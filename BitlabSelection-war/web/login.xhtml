@@ -24,16 +24,19 @@
             <!-- Mensaje recibido del menejador -->
             <p:messages id="messagesAll" closable="true" showDetail="true" />
             <div class="login-logo">
-                <b>Sistema de Recursos Humanos</b>
+                <img src="resources/dist/img/logo.png" width="150px" height="150px"></img>
+                <br/>
+                <b>Sistema de seleccion de becarios</b>
+                
             </div>
             <!-- /.login-logo -->
             <div class="card">
                 <div class="card-body login-card-body">
-                    <p class="login-box-msg">Por favor identifiquese para acceder al sistema.</p>
+                    <p class="login-box-msg">Si posee una cuenta por favor identifiquese para acceder al sistema.</p>
 
                     <h:form id="login">
                         <div class="input-group mb-3">
-                            <p:inputText class="form-control" value="#{sesionUsuario.usuario.usuario}" placeholder="Correo" validatorMessage="Error, por favor ingrese un correo valido" >
+                            <p:inputText class="form-control" value="#{usuario.usuario}" placeholder="Correo" validatorMessage="Error, por favor ingrese un correo valido" >
                                  <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
                             </p:inputText>
                             
@@ -44,7 +47,7 @@
                             </div>
                         </div>
                         <div class="input-group mb-3">
-                            <p:password class="form-control" placeholder="Contraseña" value="#{sesionUsuario.usuario.contrasena}"/>
+                            <p:password class="form-control" placeholder="Contraseña" value="#{usuario.contrasena}"/>
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-lock"></span>
@@ -55,14 +58,14 @@
 
                             <!-- /.col -->
                             <div class="col-6 ">
-                                <p:commandButton  value="Iniciar Sesion" actionListener="#{sesionUsuario.validarUsuario()}" update=":messagesAll" resetValues="true"/>
+                                <p:commandButton  value="Iniciar Sesion" actionListener="#{usuario.validarUsuario()}" update=":messagesAll" resetValues="true"/>
                             </div>
                             <!-- /.col -->  
                         </div>
                     </h:form>
                     <p class="mb-1">
                         <br/>
-                        <a href="#">Olvide mi contraseña</a>
+                        <a href="reset-password.bitlab">Olvide mi contraseña</a>
                     </p>
 
                 </div>
