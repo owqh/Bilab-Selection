@@ -10,6 +10,8 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -55,17 +57,20 @@ public class UsuarioManaged implements Serializable {
     }
 
     //Funcion para validar si el usuario existe en la base de datos
-    public void validarUsuario() throws NoSuchAlgorithmException {
+    public void validarUsuario()  {
         //Encriptando Textos de la base 
-        EncriptacionTexto encriptacionTexto = new EncriptacionTexto();
+         EncriptacionTexto encriptacionTexto = new EncriptacionTexto();
         //Obteniendo el usuario de la base de datos
         usr = usuarioFacade.ObtenerUsuario(usuario);
         if (usr != null) {
-
             //Verificando la contraseña 
             if (contrasena.equals(encriptacionTexto.getTextoDesencriptado(usr.getUsrContrasena()))) {
-                //Preparando codigo de doble factor de autenticacion
-                codigoGenerado = codigoAcceso();
+                try {
+                    //Preparando codigo de doble factor de autenticacion
+                    codigoGenerado = codigoAcceso();
+                } catch (NoSuchAlgorithmException ex) {
+                    Logger.getLogger(UsuarioManaged.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 Utilidades.redireccion("validacion");
                 //Funcion para enviar el correo electronico 
                 enviarCorreo(usr.getUsrNombre(), usr.getUsrAcceso(), codigoGenerado);
@@ -95,7 +100,7 @@ public class UsuarioManaged implements Serializable {
         }
     }
 
-    public String codigoAcceso() throws NoSuchAlgorithmException {
+    private String codigoAcceso() throws NoSuchAlgorithmException {
         LOG.debug("Preparando cadena de seguridad");
         //Variables para Generar el ID de Forma Aleatoria
         Random aleatorio = SecureRandom.getInstanceStrong();
@@ -113,9 +118,9 @@ public class UsuarioManaged implements Serializable {
     }
 
     //funicon para enviar correo electronico del codigo de seguridad previamente establecido
-    public void enviarCorreo(String nombre, String correo, String codigo) {
+    private void enviarCorreo(String nombre, String correo, String codigo) {
         //Encriptando Textos de la base 
-        EncriptacionTexto encriptacionTexto = new EncriptacionTexto();
+         EncriptacionTexto encriptacionTexto = new EncriptacionTexto();
         //Obteniendo la configuracion de la base de datos
         datos = configuracionFacade.findAll();
         //Combirtiendo la lista a tipo configuracion
@@ -155,6 +160,7 @@ public class UsuarioManaged implements Serializable {
         }
     }
 
+    //clase para cerrar sesion
     public void cerrarSesion() {
         rol = null;
         Utilidades.redireccionLogin();

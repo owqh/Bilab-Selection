@@ -493,9 +493,7 @@ exists or setup the property manually. For example like this:
     <target depends="run-debug,run-debug-appclient" description="Deploy to server." name="debug"/>
     <target depends="dist" description="Debug project in IDE." if="netbeans.home" name="run-debug" unless="app.client">
         <nbdeploy clientModuleUri="${client.module.uri}" clientUrlPart="${client.urlPart}" debugmode="true"/>
-        <antcall target="connect-debugger"/>
-        <antcall target="debug-display-browser-old"/>
-        <antcall target="debug-display-browser"/>
+
     </target>
     <target name="connect-debugger" unless="is.debugged">
         <condition property="listeningcp" value="sourcepath">
