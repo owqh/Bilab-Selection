@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="prueba-menu">
+                <li class="nav-item">
+                    <a href="prueba.bitlab" class="nav-link active">
+                        <i class="fas fa-table nav-icon"></i>
+                        <p>Prueba</p>
+                    </a>
+                </li>
+            </ui:define>
+
+            <ui:define name="content">
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1 class="m-0 text-dark">Prueba</h1>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item"><a href="index.bitlab">Home</a></li>
+                                    <li class="breadcrumb-item active">Prueba</li>
+                                </ol>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </div>
+                <!-- /.content-header -->
+
+                <!-- Main content -->
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="col-12">
+                            Contenido
+                        </div>
+                    </div>
+                </section>
+                <!-- /.content -->
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

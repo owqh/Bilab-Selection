@@ -1,0 +1,222 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="profile-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        <i class="fas fa-user nav-icon"></i>
+                        <p>Perfil</p>
+                    </a>
+                </li>
+            </ui:define>
+            <ui:define name="content">
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1 class="m-0 text-dark">Perfil</h1>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item"><a href="index.xhtml">Home</a></li>
+                                    <li class="breadcrumb-item active">Perfil</li>
+                                </ol>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </div>
+                <!-- /.content-header -->
+
+                <section class="content">
+                    <div class="container-fluid">
+                        <!-- Main row -->
+                        <div class="row">
+                            <!-- Left col -->
+                            <section class="col-lg-12">
+                                <!-- Custom tabs (Charts with tabs)-->
+                                <!-- general form elements -->
+                                <h:form role="form" id="account">
+                                    <div class="card card-primary" style="margin: 0 10% 30px 10%;">
+                                        <div class="card-header" style="background-color: #6f42c1">
+                                            <h3 class="card-title">Datos de tu cuenta</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <!-- form start -->
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <p:outputLabel for="email" value="Email address" />
+                                                <p:inputText type="email" id="email" styleClass="form-control" placeholder="Enter email" required="true" requiredMessage="Por favor, ingrese un correo electronico"/>
+                                                <p:message for="email" />
+                                            </div>
+                                            <h3>Cambiar contraseña</h3>
+                                            <div class="form-group">
+                                                <p:outputLabel for="apassword" value="Actual" />
+                                                <p:password id="apassword" styleClass="form-control" placeholder="Enter password" required="true" requiredMessage="Por favor, ingrese su contrasena"/>
+                                                <p:message for="apassword" />
+                                            </div>
+                                            <div class="form-group">
+                                                <p:outputLabel for="npassword" value="Nueva" />
+                                                <p:password id="npassword" styleClass="form-control" placeholder="Enter password" required="true" requiredMessage="Por favor, ingrese su contrasena"/>
+                                                <p:message for="npassword" />
+                                            </div>
+                                            <div class="form-group">
+                                                <p:outputLabel for="cnpassword" value="Repetir contraseña nueva" />
+                                                <p:password id="cnpassword" styleClass="form-control" placeholder="Enter password" required="true" requiredMessage="Por favor, ingrese su contrasena"/>
+                                                <p:message for="cnpassword" />
+                                            </div>
+                                        </div>
+                                        <!-- /.card-body -->
+
+                                        <div class="card-footer">
+                                            <p:commandButton value="Actualizar" ajax="false" update=":account" style="margin-top: 20px; margin-right: 20px" validateClient="true"/>
+                                            <p:commandButton value="Reset" type="reset" style="margin-top: 20px; margin-right: 20px"/>
+                                        </div>
+                                    </div>
+                                </h:form>
+                                <!-- /.card -->
+                                <!--Form General-->
+                                <h:form role="form" id="user">
+                                    <div class="card card-primary" style="margin: 0 10% 30px 10%;">
+                                        <div class="card-header" style="background-color: #6f42c1">
+                                            <h3 class="card-title">Datos de generales</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <!-- form start -->
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <p:outputLabel for="pnombre" value="Primer nombre" />
+                                                        <p:inputText id="pnombre" styleClass="form-control" placeholder="Nombre" required="true" requiredMessage="Por favor, ingrese un nombre"/>
+                                                        <p:message for="pnombre" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <p:outputLabel for="snombre" value="Segundo nombre" />
+                                                        <p:inputText id="snombre" styleClass="form-control" placeholder="Nombre"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <p:outputLabel for="papellido" value="Primer apellido" />
+                                                        <p:inputText id="papellido" styleClass="form-control" placeholder="Apellido" required="true" requiredMessage="Por favor, ingrese un apellido"/>
+                                                        <p:message for="papellido" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <p:outputLabel for="sapellido" value="Segundo apellido" />
+                                                        <p:inputText id="sapellido" styleClass="form-control" placeholder="Apellido"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <p:outputLabel for="dui" value="DUI" />
+                                                <p:inputText id="dui" styleClass="form-control" placeholder="DUI" required="true" requiredMessage="Por favor, ingrese un dui">
+                                                </p:inputText>
+                                                <p:message for="dui"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <p:outputLabel for="email" value="Email" />
+                                                <p:inputText type="email" id="email" styleClass="form-control" placeholder="Email" required="true" requiredMessage="Por favor, ingrese un correo">
+                                                </p:inputText>
+                                                <p:message for="email" />
+                                            </div>
+                                            <div class="form-group">
+                                                <p:outputLabel for="direccion" value="Direccion" />
+                                                <p:inputTextarea id="direccion" styleClass="form-control" placeholder="Direccion" required="true" requiredMessage="Por favor, ingrese una direccion">
+                                                </p:inputTextarea>
+                                                <p:message for="direccion" />
+                                            </div>
+                                            <div class="form-group">
+                                                <p:outputLabel for="telefono" value="Telefono" />
+                                                <p:inputText id="telefono" styleClass="form-control" placeholder="Telefono" required="true" requiredMessage="Por favor, ingrese un numero de telefono">
+                                                </p:inputText>
+                                                <p:message for="telefono" />
+                                            </div>
+                                            <div class="form-group">
+                                                <p:outputLabel for="fnacimiento" value="Fecha de Nacimiento" />
+                                                <br/>
+                                                <p:calendar id="fnacimiento" styleClass="form-group" showOn="button" pattern="yyyy-MM-dd" required="true" requiredMessage="Por favor, ingrese una Fecha de Nacimiento">
+                                                    <f:convertDateTime type="date" pattern="yyyy-MM-dd"/>
+                                                </p:calendar>
+                                                <p:message for="fnacimiento" />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <p:outputLabel for="state" value="State" />
+                                                <div class="form-group">
+                                                    <p:selectOneMenu id="state" required="true" style="width: 100%">
+                                                        <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
+                                                        <f:selectItem itemLabel="Option 1" itemValue="Option 1" />
+                                                        <f:selectItem itemLabel="Option 2" itemValue="Option 2" />
+                                                        <f:selectItem itemLabel="Option 3" itemValue="Option 3" />
+                                                    </p:selectOneMenu>
+                                                    <p:message for="state"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputFile">File input</label>
+                                                <div class="input-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="exampleInputFile"/>
+                                                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                                    </div>
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text" id="">Upload</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1"/>
+                                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-body -->
+
+                                        <div class="card-footer">
+                                            <p:commandButton value="Actualizar" ajax="false" update=":user" style="margin-top: 20px; margin-right: 20px" validateClient="true"/>
+                                            <p:commandButton value="Reset" type="reset" style="margin-top: 20px; margin-right: 20px"/>
+                                        </div>
+                                    </div>
+                                </h:form>
+                                <!-- /.card -->
+                            </section>
+                            <!-- /.Left col -->
+                            <!-- right col (We are only adding the ID to make the widgets sortable)-->
+                            <!-- right col -->
+                        </div>
+                        <!-- /.row (main row) -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </section>
+                <!-- /.content -->
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

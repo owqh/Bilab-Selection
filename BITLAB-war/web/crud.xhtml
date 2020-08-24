@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+            <ui:define name="crud-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        <i class="fas fa-table nav-icon"></i>
+                        <p>Modelo CRUD</p>
+                    </a>
+                </li>
+            </ui:define>
+
+            <ui:define name="content">
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1 class="m-0 text-dark">Modelo Crud</h1>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item"><a href="index.bitlab">Home</a></li>
+                                    <li class="breadcrumb-item active">Crud</li>
+                                </ol>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </div>
+                <!-- /.content-header -->
+
+                <!-- Main content -->
+                <section class="content">
+                    <div class="container-fluid">
+                        <!-- Main row -->
+                        <div class="row">
+                            <!-- Left col -->
+                            <section class="col-lg-12">
+                                <!-- Custom tabs (Charts with tabs)-->
+                                <p:growl id="mensajes" globalOnly="true" showDetail="true" showSummary="true"/>
+                                <h:form style="margin-bottom: 30px; padding:0 10%" id="form">
+                                    <p:growl id="mensajes" globalOnly="true" showDetail="true" showSummary="true"/>
+                                    <p:commandButton value="Nuevo Usuario" actionListener="#{tableTestMB.actualizarUs()}" process="@this" 
+                                                     update=":formActualizarUsuario" oncomplete="PF('usuarioDialog').show()" icon="pi pi-plus"/>
+                                    <br/>
+                                    <br/>
+                                    <p:dataTable var="can" value="#{tableTestMB.candidatos}" widgetVar="tableTest" filteredValue="#{tableTestMB.canFiltro}"
+                                                 rows="10"
+                                                 scrollable="true" scrollWidth="80%" scrollHeight="350" resizeMode="expand"
+                                                 paginator="true">
+                                        <f:facet name="header">
+                                            <p:outputPanel style="text-align: right !important">
+                                                <h:outputText value="Search all fields:" />
+                                                <p:inputText id="globalFilter" onkeyup="PF('tableTest').filter()" style="width:150px" placeholder="Enter keyword"/>
+                                            </p:outputPanel>
+                                        </f:facet>
+                                        <p:column filterBy="#{can.id}" headerText="Id" filterMatchMode="contains">
+                                            <h:outputText value="#{can.id}" />
+                                        </p:column>
+                                        <p:column filterBy="#{can.nombre}" headerText="Nombre" filterMatchMode="contains">
+                                            <h:outputText value="#{can.nombre}" />
+                                        </p:column>
+                                        <p:column filterBy="#{can.apellido}" headerText="Apellido" filterMatchMode="contains">
+                                            <h:outputText value="#{can.apellido}" />
+                                        </p:column>
+                                        <p:column filterBy="#{can.edad}" headerText="Edad" filterMatchMode="contains">
+                                            <h:outputText value="#{can.edad}" />
+                                        </p:column>
+                                        <p:column filterBy="#{can.sexo}" headerText="Sexo" filterMatchMode="contains">
+                                            <h:outputText value="#{can.sexo}" />
+                                        </p:column>
+                                        <p:column filterBy="#{can.escolaridad}" headerText="Escolaridad" filterMatchMode="contains">
+                                            <h:outputText value="#{can.escolaridad}" />
+                                        </p:column>
+                                        <p:column filterBy="#{can.equipo}" headerText="Equipo" filterMatchMode="contains">
+                                            <h:outputText value="#{can.equipo}" />
+                                        </p:column>
+                                        <p:column filterBy="#{can.lenguajes}" headerText="Lenguajes" filterMatchMode="contains">
+                                            <h:outputText value="#{can.lenguajes}" />
+                                        </p:column>
+                                        <p:column style="width:32px;text-align: center">
+                                            <p:commandButton update=":formActualizarUsuario" oncomplete="PF('usuarioDialog').show()" icon="pi pi-user-edit" title="Ver">
+                                                <f:setPropertyActionListener value="#{can}" target="#{tableTestMB.entidad}" />
+                                            </p:commandButton>
+                                        </p:column>
+                                    </p:dataTable>
+                                </h:form>
+                                <!-- /.card -->
+                                <h:form id="formActualizarUsuario">
+                                    <p:dialog widgetVar="usuarioDialog" modal="true" header="Actualizar"  width="400" resizable="true" height="40%" draggable="false" responsive="true">
+                                        <center>
+                                            <p:panelGrid columns="2" style="border:none">
+                                                <h:outputText value="ID Empleado"/>
+                                                <h:outputText value="#{tableTestMB.entidad.id}"/>
+                                                <h:outputText value="Nombre"/>
+                                                <p:inputText value="#{tableTestMB.entidad.nombre}"/>
+                                                <h:outputText value="Apellido"/>
+                                                <p:inputText value="#{tableTestMB.entidad.apellido}"/>
+                                                <h:outputText value="edad"/>
+                                                <p:inputMask value="#{tableTestMB.entidad.edad}" mask="99999999"/>
+                                                <h:outputText value="sexo"/>
+                                                <p:inputText value="#{tableTestMB.entidad.sexo}"/>
+                                                <h:outputText value="escolaridad"/>
+                                                <p:inputText value="#{tableTestMB.entidad.escolaridad}"/>
+                                                <h:outputText value="equipo "/>
+                                                <p:inputText value="#{tableTestMB.entidad.equipo}"/>
+                                                <h:outputText value="lenguajes"/>
+                                                <p:inputText value="#{tableTestMB.entidad.lenguajes}"/>
+                                                <p:commandButton value="Actualizar" actionListener="#{tableTestMB.actualizarUs()}" oncomplete="PF('usuarioDialog').hide()" update=":form :mensajes"/>
+                                            </p:panelGrid>
+                                        </center>
+                                    </p:dialog>
+                                </h:form>
+                            </section>
+                            <!-- /.Left col -->
+                            <!-- right col (We are only adding the ID to make the widgets sortable)-->
+                            <!-- right col -->
+                        </div>
+                        <!-- /.row (main row) -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </section>
+                <!-- /.content -->
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
