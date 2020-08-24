@@ -1,0 +1,9 @@
+build/*
+dist/*
+BITLAB-ejb/build/*
+BITLAB-war/build/*
+BITLAB-ejb/dist/*
+BITLAB-war/dist/*
+BITLAB-ejb/nbproject/private/*
+BITLAB-war/nbproject/private/*
+nbproject/private/*
