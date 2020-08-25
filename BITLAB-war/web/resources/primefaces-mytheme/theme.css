@@ -76,17 +76,17 @@
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 300;
-  src: url("#{resource['primefaces-nova-dark:fonts/open-sans-v13-latin-300.eot']}");
+  src: url("#{resource['primefaces-mytheme:fonts/open-sans-v13-latin-300.eot']}");
   src: local("Open Sans Light"), local("OpenSans-Light"),
-    url("#{resource['primefaces-nova-dark:fonts/open-sans-v13-latin-300.eot']}?#iefix")
+    url("#{resource['primefaces-mytheme:fonts/open-sans-v13-latin-300.eot']}?#iefix")
       format("embedded-opentype"),
-    url("#{resource['primefaces-nova-dark:fonts/open-sans-v13-latin-300.woff2']}")
+    url("#{resource['primefaces-mytheme:fonts/open-sans-v13-latin-300.woff2']}")
       format("woff2"),
-    url("#{resource['primefaces-nova-dark:fonts/open-sans-v13-latin-300.woff']}")
+    url("#{resource['primefaces-mytheme:fonts/open-sans-v13-latin-300.woff']}")
       format("woff"),
-    url("#{resource['primefaces-nova-dark:fonts/open-sans-v13-latin-300.ttf']}")
+    url("#{resource['primefaces-mytheme:fonts/open-sans-v13-latin-300.ttf']}")
       format("truetype"),
-    url("#{resource['primefaces-nova-dark:fonts/open-sans-v13-latin-300.svg']}#OpenSans")
+    url("#{resource['primefaces-mytheme:fonts/open-sans-v13-latin-300.svg']}#OpenSans")
       format("svg");
 }
 
@@ -94,17 +94,17 @@
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 400;
-  src: url("#{resource['primefaces-nova-dark:fonts/open-sans-v13-latin-regular.eot']}");
+  src: url("#{resource['primefaces-mytheme:fonts/open-sans-v13-latin-regular.eot']}");
   src: local("Open Sans"), local("OpenSans"),
-    url("#{resource['primefaces-nova-dark:fonts/open-sans-v13-latin-regular.eot']}#iefix")
+    url("#{resource['primefaces-mytheme:fonts/open-sans-v13-latin-regular.eot']}#iefix")
       format("embedded-opentype"),
-    url("#{resource['primefaces-nova-dark:fonts/open-sans-v13-latin-regular.woff2']}")
+    url("#{resource['primefaces-mytheme:fonts/open-sans-v13-latin-regular.woff2']}")
       format("woff2"),
-    url("#{resource['primefaces-nova-dark:fonts/open-sans-v13-latin-regular.woff']}")
+    url("#{resource['primefaces-mytheme:fonts/open-sans-v13-latin-regular.woff']}")
       format("woff"),
-    url("#{resource['primefaces-nova-dark:fonts/open-sans-v13-latin-regular.ttf']}")
+    url("#{resource['primefaces-mytheme:fonts/open-sans-v13-latin-regular.ttf']}")
       format("truetype"),
-    url("#{resource['primefaces-nova-dark:fonts/open-sans-v13-latin-regular.svg']}#OpenSans")
+    url("#{resource['primefaces-mytheme:fonts/open-sans-v13-latin-regular.svg']}#OpenSans")
       format("svg");
 }
 
@@ -112,17 +112,17 @@
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 700;
-  src: url("#{resource['primefaces-nova-dark:fonts/open-sans-v13-latin-700.eot']}");
+  src: url("#{resource['primefaces-mytheme:fonts/open-sans-v13-latin-700.eot']}");
   src: local("Open Sans Bold"), local("OpenSans-Bold"),
-    url("#{resource['primefaces-nova-dark:fonts/open-sans-v13-latin-700.eot']}#iefix")
+    url("#{resource['primefaces-mytheme:fonts/open-sans-v13-latin-700.eot']}#iefix")
       format("embedded-opentype"),
-    url("#{resource['primefaces-nova-dark:fonts/open-sans-v13-latin-700.woff2']}")
+    url("#{resource['primefaces-mytheme:fonts/open-sans-v13-latin-700.woff2']}")
       format("woff2"),
-    url("#{resource['primefaces-nova-dark:fonts/open-sans-v13-latin-700.woff']}")
+    url("#{resource['primefaces-mytheme:fonts/open-sans-v13-latin-700.woff']}")
       format("woff"),
-    url("#{resource['primefaces-nova-dark:fonts/open-sans-v13-latin-700.ttf']}")
+    url("#{resource['primefaces-mytheme:fonts/open-sans-v13-latin-700.ttf']}")
       format("truetype"),
-    url("#{resource['primefaces-nova-dark:fonts/open-sans-v13-latin-700.svg']}#OpenSans")
+    url("#{resource['primefaces-mytheme:fonts/open-sans-v13-latin-700.svg']}#OpenSans")
       format("svg");
 }
 
