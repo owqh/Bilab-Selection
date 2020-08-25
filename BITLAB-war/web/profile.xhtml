@@ -190,134 +190,137 @@
                                     </div>
                                 </h:form>
                                 <!-- /.card -->
-                                
-                                <!--Form General-->
-                                <h:form role="form" id="complement">
-                                    <div class="card card-primary" style="margin: 0 10% 30px 10%;">
-                                        <div class="card-header" style="background-color: #6f42c1">
-                                            <h3 class="card-title">Datos Complementarios</h3>
-                                            <div class="card-tools">
-                                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                                            </div>
-                                        </div>
-                                        <!-- /.card-header -->
-                                        <!-- form start -->
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <p:outputLabel for="nivacademico" value="Nivel Academico" />
-                                                        <div class="form-group">
-                                                            <p:selectOneMenu id="nivacademico"  style="width: 100%">
-                                                                <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
-                                                                <f:selectItem itemLabel="M" itemValue="M" />
-                                                                <f:selectItem itemLabel="F" itemValue="F" />
-                                                            </p:selectOneMenu>
-                                                            <p:message for="nivacademico"/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <p:outputLabel for="ocupacion" value="Ocupacion" />
-                                                        <div class="form-group">
-                                                            <p:selectOneMenu id="ocupacion" style="width: 100%">
-                                                                <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
-                                                                <f:selectItem itemLabel="M" itemValue="M" />
-                                                                <f:selectItem itemLabel="F" itemValue="F" />
-                                                            </p:selectOneMenu>
-                                                            <p:message for="ocupacion"/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <p:outputLabel for="internet" value="Internet" />
-                                                        <div class="form-group">
-                                                            <p:selectOneMenu id="internet" style="width: 100%">
-                                                                <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
-                                                                <f:selectItem itemLabel="M" itemValue="M" />
-                                                                <f:selectItem itemLabel="F" itemValue="F" />
-                                                            </p:selectOneMenu>
-                                                            <p:message for="internet"/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <p:outputLabel for="computadora" value="Computadora" />
-                                                        <div class="form-group">
-                                                            <p:selectOneMenu id="computadora" style="width: 100%">
-                                                                <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
-                                                                <f:selectItem itemLabel="M" itemValue="M" />
-                                                                <f:selectItem itemLabel="F" itemValue="F" />
-                                                            </p:selectOneMenu>
-                                                            <p:message for="computadora"/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <p:outputLabel for="tiempo" value="Disponibilidad de Tiempo" />
-                                                        <div class="form-group">
-                                                            <p:selectOneMenu id="tiempo" style="width: 100%">
-                                                                <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
-                                                                <f:selectItem itemLabel="M" itemValue="M" />
-                                                                <f:selectItem itemLabel="F" itemValue="F" />
-                                                            </p:selectOneMenu>
-                                                            <p:message for="tiempo"/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <p:outputLabel for="salario" value="Aspiracion salarial" />
-                                                <br/>
-                                                <p:spinner id="salario" min="300" max="5000" stepFactor="50" suffix=" $" styleClass="form-group" style="width: 100%">
-                                                </p:spinner>
-                                                <p:slider for="salario" minValue="300" maxValue="2000" step="50" />
-                                                <br/>
-                                            </div>
-                                            
-                                            <div class="form-group">
-                                                <p:outputLabel for="alaboral" value="Aspiracion Laboral" />
-                                                <p:inputTextarea id="alaboral" styleClass="form-control" placeholder="Aspiracion Laboral">
-                                                </p:inputTextarea>
-                                                <p:message for="alaboral" />
-                                            </div>
-                                            <div class="form-group">
-                                                <p:outputLabel for="acurso" value="Aspiracion del Curso" />
-                                                <p:inputTextarea id="acurso" styleClass="form-control" placeholder="Aspiracion del Curso">
-                                                </p:inputTextarea>
-                                                <p:message for="acurso" />
-                                            </div>
-                                            <div class="form-group">
-                                                <p:outputLabel for="enterado" value="Donde te enteraste de nosotros?" />
-                                                <p:inputTextarea id="enterado" styleClass="form-control" placeholder="Facebook, Instagram, Otras redes sociales">
-                                                </p:inputTextarea>
-                                                <p:message for="enterado" />
-                                            </div>
-                                            <div class="form-group">
-                                                <p:outputLabel for="otros" value="Otros Conocimientos" />
-                                                <p:inputTextarea id="otros" styleClass="form-control" placeholder="Otros Conocimientos">
-                                                </p:inputTextarea>
-                                                <p:message for="otros" />
-                                            </div>
-                                            <div class="form-group">
-                                                <p:fileUpload id="cv" label="CV" mode="simple" skinSimple="true"/>
-                                                <p:message for="cv" />
-                                            </div>
-                                        </div>
-                                        <!-- /.card-body -->
 
-                                        <div class="card-footer">
-                                            <p:commandButton value="Actualizar" ajax="false" update=":complement" style="margin-top: 20px; margin-right: 20px" validateClient="true"/>
-                                            <p:commandButton value="Reset" type="reset" style="margin-top: 20px; margin-right: 20px"/>
+                                <!--Form General-->
+                                <ui:fragment>
+                                    <h:form role="form" id="complement">
+                                        <div class="card card-primary" style="margin: 0 10% 30px 10%;">
+                                            <div class="card-header" style="background-color: #6f42c1">
+                                                <h3 class="card-title">Datos Complementarios</h3>
+                                                <div class="card-tools">
+                                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                                                </div>
+                                            </div>
+                                            <!-- /.card-header -->
+                                            <!-- form start -->
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <p:outputLabel for="nivacademico" value="Nivel Academico" />
+                                                            <div class="form-group">
+                                                                <p:selectOneMenu id="nivacademico"  style="width: 100%">
+                                                                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
+                                                                    <f:selectItem itemLabel="M" itemValue="M" />
+                                                                    <f:selectItem itemLabel="F" itemValue="F" />
+                                                                </p:selectOneMenu>
+                                                                <p:message for="nivacademico"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <p:outputLabel for="ocupacion" value="Ocupacion" />
+                                                            <div class="form-group">
+                                                                <p:selectOneMenu id="ocupacion" style="width: 100%">
+                                                                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
+                                                                    <f:selectItem itemLabel="M" itemValue="M" />
+                                                                    <f:selectItem itemLabel="F" itemValue="F" />
+                                                                </p:selectOneMenu>
+                                                                <p:message for="ocupacion"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <p:outputLabel for="internet" value="Internet" />
+                                                            <div class="form-group">
+                                                                <p:selectOneMenu id="internet" style="width: 100%">
+                                                                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
+                                                                    <f:selectItem itemLabel="M" itemValue="M" />
+                                                                    <f:selectItem itemLabel="F" itemValue="F" />
+                                                                </p:selectOneMenu>
+                                                                <p:message for="internet"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <p:outputLabel for="computadora" value="Computadora" />
+                                                            <div class="form-group">
+                                                                <p:selectOneMenu id="computadora" style="width: 100%">
+                                                                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
+                                                                    <f:selectItem itemLabel="M" itemValue="M" />
+                                                                    <f:selectItem itemLabel="F" itemValue="F" />
+                                                                </p:selectOneMenu>
+                                                                <p:message for="computadora"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <p:outputLabel for="tiempo" value="Disponibilidad de Tiempo" />
+                                                            <div class="form-group">
+                                                                <p:selectOneMenu id="tiempo" style="width: 100%">
+                                                                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
+                                                                    <f:selectItem itemLabel="M" itemValue="M" />
+                                                                    <f:selectItem itemLabel="F" itemValue="F" />
+                                                                </p:selectOneMenu>
+                                                                <p:message for="tiempo"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <p:outputLabel for="salario" value="Aspiracion salarial" />
+                                                    <br/>
+                                                    <p:spinner id="salario" min="300" max="5000" stepFactor="50" suffix=" $" styleClass="form-group" style="width: 100%">
+                                                    </p:spinner>
+                                                    <p:slider for="salario" minValue="300" maxValue="2000" step="50" />
+                                                    <br/>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <p:outputLabel for="alaboral" value="Aspiracion Laboral" />
+                                                    <p:inputTextarea id="alaboral" styleClass="form-control" placeholder="Aspiracion Laboral">
+                                                    </p:inputTextarea>
+                                                    <p:message for="alaboral" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <p:outputLabel for="acurso" value="Aspiracion del Curso" />
+                                                    <p:inputTextarea id="acurso" styleClass="form-control" placeholder="Aspiracion del Curso">
+                                                    </p:inputTextarea>
+                                                    <p:message for="acurso" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <p:outputLabel for="enterado" value="Donde te enteraste de nosotros?" />
+                                                    <p:inputTextarea id="enterado" styleClass="form-control" placeholder="Facebook, Instagram, Otras redes sociales">
+                                                    </p:inputTextarea>
+                                                    <p:message for="enterado" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <p:outputLabel for="otros" value="Otros Conocimientos" />
+                                                    <p:inputTextarea id="otros" styleClass="form-control" placeholder="Otros Conocimientos">
+                                                    </p:inputTextarea>
+                                                    <p:message for="otros" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <p:fileUpload id="cv" label="CV" mode="simple" skinSimple="true"/>
+                                                    <p:message for="cv" />
+                                                </div>
+                                            </div>
+                                            <!-- /.card-body -->
+
+                                            <div class="card-footer">
+                                                <p:commandButton value="Actualizar" ajax="false" update=":complement" style="margin-top: 20px; margin-right: 20px" validateClient="true"/>
+                                                <p:commandButton value="Reset" type="reset" style="margin-top: 20px; margin-right: 20px"/>
+                                            </div>
                                         </div>
-                                    </div>
-                                </h:form>
+                                    </h:form>
+                                </ui:fragment>
+
                                 <!-- /.card -->
                             </section>
                             <!-- /.Left col -->
