@@ -326,5 +326,5 @@ public class candidatoManaged implements Serializable {
     public void setAplicanteGeneral(List<Candidato> aplicanteGeneral) {
         this.aplicanteGeneral = aplicanteGeneral;
     }
-
+    
 }
