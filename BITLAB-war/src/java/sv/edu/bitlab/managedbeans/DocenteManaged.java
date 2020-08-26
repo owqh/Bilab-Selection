@@ -15,6 +15,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import sv.edu.bitlab.beans.DocenteFacade;
 import sv.edu.bitlab.entidades.Docente;
+import sv.edu.bitlab.utilidades.Utilidades;
 
 
 /**
@@ -47,10 +48,10 @@ public class DocenteManaged implements Serializable {
         try {
             docenteFacade.create(entidadSeleccion);
             encontrarEntidades();
-            UtilidadesManejador.lanzarInfo("Exitoso ", Docente.class.getSimpleName() + " ha sido creado");
+            Utilidades.lanzarInfo("Exitoso ", Docente.class.getSimpleName() + " ha sido creado");
         } catch (Exception ex) {
             Logger.getLogger(DocenteManaged.class.getName()).log(Level.SEVERE, null, ex);
-            UtilidadesManejador.lanzarError("Error al crear ", ex.getMessage());
+            Utilidades.lanzarError("Error al crear ", ex.getMessage());
         }
         log.info("Entidad creada exitosamente!!");
     }
@@ -61,10 +62,10 @@ public class DocenteManaged implements Serializable {
         try {
             docenteFacade.remove(entidadSeleccion);
             encontrarEntidades();
-            UtilidadesManejador.lanzarInfo("Exitoso ", Docente.class.getSimpleName() + " ha sido eliminado");
+            Utilidades.lanzarInfo("Exitoso ", Docente.class.getSimpleName() + " ha sido eliminado");
         } catch (Exception ex) {
             Logger.getLogger(DocenteManaged.class.getName()).log(Level.SEVERE, null, ex);
-            UtilidadesManejador.lanzarError("Error al eliminar ", ex.getMessage());
+            Utilidades.lanzarError("Error al eliminar ", ex.getMessage());
         }
         log.info("Entidad eliminada");
     }
@@ -75,10 +76,10 @@ public class DocenteManaged implements Serializable {
         try {
             docenteFacade.edit(entidadSeleccion);
             encontrarEntidades();
-            UtilidadesManejador.lanzarInfo("Exitoso ", Docente.class.getSimpleName() + " ha sido guardado");
+            Utilidades.lanzarInfo("Exitoso ", Docente.class.getSimpleName() + " ha sido guardado");
         } catch (Exception ex) {
             Logger.getLogger(DocenteManaged.class.getName()).log(Level.SEVERE, null, ex);
-            UtilidadesManejador.lanzarError("Error al guardar ", ex.getMessage());
+            Utilidades.lanzarError("Error al guardar ", ex.getMessage());
         }
         log.info("Entidad editada y guardada");
     }

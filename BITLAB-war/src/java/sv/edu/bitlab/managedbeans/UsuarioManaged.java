@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sv.edu.bitlab.managed;
+package sv.edu.bitlab.managedbeans;
 
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;

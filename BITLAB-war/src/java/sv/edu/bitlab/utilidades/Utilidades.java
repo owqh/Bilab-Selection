@@ -12,7 +12,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import org.slf4j.LoggerFactory;
-import sv.edu.bitlab.managed.UsuarioManaged;
+import sv.edu.bitlab.managedbeans.UsuarioManaged;
 
 /**
  *
