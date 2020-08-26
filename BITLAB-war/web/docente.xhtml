@@ -71,27 +71,27 @@
                                         <h:outputText value="#{entidad.docId}"/>
                                     </p:column>
                                     
-                                    <p:column headerText="Codigo docente" filterBy="#{entidad.docCodigo}" filterMatchMode="contains" width="85">
+                                    <p:column headerText="Codigo docente" filterBy="#{entidad.docCodigo}" filterMatchMode="contains" >
                                         <h:outputText value="#{entidad.docCodigo}"/>
                                     </p:column>
                                     
-                                    <p:column headerText="Primer nombre" filterBy="#{entidad.docPrimerNombre}" filterMatchMode="contains" width="85">
+                                    <p:column headerText="Primer nombre" filterBy="#{entidad.docPrimerNombre}" filterMatchMode="contains" >
                                         <h:outputText value="#{entidad.docPrimerNombre}"/>
                                     </p:column>
                                     
-                                    <p:column headerText="Segundo nombre" width="85">
+                                    <p:column headerText="Segundo nombre">
                                         <h:outputText value="#{entidad.docSegundoNombre}"/>
                                     </p:column>
                                     
-                                    <p:column headerText="Primer apellido" width="85">
+                                    <p:column headerText="Primer apellido">
                                         <h:outputText value="#{entidad.docPrimerApellido}"/> 
                                     </p:column>
                                     
-                                    <p:column headerText="Segundo apellido" width="85">
+                                    <p:column headerText="Segundo apellido">
                                         <h:outputText value="#{entidad.docSegundoApellido}"/>
                                     </p:column>
                                     
-                                    <p:column headerText="Dui" filterBy="#{entidad.docDui}" filterMatchMode="contains" width="85">
+                                    <p:column headerText="Dui" filterBy="#{entidad.docDui}" filterMatchMode="contains">
                                         <h:outputText value="#{entidad.docDui}"/>
                                     </p:column>
                                     
@@ -99,7 +99,7 @@
                                         <h:outputText value="#{entidad.docDireccion}"/>
                                     </p:column>
                                     
-                                    <p:column headerText="Telefono" width="75">
+                                    <p:column headerText="Telefono">
                                         <h:outputText value="#{entidad.docTelefono}"/>
                                     </p:column>
                                     
@@ -107,13 +107,13 @@
                                         <h:outputText value="#{entidad.docCorreo}"/>
                                     </p:column>}
                                     
-                                    <p:column headerText="Fecha nacimiento" width="75">
+                                    <p:column headerText="Fecha nacimiento">
                                         <h:outputText value="#{entidad.docFechaNac}">
                                             <f:convertDateTime  pattern="dd/MM/yyyy"/>
                                         </h:outputText>
                                     </p:column>
                                     
-                                    <p:column style="width:32px;text-align: center" headerText="Edit">
+                                    <p:column style="width:32px;text-align: center" headerText="Edit" width="25">
                                         <p:commandButton update=":editDocente :messages :messagesAll" oncomplete="PF('widEditDocente').show()" icon="pi pi-pencil" title="edit">
                                             <f:setPropertyActionListener value="#{entidad}" target="#{docenteManaged.entidadSeleccion}"/>
                                         </p:commandButton>
