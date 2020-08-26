@@ -52,6 +52,12 @@ public class NotaSeleccion implements Serializable {
 
     public NotaSeleccion() {
     }
+    public NotaSeleccion(Double nseNota, Double nsePromedio, HistorialAplicacion hapId, Pruebas pruId) {
+        this.nseNota = nseNota;
+        this.nsePromedio = nsePromedio;
+        this.hapId = hapId;
+        this.pruId = pruId;
+    }
 
     public NotaSeleccion(Integer nseId) {
         this.nseId = nseId;

@@ -4,7 +4,7 @@
   <module>
     <web>
       <web-uri>BITLAB-war.war</web-uri>
-      <context-root>/BITLAB-war</context-root>
+      <context-root>/seleccion</context-root>
     </web>
   </module>
   <module>
