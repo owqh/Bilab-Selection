@@ -48,6 +48,30 @@
                             <!-- Left col -->
                             <section class="col-lg-12">
                                 <!-- Custom tabs (Charts with tabs)-->
+                                <h:form role="form">
+                                    <div class="card card-primary" style="margin: 0 40% 30px 40%;">
+                                        <div class="card-header" style="background-color: #6f42c1">
+                                            <p:graphicImage name="dist/img/user2-160x160.jpg" alt=""/>
+                                            <!--                                            <div class="card-tools">
+                                                                                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                                                                                        </div>-->
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <h:outputText value="#{testMB.nUsuario}" />
+
+                                            </div>
+                                            <div class="form-group">
+                                                <h:outputText value="#{testMB.ROL}" />
+
+                                            </div>
+                                            <div class="form-group">
+
+                                                <p:fileUpload label="Foto" mode="simple" skinSimple="true"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </h:form>
                                 <!-- general form elements -->
                                 <h:form role="form" id="account">
                                     <div class="card card-primary" style="margin: 0 10% 30px 10%;">
@@ -72,8 +96,9 @@
                                                 <p:message for="apassword" />
                                             </div>
                                             <div class="form-group">
-                                                <p:outputLabel for="npassword" value="Nueva" />
-                                                <p:password id="npassword" styleClass="form-control" placeholder="Enter password" required="true" requiredMessage="Por favor, ingrese su contrasena"/>
+                                                <p:outputLabel for="npassword" value="Nueva contraseña" />
+                                                <p:password id="npassword" styleClass="form-control" placeholder="Enter password" match="cnpassword" validatorMessage="Las contraseñas no coinciden"
+                                                            required="true" requiredMessage="Por favor, ingrese su contrasena"/>
                                                 <p:message for="npassword" />
                                             </div>
                                             <div class="form-group">
@@ -85,7 +110,7 @@
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
-                                            <p:commandButton value="Actualizar" ajax="false" update=":account" style="margin-top: 20px; margin-right: 20px" validateClient="true"/>
+                                            <p:commandButton value="Actualizar" ajax="true" update=":account" style="margin-top: 20px; margin-right: 20px" validateClient="true"/>
                                             <p:commandButton value="Reset" type="reset" style="margin-top: 20px; margin-right: 20px"/>
                                         </div>
                                     </div>
@@ -95,7 +120,7 @@
                                 <h:form role="form" id="general">
                                     <div class="card card-primary" style="margin: 0 10% 30px 10%;">
                                         <div class="card-header" style="background-color: #6f42c1">
-                                            <h3 class="card-title">Datos de generales</h3>
+                                            <h3 class="card-title">Datos generales</h3>
                                             <div class="card-tools">
                                                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                                             </div>
@@ -143,14 +168,14 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <p:outputLabel for="sexo" value="Sexo" />
+                                                        <p:outputLabel for="genero" value="Género" />
                                                         <div class="form-group">
-                                                            <p:selectOneMenu id="sexo" required="true" style="width: 100%">
-                                                                <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
+                                                            <p:selectOneMenu id="genero" required="true" style="width: 100%">
+                                                                <f:selectItem itemLabel="Escoje una opción" itemValue="#{null}" noSelectionOption="true"/>
                                                                 <f:selectItem itemLabel="M" itemValue="M" />
                                                                 <f:selectItem itemLabel="F" itemValue="F" />
                                                             </p:selectOneMenu>
-                                                            <p:message for="sexo"/>
+                                                            <p:message for="genero"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -204,17 +229,25 @@
                                             <!-- /.card-header -->
                                             <!-- form start -->
                                             <div class="card-body">
+                                                <div class="form-group">
+                                                    <p:outputLabel for="linkedin" value="Si tienes LinkedIn, ¿nos puedes compartir el enlace para conocerte mejor?" />
+                                                    <p:inputText id="linkedin" styleClass="form-control" placeholder="https://www.linkedin.com/" />
+                                                    <p:message for="linkedin" />
+                                                </div>
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <p:outputLabel for="nivacademico" value="Nivel Academico" />
+                                                            <p:outputLabel for="grado" value="Grado académico actual" />
                                                             <div class="form-group">
-                                                                <p:selectOneMenu id="nivacademico"  style="width: 100%">
-                                                                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
-                                                                    <f:selectItem itemLabel="M" itemValue="M" />
-                                                                    <f:selectItem itemLabel="F" itemValue="F" />
+                                                                <p:selectOneMenu id="grado"  style="width: 100%">
+                                                                    <f:selectItem itemLabel="Escoje una opción" itemValue="#{null}" noSelectionOption="true"/>
+                                                                    <f:selectItem itemLabel="Bachiller General" itemValue="1" />
+                                                                    <f:selectItem itemLabel="Bachiller Técnico" itemValue="2" />
+                                                                    <f:selectItem itemLabel="Técnico" itemValue="3" />
+                                                                    <f:selectItem itemLabel="Universitario" itemValue="4" />
+                                                                    <f:selectItem itemLabel="Otro" itemValue="5" />
                                                                 </p:selectOneMenu>
-                                                                <p:message for="nivacademico"/>
+                                                                <p:message for="grado"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -223,9 +256,11 @@
                                                             <p:outputLabel for="ocupacion" value="Ocupacion" />
                                                             <div class="form-group">
                                                                 <p:selectOneMenu id="ocupacion" style="width: 100%">
-                                                                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
-                                                                    <f:selectItem itemLabel="M" itemValue="M" />
-                                                                    <f:selectItem itemLabel="F" itemValue="F" />
+                                                                    <f:selectItem itemLabel="Escoje una opción" itemValue="#{null}" noSelectionOption="true"/>
+                                                                    <f:selectItem itemLabel="Empleado" itemValue="1" />
+                                                                    <f:selectItem itemLabel="Desempleado" itemValue="2" />
+                                                                    <f:selectItem itemLabel="Estudiante" itemValue="3" />
+                                                                    <f:selectItem itemLabel="Emprendedor" itemValue="4" />
                                                                 </p:selectOneMenu>
                                                                 <p:message for="ocupacion"/>
                                                             </div>
@@ -233,40 +268,41 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <p:outputLabel for="internet" value="Internet" />
+                                                            <p:outputLabel for="internet" value="¿Posees Internet?" />
                                                             <div class="form-group">
                                                                 <p:selectOneMenu id="internet" style="width: 100%">
-                                                                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
-                                                                    <f:selectItem itemLabel="M" itemValue="M" />
-                                                                    <f:selectItem itemLabel="F" itemValue="F" />
+                                                                    <f:selectItem itemLabel="Escoje una opción" itemValue="#{null}" noSelectionOption="true"/>
+                                                                    <f:selectItem itemLabel="SI" itemValue="1" />
+                                                                    <f:selectItem itemLabel="NO" itemValue="2" />
                                                                 </p:selectOneMenu>
                                                                 <p:message for="internet"/>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <p:outputLabel for="computadora" value="Computadora" />
+                                                            <p:outputLabel for="computadora" value="¿Posees computadora?" />
                                                             <div class="form-group">
                                                                 <p:selectOneMenu id="computadora" style="width: 100%">
-                                                                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
-                                                                    <f:selectItem itemLabel="M" itemValue="M" />
-                                                                    <f:selectItem itemLabel="F" itemValue="F" />
+                                                                    <f:selectItem itemLabel="Escoje una opción" itemValue="#{null}" noSelectionOption="true"/>
+                                                                    <f:selectItem itemLabel="SI" itemValue="1" />
+                                                                    <f:selectItem itemLabel="NO" itemValue="2" />
                                                                 </p:selectOneMenu>
                                                                 <p:message for="computadora"/>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <p:outputLabel for="tiempo" value="Disponibilidad de Tiempo" />
+                                                            <p:outputLabel for="tiempo" value="¿Cuál es tu disponibilidad de tiempo actual?" />
                                                             <div class="form-group">
                                                                 <p:selectOneMenu id="tiempo" style="width: 100%">
-                                                                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
-                                                                    <f:selectItem itemLabel="M" itemValue="M" />
-                                                                    <f:selectItem itemLabel="F" itemValue="F" />
+                                                                    <f:selectItem itemLabel="Escoje una opción" itemValue="#{null}" noSelectionOption="true"/>
+                                                                    <f:selectItem itemLabel="Tiempo parcial de 7:00 a.m. a 12:00 m.d." itemValue="1" />
+                                                                    <f:selectItem itemLabel="Tiempo parcial de 12:00 m.d. a 5:00 p.m." itemValue="2" />
+                                                                    <f:selectItem itemLabel="Jornada completa de 8:00 a.m. a 5:00 p.m." itemValue="3" />
                                                                 </p:selectOneMenu>
                                                                 <p:message for="tiempo"/>
                                                             </div>
@@ -274,7 +310,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <p:outputLabel for="salario" value="Aspiracion salarial" />
+                                                    <p:outputLabel for="salario" value="Expectativa salarial" />
                                                     <br/>
                                                     <p:spinner id="salario" min="300" max="5000" stepFactor="50" suffix=" $" styleClass="form-group" style="width: 100%">
                                                     </p:spinner>
@@ -289,13 +325,13 @@
                                                     <p:message for="alaboral" />
                                                 </div>
                                                 <div class="form-group">
-                                                    <p:outputLabel for="acurso" value="Aspiracion del Curso" />
+                                                    <p:outputLabel for="acurso" value="Aspiracion del Curso en Bitlab" />
                                                     <p:inputTextarea id="acurso" styleClass="form-control" placeholder="Aspiracion del Curso">
                                                     </p:inputTextarea>
                                                     <p:message for="acurso" />
                                                 </div>
                                                 <div class="form-group">
-                                                    <p:outputLabel for="enterado" value="Donde te enteraste de nosotros?" />
+                                                    <p:outputLabel for="enterado" value="¿Cómo te enteraste de Bitlab?" />
                                                     <p:inputTextarea id="enterado" styleClass="form-control" placeholder="Facebook, Instagram, Otras redes sociales">
                                                     </p:inputTextarea>
                                                     <p:message for="enterado" />
