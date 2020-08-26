@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mb;
+package sv.edu.bitlab.managedbeans;
 
 import entityTest.EntityTest;
 import java.io.Serializable;
