@@ -9,7 +9,7 @@
     <h:head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Template</title>
+        <title>BITLAB</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!-- Font Awesome -->
@@ -19,7 +19,7 @@
             rel="stylesheet"
             href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"
             />
-
+        <link rel="icon" type="image/png" href="resources/dist/img/favicon.png" />
         <!-- Theme style -->
         <link rel="stylesheet" href="resources/dist/css/adminlte.min.css" />
 
@@ -33,15 +33,14 @@
             href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
             rel="stylesheet"
             />
-        
-        
+
     </h:head>
 
     <body class="hold-transition sidebar-mini layout-fixed">
         <h:body>
             <div class="wrapper">
 
-                <f:event listener="#{testMB.validarSesion()}" type="preRenderView"/>
+                <f:event listener="#{usuarioManaged.validarSesion()}" type="preRenderView"/>
 
                 <!-- Navbar -->
                 <nav
@@ -56,7 +55,7 @@
                                 ></a>
                         </li>
                         <li class="nav-item d-none d-sm-inline-block">
-                            <a href="index.bitlab" class="nav-link">Home</a>
+                            <a href="index.xhtml" class="nav-link">Home</a>
                         </li>
                         <li class="nav-item d-none d-sm-inline-block">
                             <a href="#" class="nav-link">Contact</a>
@@ -77,7 +76,7 @@
                                         style="border-radius: 50%;"
                                         />
                                     <!--<span class="d-none d-md-inline">Alexander Pierce</span>-->
-                                    <h:outputText value="#{testMB.nUsuario}" styleClass="d-none d-md-inline"/>
+                                    <h:outputText value="#{usuarioManaged.nombre}" styleClass="d-none d-md-inline"/>
                                 </div>
                             </a>
                             <!-- Profile Option -->
@@ -92,10 +91,10 @@
                                             />
                                         <div class="media-body">
                                             <h3 class="dropdown-item-title">
-                                                <h:outputText value="#{testMB.nUsuario}" />
+                                                <h:outputText value="#{usuarioManaged.nombre}" />
                                             </h3>
                                             <!--<p class="text-sm">Aplicante</p>-->
-                                            <h:outputText value="#{testMB.ROL}" styleClass="text-sm" />
+                                            <h:outputText value="#{usuarioManaged.rol}" styleClass="text-sm" />
                                         </div>
                                     </div>
                                     <!-- Message End -->
@@ -108,7 +107,7 @@
                                 </h:outputLink>
                                 <h:form>
                                     <div class="dropdown-divider"></div>
-                                    <h:commandLink styleClass="dropdown-item float-right" >
+                                    <h:commandLink styleClass="dropdown-item float-right" actionListener="#{usuarioManaged.cerrarSesion()}">
                                         <i class="fas fa-sign-out-alt mr-2"></i>Cerrar Sesion
                                     </h:commandLink>
                                 </h:form>
@@ -190,9 +189,9 @@
                                 <ui:fragment rendered="#{testMB.ROL eq 'Admin'}">
                                     <li class="nav-header">ADMIN LEVEL EXAMPLE</li>
                                     <li class="nav-item">
-                                        <a href="docente.bitlab" class="nav-link">
+                                        <a href="#" class="nav-link">
                                             <i class="fas fa-circle nav-icon"></i>
-                                            <p>Docentes</p>
+                                            <p>Level 1</p>
                                         </a>
                                     </li>
                                     <li class="nav-item has-treeview">
@@ -325,7 +324,7 @@
                                 <!-- Menu SideBar Division -->
                                 <li class="nav-header"></li>
                                 <h:form styleClass="nav-item">
-                                    <h:commandLink styleClass="nav-link" >
+                                    <h:commandLink styleClass="nav-link" actionListener="#{usuarioManaged.cerrarSesion()}" >
                                         <i class="fas fa-sign-out-alt nav-icon"></i>
                                         <p>Cerrar Sesion</p>
                                     </h:commandLink>
@@ -488,7 +487,7 @@
                     >
                     All rights reserved.
                     <div class="float-right d-none d-sm-inline-block">
-                        <b>Version</b> 3.0.5
+                        <b>Version</b> 1.0.5
                     </div>
                 </footer>
 
@@ -499,7 +498,6 @@
                 <!-- /.control-sidebar -->
             </div>
             <!-- ./wrapper -->
-
             <!-- Bootstrap 4 -->
             <script src="resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
             <!-- overlayScrollbars -->

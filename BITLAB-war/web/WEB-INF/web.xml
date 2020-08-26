@@ -51,6 +51,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>index.bitlab</welcome-file>
+        <welcome-file>login.bitlab</welcome-file>
     </welcome-file-list>
 </web-app>

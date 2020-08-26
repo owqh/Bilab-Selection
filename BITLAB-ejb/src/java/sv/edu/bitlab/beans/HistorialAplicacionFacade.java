@@ -8,6 +8,7 @@ package sv.edu.bitlab.beans;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import sv.edu.bitlab.entidades.HistorialAplicacion;
 
 /**
@@ -28,5 +29,12 @@ public class HistorialAplicacionFacade extends AbstractFacade<HistorialAplicacio
     public HistorialAplicacionFacade() {
         super(HistorialAplicacion.class);
     }
+    
+     public Object buscarPorIdCandidato(Object id) {
+        Query q = em.createQuery("Select c from HistorialAplicacion c where c.canId.canId= :id");
+        q.setParameter("id", id);
+        return q.getSingleResult();
+    }
+
     
 }

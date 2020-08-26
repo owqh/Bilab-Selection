@@ -1,3 +1,14 @@
+<<<<<<< HEAD
+/nbproject/private/
+/BITLAB-ejb/nbproject/private/
+/BITLAB-war/nbproject/private/
+/BITLAB-ejb/build/
+/BITLAB-ejb/dist/
+/build/
+/BITLAB-war/build/
+/BITLAB-war/dist/
+/dist/
+=======
 build/*
 dist/*
 BITLAB-ejb/build/*
@@ -7,3 +18,4 @@ BITLAB-war/dist/*
 BITLAB-ejb/nbproject/private/*
 BITLAB-war/nbproject/private/*
 nbproject/private/*
+>>>>>>> 4b5841da884a1898d6a6c317eaa7e6020f5b96c2

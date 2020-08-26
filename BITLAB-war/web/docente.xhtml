@@ -163,10 +163,19 @@
                                         
                                     </p:panelGrid>
                                     <br/>
-                                    <center>                 
-                                        <p:commandButton value="Eliminar" icon="pi pi-trash" actionListener="#{docenteManaged.eliminarEntidad()}"
-                                                         update=":tablaDocente :messages :messagesAll" onsuccess="PF('widEditDocente').hide()" 
-                                                         style = "background: #D90202; border-color: #D90202;"/>
+                                    <center>              
+                                        
+                                        <p:growl id="message" showDetail="true" />
+                                        <p:commandButton value="Eliminar" action="#{docenteManaged.eliminarEntidad()}" onsuccess="PF('widEditDocente').hide()" 
+                                                         update="message :tablaDocente :messages :messagesAll" style = "background: #D90202; border-color: #D90202;"
+                                                         icon="pi pi-trash">
+                                            <p:confirm header="Confirmación" message="Seguro que desea eliminar ?" icon="pi pi-exclamation-triangle" />
+                                        </p:commandButton>
+                                        
+                                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times"/>
+                                        </p:confirmDialog>
                                         
                                         <p:commandButton value="Actualizar" icon="pi pi-save" actionListener="#{docenteManaged.guardarEntidad()}"
                                                          update=" :tablaDocente :messages :messagesAll" onsuccess="PF('widEditDocente').hide()"/>
