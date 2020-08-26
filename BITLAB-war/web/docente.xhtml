@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Docente</title>
     </h:head>
     <h:body>
         
@@ -124,15 +124,10 @@
                             
                             <!--EDITAR DOCENTE-->
                             <h:form id="editDocente"> 
-                                <p:dialog modal="true" header="Editar Datos Docente" widgetVar="widEditDocente" resizable="false" position="center">
+                                <p:dialog header="Editar Datos Docente" widgetVar="widEditDocente" resizable="false" 
+                                          showEffect="explode" hideEffect="hide" position="center">
                                     
-                                    <p:panelGrid columns="2" style="border: none !important;">
-                                        
-                                        <h:outputLabel value="ID:"/>
-                                        <h:outputText value="#{docenteManaged.entidadSeleccion.docId}"/>
-                                        
-                                        <h:outputLabel value="Codigo docente:"/>
-                                        <p:inputText value="#{docenteManaged.entidadSeleccion.docCodigo}"/>
+                                    <p:panelGrid columns="4" style="border: none !important;">
                                         
                                         <h:outputLabel value="Primer nombre:"/>
                                         <p:inputText value="#{docenteManaged.entidadSeleccion.docPrimerNombre}"/>
@@ -162,6 +157,9 @@
                                         
                                         <h:outputLabel value="Fecha nacimiento: "/>
                                         <p:calendar value="#{docenteManaged.entidadSeleccion.docFechaNac}" pattern="dd/MM/yyyy"/>
+                                        
+                                        <h:outputLabel value="Codigo docente:"/>
+                                        <p:inputText value="#{docenteManaged.entidadSeleccion.docCodigo}"/>
                                         
                                     </p:panelGrid>
                                     <br/>
@@ -180,12 +178,9 @@
                             <!--Nuevo DOCENTE-->
                             <h:form id="nuevoDocente"> 
                                 <p:dialog header="Ingresa datos Docente" widgetVar="widNuevoDocente" resizable="false" 
-                                          showEffect="explode" hideEffect="hide" position="center" width="380" >
+                                          showEffect="explode" hideEffect="hide" position="center">
                                     
-                                    <p:panelGrid columns="2" style="border: none !important;">
-                                        
-                                        <h:outputLabel value="Codigo docente:"/>
-                                        <p:inputText value="#{docenteManaged.entidadSeleccion.docCodigo}"/>
+                                    <p:panelGrid columns="4" style="border: none !important;">
                                         
                                         <h:outputLabel value="Primer nombre:"/>
                                         <p:inputText value="#{docenteManaged.entidadSeleccion.docPrimerNombre}"/>
@@ -215,6 +210,9 @@
                                         
                                         <h:outputLabel value="Fecha nacimiento: "/>
                                         <p:calendar value="#{docenteManaged.entidadSeleccion.docFechaNac}" pattern="dd/MM/yyyy"/>
+                                        
+                                        <h:outputLabel value="Codigo docente:"/>
+                                        <p:inputText value="#{docenteManaged.entidadSeleccion.docCodigo}"/>
                                         
                                     </p:panelGrid>
                                     <br/>
