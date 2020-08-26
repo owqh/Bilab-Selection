@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import sv.bitlab.utilidades.UtilidadesManejador;
 import sv.edu.bitlab.beans.DocenteFacade;
 import sv.edu.bitlab.entidades.Docente;
 
