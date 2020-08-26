@@ -10,8 +10,6 @@
             <included-library dirs="200">libs.eclipselinkmodelgen.classpath</included-library>
             <included-library dirs="200">libs.eclipselink.classpath</included-library>
             <included-library dirs="200">libs.hibernate4-persistence.classpath</included-library>
-            <included-library dirs="200">file.reference.jasypt-1.9.0.jar</included-library>
-            <included-library dirs="200">file.reference.slf4j-api-1.7.9.jar</included-library>
             <source-roots>
                 <root id="src.dir"/>
             </source-roots>
