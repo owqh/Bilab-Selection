@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailException;
@@ -179,7 +180,7 @@ public class UsuarioManaged implements Serializable {
 
     //clase para cerrar sesion
     public void cerrarSesion() {
-        rol = null;
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         Utilidades.redireccionLogin();
     }
 
