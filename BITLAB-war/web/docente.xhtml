@@ -48,7 +48,13 @@
                 <section class="content">
                     <div class="container-fluid">
                         <div class="col-12">
-
+                            
+                            <div id="top" class="top">
+                                <ui:insert name="top" >
+                                    <p:growl id="messages" globalOnly="true" showDetail="true" showSummary="true" life="2000"/>
+                                    <p:messages id="messagesAll"/>
+                                </ui:insert>
+                            </div>
                             
                             <h:form id="tablaDocente">
                                 <p:commandButton value="Agregar docente" actionListener="#{docenteManaged.nuevaEntidad()}"
