@@ -14,7 +14,7 @@
                 <li class="nav-item">
                     <a href="prueba.bitlab" class="nav-link active">
                         <i class="fas fa-table nav-icon"></i>
-                        <p>Prueba</p>
+                        <p>Seleccionado</p>
                     </a>
                 </li>
             </ui:define>
@@ -25,13 +25,13 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1 class="m-0 text-dark">Prueba</h1>
+                                <h1 class="m-0 text-dark">Seleccionado</h1>
                             </div>
                             <!-- /.col -->
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="index.bitlab">Home</a></li>
-                                    <li class="breadcrumb-item active">Prueba</li>
+                                    <li class="breadcrumb-item active">Seleccionado</li>
                                 </ol>
                             </div>
                             <!-- /.col -->
@@ -46,6 +46,12 @@
                 <section class="content">
                     <div class="container-fluid">
                         <div class="col-12">
+                            <div id="top" class="top">
+                                <ui:insert name="top" >
+                                    <p:growl id="messages" globalOnly="true" showDetail="true" showSummary="true" life="2000"/>
+                                    <p:messages id="messagesAll"/>
+                                </ui:insert>
+                            </div>
                             <h:form id="seleccionadoA">
                                 <p:carousel value="#{candidatomanaged.candidatoSeleccionado}"  headerText="Seleccionados" var="candidato" itemStyle="text-align:center" responsive="true">
 
@@ -69,7 +75,7 @@
 
                                         <h:outputText value="Gestionar Candidato" />
                                         <p:column style="width:32px;text-align: center">
-                                            <p:commandButton update="select" oncomplete="PF('seleccionado').show()" icon="pi pi-user" title="Ingresar notas">
+                                            <p:commandButton update="select :messages :messagesAll" oncomplete="PF('seleccionado').show()" icon="pi pi-user" title="Ingresar notas">
                                                 <f:setPropertyActionListener value="#{candidato}" target="#{candidatomanaged.candidato}" />
                                             </p:commandButton>
                                         </p:column>
@@ -83,7 +89,7 @@
                             </h:form>
 
                             <h:form id="select">
-                                <p:dialog widgetVar="seleccionado" modal="true" header="Ingresar Notas"  width="30%" resizable="true" height="40%" responsive="true" >
+                                <p:dialog widgetVar="seleccionado" modal="true" header="Ingresar Notas"  resizable="false" showEffect="explode" hideEffect="explode" position="center">
                                     <center>
                                         <p:panelGrid columns="2" style="border:none">
                                             <p:outputLabel value="Codigo"/>
@@ -95,8 +101,8 @@
                                             <p:outputLabel value=" Estado Candidato"/>
                                             <p:outputLabel value="#{candidatomanaged.candidato.eapId.eapNombre}"/>
 
-                                            <p:commandButton value="Aceptar Alumno" actionListener="#{candidatomanaged.addAlumn()}" update=":seleccionadoA" oncomplete="PF('seleccionado').hide()"/>
-                                            <p:commandButton value="Rechazar" actionListener="#{candidatomanaged.rechazarCandidato()}" update=":seleccionadoA" oncomplete="PF('seleccionado').hide()" style = "background: #D90202; border-color: #D90202;"/>
+                                            <p:commandButton value="Aceptar Alumno" actionListener="#{candidatomanaged.addAlumn()}" update=":seleccionadoA :messages :messagesAll" oncomplete="PF('seleccionado').hide()"/>
+                                            <p:commandButton value="Rechazar" actionListener="#{candidatomanaged.rechazarCandidato()}" update=":seleccionadoA :messages :messagesAll" oncomplete="PF('seleccionado').hide()" style = "background: #D90202; border-color: #D90202;"/>
 
 
                                         </p:panelGrid>
