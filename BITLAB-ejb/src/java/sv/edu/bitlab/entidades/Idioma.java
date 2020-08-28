@@ -22,15 +22,14 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Mario
+ * @author carlosGodoy
  */
 @Entity
 @Table(name = "BIT_IDI_IDIOMA", catalog = "BITLAB", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "Idioma.findAll", query = "SELECT i FROM Idioma i"),
-    @NamedQuery(name = "Idioma.findByIdiId", query = "SELECT i FROM Idioma i WHERE i.idiId = :idiId"),
-    @NamedQuery(name = "Idioma.findByIdiNombre", query = "SELECT i FROM Idioma i WHERE i.idiNombre = :idiNombre"),
-    @NamedQuery(name = "Idioma.findByIdiNivel", query = "SELECT i FROM Idioma i WHERE i.idiNivel = :idiNivel")})
+    @NamedQuery(name = "Idioma.findAll", query = "SELECT i FROM Idioma i")
+    , @NamedQuery(name = "Idioma.findByIdiId", query = "SELECT i FROM Idioma i WHERE i.idiId = :idiId")
+    , @NamedQuery(name = "Idioma.findByIdiNivel", query = "SELECT i FROM Idioma i WHERE i.idiNivel = :idiNivel")})
 public class Idioma implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,9 +38,6 @@ public class Idioma implements Serializable {
     @Basic(optional = false)
     @Column(name = "IDI_ID", nullable = false)
     private Integer idiId;
-    @Size(max = 50)
-    @Column(name = "IDI_NOMBRE", length = 50)
-    private String idiNombre;
     @Size(max = 50)
     @Column(name = "IDI_NIVEL", length = 50)
     private String idiNivel;
@@ -61,14 +57,6 @@ public class Idioma implements Serializable {
 
     public void setIdiId(Integer idiId) {
         this.idiId = idiId;
-    }
-
-    public String getIdiNombre() {
-        return idiNombre;
-    }
-
-    public void setIdiNombre(String idiNombre) {
-        this.idiNombre = idiNombre;
     }
 
     public String getIdiNivel() {

@@ -6,6 +6,7 @@
 package sv.edu.bitlab.entidades;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,19 +18,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
  *
- * @author Mario
+ * @author carlosGodoy
  */
 @Entity
 @Table(name = "BIT_NSE_NOTA_SELECCION", catalog = "BITLAB", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "NotaSeleccion.findAll", query = "SELECT n FROM NotaSeleccion n"),
-    @NamedQuery(name = "NotaSeleccion.findByNseId", query = "SELECT n FROM NotaSeleccion n WHERE n.nseId = :nseId"),
-    @NamedQuery(name = "NotaSeleccion.findByNseNota", query = "SELECT n FROM NotaSeleccion n WHERE n.nseNota = :nseNota"),
-    @NamedQuery(name = "NotaSeleccion.findByNsePromedio", query = "SELECT n FROM NotaSeleccion n WHERE n.nsePromedio = :nsePromedio")})
+    @NamedQuery(name = "NotaSeleccion.findAll", query = "SELECT n FROM NotaSeleccion n")
+    , @NamedQuery(name = "NotaSeleccion.findByNseId", query = "SELECT n FROM NotaSeleccion n WHERE n.nseId = :nseId")
+    , @NamedQuery(name = "NotaSeleccion.findByNseNota", query = "SELECT n FROM NotaSeleccion n WHERE n.nseNota = :nseNota")
+    , @NamedQuery(name = "NotaSeleccion.findByNsePromedio", query = "SELECT n FROM NotaSeleccion n WHERE n.nsePromedio = :nsePromedio")})
 public class NotaSeleccion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,24 +41,17 @@ public class NotaSeleccion implements Serializable {
     @Column(name = "NSE_ID", nullable = false)
     private Integer nseId;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "NSE_NOTA", precision = 22, scale = 0)
+    @Column(name = "NSE_NOTA", precision = 22)
     private Double nseNota;
-    @Column(name = "NSE_PROMEDIO", precision = 22, scale = 0)
+    @Column(name = "NSE_PROMEDIO", precision = 22)
     private Double nsePromedio;
-    @JoinColumn(name = "HAP_ID", referencedColumnName = "HAP_ID")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private HistorialAplicacion hapId;
+    @OneToMany(mappedBy = "nseId", fetch = FetchType.LAZY)
+    private List<HistorialAplicacion> historialAplicacionList;
     @JoinColumn(name = "PRU_ID", referencedColumnName = "PRU_ID")
     @ManyToOne(fetch = FetchType.LAZY)
     private Pruebas pruId;
 
     public NotaSeleccion() {
-    }
-    public NotaSeleccion(Double nseNota, Double nsePromedio, HistorialAplicacion hapId, Pruebas pruId) {
-        this.nseNota = nseNota;
-        this.nsePromedio = nsePromedio;
-        this.hapId = hapId;
-        this.pruId = pruId;
     }
 
     public NotaSeleccion(Integer nseId) {
@@ -87,12 +82,12 @@ public class NotaSeleccion implements Serializable {
         this.nsePromedio = nsePromedio;
     }
 
-    public HistorialAplicacion getHapId() {
-        return hapId;
+    public List<HistorialAplicacion> getHistorialAplicacionList() {
+        return historialAplicacionList;
     }
 
-    public void setHapId(HistorialAplicacion hapId) {
-        this.hapId = hapId;
+    public void setHistorialAplicacionList(List<HistorialAplicacion> historialAplicacionList) {
+        this.historialAplicacionList = historialAplicacionList;
     }
 
     public Pruebas getPruId() {

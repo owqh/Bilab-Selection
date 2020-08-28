@@ -26,24 +26,24 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Mario
+ * @author carlosGodoy
  */
 @Entity
 @Table(name = "BIT_DOC_DOCENTE", catalog = "BITLAB", schema = "", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"DOC_DUI"})})
 @NamedQueries({
-    @NamedQuery(name = "Docente.findAll", query = "SELECT d FROM Docente d"),
-    @NamedQuery(name = "Docente.findByDocId", query = "SELECT d FROM Docente d WHERE d.docId = :docId"),
-    @NamedQuery(name = "Docente.findByDocCodigo", query = "SELECT d FROM Docente d WHERE d.docCodigo = :docCodigo"),
-    @NamedQuery(name = "Docente.findByDocPrimerNombre", query = "SELECT d FROM Docente d WHERE d.docPrimerNombre = :docPrimerNombre"),
-    @NamedQuery(name = "Docente.findByDocSegundoNombre", query = "SELECT d FROM Docente d WHERE d.docSegundoNombre = :docSegundoNombre"),
-    @NamedQuery(name = "Docente.findByDocPrimerApellido", query = "SELECT d FROM Docente d WHERE d.docPrimerApellido = :docPrimerApellido"),
-    @NamedQuery(name = "Docente.findByDocSegundoApellido", query = "SELECT d FROM Docente d WHERE d.docSegundoApellido = :docSegundoApellido"),
-    @NamedQuery(name = "Docente.findByDocDui", query = "SELECT d FROM Docente d WHERE d.docDui = :docDui"),
-    @NamedQuery(name = "Docente.findByDocDireccion", query = "SELECT d FROM Docente d WHERE d.docDireccion = :docDireccion"),
-    @NamedQuery(name = "Docente.findByDocTelefono", query = "SELECT d FROM Docente d WHERE d.docTelefono = :docTelefono"),
-    @NamedQuery(name = "Docente.findByDocCorreo", query = "SELECT d FROM Docente d WHERE d.docCorreo = :docCorreo"),
-    @NamedQuery(name = "Docente.findByDocFechaNac", query = "SELECT d FROM Docente d WHERE d.docFechaNac = :docFechaNac")})
+    @NamedQuery(name = "Docente.findAll", query = "SELECT d FROM Docente d")
+    , @NamedQuery(name = "Docente.findByDocId", query = "SELECT d FROM Docente d WHERE d.docId = :docId")
+    , @NamedQuery(name = "Docente.findByDocCodigo", query = "SELECT d FROM Docente d WHERE d.docCodigo = :docCodigo")
+    , @NamedQuery(name = "Docente.findByDocPrimerNombre", query = "SELECT d FROM Docente d WHERE d.docPrimerNombre = :docPrimerNombre")
+    , @NamedQuery(name = "Docente.findByDocSegundoNombre", query = "SELECT d FROM Docente d WHERE d.docSegundoNombre = :docSegundoNombre")
+    , @NamedQuery(name = "Docente.findByDocPrimerApellido", query = "SELECT d FROM Docente d WHERE d.docPrimerApellido = :docPrimerApellido")
+    , @NamedQuery(name = "Docente.findByDocSegundoApellido", query = "SELECT d FROM Docente d WHERE d.docSegundoApellido = :docSegundoApellido")
+    , @NamedQuery(name = "Docente.findByDocDui", query = "SELECT d FROM Docente d WHERE d.docDui = :docDui")
+    , @NamedQuery(name = "Docente.findByDocDireccion", query = "SELECT d FROM Docente d WHERE d.docDireccion = :docDireccion")
+    , @NamedQuery(name = "Docente.findByDocTelefono", query = "SELECT d FROM Docente d WHERE d.docTelefono = :docTelefono")
+    , @NamedQuery(name = "Docente.findByDocCorreo", query = "SELECT d FROM Docente d WHERE d.docCorreo = :docCorreo")
+    , @NamedQuery(name = "Docente.findByDocFechaNac", query = "SELECT d FROM Docente d WHERE d.docFechaNac = :docFechaNac")})
 public class Docente implements Serializable {
 
     private static final long serialVersionUID = 1L;
