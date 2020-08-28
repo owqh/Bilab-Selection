@@ -24,33 +24,35 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
  *
- * @author Mario
+ * @author carlosGodoy
  */
 @Entity
 @Table(name = "BIT_CAN_CANDIDATO", catalog = "BITLAB", schema = "", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"CAN_CODIGO"}),
-    @UniqueConstraint(columnNames = {"CAN_DUI"}),
-    @UniqueConstraint(columnNames = {"CAN_CORREO"})})
+    @UniqueConstraint(columnNames = {"CAN_CODIGO"})
+    , @UniqueConstraint(columnNames = {"CAN_DUI"})
+    , @UniqueConstraint(columnNames = {"CAN_CORREO"})})
 @NamedQueries({
-    @NamedQuery(name = "Candidato.findAll", query = "SELECT c FROM Candidato c"),
-    @NamedQuery(name = "Candidato.findByCanId", query = "SELECT c FROM Candidato c WHERE c.canId = :canId"),
-    @NamedQuery(name = "Candidato.findByCanCodigo", query = "SELECT c FROM Candidato c WHERE c.canCodigo = :canCodigo"),
-    @NamedQuery(name = "Candidato.findByCanPrimerNombre", query = "SELECT c FROM Candidato c WHERE c.canPrimerNombre = :canPrimerNombre"),
-    @NamedQuery(name = "Candidato.findByCanSegundoNombre", query = "SELECT c FROM Candidato c WHERE c.canSegundoNombre = :canSegundoNombre"),
-    @NamedQuery(name = "Candidato.findByCanPrimerApellido", query = "SELECT c FROM Candidato c WHERE c.canPrimerApellido = :canPrimerApellido"),
-    @NamedQuery(name = "Candidato.findByCanSegundoApellido", query = "SELECT c FROM Candidato c WHERE c.canSegundoApellido = :canSegundoApellido"),
-    @NamedQuery(name = "Candidato.findByCanDui", query = "SELECT c FROM Candidato c WHERE c.canDui = :canDui"),
-    @NamedQuery(name = "Candidato.findByCanCorreo", query = "SELECT c FROM Candidato c WHERE c.canCorreo = :canCorreo"),
-    @NamedQuery(name = "Candidato.findByCanDireccion", query = "SELECT c FROM Candidato c WHERE c.canDireccion = :canDireccion"),
-    @NamedQuery(name = "Candidato.findByCanTelefono", query = "SELECT c FROM Candidato c WHERE c.canTelefono = :canTelefono"),
-    @NamedQuery(name = "Candidato.findByCanFechaNac", query = "SELECT c FROM Candidato c WHERE c.canFechaNac = :canFechaNac"),
-    @NamedQuery(name = "Candidato.findByCanCv", query = "SELECT c FROM Candidato c WHERE c.canCv = :canCv"),
-    @NamedQuery(name = "Candidato.findByCanFoto", query = "SELECT c FROM Candidato c WHERE c.canFoto = :canFoto"),
-    @NamedQuery(name = "Candidato.findByCanPromedioCurso", query = "SELECT c FROM Candidato c WHERE c.canPromedioCurso = :canPromedioCurso")})
+    @NamedQuery(name = "Candidato.findAll", query = "SELECT c FROM Candidato c")
+    , @NamedQuery(name = "Candidato.findByCanId", query = "SELECT c FROM Candidato c WHERE c.canId = :canId")
+    , @NamedQuery(name = "Candidato.findByCanCodigo", query = "SELECT c FROM Candidato c WHERE c.canCodigo = :canCodigo")
+    , @NamedQuery(name = "Candidato.findByCanPrimerNombre", query = "SELECT c FROM Candidato c WHERE c.canPrimerNombre = :canPrimerNombre")
+    , @NamedQuery(name = "Candidato.findByCanSegundoNombre", query = "SELECT c FROM Candidato c WHERE c.canSegundoNombre = :canSegundoNombre")
+    , @NamedQuery(name = "Candidato.findByCanPrimerApellido", query = "SELECT c FROM Candidato c WHERE c.canPrimerApellido = :canPrimerApellido")
+    , @NamedQuery(name = "Candidato.findByCanSegundoApellido", query = "SELECT c FROM Candidato c WHERE c.canSegundoApellido = :canSegundoApellido")
+    , @NamedQuery(name = "Candidato.findByCanDui", query = "SELECT c FROM Candidato c WHERE c.canDui = :canDui")
+    , @NamedQuery(name = "Candidato.findByCanCorreo", query = "SELECT c FROM Candidato c WHERE c.canCorreo = :canCorreo")
+    , @NamedQuery(name = "Candidato.findByCanDireccion", query = "SELECT c FROM Candidato c WHERE c.canDireccion = :canDireccion")
+    , @NamedQuery(name = "Candidato.findByCanTelefono", query = "SELECT c FROM Candidato c WHERE c.canTelefono = :canTelefono")
+    , @NamedQuery(name = "Candidato.findByCanFechaNac", query = "SELECT c FROM Candidato c WHERE c.canFechaNac = :canFechaNac")
+    , @NamedQuery(name = "Candidato.findByCanCv", query = "SELECT c FROM Candidato c WHERE c.canCv = :canCv")
+    , @NamedQuery(name = "Candidato.findByCanFoto", query = "SELECT c FROM Candidato c WHERE c.canFoto = :canFoto")
+    , @NamedQuery(name = "Candidato.findByCanPromedioCurso", query = "SELECT c FROM Candidato c WHERE c.canPromedioCurso = :canPromedioCurso")
+    , @NamedQuery(name = "Candidato.findByCanPromedioSeleccion", query = "SELECT c FROM Candidato c WHERE c.canPromedioSeleccion = :canPromedioSeleccion")})
 public class Candidato implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -59,32 +61,44 @@ public class Candidato implements Serializable {
     @Basic(optional = false)
     @Column(name = "CAN_ID", nullable = false)
     private Integer canId;
-    @Size(max = 6)
-    @Column(name = "CAN_CODIGO", length = 6)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 6)
+    @Column(name = "CAN_CODIGO", nullable = false, length = 6)
     private String canCodigo;
-    @Size(max = 20)
-    @Column(name = "CAN_PRIMER_NOMBRE", length = 20)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
+    @Column(name = "CAN_PRIMER_NOMBRE", nullable = false, length = 20)
     private String canPrimerNombre;
     @Size(max = 20)
     @Column(name = "CAN_SEGUNDO_NOMBRE", length = 20)
     private String canSegundoNombre;
-    @Size(max = 20)
-    @Column(name = "CAN_PRIMER_APELLIDO", length = 20)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
+    @Column(name = "CAN_PRIMER_APELLIDO", nullable = false, length = 20)
     private String canPrimerApellido;
     @Size(max = 20)
     @Column(name = "CAN_SEGUNDO_APELLIDO", length = 20)
     private String canSegundoApellido;
-    @Size(max = 10)
-    @Column(name = "CAN_DUI", length = 10)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 10)
+    @Column(name = "CAN_DUI", nullable = false, length = 10)
     private String canDui;
-    @Size(max = 150)
-    @Column(name = "CAN_CORREO", length = 150)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 150)
+    @Column(name = "CAN_CORREO", nullable = false, length = 150)
     private String canCorreo;
     @Size(max = 350)
     @Column(name = "CAN_DIRECCION", length = 350)
     private String canDireccion;
-    @Size(max = 9)
-    @Column(name = "CAN_TELEFONO", length = 9)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 9)
+    @Column(name = "CAN_TELEFONO", nullable = false, length = 9)
     private String canTelefono;
     @Column(name = "CAN_FECHA_NAC")
     @Temporal(TemporalType.DATE)
@@ -96,14 +110,19 @@ public class Candidato implements Serializable {
     @Column(name = "CAN_FOTO", length = 300)
     private String canFoto;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "CAN_PROMEDIO_CURSO", precision = 22, scale = 0)
+    @Column(name = "CAN_PROMEDIO_CURSO", precision = 22)
     private Double canPromedioCurso;
+    @Column(name = "CAN_PROMEDIO_SELECCION", precision = 22)
+    private Double canPromedioSeleccion;
     @JoinColumn(name = "EAP_ID", referencedColumnName = "EAP_ID")
     @ManyToOne(fetch = FetchType.LAZY)
     private EstadoAplicacion eapId;
     @JoinColumn(name = "GEN_ID", referencedColumnName = "GEN_ID")
     @ManyToOne(fetch = FetchType.LAZY)
     private Generalidades genId;
+    @JoinColumn(name = "HAP_ID", referencedColumnName = "HAP_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private HistorialAplicacion hapId;
     @JoinColumn(name = "IDI_ID", referencedColumnName = "IDI_ID")
     @ManyToOne(fetch = FetchType.LAZY)
     private Idioma idiId;
@@ -113,22 +132,30 @@ public class Candidato implements Serializable {
     @JoinColumn(name = "OCU_ID", referencedColumnName = "OCU_ID")
     @ManyToOne(fetch = FetchType.LAZY)
     private Ocupacion ocuId;
-    @JoinColumn(name = "SEX_ID", referencedColumnName = "SEX_ID")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SEX_ID", referencedColumnName = "SEX_ID", nullable = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Sexo sexId;
     @JoinColumn(name = "DOC_ID", referencedColumnName = "DOC_ID")
     @ManyToOne(fetch = FetchType.LAZY)
     private Docente docId;
     @OneToMany(mappedBy = "canId", fetch = FetchType.LAZY)
     private List<NotaCurso> notaCursoList;
-    @OneToMany(mappedBy = "canId", fetch = FetchType.LAZY)
-    private List<HistorialAplicacion> historialAplicacionList;
 
     public Candidato() {
     }
 
     public Candidato(Integer canId) {
         this.canId = canId;
+    }
+
+    public Candidato(Integer canId, String canCodigo, String canPrimerNombre, String canPrimerApellido, String canDui, String canCorreo, String canTelefono) {
+        this.canId = canId;
+        this.canCodigo = canCodigo;
+        this.canPrimerNombre = canPrimerNombre;
+        this.canPrimerApellido = canPrimerApellido;
+        this.canDui = canDui;
+        this.canCorreo = canCorreo;
+        this.canTelefono = canTelefono;
     }
 
     public Integer getCanId() {
@@ -243,6 +270,14 @@ public class Candidato implements Serializable {
         this.canPromedioCurso = canPromedioCurso;
     }
 
+    public Double getCanPromedioSeleccion() {
+        return canPromedioSeleccion;
+    }
+
+    public void setCanPromedioSeleccion(Double canPromedioSeleccion) {
+        this.canPromedioSeleccion = canPromedioSeleccion;
+    }
+
     public EstadoAplicacion getEapId() {
         return eapId;
     }
@@ -257,6 +292,14 @@ public class Candidato implements Serializable {
 
     public void setGenId(Generalidades genId) {
         this.genId = genId;
+    }
+
+    public HistorialAplicacion getHapId() {
+        return hapId;
+    }
+
+    public void setHapId(HistorialAplicacion hapId) {
+        this.hapId = hapId;
     }
 
     public Idioma getIdiId() {
@@ -305,14 +348,6 @@ public class Candidato implements Serializable {
 
     public void setNotaCursoList(List<NotaCurso> notaCursoList) {
         this.notaCursoList = notaCursoList;
-    }
-
-    public List<HistorialAplicacion> getHistorialAplicacionList() {
-        return historialAplicacionList;
-    }
-
-    public void setHistorialAplicacionList(List<HistorialAplicacion> historialAplicacionList) {
-        this.historialAplicacionList = historialAplicacionList;
     }
 
     @Override

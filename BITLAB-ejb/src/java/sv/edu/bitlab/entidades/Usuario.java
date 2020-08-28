@@ -23,18 +23,18 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Mario
+ * @author carlosGodoy
  */
 @Entity
 @Table(name = "BIT_USR_USUARIO", catalog = "BITLAB", schema = "", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"USR_ACCESO"})})
 @NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
-    @NamedQuery(name = "Usuario.findByUsrId", query = "SELECT u FROM Usuario u WHERE u.usrId = :usrId"),
-    @NamedQuery(name = "Usuario.findByUsrAcceso", query = "SELECT u FROM Usuario u WHERE u.usrAcceso = :usrAcceso"),
-    @NamedQuery(name = "Usuario.findByUsrNombre", query = "SELECT u FROM Usuario u WHERE u.usrNombre = :usrNombre"),
-    @NamedQuery(name = "Usuario.findByUsrApellido", query = "SELECT u FROM Usuario u WHERE u.usrApellido = :usrApellido"),
-    @NamedQuery(name = "Usuario.findByUsrContrasena", query = "SELECT u FROM Usuario u WHERE u.usrContrasena = :usrContrasena")})
+    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
+    , @NamedQuery(name = "Usuario.findByUsrId", query = "SELECT u FROM Usuario u WHERE u.usrId = :usrId")
+    , @NamedQuery(name = "Usuario.findByUsrAcceso", query = "SELECT u FROM Usuario u WHERE u.usrAcceso = :usrAcceso")
+    , @NamedQuery(name = "Usuario.findByUsrNombre", query = "SELECT u FROM Usuario u WHERE u.usrNombre = :usrNombre")
+    , @NamedQuery(name = "Usuario.findByUsrApellido", query = "SELECT u FROM Usuario u WHERE u.usrApellido = :usrApellido")
+    , @NamedQuery(name = "Usuario.findByUsrContrasena", query = "SELECT u FROM Usuario u WHERE u.usrContrasena = :usrContrasena")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;

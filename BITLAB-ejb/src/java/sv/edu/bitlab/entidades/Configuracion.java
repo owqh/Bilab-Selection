@@ -19,18 +19,18 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Mario
+ * @author carlosGodoy
  */
 @Entity
 @Table(name = "BIT_CON_CONFIGURACION", catalog = "BITLAB", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "Configuracion.findAll", query = "SELECT c FROM Configuracion c"),
-    @NamedQuery(name = "Configuracion.findByConId", query = "SELECT c FROM Configuracion c WHERE c.conId = :conId"),
-    @NamedQuery(name = "Configuracion.findByConCorreo", query = "SELECT c FROM Configuracion c WHERE c.conCorreo = :conCorreo"),
-    @NamedQuery(name = "Configuracion.findByConPcorreo", query = "SELECT c FROM Configuracion c WHERE c.conPcorreo = :conPcorreo"),
-    @NamedQuery(name = "Configuracion.findByConPort", query = "SELECT c FROM Configuracion c WHERE c.conPort = :conPort"),
-    @NamedQuery(name = "Configuracion.findByConServer", query = "SELECT c FROM Configuracion c WHERE c.conServer = :conServer"),
-    @NamedQuery(name = "Configuracion.findByConSeguridad", query = "SELECT c FROM Configuracion c WHERE c.conSeguridad = :conSeguridad")})
+    @NamedQuery(name = "Configuracion.findAll", query = "SELECT c FROM Configuracion c")
+    , @NamedQuery(name = "Configuracion.findByConId", query = "SELECT c FROM Configuracion c WHERE c.conId = :conId")
+    , @NamedQuery(name = "Configuracion.findByConCorreo", query = "SELECT c FROM Configuracion c WHERE c.conCorreo = :conCorreo")
+    , @NamedQuery(name = "Configuracion.findByConPcorreo", query = "SELECT c FROM Configuracion c WHERE c.conPcorreo = :conPcorreo")
+    , @NamedQuery(name = "Configuracion.findByConPort", query = "SELECT c FROM Configuracion c WHERE c.conPort = :conPort")
+    , @NamedQuery(name = "Configuracion.findByConServer", query = "SELECT c FROM Configuracion c WHERE c.conServer = :conServer")
+    , @NamedQuery(name = "Configuracion.findByConSeguridad", query = "SELECT c FROM Configuracion c WHERE c.conSeguridad = :conSeguridad")})
 public class Configuracion implements Serializable {
 
     private static final long serialVersionUID = 1L;
