@@ -15,15 +15,14 @@ import sv.edu.bitlab.entidades.Candidato;
 
 /**
  *
- * @author Mario
+ * @author carlosGodoy
  */
 @Stateless
 public class CandidatoFacade extends AbstractFacade<Candidato> {
 
-    // varibales y lista de tipo candidatos.
     List<Candidato> listaCandidado = new ArrayList<>();
     private Candidato candidato = new Candidato();
-    @PersistenceContext(unitName = "BITLAB-ejbPU")
+    @PersistenceContext(unitName = "BITLAB-PROJECT-ejbPU")
     private EntityManager em;
 
     @Override
@@ -45,30 +44,6 @@ public class CandidatoFacade extends AbstractFacade<Candidato> {
         }
     }
 
-    public List<Candidato> candidatosPotencialList() {
-        List<Candidato> listaCandidado = new ArrayList<>();
-
-        return listaCandidado = CandidatoFacade.super.findAll();
-
-    }
-
-    public List<Candidato> CandidatoTipoPRe() {
-        if (candidato.getEapId().equals(1)) {
-
-            return listaCandidado = CandidatoFacade.super.findAll();
-        }
-
-        return null;
-    }
-
-    public List<Candidato> candidatoPre() throws Exception {
-        try {
-            Query q = em.createQuery("select c from Candidato c where c.eapId.eapId = 1");
-            return q.getResultList();
-        } catch (Exception e) {
-            throw new Exception(e);
-        }
-    }
 
     //lista de candidatos potenciales
     public List<Candidato> candidatoPotencial() throws Exception {
@@ -89,7 +64,7 @@ public class CandidatoFacade extends AbstractFacade<Candidato> {
             throw new Exception(e);
         }
     }
-
+    // lista para candidatos regularesbajos
     public List<Candidato> candidatoRegularBajo() throws Exception {
         try {
             Query q = em.createQuery("select c from Candidato c where c.genId.genInternet='si' and c.genId.genComputadora='no' and c.genId.genTiempo='no' and c.eapId.eapId=9");
@@ -107,10 +82,22 @@ public class CandidatoFacade extends AbstractFacade<Candidato> {
             throw new Exception(e);
         }
     }
+    //Lista para candidatos preseleccionados.
+    public List<Candidato> candidatosPreseleccionados() {
 
-    public List<Candidato> aplicanteGeneral() {
-        Query q = em.createQuery("select c from Candidato c where c.eapId.eapId=9");
+        Query q = em.createQuery("select c from Candidato c where c.eapId.eapId=1");
+        return q.getResultList();
+
+    }
+    //Lista de aplicantes en general.
+    public List<Candidato> aplicanteGeneral(){
+       Query q = em.createQuery("select c from Candidato c where c.eapId.eapId=9");
         return q.getResultList();
     }
 
+     public List<Candidato> aplicanteSeleccionado(){
+       Query q = em.createQuery("select c from Candidato c where c.eapId.eapId=2");
+        return q.getResultList();
+    }
+    
 }
