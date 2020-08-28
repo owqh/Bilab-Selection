@@ -83,7 +83,7 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <p:outputLabel for="email" value="Email address" />
-                                                <p:inputText type="email" id="email" styleClass="form-control" disabled="true"/>
+                                                <p:inputText type="email" id="email" value="#{perfilManaged.correo}" styleClass="form-control" disabled="true"/>
                                                 <p:message for="email" />
                                             </div>
                                             <h3>Cambiar contraseña</h3>
@@ -129,14 +129,14 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <p:outputLabel for="pnombre" value="Primer nombre" />
-                                                        <p:inputText id="pnombre" styleClass="form-control" placeholder="Nombre" required="true" requiredMessage="Por favor, ingrese un nombre"/>
+                                                        <p:inputText id="pnombre" styleClass="form-control" value="#{perfilManaged.pnombre}" required="true" requiredMessage="Por favor, ingrese un nombre"/>
                                                         <p:message for="pnombre" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <p:outputLabel for="snombre" value="Segundo nombre" />
-                                                        <p:inputText id="snombre" styleClass="form-control" placeholder="Nombre"/>
+                                                        <p:inputText id="snombre" styleClass="form-control" value="#{perfilManaged.snombre}"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -144,14 +144,14 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <p:outputLabel for="papellido" value="Primer apellido" />
-                                                        <p:inputText id="papellido" styleClass="form-control" placeholder="Apellido" required="true" requiredMessage="Por favor, ingrese un apellido"/>
+                                                        <p:inputText id="papellido" styleClass="form-control" value="#{perfilManaged.papellido}" required="true" requiredMessage="Por favor, ingrese un apellido"/>
                                                         <p:message for="papellido" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <p:outputLabel for="sapellido" value="Segundo apellido" />
-                                                        <p:inputText id="sapellido" styleClass="form-control" placeholder="Apellido"/>
+                                                        <p:inputText id="sapellido" styleClass="form-control" value="#{perfilManaged.sapellido}"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -159,18 +159,17 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <p:outputLabel for="fnacimiento" value="Fecha de Nacimiento" />
-                                                        <p:datePicker id="fnacimiento" pattern="yyyy-MM-dd" inputStyle="width:100%" styleClass="form-group" style="width: 100%" readonlyInput="true" required="true" requiredMessage="Por favor, ingrese una fecha"/>
+                                                        <p:datePicker id="fnacimiento" value="#{perfilManaged.fnacimiento}" pattern="yyyy-MM-dd" inputStyle="width:100%" styleClass="form-group" style="width: 100%" readonlyInput="true" required="true" requiredMessage="Por favor, ingrese una fecha"/>
                                                         <p:message for="fnacimiento" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <p:outputLabel for="genero" value="Género" />
+                                                        <p:outputLabel for="genero" value="Sexo" />
                                                         <div class="form-group">
-                                                            <p:selectOneMenu id="genero" required="true" style="width: 100%">
-                                                                <f:selectItem itemLabel="Escoje una opción" itemValue="#{null}" noSelectionOption="true"/>
-                                                                <f:selectItem itemLabel="M" itemValue="M" />
-                                                                <f:selectItem itemLabel="F" itemValue="F" />
+                                                            <p:selectOneMenu id="genero" value="#{perfilManaged.sexo}" required="true" style="width: 100%">
+                                                                <f:selectItem itemLabel="Masculino" itemValue="1" />
+                                                                <f:selectItem itemLabel="Femenino" itemValue="2" />
                                                             </p:selectOneMenu>
                                                             <p:message for="genero"/>
                                                         </div>
@@ -181,7 +180,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <p:outputLabel for="dui" value="DUI" />
-                                                        <p:inputMask id="dui" mask="99999999-9" styleClass="form-control" required="true" requiredMessage="Por favor, ingrese un dui">
+                                                        <p:inputMask id="dui" mask="99999999-9" value="#{perfilManaged.dui}" styleClass="form-control" required="true" requiredMessage="Por favor, ingrese un dui">
                                                         </p:inputMask>
                                                         <p:message for="dui"/>
                                                     </div>
@@ -189,7 +188,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <p:outputLabel for="telefono" value="Telefono" />
-                                                        <p:inputMask id="telefono" mask="9999-9999" styleClass="form-control" placeholder="Telefono" required="true" requiredMessage="Por favor, ingrese un numero de telefono">
+                                                        <p:inputMask id="telefono" mask="9999-9999" styleClass="form-control" value="#{perfilManaged.telefono}" required="true" requiredMessage="Por favor, ingrese un numero de telefono">
                                                             <p:keyFilter mask="num"/>
                                                         </p:inputMask>
                                                         <p:message for="telefono" />
@@ -198,7 +197,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <p:outputLabel for="direccion" value="Direccion" />
-                                                <p:inputTextarea id="direccion" styleClass="form-control" placeholder="Direccion" required="true" requiredMessage="Por favor, ingrese una direccion">
+                                                <p:inputTextarea id="direccion" styleClass="form-control" value="#{perfilManaged.direccion}" required="true" requiredMessage="Por favor, ingrese una direccion">
                                                 </p:inputTextarea>
                                                 <p:message for="direccion" />
                                             </div>
@@ -206,7 +205,7 @@
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
-                                            <p:commandButton value="Actualizar" ajax="false" update=":general" style="margin-top: 20px; margin-right: 20px" validateClient="true"/>
+                                            <p:commandButton value="Actualizar" ajax="true" actionListener="#{perfilManaged.updateGeneral()}" update=":general" style="margin-top: 20px; margin-right: 20px" validateClient="true"/>
                                             <p:commandButton value="Reset" type="reset" style="margin-top: 20px; margin-right: 20px"/>
                                         </div>
                                     </div>
@@ -228,16 +227,15 @@
                                             <div class="card-body">
                                                 <div class="form-group">
                                                     <p:outputLabel for="linkedin" value="Si tienes LinkedIn, ¿nos puedes compartir el enlace para conocerte mejor?" />
-                                                    <p:inputText id="linkedin" styleClass="form-control" placeholder="https://www.linkedin.com/" />
+                                                    <p:inputText id="linkedin" styleClass="form-control" value="#{perfilManaged.linkedIn}" />
                                                     <p:message for="linkedin" />
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <p:outputLabel for="grado" value="Grado académico actual" />
+                                                            <p:outputLabel for="grado" value="Nivel académico actual" />
                                                             <div class="form-group">
-                                                                <p:selectOneMenu id="grado"  style="width: 100%">
-                                                                    <f:selectItem itemLabel="Escoje una opción" itemValue="#{null}" noSelectionOption="true"/>
+                                                                <p:selectOneMenu id="grado" value="#{perfilManaged.nivelAcademico}" style="width: 100%">
                                                                     <f:selectItem itemLabel="Bachiller General" itemValue="1" />
                                                                     <f:selectItem itemLabel="Bachiller Técnico" itemValue="2" />
                                                                     <f:selectItem itemLabel="Técnico" itemValue="3" />
@@ -248,12 +246,11 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
                                                             <p:outputLabel for="ocupacion" value="Ocupacion" />
                                                             <div class="form-group">
-                                                                <p:selectOneMenu id="ocupacion" style="width: 100%">
-                                                                    <f:selectItem itemLabel="Escoje una opción" itemValue="#{null}" noSelectionOption="true"/>
+                                                                <p:selectOneMenu id="ocupacion" value="#{perfilManaged.ocupacion}" style="width: 100%">
                                                                     <f:selectItem itemLabel="Empleado" itemValue="1" />
                                                                     <f:selectItem itemLabel="Desempleado" itemValue="2" />
                                                                     <f:selectItem itemLabel="Estudiante" itemValue="3" />
@@ -263,16 +260,32 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <p:outputLabel for="idioma" value="Nivel de Inglés" />
+                                                            <div class="form-group">
+                                                                <p:selectOneMenu id="idioma" value="#{perfilManaged.idioma}" style="width: 100%">
+                                                                    <f:selectItem itemLabel="No hablo ingles" itemValue="1" />
+                                                                    <f:selectItem itemLabel="Básico" itemValue="2" />
+                                                                    <f:selectItem itemLabel="Intermedio bajo" itemValue="3" />
+                                                                    <f:selectItem itemLabel="Intermedio" itemValue="4" />
+                                                                    <f:selectItem itemLabel="Intermedio Alto" itemValue="5" />
+                                                                    <f:selectItem itemLabel="Avanzado" itemValue="6" />
+                                                                    <f:selectItem itemLabel="Nativo" itemValue="7" />
+                                                                </p:selectOneMenu>
+                                                                <p:message for="idioma"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <p:outputLabel for="internet" value="¿Posees Internet?" />
                                                             <div class="form-group">
-                                                                <p:selectOneMenu id="internet" style="width: 100%">
-                                                                    <f:selectItem itemLabel="Escoje una opción" itemValue="#{null}" noSelectionOption="true"/>
-                                                                    <f:selectItem itemLabel="SI" itemValue="1" />
-                                                                    <f:selectItem itemLabel="NO" itemValue="2" />
+                                                                <p:selectOneMenu id="internet" value="#{perfilManaged.internet}" style="width: 100%">
+                                                                    <f:selectItem itemLabel="Si" itemValue="si" />
+                                                                    <f:selectItem itemLabel="No" itemValue="no" />
                                                                 </p:selectOneMenu>
                                                                 <p:message for="internet"/>
                                                             </div>
@@ -282,10 +295,9 @@
                                                         <div class="form-group">
                                                             <p:outputLabel for="computadora" value="¿Posees computadora?" />
                                                             <div class="form-group">
-                                                                <p:selectOneMenu id="computadora" style="width: 100%">
-                                                                    <f:selectItem itemLabel="Escoje una opción" itemValue="#{null}" noSelectionOption="true"/>
-                                                                    <f:selectItem itemLabel="SI" itemValue="1" />
-                                                                    <f:selectItem itemLabel="NO" itemValue="2" />
+                                                                <p:selectOneMenu id="computadora" value="#{perfilManaged.computadora}" style="width: 100%">
+                                                                    <f:selectItem itemLabel="Si" itemValue="si" />
+                                                                    <f:selectItem itemLabel="No" itemValue="no" />
                                                                 </p:selectOneMenu>
                                                                 <p:message for="computadora"/>
                                                             </div>
@@ -295,11 +307,11 @@
                                                         <div class="form-group">
                                                             <p:outputLabel for="tiempo" value="¿Cuál es tu disponibilidad de tiempo actual?" />
                                                             <div class="form-group">
-                                                                <p:selectOneMenu id="tiempo" style="width: 100%">
+                                                                <p:selectOneMenu id="tiempo" value="#{perfilManaged.tiempo}" style="width: 100%">
                                                                     <f:selectItem itemLabel="Escoje una opción" itemValue="#{null}" noSelectionOption="true"/>
-                                                                    <f:selectItem itemLabel="Tiempo parcial de 7:00 a.m. a 12:00 m.d." itemValue="1" />
-                                                                    <f:selectItem itemLabel="Tiempo parcial de 12:00 m.d. a 5:00 p.m." itemValue="2" />
-                                                                    <f:selectItem itemLabel="Jornada completa de 8:00 a.m. a 5:00 p.m." itemValue="3" />
+                                                                    <f:selectItem itemLabel="Tiempo parcial de 7:00 a.m. a 12:00 m.d." itemValue="Tiempo parcial de 7:00 a.m. a 12:00 m.d." />
+                                                                    <f:selectItem itemLabel="Tiempo parcial de 12:00 m.d. a 5:00 p.m." itemValue="Tiempo parcial de 12:00 m.d. a 5:00 p.m." />
+                                                                    <f:selectItem itemLabel="Jornada completa de 8:00 a.m. a 5:00 p.m." itemValue="Jornada completa de 8:00 a.m. a 5:00 p.m." />
                                                                 </p:selectOneMenu>
                                                                 <p:message for="tiempo"/>
                                                             </div>
@@ -309,7 +321,7 @@
                                                 <div class="form-group">
                                                     <p:outputLabel for="salario" value="Expectativa salarial" />
                                                     <br/>
-                                                    <p:spinner id="salario" min="300" max="5000" stepFactor="50" suffix=" $" styleClass="form-group" style="width: 100%">
+                                                    <p:spinner id="salario" value="#{perfilManaged.expectativaSal}" min="300" max="5000" stepFactor="50" suffix=" $" styleClass="form-group" style="width: 100%">
                                                     </p:spinner>
                                                     <p:slider for="salario" minValue="300" maxValue="2000" step="50" />
                                                     <br/>
@@ -317,25 +329,25 @@
 
                                                 <div class="form-group">
                                                     <p:outputLabel for="alaboral" value="Aspiracion Laboral" />
-                                                    <p:inputTextarea id="alaboral" styleClass="form-control" placeholder="Aspiracion Laboral">
+                                                    <p:inputTextarea id="alaboral" styleClass="form-control" value="#{perfilManaged.alaboral}">
                                                     </p:inputTextarea>
                                                     <p:message for="alaboral" />
                                                 </div>
                                                 <div class="form-group">
                                                     <p:outputLabel for="acurso" value="Aspiracion del Curso en Bitlab" />
-                                                    <p:inputTextarea id="acurso" styleClass="form-control" placeholder="Aspiracion del Curso">
+                                                    <p:inputTextarea id="acurso" styleClass="form-control" value="#{perfilManaged.acurso}">
                                                     </p:inputTextarea>
                                                     <p:message for="acurso" />
                                                 </div>
                                                 <div class="form-group">
                                                     <p:outputLabel for="enterado" value="¿Cómo te enteraste de Bitlab?" />
-                                                    <p:inputTextarea id="enterado" styleClass="form-control" placeholder="Facebook, Instagram, Otras redes sociales">
+                                                    <p:inputTextarea id="enterado" styleClass="form-control" value="#{perfilManaged.enterado}">
                                                     </p:inputTextarea>
                                                     <p:message for="enterado" />
                                                 </div>
                                                 <div class="form-group">
                                                     <p:outputLabel for="otros" value="Otros Conocimientos" />
-                                                    <p:inputTextarea id="otros" styleClass="form-control" placeholder="Otros Conocimientos">
+                                                    <p:inputTextarea id="otros" styleClass="form-control" value="#{perfilManaged.otros}">
                                                     </p:inputTextarea>
                                                     <p:message for="otros" />
                                                 </div>
@@ -347,7 +359,7 @@
                                             <!-- /.card-body -->
 
                                             <div class="card-footer">
-                                                <p:commandButton value="Actualizar" ajax="false" update=":complement" style="margin-top: 20px; margin-right: 20px" validateClient="true"/>
+                                                <p:commandButton value="Actualizar" actionListener="#{perfilManaged.updateComplement()}" ajax="true" update=":complement" style="margin-top: 20px; margin-right: 20px" validateClient="true"/>
                                                 <p:commandButton value="Reset" type="reset" style="margin-top: 20px; margin-right: 20px"/>
                                             </div>
                                         </div>
