@@ -31,11 +31,14 @@ import sv.edu.bitlab.entidades.Pruebas;
 @Named(value = "candidatomanaged")
 @SessionScoped
 public class candidatoManaged implements Serializable {
+
+    @EJB
+    private CandidatoFacade candidatoFacade1;
     
     @EJB
     private EstadoAplicacionFacade estadoAplicacionFacade1;
-    @EJB
-    private CandidatoFacade candidatoFacade;
+//    @EJB
+//    private CandidatoFacade candidatoFacade;
     @EJB
     private NotaSeleccionFacade notaSeleccionFacade;
     @EJB
@@ -75,13 +78,13 @@ public class candidatoManaged implements Serializable {
     public void cargarInfo() {
 
         try {
-            candidatoListPreseleccionado = candidatoFacade.candidatosPreseleccionados();
-            aplicanteGeneral = candidatoFacade.aplicanteGeneral(); //
-            candidatoSeleccionado = candidatoFacade.aplicanteSeleccionado();
-            candidatoListPo = candidatoFacade.candidatoPotencial(); //
-            candidatoListRegularAlto = candidatoFacade.candidatoRegularAlto(); //
-            candidatoListRegularBajo = candidatoFacade.candidatoRegularBajo(); //
-            candidatoSinOportu = candidatoFacade.candidatoSinOportunidad();
+            candidatoListPreseleccionado = candidatoFacade1.candidatosPreseleccionados();
+            aplicanteGeneral = candidatoFacade1.aplicanteGeneral(); //
+            candidatoSeleccionado = candidatoFacade1.aplicanteSeleccionado();
+            candidatoListPo = candidatoFacade1.candidatoPotencial(); //
+            candidatoListRegularAlto = candidatoFacade1.candidatoRegularAlto(); //
+            candidatoListRegularBajo = candidatoFacade1.candidatoRegularBajo(); //
+            candidatoSinOportu = candidatoFacade1.candidatoSinOportunidad();
         } catch (Exception ex) {
             Logger.getLogger(candidatoManaged.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -112,7 +115,7 @@ public class candidatoManaged implements Serializable {
         //Ingreso del promedio 
         double promedioSeleccion = Math.round(promedio * 100D) / 100D;
         candidato.setCanPromedioSeleccion(promedioSeleccion);
-        candidatoFacade.edit(candidato);
+        candidatoFacade1.edit(candidato);
         
         cargarInfo();
     }
@@ -120,28 +123,28 @@ public class candidatoManaged implements Serializable {
     public void aceptarPreSeleccionado() {
         estadoSeleccion = estadoAplicacionFacade1.find(1);
         candidato.setEapId(estadoSeleccion);
-        candidatoFacade.edit(candidato);
+        candidatoFacade1.edit(candidato);
         cargarInfo();
     }
 
     public void aceptarASeleccionado() {
         estadoSeleccion = estadoAplicacionFacade1.find(2);
         candidato.setEapId(estadoSeleccion);
-        candidatoFacade.edit(candidato);
+        candidatoFacade1.edit(candidato);
         cargarInfo();
     }
 
     public void addAlumn() {
         estadoSeleccion = estadoAplicacionFacade1.find(3);
         candidato.setEapId(estadoSeleccion);
-        candidatoFacade.edit(candidato);
+        candidatoFacade1.edit(candidato);
         cargarInfo();
     }
 
     public void rechazarCandidato() {
         estadoSeleccion = estadoAplicacionFacade1.find(7);
         candidato.setEapId(estadoSeleccion);
-        candidatoFacade.edit(candidato);
+        candidatoFacade1.edit(candidato);
         cargarInfo();
     }
 
@@ -186,11 +189,11 @@ public class candidatoManaged implements Serializable {
     }
 
     public CandidatoFacade getCandidatoFacade() {
-        return candidatoFacade;
+        return candidatoFacade1;
     }
 
     public void setCandidatoFacade(CandidatoFacade candidatoFacade) {
-        this.candidatoFacade = candidatoFacade;
+        this.candidatoFacade1 = candidatoFacade;
     }
 
     public List<Candidato> getCandidatoLista() {
