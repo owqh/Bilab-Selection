@@ -23,6 +23,7 @@ import sv.edu.bitlab.entidades.EstadoAplicacion;
 import sv.edu.bitlab.entidades.HistorialAplicacion;
 import sv.edu.bitlab.entidades.NotaSeleccion;
 import sv.edu.bitlab.entidades.Pruebas;
+import sv.edu.bitlab.utilidades.Utilidades;
 
 /**
  *
@@ -34,7 +35,7 @@ public class candidatoManaged implements Serializable {
 
     @EJB
     private CandidatoFacade candidatoFacade1;
-    
+
     @EJB
     private EstadoAplicacionFacade estadoAplicacionFacade1;
 //    @EJB
@@ -104,48 +105,76 @@ public class candidatoManaged implements Serializable {
         double promedioP = (Double.parseDouble(Psicometrica) * (pruebasP.getPruPorcentaje()) / 100);
         Double promedio = (promedioE + promedioL + promedioP + promedioT);
         //Ingreso de notas 
-        notaSeleccion = new NotaSeleccion((Double.parseDouble(entrevista)), promedioE, pruebasE);
-        notaSeleccionFacade.edit(notaSeleccion);
-        notaSeleccion = new NotaSeleccion((Double.parseDouble(logica)), promedioL, pruebasL);
-        notaSeleccionFacade.edit(notaSeleccion);
-        notaSeleccion = new NotaSeleccion((Double.parseDouble(tecnica)), promedioT, pruebasT);
-        notaSeleccionFacade.edit(notaSeleccion);
-        notaSeleccion = new NotaSeleccion((Double.parseDouble(Psicometrica)), promedioP, pruebasP);
-        notaSeleccionFacade.edit(notaSeleccion);
-        //Ingreso del promedio 
-        double promedioSeleccion = Math.round(promedio * 100D) / 100D;
-        candidato.setCanPromedioSeleccion(promedioSeleccion);
-        candidatoFacade1.edit(candidato);
-        
-        cargarInfo();
+        try {
+            notaSeleccion = new NotaSeleccion((Double.parseDouble(entrevista)), promedioE, pruebasE);
+            notaSeleccionFacade.edit(notaSeleccion);
+            notaSeleccion = new NotaSeleccion((Double.parseDouble(logica)), promedioL, pruebasL);
+            notaSeleccionFacade.edit(notaSeleccion);
+            notaSeleccion = new NotaSeleccion((Double.parseDouble(tecnica)), promedioT, pruebasT);
+            notaSeleccionFacade.edit(notaSeleccion);
+            notaSeleccion = new NotaSeleccion((Double.parseDouble(Psicometrica)), promedioP, pruebasP);
+            notaSeleccionFacade.edit(notaSeleccion);
+            //Ingreso del promedio 
+            double promedioSeleccion = Math.round(promedio * 100D) / 100D;
+            candidato.setCanPromedioSeleccion(promedioSeleccion);
+            candidatoFacade1.edit(candidato);
+            cargarInfo();
+            Utilidades.lanzarInfo("Exitoso", "Notas Ingresadas a " + candidato.getCanPrimerNombre());
+        } catch (Exception ex) {
+            Utilidades.lanzarError("Error", ex.getMessage());
+        }
+
     }
 
     public void aceptarPreSeleccionado() {
-        estadoSeleccion = estadoAplicacionFacade1.find(1);
-        candidato.setEapId(estadoSeleccion);
-        candidatoFacade1.edit(candidato);
-        cargarInfo();
+        try {
+            estadoSeleccion = estadoAplicacionFacade1.find(1);
+            candidato.setEapId(estadoSeleccion);
+            candidatoFacade1.edit(candidato);
+            cargarInfo();
+            Utilidades.lanzarInfo("Exitoso", "Se ha aceptado a " + candidato.getCanPrimerNombre() + " Y su estado paso a: " + candidato.getEapId().getEapNombre());
+        } catch (Exception ex) {
+            Utilidades.lanzarError("Error", ex.getMessage());
+        }
+
     }
 
     public void aceptarASeleccionado() {
-        estadoSeleccion = estadoAplicacionFacade1.find(2);
-        candidato.setEapId(estadoSeleccion);
-        candidatoFacade1.edit(candidato);
-        cargarInfo();
+        try {
+            estadoSeleccion = estadoAplicacionFacade1.find(2);
+            candidato.setEapId(estadoSeleccion);
+            candidatoFacade1.edit(candidato);
+            cargarInfo();
+            Utilidades.lanzarInfo("Exitoso", "Se ha aceptado a " + candidato.getCanPrimerNombre() + " Y su estado paso a: " + candidato.getEapId().getEapNombre());
+        } catch (Exception ex) {
+            Utilidades.lanzarError("Error", ex.getMessage());
+        }
     }
 
     public void addAlumn() {
-        estadoSeleccion = estadoAplicacionFacade1.find(3);
-        candidato.setEapId(estadoSeleccion);
-        candidatoFacade1.edit(candidato);
-        cargarInfo();
+        try {
+
+            estadoSeleccion = estadoAplicacionFacade1.find(3);
+            candidato.setEapId(estadoSeleccion);
+            candidatoFacade1.edit(candidato);
+            cargarInfo();
+            Utilidades.lanzarInfo("Exitoso", "Se ha aceptado a " + candidato.getCanPrimerNombre() + " Y su estado paso a: " + candidato.getEapId().getEapNombre());
+        } catch (Exception ex) {
+            Utilidades.lanzarError("Error", ex.getMessage());
+        }
     }
 
     public void rechazarCandidato() {
-        estadoSeleccion = estadoAplicacionFacade1.find(7);
-        candidato.setEapId(estadoSeleccion);
-        candidatoFacade1.edit(candidato);
-        cargarInfo();
+        try {
+            estadoSeleccion = estadoAplicacionFacade1.find(7);
+            candidato.setEapId(estadoSeleccion);
+            candidatoFacade1.edit(candidato);
+            cargarInfo();
+            Utilidades.lanzarInfo("Exitoso", candidato.getCanPrimerNombre() + " A sido rechazado");
+        } catch (Exception ex) {
+            Utilidades.lanzarError("Error", ex.getMessage());
+
+        }
     }
 
     public EstadoAplicacionFacade getEstadoAplicacionFacade1() {
