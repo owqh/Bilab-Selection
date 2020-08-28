@@ -46,6 +46,12 @@
                 <section class="content">
                     <div class="container-fluid">
                         <div class="col-12">
+                            <div id="top" class="top">
+                                <ui:insert name="top" >
+                                    <p:growl id="messages" globalOnly="true" showDetail="true" showSummary="true" life="2000"/>
+                                    <p:messages id="messagesAll"/>
+                                </ui:insert>
+                            </div>
                             <h:form id="seleccion">
                                 <p:dataTable var="candidato" value="#{candidatomanaged.candidatoListPreseleccionado}" style="margin-bottom:20px" rendered="true" paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" rowsPerPageTemplate="5,10,15" reflow="true" rows="5" paginator="true">
                                     <p:column style="width:16px">
@@ -93,20 +99,20 @@
                                     </p:rowExpansion>
 
                                     <p:column style="width:32px;text-align: center">
-                                        <p:commandButton update="ingresoNotas" oncomplete="PF('notas').show()" icon="pi pi-pencil" title="Ingresar notas">
+                                        <p:commandButton update="ingresoNotas :messages :messagesAll" oncomplete="PF('notas').show()" icon="pi pi-pencil" title="Ingresar notas">
                                             <f:setPropertyActionListener value="#{candidato}" target="#{candidatomanaged.candidato}" />
                                         </p:commandButton>
                                     </p:column>
 
                                     <p:column style="width:32px;text-align: center">     
-                                        <p:commandButton update="aceptarPre" oncomplete="PF('aceptarP').show()" icon="pi pi-user-plus" title="Gestion candidato">
+                                        <p:commandButton update="aceptarPre :messages :messagesAll" oncomplete="PF('aceptarP').show()" icon="pi pi-user-plus" title="Gestion candidato">
                                             <f:setPropertyActionListener value="#{candidato}" target="#{candidatomanaged.candidato}" />
                                         </p:commandButton>
                                     </p:column>
                                 </p:dataTable>
                             </h:form>
                             <h:form id="ingresoNotas">
-                                <p:dialog widgetVar="notas" modal="true" header="Ingresar Notas"  width="30%" resizable="true" height="40%" responsive="true" showEffect="">
+                                <p:dialog widgetVar="notas" modal="true" header="Ingresar Notas"  resizable="false" showEffect="explode" hideEffect="explode" position="center">
                                     <center>
                                         <p:panelGrid columns="2" style="border:none" >
                                             <p:outputLabel value="Codigo"/>
@@ -126,7 +132,7 @@
                                             <p:outputLabel value="Nota Prueba Psicometrica"/>
                                             <p:inputNumber placeholder="10.00"  value="#{candidatomanaged.psicometrica}"/>  
 
-                                            <p:commandButton value="Ingresar notas" actionListener="#{candidatomanaged.insertarNotas()}" update="" oncomplete="PF('notas').hide()"/>
+                                            <p:commandButton value="Ingresar notas" actionListener="#{candidatomanaged.insertarNotas()}" update=":messages :messagesAll" oncomplete="PF('notas').hide()"/>
                                             <p:commandButton value="Cancelar" oncomplete="PF('notas').hide()" style = "background: #D90202; border-color: #D90202;"/>
                                         </p:panelGrid>
                                     </center>
@@ -134,7 +140,7 @@
                             </h:form>
 
                             <h:form id="aceptarPre">
-                                <p:dialog widgetVar="aceptarP" modal="true" header="Ingresar Notas"  width="30%" resizable="true" height="40%" >
+                                <p:dialog widgetVar="aceptarP" modal="true" header="Ingresar Notas" resizable="false" showEffect="explode" hideEffect="explode" position="center">
                                     <center>
                                         <p:panelGrid columns="2" style="border:none">
                                             <p:outputLabel value="Codigo"/>
@@ -148,8 +154,8 @@
 
 
 
-                                            <p:commandButton value="Aceptar Candidado" actionListener="#{candidatomanaged.aceptarASeleccionado()}" update=":seleccion" oncomplete="PF('aceptarP').hide()"/>
-                                            <p:commandButton value="Rechazar" actionListener="#{candidatomanaged.rechazarCandidato()}" update=":seleccion" oncomplete="PF('aceptarP').hide()" style = "background: #D90202; border-color: #D90202;"/>
+                                            <p:commandButton value="Aceptar Candidado" actionListener="#{candidatomanaged.aceptarASeleccionado()}" update=":seleccion :messages :messagesAll" oncomplete="PF('aceptarP').hide()"/>
+                                            <p:commandButton value="Rechazar" actionListener="#{candidatomanaged.rechazarCandidato()}" update=":seleccion :messages :messagesAll" oncomplete="PF('aceptarP').hide()" style = "background: #D90202; border-color: #D90202;"/>
                                         </p:panelGrid>
                                     </center>
                                 </p:dialog>
