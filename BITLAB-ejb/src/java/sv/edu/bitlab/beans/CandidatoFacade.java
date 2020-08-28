@@ -45,6 +45,17 @@ public class CandidatoFacade extends AbstractFacade<Candidato> {
         }
     }
 
+    public Candidato candidatoPorCorreo(String correo) throws Exception {
+        try {
+            Query q = em.createQuery("select c from Candidato c where c.canCorreo= :correo");
+            q.setParameter("correo", correo);
+            List<Candidato> candidatos =  q.getResultList();
+            return candidatos.get(0);
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+    
     public List<Candidato> candidatosPotencialList() {
         List<Candidato> listaCandidado = new ArrayList<>();
 
