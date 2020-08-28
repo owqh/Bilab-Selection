@@ -114,7 +114,8 @@
                                     </p:column>
                                     
                                     <p:column style="width:32px;text-align: center" headerText="Edit" width="25">
-                                        <p:commandButton update=":editDocente :messages :messagesAll" oncomplete="PF('widEditDocente').show()" icon="pi pi-pencil" title="edit">
+                                        <p:commandButton update=":editDocente :messages :messagesAll" oncomplete="PF('widEditDocente').show()" 
+                                                         icon="pi pi-user-edit" title="edit">
                                             <f:setPropertyActionListener value="#{entidad}" target="#{docenteManaged.entidadSeleccion}"/>
                                         </p:commandButton>
                                     </p:column>
