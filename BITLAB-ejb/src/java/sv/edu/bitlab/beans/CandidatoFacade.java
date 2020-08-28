@@ -22,7 +22,7 @@ public class CandidatoFacade extends AbstractFacade<Candidato> {
 
     List<Candidato> listaCandidado = new ArrayList<>();
     private Candidato candidato = new Candidato();
-    @PersistenceContext(unitName = "BITLAB-PROJECT-ejbPU")
+    @PersistenceContext(unitName = "BITLAB-ejbPU")
     private EntityManager em;
 
     @Override
