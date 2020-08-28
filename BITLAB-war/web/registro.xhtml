@@ -77,14 +77,14 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <p:outputLabel for="pnombre" value="Primer nombre" />
-                                                <p:inputText id="pnombre" styleClass="form-control" placeholder="Nombre" required="true" requiredMessage="Por favor, ingrese un nombre"/>
+                                                <p:inputText id="pnombre" value="#{registroManaged.pnombre}" styleClass="form-control" placeholder="Nombre" required="true" requiredMessage="Por favor, ingrese un nombre"/>
                                                 <p:message for="pnombre" />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <p:outputLabel for="snombre" value="Segundo nombre" />
-                                                <p:inputText id="snombre" styleClass="form-control" placeholder="Nombre"/>
+                                                <p:inputText id="snombre" value="#{registroManaged.snombre}" styleClass="form-control" placeholder="Nombre"/>
                                             </div>
                                         </div>
                                     </div>
@@ -92,14 +92,14 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <p:outputLabel for="papellido" value="Primer apellido" />
-                                                <p:inputText id="papellido" styleClass="form-control" placeholder="Apellido" required="true" requiredMessage="Por favor, ingrese un apellido"/>
+                                                <p:inputText id="papellido" value="#{registroManaged.papellido}" styleClass="form-control" placeholder="Apellido" required="true" requiredMessage="Por favor, ingrese un apellido"/>
                                                 <p:message for="papellido" />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <p:outputLabel for="sapellido" value="Segundo apellido" />
-                                                <p:inputText id="sapellido" styleClass="form-control" placeholder="Apellido"/>
+                                                <p:inputText id="sapellido" value="#{registroManaged.sapellido}" styleClass="form-control" placeholder="Apellido"/>
                                             </div>
                                         </div>
                                     </div>
@@ -107,7 +107,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <p:outputLabel for="fnacimiento" value="Fecha de Nacimiento" />
-                                                <p:datePicker id="fnacimiento" pattern="yyyy-MM-dd" inputStyle="width:100%" styleClass="form-group" style="width: 100%" readonlyInput="true" required="true" requiredMessage="Por favor, ingrese una fecha"/>
+                                                <p:datePicker id="fnacimiento" value="#{registroManaged.fnacimiento}" pattern="yyyy-MM-dd" inputStyle="width:100%" styleClass="form-group" style="width: 100%" readonlyInput="true" required="true" requiredMessage="Por favor, ingrese una fecha"/>
                                                 <p:message for="fnacimiento" />
                                             </div>
                                         </div>
@@ -115,10 +115,9 @@
                                             <div class="form-group">
                                                 <p:outputLabel for="genero" value="Género" />
                                                 <div class="form-group">
-                                                    <p:selectOneMenu id="genero" required="true" style="width: 100%">
+                                                    <p:selectOneMenu value="#{registroManaged.sexo}" id="genero" required="true" style="width: 100%">
                                                         <f:selectItem itemLabel="Escoje una opción" itemValue="#{null}" noSelectionOption="true"/>
-                                                        <f:selectItem itemLabel="Masculino" itemValue="1" />
-                                                        <f:selectItem itemLabel="Femenino" itemValue="2" />
+                                                        <f:selectItems value="#{registroManaged.listaGenero}" var="genero" itemLabel="#{genero.sexNombre}" />
                                                     </p:selectOneMenu>
                                                     <p:message for="genero"/>
                                                 </div>
