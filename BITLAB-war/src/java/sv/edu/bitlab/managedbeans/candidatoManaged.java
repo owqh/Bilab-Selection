@@ -107,17 +107,17 @@ public class candidatoManaged implements Serializable {
 //        notaSeleccion.setHapId(hApp);
 //        notaSeleccionFacade.create(notaSeleccion);
 
-        notaSeleccion = new NotaSeleccion((Double.parseDouble(entrevista)), promedioE, hApp, pruebasE);
-        notaSeleccionFacade.edit(notaSeleccion);
-
-        notaSeleccion = new NotaSeleccion((Double.parseDouble(tecnica)), promedioT, hApp, pruebasT);
-        notaSeleccionFacade.edit(notaSeleccion);
-
-        notaSeleccion = new NotaSeleccion((Double.parseDouble(logica)), promedioL, hApp, pruebasL);
-        notaSeleccionFacade.edit(notaSeleccion);
-
-        notaSeleccion = new NotaSeleccion((Double.parseDouble(Psicometrica)), promedioP, hApp, pruebasP);
-        notaSeleccionFacade.edit(notaSeleccion);
+//        notaSeleccion = new NotaSeleccion((Double.parseDouble(entrevista)), promedioE, hApp, pruebasE);
+//        notaSeleccionFacade.edit(notaSeleccion);
+//
+//        notaSeleccion = new NotaSeleccion((Double.parseDouble(tecnica)), promedioT, hApp, pruebasT);
+//        notaSeleccionFacade.edit(notaSeleccion);
+//
+//        notaSeleccion = new NotaSeleccion((Double.parseDouble(logica)), promedioL, hApp, pruebasL);
+//        notaSeleccionFacade.edit(notaSeleccion);
+//
+//        notaSeleccion = new NotaSeleccion((Double.parseDouble(Psicometrica)), promedioP, hApp, pruebasP);
+//        notaSeleccionFacade.edit(notaSeleccion);
         
 //        
         //System.out.println(" probando para ingresar el promedio." + notaSeleccionP.getNsePromedio().toString());
