@@ -46,6 +46,12 @@
                 <section class="content">
                     <div class="container-fluid">
                         <div class="col-12">
+                            <div id="top" class="top">
+                                <ui:insert name="top" >
+                                    <p:growl id="messages" globalOnly="true" showDetail="true" showSummary="true" life="2000"/>
+                                    <p:messages id="messagesAll"/>
+                                </ui:insert>
+                            </div>
                             <p:outputLabel value="Aplicantes Potenciales"/>
                             <h:form id="candidatosPotenciales">
                                 <p:dataTable var="candidato" value="#{candidatomanaged.candidatoListPo}" style="margin-bottom:20px" rendered="true" paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" rowsPerPageTemplate="5,10,15" reflow="true" rows="5" paginator="true">
@@ -121,7 +127,7 @@
                                     </p:rowExpansion>
 
                                     <p:column style="width:32px;text-align: center">
-                                        <p:commandButton update=":CanPotencial" oncomplete="PF('CandiPotencial').show()" icon="pi pi-user-edit" title="Gestion Aplicante">
+                                        <p:commandButton update=":CanPotencial :messages :messagesAll" oncomplete="PF('CandiPotencial').show()" icon="pi pi-user-edit" title="Gestion Aplicante">
                                             <f:setPropertyActionListener value="#{candidato}" target="#{candidatomanaged.candidato}" />
                                         </p:commandButton>
                                     </p:column>
@@ -129,14 +135,14 @@
                             </h:form>
 
                             <h:form id="CanPotencial">
-                                <p:dialog widgetVar="CandiPotencial" modal="true" header="Decision Candidato"  width="30%" resizable="true" height="40%" >
+                                <p:dialog widgetVar="CandiPotencial" modal="true" header="Decision Candidato" resizable="false" showEffect="explode" hideEffect="explode" position="center">
                                     <center>
                                         <p:panelGrid columns="2" style="border:none">
                                             <p:outputLabel value="Estado actual"/>
                                             <p:outputLabel value="#{candidatomanaged.candidato.eapId.eapNombre}"/>
 
-                                            <p:commandButton value="Aceptar" actionListener="#{candidatomanaged.aceptarPreSeleccionado()}" update=":candidatosPotenciales :apliGeneral" oncomplete="PF('CandiPotencial').hide()"/>
-                                            <p:commandButton value="Rechazar" actionListener="#{candidatomanaged.rechazarCandidato()}" update=":candidatosPotenciales :apliGeneral" oncomplete="PF('CandiPotencial').hide()" style = "background: #D90202; border-color: #D90202;"/>
+                                            <p:commandButton value="Aceptar" actionListener="#{candidatomanaged.aceptarPreSeleccionado()}" update=":candidatosPotenciales :apliGeneral :messages :messagesAll" oncomplete="PF('CandiPotencial').hide()"/>
+                                            <p:commandButton value="Rechazar" actionListener="#{candidatomanaged.rechazarCandidato()}" update=":candidatosPotenciales :apliGeneral :messages :messagesAll" oncomplete="PF('CandiPotencial').hide()" style = "background: #D90202; border-color: #D90202;"/>
                                         </p:panelGrid>
                                     </center>
                                 </p:dialog>
@@ -218,7 +224,7 @@
                                     </p:rowExpansion>
 
                                     <p:column style="width:32px;text-align: center">
-                                        <p:commandButton update=":canReguAlto" oncomplete="PF('candiReguAlto').show()" icon="pi pi-user-edit" title="Gestionar">
+                                        <p:commandButton update=":canReguAlto :messages :messagesAll" oncomplete="PF('candiReguAlto').show()" icon="pi pi-user-edit" title="Gestionar">
                                             <f:setPropertyActionListener value="#{candidato}" target="#{candidatomanaged.candidato}" />
                                         </p:commandButton>
                                     </p:column>
@@ -227,14 +233,14 @@
 
 
                             <h:form id="canReguAlto">
-                                <p:dialog widgetVar="candiReguAlto" modal="true" header="Decision Candidato "  width="30%" resizable="true" height="40%" >
+                                <p:dialog widgetVar="candiReguAlto" modal="true" header="Decision Candidato " resizable="false" showEffect="explode" hideEffect="explode" position="center">
                                     <center>
                                         <p:panelGrid columns="2" style="border:none">
                                             <p:outputLabel value="Estado actual"/>
                                             <p:outputLabel value="#{candidatomanaged.candidato.eapId.eapNombre}"/>
 
-                                            <p:commandButton value="Aceptar" actionListener="#{candidatomanaged.aceptarPreSeleccionado()}" update=":regularesAltos :apliGeneral" oncomplete="PF('candiReguAlto').hide()"/>
-                                            <p:commandButton value="Rechazar" actionListener="#{candidatomanaged.rechazarCandidato()}" update=":regularesAltos :apliGeneral" oncomplete="PF('candiReguAlto').hide()" style = "background: #D90202; border-color: #D90202;"/>
+                                            <p:commandButton value="Aceptar" actionListener="#{candidatomanaged.aceptarPreSeleccionado()}" update=":regularesAltos :apliGeneral :messages :messagesAll" oncomplete="PF('candiReguAlto').hide()"/>
+                                            <p:commandButton value="Rechazar" actionListener="#{candidatomanaged.rechazarCandidato()}" update=":regularesAltos :apliGeneral :messages :messagesAll" oncomplete="PF('candiReguAlto').hide()" style = "background: #D90202; border-color: #D90202;"/>
                                         </p:panelGrid>
                                     </center>
                                 </p:dialog>
@@ -316,7 +322,7 @@
                                     </p:rowExpansion>
 
                                     <p:column style="width:32px;text-align: center">
-                                        <p:commandButton update=":canReguBajo" oncomplete="PF('candiRegubajo').show()" icon="pi pi-user-edit" title="Gestionar">
+                                        <p:commandButton update=":canReguBajo :messages :messagesAll" oncomplete="PF('candiRegubajo').show()" icon="pi pi-user-edit" title="Gestionar">
                                             <f:setPropertyActionListener value="#{candidato}" target="#{candidatomanaged.candidato}" />
                                         </p:commandButton>
                                     </p:column>
@@ -325,14 +331,14 @@
 
 
                             <h:form id="canReguBajo">
-                                <p:dialog widgetVar="candiRegubajo" modal="true" header="Decision Candidato"  width="30%" resizable="true" height="40%" >
+                                <p:dialog widgetVar="candiRegubajo" modal="true" header="Decision Candidato" resizable="false" showEffect="explode" hideEffect="explode" position="center">
                                     <center>
                                         <p:panelGrid columns="2" style="border:none">
                                             <p:outputLabel value="Estado actual"/>
                                             <p:outputLabel value="#{candidatomanaged.candidato.eapId.eapNombre}"/>
 
-                                            <p:commandButton value="Aceptar" actionListener="#{candidatomanaged.aceptarPreSeleccionado()}" update=":regularesBajos :apliGeneral" oncomplete="PF('candiRegubajo').hide()"/>
-                                            <p:commandButton value="Rechazar" actionListener="#{candidatomanaged.rechazarCandidato()}" update=":regularesBajos :apliGeneral " oncomplete="PF('candiRegubajo').hide()" style = "background: #D90202; border-color: #D90202;"/>
+                                            <p:commandButton value="Aceptar" actionListener="#{candidatomanaged.aceptarPreSeleccionado()}" update=":regularesBajos :apliGeneral :messages :messagesAll" oncomplete="PF('candiRegubajo').hide()"/>
+                                            <p:commandButton value="Rechazar" actionListener="#{candidatomanaged.rechazarCandidato()}" update=":regularesBajos :apliGeneral :messages :messagesAll" oncomplete="PF('candiRegubajo').hide()" style = "background: #D90202; border-color: #D90202;"/>
                                         </p:panelGrid>
                                     </center>
                                 </p:dialog>
@@ -415,7 +421,7 @@
                                     </p:rowExpansion>
 
                                     <p:column style="width:32px;text-align: center">
-                                        <p:commandButton update=":apliCante" oncomplete="PF('aplicanteGeneral').show()" icon="pi pi-user-edit" title="Gestionar">
+                                        <p:commandButton update=":apliCante :messages :messagesAll" oncomplete="PF('aplicanteGeneral').show()" icon="pi pi-user-edit" title="Gestionar">
                                             <f:setPropertyActionListener value="#{candidato}" target="#{candidatomanaged.candidato}" />
                                         </p:commandButton>
                                     </p:column>
@@ -424,14 +430,14 @@
 
 
                             <h:form id="apliCante">
-                                <p:dialog widgetVar="aplicanteGeneral" modal="true" header="Decision Candidato "  width="30%" resizable="true" height="40%" >
+                                <p:dialog widgetVar="aplicanteGeneral" modal="true" header="Decision Candidato " resizable="false" showEffect="explode" hideEffect="explode" position="center">
                                     <center>
                                         <p:panelGrid columns="2" style="border:none">
                                             <p:outputLabel value="Estado actual"/>
                                             <p:outputLabel value="#{candidatomanaged.candidato.eapId.eapNombre}"/>
 
-                                            <p:commandButton value="Aceptar" actionListener="#{candidatomanaged.aceptarPreSeleccionado()}" update=":apliGeneral" oncomplete="PF('aplicanteGeneral').hide()"/>
-                                            <p:commandButton value="Rechazar" actionListener="#{candidatomanaged.rechazarCandidato()}" update=":apliGeneral" oncomplete="PF('aplicanteGeneral').hide()" style = "background: #D90202; border-color: #D90202;"/>
+                                            <p:commandButton value="Aceptar" actionListener="#{candidatomanaged.aceptarPreSeleccionado()}" update=":apliGeneral :messages :messagesAll" oncomplete="PF('aplicanteGeneral').hide()"/>
+                                            <p:commandButton value="Rechazar" actionListener="#{candidatomanaged.rechazarCandidato()}" update=":apliGeneral :messages :messagesAll" oncomplete="PF('aplicanteGeneral').hide()" style = "background: #D90202; border-color: #D90202;"/>
                                         </p:panelGrid>
                                     </center>
                                 </p:dialog>
