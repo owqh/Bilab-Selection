@@ -48,16 +48,10 @@
                 <section class="content">
                     <div class="container-fluid">
                         <div class="col-12">
-                            
-                            <div id="top" class="top">
-                                <ui:insert name="top" >
-                                    <p:growl id="messages" globalOnly="true" showDetail="true" showSummary="true" life="2000"/>
-                                    <p:messages id="messagesAll"/>
-                                </ui:insert>
-                            </div>
+
                             
                             <h:form id="tablaDocente">
-                                <p:commandButton value="Agregar docente" actionListener="#{docenteManaged.entidadSeleccion}" process="@this"
+                                <p:commandButton value="Agregar docente" actionListener="#{docenteManaged.nuevaEntidad()}"
                                                  update=":nuevoDocente :messages :messagesAll"  oncomplete="PF('widNuevoDocente').show()" icon="pi pi-plus"/>
                                 <br />
                                 <br />
@@ -159,7 +153,7 @@
                                         <p:calendar value="#{docenteManaged.entidadSeleccion.docFechaNac}" pattern="dd/MM/yyyy"/>
                                         
                                         <h:outputLabel value="Codigo docente:"/>
-                                        <p:inputText value="#{docenteManaged.entidadSeleccion.docCodigo}"/>
+                                        <p:inputMask value="#{docenteManaged.entidadSeleccion.docCodigo}" mask="999999" required="true"/>
                                         
                                     </p:panelGrid>
                                     <br/>
@@ -184,7 +178,7 @@
                             </h:form>   
                             
                             
-                            <!--Nuevo DOCENTE-->
+                            <!--NUEVO DOCENTE-->
                             <h:form id="nuevoDocente"> 
                                 <p:dialog header="Ingresa datos Docente" widgetVar="widNuevoDocente" resizable="false" 
                                           showEffect="explode" hideEffect="hide" position="center">
@@ -221,12 +215,12 @@
                                         <p:calendar value="#{docenteManaged.entidadSeleccion.docFechaNac}" pattern="dd/MM/yyyy"/>
                                         
                                         <h:outputLabel value="Codigo docente:"/>
-                                        <p:inputText value="#{docenteManaged.entidadSeleccion.docCodigo}"/>
+                                        <p:inputMask value="#{docenteManaged.entidadSeleccion.docCodigo}" mask="999999" required="true"/>
                                         
                                     </p:panelGrid>
                                     <br/>
                                     <center>                 
-                                        <p:commandButton value="Guardar" icon="pi pi-save" actionListener="#{docenteManaged.nuevaEntidad()}"
+                                        <p:commandButton value="Guardar" icon="pi pi-save" actionListener="#{docenteManaged.guardarEntidad()}"
                                                          update=" :tablaDocente " onsuccess="PF('widNuevoDocente').hide()"/>
                                     </center>
                                 </p:dialog>

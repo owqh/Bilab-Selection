@@ -5,6 +5,7 @@
 */
 package sv.edu.bitlab.convertidores;
 
+import javax.ejb.EJB;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -19,10 +20,12 @@ import sv.edu.bitlab.entidades.Docente;
  */
 @FacesConverter(forClass = Docente.class)
 public class DocenteConvertidor implements Converter {
+
+    @EJB
+    DocenteFacade docenteFacade;
     
     @Override
-    public Object getAsObject(FacesContext context, UIComponent component, String value) {   
-        DocenteFacade docenteFacade = new DocenteFacade();
+    public Object getAsObject(FacesContext context, UIComponent component, String value) {
         return docenteFacade.find(Integer.parseInt(value));
     }
     
@@ -30,5 +33,4 @@ public class DocenteConvertidor implements Converter {
     public String getAsString(FacesContext context, UIComponent component, Object value) {
         return ((Docente)value).getDocId().toString();
     }
-    
 }

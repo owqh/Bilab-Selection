@@ -7,6 +7,7 @@ package sv.edu.bitlab.managedbeans;
 
 import javax.inject.Named;
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,7 +28,7 @@ import sv.edu.bitlab.utilidades.Utilidades;
 public class DocenteManaged implements Serializable {
     private static final Logger log = Logger.getLogger(DocenteManaged.class.getName());
     
-    private Docente entidadSeleccion = new Docente();
+    private Docente entidadSeleccion;
     private List<Docente> docenteList;
     
     @EJB
@@ -37,21 +38,18 @@ public class DocenteManaged implements Serializable {
     }
     
     @PostConstruct
-    public void encontrarEntidades(){
+    private void encontrarEntidades(){
         docenteList = docenteFacade.findAll();
-        log.info("Entidades cargadas en @constructor");
+        log.info("Lista de entidades cargada");
     }
     
     
-    public void nuevaEntidad(){
+    public void nuevaEntidad() throws NoSuchMethodException{
         log.info("Creando nueva entidad...");
         try {
-            docenteFacade.create(entidadSeleccion);
-            encontrarEntidades();
-            Utilidades.lanzarInfo("Exitoso ", Docente.class.getSimpleName() + " ha sido creado");
-        } catch (Exception ex) {
+            entidadSeleccion = Docente.class.getDeclaredConstructor().newInstance();
+        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             Logger.getLogger(DocenteManaged.class.getName()).log(Level.SEVERE, null, ex);
-            Utilidades.lanzarError("Error al crear ", ex.getMessage());
         }
         log.info("Entidad creada exitosamente!!");
     }
