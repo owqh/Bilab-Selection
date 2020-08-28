@@ -8,6 +8,7 @@ package sv.edu.bitlab.entidades;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,14 +23,14 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Mario
+ * @author carlosGodoy
  */
 @Entity
 @Table(name = "BIT_SEX_SEXO", catalog = "BITLAB", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "Sexo.findAll", query = "SELECT s FROM Sexo s"),
-    @NamedQuery(name = "Sexo.findBySexId", query = "SELECT s FROM Sexo s WHERE s.sexId = :sexId"),
-    @NamedQuery(name = "Sexo.findBySexNombre", query = "SELECT s FROM Sexo s WHERE s.sexNombre = :sexNombre")})
+    @NamedQuery(name = "Sexo.findAll", query = "SELECT s FROM Sexo s")
+    , @NamedQuery(name = "Sexo.findBySexId", query = "SELECT s FROM Sexo s WHERE s.sexId = :sexId")
+    , @NamedQuery(name = "Sexo.findBySexNombre", query = "SELECT s FROM Sexo s WHERE s.sexNombre = :sexNombre")})
 public class Sexo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,7 +42,7 @@ public class Sexo implements Serializable {
     @Size(max = 25)
     @Column(name = "SEX_NOMBRE", length = 25)
     private String sexNombre;
-    @OneToMany(mappedBy = "sexId", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sexId", fetch = FetchType.LAZY)
     private List<Candidato> candidatoList;
 
     public Sexo() {

@@ -22,21 +22,22 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Mario
+ * @author carlosGodoy
  */
 @Entity
 @Table(name = "BIT_GEN_GENERALIDADES", catalog = "BITLAB", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "Generalidades.findAll", query = "SELECT g FROM Generalidades g"),
-    @NamedQuery(name = "Generalidades.findByGenId", query = "SELECT g FROM Generalidades g WHERE g.genId = :genId"),
-    @NamedQuery(name = "Generalidades.findByGenInternet", query = "SELECT g FROM Generalidades g WHERE g.genInternet = :genInternet"),
-    @NamedQuery(name = "Generalidades.findByGenComputadora", query = "SELECT g FROM Generalidades g WHERE g.genComputadora = :genComputadora"),
-    @NamedQuery(name = "Generalidades.findByGenAspiracionLab", query = "SELECT g FROM Generalidades g WHERE g.genAspiracionLab = :genAspiracionLab"),
-    @NamedQuery(name = "Generalidades.findByGenAspiracionSal", query = "SELECT g FROM Generalidades g WHERE g.genAspiracionSal = :genAspiracionSal"),
-    @NamedQuery(name = "Generalidades.findByGenTiempo", query = "SELECT g FROM Generalidades g WHERE g.genTiempo = :genTiempo"),
-    @NamedQuery(name = "Generalidades.findByGenAspiracionCurso", query = "SELECT g FROM Generalidades g WHERE g.genAspiracionCurso = :genAspiracionCurso"),
-    @NamedQuery(name = "Generalidades.findByGenEnterado", query = "SELECT g FROM Generalidades g WHERE g.genEnterado = :genEnterado"),
-    @NamedQuery(name = "Generalidades.findByGenOtrosConocimientos", query = "SELECT g FROM Generalidades g WHERE g.genOtrosConocimientos = :genOtrosConocimientos")})
+    @NamedQuery(name = "Generalidades.findAll", query = "SELECT g FROM Generalidades g")
+    , @NamedQuery(name = "Generalidades.findByGenId", query = "SELECT g FROM Generalidades g WHERE g.genId = :genId")
+    , @NamedQuery(name = "Generalidades.findByGenInternet", query = "SELECT g FROM Generalidades g WHERE g.genInternet = :genInternet")
+    , @NamedQuery(name = "Generalidades.findByGenComputadora", query = "SELECT g FROM Generalidades g WHERE g.genComputadora = :genComputadora")
+    , @NamedQuery(name = "Generalidades.findByGenAspiracionLab", query = "SELECT g FROM Generalidades g WHERE g.genAspiracionLab = :genAspiracionLab")
+    , @NamedQuery(name = "Generalidades.findByGenAspiracionSal", query = "SELECT g FROM Generalidades g WHERE g.genAspiracionSal = :genAspiracionSal")
+    , @NamedQuery(name = "Generalidades.findByGenTiempo", query = "SELECT g FROM Generalidades g WHERE g.genTiempo = :genTiempo")
+    , @NamedQuery(name = "Generalidades.findByGenAspiracionCurso", query = "SELECT g FROM Generalidades g WHERE g.genAspiracionCurso = :genAspiracionCurso")
+    , @NamedQuery(name = "Generalidades.findByGenEnterado", query = "SELECT g FROM Generalidades g WHERE g.genEnterado = :genEnterado")
+    , @NamedQuery(name = "Generalidades.findByGenOtrosConocimientos", query = "SELECT g FROM Generalidades g WHERE g.genOtrosConocimientos = :genOtrosConocimientos")
+    , @NamedQuery(name = "Generalidades.findByGenLinkedin", query = "SELECT g FROM Generalidades g WHERE g.genLinkedin = :genLinkedin")})
 public class Generalidades implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,21 +55,23 @@ public class Generalidades implements Serializable {
     @Size(max = 600)
     @Column(name = "GEN_ASPIRACION_LAB", length = 600)
     private String genAspiracionLab;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "GEN_ASPIRACION_SAL", precision = 22, scale = 0)
-    private Double genAspiracionSal;
+    @Column(name = "GEN_ASPIRACION_SAL")
+    private Integer genAspiracionSal;
     @Size(max = 50)
     @Column(name = "GEN_TIEMPO", length = 50)
     private String genTiempo;
-    @Size(max = 800)
-    @Column(name = "GEN_ASPIRACION_CURSO", length = 800)
+    @Size(max = 600)
+    @Column(name = "GEN_ASPIRACION_CURSO", length = 600)
     private String genAspiracionCurso;
-    @Size(max = 50)
-    @Column(name = "GEN_ENTERADO", length = 50)
+    @Size(max = 300)
+    @Column(name = "GEN_ENTERADO", length = 300)
     private String genEnterado;
     @Size(max = 600)
     @Column(name = "GEN_OTROS_CONOCIMIENTOS", length = 600)
     private String genOtrosConocimientos;
+    @Size(max = 300)
+    @Column(name = "GEN_LINKEDIN", length = 300)
+    private String genLinkedin;
     @OneToMany(mappedBy = "genId", fetch = FetchType.LAZY)
     private List<Candidato> candidatoList;
 
@@ -111,11 +114,11 @@ public class Generalidades implements Serializable {
         this.genAspiracionLab = genAspiracionLab;
     }
 
-    public Double getGenAspiracionSal() {
+    public Integer getGenAspiracionSal() {
         return genAspiracionSal;
     }
 
-    public void setGenAspiracionSal(Double genAspiracionSal) {
+    public void setGenAspiracionSal(Integer genAspiracionSal) {
         this.genAspiracionSal = genAspiracionSal;
     }
 
@@ -149,6 +152,14 @@ public class Generalidades implements Serializable {
 
     public void setGenOtrosConocimientos(String genOtrosConocimientos) {
         this.genOtrosConocimientos = genOtrosConocimientos;
+    }
+
+    public String getGenLinkedin() {
+        return genLinkedin;
+    }
+
+    public void setGenLinkedin(String genLinkedin) {
+        this.genLinkedin = genLinkedin;
     }
 
     public List<Candidato> getCandidatoList() {
