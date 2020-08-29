@@ -22,15 +22,15 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author carlosGodoy
+ * @author Oscar
  */
 @Entity
 @Table(name = "BIT_ACT_ACTIVIDADES", catalog = "BITLAB", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "Actividades.findAll", query = "SELECT a FROM Actividades a")
-    , @NamedQuery(name = "Actividades.findByActId", query = "SELECT a FROM Actividades a WHERE a.actId = :actId")
-    , @NamedQuery(name = "Actividades.findByActNombre", query = "SELECT a FROM Actividades a WHERE a.actNombre = :actNombre")
-    , @NamedQuery(name = "Actividades.findByActPorcentaje", query = "SELECT a FROM Actividades a WHERE a.actPorcentaje = :actPorcentaje")})
+    @NamedQuery(name = "Actividades.findAll", query = "SELECT a FROM Actividades a"),
+    @NamedQuery(name = "Actividades.findByActId", query = "SELECT a FROM Actividades a WHERE a.actId = :actId"),
+    @NamedQuery(name = "Actividades.findByActNombre", query = "SELECT a FROM Actividades a WHERE a.actNombre = :actNombre"),
+    @NamedQuery(name = "Actividades.findByActPorcentaje", query = "SELECT a FROM Actividades a WHERE a.actPorcentaje = :actPorcentaje")})
 public class Actividades implements Serializable {
 
     private static final long serialVersionUID = 1L;

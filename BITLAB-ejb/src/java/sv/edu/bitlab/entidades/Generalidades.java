@@ -22,22 +22,22 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author carlosGodoy
+ * @author Oscar
  */
 @Entity
 @Table(name = "BIT_GEN_GENERALIDADES", catalog = "BITLAB", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "Generalidades.findAll", query = "SELECT g FROM Generalidades g")
-    , @NamedQuery(name = "Generalidades.findByGenId", query = "SELECT g FROM Generalidades g WHERE g.genId = :genId")
-    , @NamedQuery(name = "Generalidades.findByGenInternet", query = "SELECT g FROM Generalidades g WHERE g.genInternet = :genInternet")
-    , @NamedQuery(name = "Generalidades.findByGenComputadora", query = "SELECT g FROM Generalidades g WHERE g.genComputadora = :genComputadora")
-    , @NamedQuery(name = "Generalidades.findByGenAspiracionLab", query = "SELECT g FROM Generalidades g WHERE g.genAspiracionLab = :genAspiracionLab")
-    , @NamedQuery(name = "Generalidades.findByGenAspiracionSal", query = "SELECT g FROM Generalidades g WHERE g.genAspiracionSal = :genAspiracionSal")
-    , @NamedQuery(name = "Generalidades.findByGenTiempo", query = "SELECT g FROM Generalidades g WHERE g.genTiempo = :genTiempo")
-    , @NamedQuery(name = "Generalidades.findByGenAspiracionCurso", query = "SELECT g FROM Generalidades g WHERE g.genAspiracionCurso = :genAspiracionCurso")
-    , @NamedQuery(name = "Generalidades.findByGenEnterado", query = "SELECT g FROM Generalidades g WHERE g.genEnterado = :genEnterado")
-    , @NamedQuery(name = "Generalidades.findByGenOtrosConocimientos", query = "SELECT g FROM Generalidades g WHERE g.genOtrosConocimientos = :genOtrosConocimientos")
-    , @NamedQuery(name = "Generalidades.findByGenLinkedin", query = "SELECT g FROM Generalidades g WHERE g.genLinkedin = :genLinkedin")})
+    @NamedQuery(name = "Generalidades.findAll", query = "SELECT g FROM Generalidades g"),
+    @NamedQuery(name = "Generalidades.findByGenId", query = "SELECT g FROM Generalidades g WHERE g.genId = :genId"),
+    @NamedQuery(name = "Generalidades.findByGenInternet", query = "SELECT g FROM Generalidades g WHERE g.genInternet = :genInternet"),
+    @NamedQuery(name = "Generalidades.findByGenComputadora", query = "SELECT g FROM Generalidades g WHERE g.genComputadora = :genComputadora"),
+    @NamedQuery(name = "Generalidades.findByGenAspiracionLab", query = "SELECT g FROM Generalidades g WHERE g.genAspiracionLab = :genAspiracionLab"),
+    @NamedQuery(name = "Generalidades.findByGenAspiracionSal", query = "SELECT g FROM Generalidades g WHERE g.genAspiracionSal = :genAspiracionSal"),
+    @NamedQuery(name = "Generalidades.findByGenTiempo", query = "SELECT g FROM Generalidades g WHERE g.genTiempo = :genTiempo"),
+    @NamedQuery(name = "Generalidades.findByGenAspiracionCurso", query = "SELECT g FROM Generalidades g WHERE g.genAspiracionCurso = :genAspiracionCurso"),
+    @NamedQuery(name = "Generalidades.findByGenEnterado", query = "SELECT g FROM Generalidades g WHERE g.genEnterado = :genEnterado"),
+    @NamedQuery(name = "Generalidades.findByGenOtrosConocimientos", query = "SELECT g FROM Generalidades g WHERE g.genOtrosConocimientos = :genOtrosConocimientos"),
+    @NamedQuery(name = "Generalidades.findByGenLinkedin", query = "SELECT g FROM Generalidades g WHERE g.genLinkedin = :genLinkedin")})
 public class Generalidades implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -78,6 +78,21 @@ public class Generalidades implements Serializable {
     public Generalidades() {
     }
 
+    public Generalidades(Integer genId, String genInternet, String genComputadora, String genAspiracionLab, Integer genAspiracionSal, String genTiempo, String genAspiracionCurso, String genEnterado, String genOtrosConocimientos, String genLinkedin) {
+        this.genId = genId;
+        this.genInternet = genInternet;
+        this.genComputadora = genComputadora;
+        this.genAspiracionLab = genAspiracionLab;
+        this.genAspiracionSal = genAspiracionSal;
+        this.genTiempo = genTiempo;
+        this.genAspiracionCurso = genAspiracionCurso;
+        this.genEnterado = genEnterado;
+        this.genOtrosConocimientos = genOtrosConocimientos;
+        this.genLinkedin = genLinkedin;
+    }
+
+    
+   
     public Generalidades(Integer genId) {
         this.genId = genId;
     }

@@ -28,18 +28,18 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author carlosGodoy
+ * @author Oscar
  */
 @Entity
 @Table(name = "BIT_CUR_CURSO", catalog = "BITLAB", schema = "", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"CUR_CODIGO"})})
 @NamedQueries({
-    @NamedQuery(name = "Curso.findAll", query = "SELECT c FROM Curso c")
-    , @NamedQuery(name = "Curso.findByCurId", query = "SELECT c FROM Curso c WHERE c.curId = :curId")
-    , @NamedQuery(name = "Curso.findByCurCodigo", query = "SELECT c FROM Curso c WHERE c.curCodigo = :curCodigo")
-    , @NamedQuery(name = "Curso.findByCurNombre", query = "SELECT c FROM Curso c WHERE c.curNombre = :curNombre")
-    , @NamedQuery(name = "Curso.findByCurFechaInicio", query = "SELECT c FROM Curso c WHERE c.curFechaInicio = :curFechaInicio")
-    , @NamedQuery(name = "Curso.findByCurFechaFin", query = "SELECT c FROM Curso c WHERE c.curFechaFin = :curFechaFin")})
+    @NamedQuery(name = "Curso.findAll", query = "SELECT c FROM Curso c"),
+    @NamedQuery(name = "Curso.findByCurId", query = "SELECT c FROM Curso c WHERE c.curId = :curId"),
+    @NamedQuery(name = "Curso.findByCurCodigo", query = "SELECT c FROM Curso c WHERE c.curCodigo = :curCodigo"),
+    @NamedQuery(name = "Curso.findByCurNombre", query = "SELECT c FROM Curso c WHERE c.curNombre = :curNombre"),
+    @NamedQuery(name = "Curso.findByCurFechaInicio", query = "SELECT c FROM Curso c WHERE c.curFechaInicio = :curFechaInicio"),
+    @NamedQuery(name = "Curso.findByCurFechaFin", query = "SELECT c FROM Curso c WHERE c.curFechaFin = :curFechaFin")})
 public class Curso implements Serializable {
 
     private static final long serialVersionUID = 1L;

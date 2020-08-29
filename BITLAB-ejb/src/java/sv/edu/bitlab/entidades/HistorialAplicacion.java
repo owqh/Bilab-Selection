@@ -28,17 +28,17 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author carlosGodoy
+ * @author Oscar
  */
 @Entity
 @Table(name = "BIT_HAP_HISTORIAL_APLICACION", catalog = "BITLAB", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "HistorialAplicacion.findAll", query = "SELECT h FROM HistorialAplicacion h")
-    , @NamedQuery(name = "HistorialAplicacion.findByHapId", query = "SELECT h FROM HistorialAplicacion h WHERE h.hapId = :hapId")
-    , @NamedQuery(name = "HistorialAplicacion.findByHapFechaInicio", query = "SELECT h FROM HistorialAplicacion h WHERE h.hapFechaInicio = :hapFechaInicio")
-    , @NamedQuery(name = "HistorialAplicacion.findByHapFechaFin", query = "SELECT h FROM HistorialAplicacion h WHERE h.hapFechaFin = :hapFechaFin")
-    , @NamedQuery(name = "HistorialAplicacion.findByHapComentario", query = "SELECT h FROM HistorialAplicacion h WHERE h.hapComentario = :hapComentario")
-    , @NamedQuery(name = "HistorialAplicacion.findByHapPromedio", query = "SELECT h FROM HistorialAplicacion h WHERE h.hapPromedio = :hapPromedio")})
+    @NamedQuery(name = "HistorialAplicacion.findAll", query = "SELECT h FROM HistorialAplicacion h"),
+    @NamedQuery(name = "HistorialAplicacion.findByHapId", query = "SELECT h FROM HistorialAplicacion h WHERE h.hapId = :hapId"),
+    @NamedQuery(name = "HistorialAplicacion.findByHapFechaInicio", query = "SELECT h FROM HistorialAplicacion h WHERE h.hapFechaInicio = :hapFechaInicio"),
+    @NamedQuery(name = "HistorialAplicacion.findByHapFechaFin", query = "SELECT h FROM HistorialAplicacion h WHERE h.hapFechaFin = :hapFechaFin"),
+    @NamedQuery(name = "HistorialAplicacion.findByHapComentario", query = "SELECT h FROM HistorialAplicacion h WHERE h.hapComentario = :hapComentario"),
+    @NamedQuery(name = "HistorialAplicacion.findByHapPromedio", query = "SELECT h FROM HistorialAplicacion h WHERE h.hapPromedio = :hapPromedio")})
 public class HistorialAplicacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -59,7 +59,7 @@ public class HistorialAplicacion implements Serializable {
     @Column(name = "HAP_COMENTARIO", length = 600)
     private String hapComentario;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "HAP_PROMEDIO", precision = 22)
+    @Column(name = "HAP_PROMEDIO", precision = 22, scale = 0)
     private Double hapPromedio;
     @OneToMany(mappedBy = "hapId", fetch = FetchType.LAZY)
     private List<Candidato> candidatoList;

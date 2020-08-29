@@ -19,13 +19,19 @@ import sv.edu.bitlab.beans.IdiomaFacade;
 import sv.edu.bitlab.beans.NivelAcademicoFacade;
 import sv.edu.bitlab.beans.OcupacionFacade;
 import sv.edu.bitlab.beans.SexoFacade;
+import sv.edu.bitlab.beans.TipoUsuarioFacade;
+import sv.edu.bitlab.beans.UsuarioFacade;
 import sv.edu.bitlab.entidades.Candidato;
 import sv.edu.bitlab.entidades.EstadoAplicacion;
 import sv.edu.bitlab.entidades.Generalidades;
 import sv.edu.bitlab.entidades.HistorialAplicacion;
 import sv.edu.bitlab.entidades.Idioma;
 import sv.edu.bitlab.entidades.NivelAcademico;
+import sv.edu.bitlab.entidades.Ocupacion;
 import sv.edu.bitlab.entidades.Sexo;
+import sv.edu.bitlab.entidades.TipoUsuario;
+import sv.edu.bitlab.entidades.Usuario;
+import sv.edu.bitlab.utilidades.Utilidades;
 
 /**
  *
@@ -35,7 +41,12 @@ import sv.edu.bitlab.entidades.Sexo;
 @Dependent
 public class RegistroManaged {
 
-    //Importando EJB para registrar al participante
+    //Importando EJB para registrar al candidato
+    @EJB
+    private TipoUsuarioFacade tipoUsuarioFacade;
+
+    @EJB
+    private UsuarioFacade usuarioFacade;
 
     @EJB
     private IdiomaFacade idiomaFacade;
@@ -69,38 +80,83 @@ public class RegistroManaged {
     private Sexo sexo;
     private Generalidades generalidades;
     private Candidato candidato;
+    private Ocupacion ocupacion;
+    private Usuario usuario;
+    private TipoUsuario tipoUsuario;
 
     //Poner variables para insertar en 
     private String pnombre;
     private String snombre;
     private String papellido;
     private String sapellido;
+    private String codigo;
     private Date fnacimiento;
     private String dui;
     private String telefono;
     private String correo;
     private String contrasena;
     private String direccion;
+    private String linkedin;
+    private String aspiracionLaboral;
+    private int aspiracionSalarial;
+    private String internt;
+    private String computadora;
+    private String tiempo;
+    private String aspiracionCurso;
+    private String enterado;
+    private String otrosConocimientos;
     
     //Listas para rrecorrer las entidades externas
     private List<Sexo> listaGenero;
+    private List<NivelAcademico> listaNivelAcademico;
+    private List<Idioma> listaIdioma;
+    private List<Ocupacion> listaOcupacion;
     
     @PostConstruct
     public void cargarDatos(){
+        //Cargando listas desde la base de datos
         listaGenero = sexoFacade.findAll();
+        listaNivelAcademico = nivelAcademicoFacade.findAll();
+        listaIdioma = idiomaFacade.findAll();
+        listaOcupacion = ocupacionFacade.findAll();
     }
     
     public RegistroManaged() {
+      
     }
-
+    //Metodo para generar el codigo de cada candidato
+    public void codigoPersonas(){
+        codigo = papellido.charAt(0) + sapellido.charAt(0) + "123"; 
+    }
+    
     public void guardarRegistro() {
         //Encotrar todos los id foraneos
-        //sexo= sexoFacade.find(id) 
-
-        //preparar insert a la base
+        sexo = sexoFacade.find(sexo.getSexId());
+        idioma = idiomaFacade.find(idioma.getIdiId());
+        nivelAcademico = nivelAcademicoFacade.find(nivelAcademico.getNacId());
+        ocupacion = ocupacionFacade.find(ocupacion.getOcuId());
+        estadoAplicacion = estadoAplicacionFacade.find(1); //El estado de aplicacion 1 pertenece al estado "Candidato"
+        tipoUsuario = tipoUsuarioFacade.find(1); //El codigo 1 pertenece al tipo de usuario "candidato"
+        
+        //Creando Historial de Aplicacion 
+        
+        //Creando cuenta de usuario para acceder al sistema
+        //Acceder a metodo creado en la clase Usuario Managed
+        
+        //Creando registro de informacion basica de candidato
         //candidato = new Candidato(Integer.SIZE, nombre, nombre, nombre, nombre, nombre, nombre, nombre, nombre, nombre, canFechaNac, nombre, nombre, eapId, genId, idiId, nacId, ocuId, sexo)
+        candidato = new Candidato(1, codigo, pnombre, snombre, papellido, sapellido, dui, correo, direccion, telefono, fnacimiento, estadoAplicacion, generalidades, historialAplicacion, idioma, nivelAcademico, ocupacion, sexo);
         candidatoFacade.create(candidato);
-
+        
+        //Creando registro de datos complementarios
+        
+        
+        
+    }
+    
+    public void cuentaUsuario(){
+        //Validando que el usuario no exista en la base de datos
+        
     }
 
     public IdiomaFacade getIdiomaFacade() {
@@ -223,6 +279,14 @@ public class RegistroManaged {
         this.candidato = candidato;
     }
 
+    public Ocupacion getOcupacion() {
+        return ocupacion;
+    }
+
+    public void setOcupacion(Ocupacion ocupacion) {
+        this.ocupacion = ocupacion;
+    }
+
     public String getPnombre() {
         return pnombre;
     }
@@ -251,8 +315,8 @@ public class RegistroManaged {
         return sapellido;
     }
 
-    public void setSapellido(String sapeliido) {
-        this.sapellido = sapeliido;
+    public void setSapellido(String sapellido) {
+        this.sapellido = sapellido;
     }
 
     public Date getFnacimiento() {
@@ -303,6 +367,78 @@ public class RegistroManaged {
         this.direccion = direccion;
     }
 
+    public String getLinkedin() {
+        return linkedin;
+    }
+
+    public void setLinkedin(String linkedin) {
+        this.linkedin = linkedin;
+    }
+
+    public String getAspiracionLaboral() {
+        return aspiracionLaboral;
+    }
+
+    public void setAspiracionLaboral(String aspiracionLaboral) {
+        this.aspiracionLaboral = aspiracionLaboral;
+    }
+
+    public int getAspiracionSalarial() {
+        return aspiracionSalarial;
+    }
+
+    public void setAspiracionSalarial(int aspiracionSalarial) {
+        this.aspiracionSalarial = aspiracionSalarial;
+    }
+
+    public String getInternt() {
+        return internt;
+    }
+
+    public void setInternt(String internt) {
+        this.internt = internt;
+    }
+
+    public String getComputadora() {
+        return computadora;
+    }
+
+    public void setComputadora(String computadora) {
+        this.computadora = computadora;
+    }
+
+    public String getTiempo() {
+        return tiempo;
+    }
+
+    public void setTiempo(String tiempo) {
+        this.tiempo = tiempo;
+    }
+
+    public String getAspiracionCurso() {
+        return aspiracionCurso;
+    }
+
+    public void setAspiracionCurso(String aspiracionCurso) {
+        this.aspiracionCurso = aspiracionCurso;
+    }
+
+    public String getEnterado() {
+        return enterado;
+    }
+
+    public void setEnterado(String enterado) {
+        this.enterado = enterado;
+    }
+
+    public String getOtrosConocimientos() {
+        return otrosConocimientos;
+    }
+
+    public void setOtrosConocimientos(String otrosConocimientos) {
+        this.otrosConocimientos = otrosConocimientos;
+    }
+
     public List<Sexo> getListaGenero() {
         return listaGenero;
     }
@@ -310,8 +446,31 @@ public class RegistroManaged {
     public void setListaGenero(List<Sexo> listaGenero) {
         this.listaGenero = listaGenero;
     }
-    
-    
-    
+
+    public List<NivelAcademico> getListaNivelAcademico() {
+        return listaNivelAcademico;
+    }
+
+    public void setListaNivelAcademico(List<NivelAcademico> listaNivelAcademico) {
+        this.listaNivelAcademico = listaNivelAcademico;
+    }
+
+    public List<Idioma> getListaIdioma() {
+        return listaIdioma;
+    }
+
+    public void setListaIdioma(List<Idioma> listaIdioma) {
+        this.listaIdioma = listaIdioma;
+    }
+
+    public List<Ocupacion> getListaOcupacion() {
+        return listaOcupacion;
+    }
+
+    public void setListaOcupacion(List<Ocupacion> listaOcupacion) {
+        this.listaOcupacion = listaOcupacion;
+    }
+
+   
 
 }

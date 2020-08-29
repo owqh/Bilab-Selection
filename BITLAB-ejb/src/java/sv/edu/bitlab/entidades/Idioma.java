@@ -22,14 +22,14 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author carlosGodoy
+ * @author Oscar
  */
 @Entity
 @Table(name = "BIT_IDI_IDIOMA", catalog = "BITLAB", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "Idioma.findAll", query = "SELECT i FROM Idioma i")
-    , @NamedQuery(name = "Idioma.findByIdiId", query = "SELECT i FROM Idioma i WHERE i.idiId = :idiId")
-    , @NamedQuery(name = "Idioma.findByIdiNivel", query = "SELECT i FROM Idioma i WHERE i.idiNivel = :idiNivel")})
+    @NamedQuery(name = "Idioma.findAll", query = "SELECT i FROM Idioma i"),
+    @NamedQuery(name = "Idioma.findByIdiId", query = "SELECT i FROM Idioma i WHERE i.idiId = :idiId"),
+    @NamedQuery(name = "Idioma.findByIdiNivel", query = "SELECT i FROM Idioma i WHERE i.idiNivel = :idiNivel")})
 public class Idioma implements Serializable {
 
     private static final long serialVersionUID = 1L;

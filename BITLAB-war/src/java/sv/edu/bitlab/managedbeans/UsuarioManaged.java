@@ -23,8 +23,10 @@ import org.apache.commons.mail.HtmlEmail;
 import org.primefaces.PrimeFaces;
 import org.slf4j.LoggerFactory;
 import sv.edu.bitlab.beans.ConfiguracionFacade;
+import sv.edu.bitlab.beans.TipoUsuarioFacade;
 import sv.edu.bitlab.beans.UsuarioFacade;
 import sv.edu.bitlab.entidades.Configuracion;
+import sv.edu.bitlab.entidades.TipoUsuario;
 import sv.edu.bitlab.entidades.Usuario;
 import sv.edu.bitlab.utilidades.EncriptacionTexto;
 import sv.edu.bitlab.utilidades.Utilidades;
@@ -38,23 +40,29 @@ import sv.edu.bitlab.utilidades.Utilidades;
 public class UsuarioManaged implements Serializable {
 
     @EJB
+    private TipoUsuarioFacade tipoUsuarioFacade;
+
+    @EJB
     private ConfiguracionFacade configuracionFacade;
 
     @EJB
     private UsuarioFacade usuarioFacade;
-
+    
     private String usuario;
     private String codigoRecibido;
     private String codigoGenerado;
     private String contrasena;
     private String rol;
     private String nombre;
-    private EncriptacionTexto encriptacionTexto;
-    private Usuario usr;
     private String mensajeCorreo;
-    private String asunto;
-    List<Configuracion> datos;
     private String contrasenaGenerada;
+    private String asunto;
+    
+    private TipoUsuario tipoUsuario;
+    private Usuario usr;
+    private EncriptacionTexto encriptacionTexto;
+    List<Configuracion> datos;
+    
     private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(UsuarioFacade.class);
 
     @PostConstruct
@@ -220,6 +228,33 @@ public class UsuarioManaged implements Serializable {
             Utilidades.lanzarAdvertencia("Usaurio invalido", "El usuario no es valido, si no tienes una cuenta puedes crearla en la opcion registro!");
         }
 
+    }
+
+    public void crearUsuario(String correo, String nombre, String apellido, String pass, int tipo) {
+        try {
+            //Obteniendo el usuario de la base de datos
+            usr = usuarioFacade.ObtenerUsuario(correo);
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioManaged.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         //preparando para encriptar contraseña  
+        encriptacionTexto = new EncriptacionTexto();
+        //Validando si el usuario ya existe en la base de datos
+        if(usr == null) {
+            //Buscando el tipo de usuario
+            tipoUsuario = tipoUsuarioFacade.find(tipo);
+            
+            //Encriptando contraseña para guardar en base de datos
+            String contrasenaSegura = encriptacionTexto.getTextoEncriptado(pass);
+            
+                    
+            //perparando y creando el registro
+            Usuario registro = new Usuario(1, correo, nombre, apellido, contrasenaSegura, tipoUsuario);
+            usuarioFacade.create(registro);
+        }else{
+            LOG.error("El correo: "+correo +" ya existe en la base de datos");
+            Utilidades.lanzarAdvertencia("Usaurio existente", "La direccion de correo: "+correo+" ya se encuentra registrado.");
+        }
     }
 
     //Clase para el cambio de contraseña 

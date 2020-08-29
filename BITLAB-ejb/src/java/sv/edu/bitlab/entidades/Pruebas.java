@@ -22,15 +22,15 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author carlosGodoy
+ * @author Oscar
  */
 @Entity
 @Table(name = "BIT_PRU_PRUEBAS", catalog = "BITLAB", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "Pruebas.findAll", query = "SELECT p FROM Pruebas p")
-    , @NamedQuery(name = "Pruebas.findByPruId", query = "SELECT p FROM Pruebas p WHERE p.pruId = :pruId")
-    , @NamedQuery(name = "Pruebas.findByPruNombre", query = "SELECT p FROM Pruebas p WHERE p.pruNombre = :pruNombre")
-    , @NamedQuery(name = "Pruebas.findByPruPorcentaje", query = "SELECT p FROM Pruebas p WHERE p.pruPorcentaje = :pruPorcentaje")})
+    @NamedQuery(name = "Pruebas.findAll", query = "SELECT p FROM Pruebas p"),
+    @NamedQuery(name = "Pruebas.findByPruId", query = "SELECT p FROM Pruebas p WHERE p.pruId = :pruId"),
+    @NamedQuery(name = "Pruebas.findByPruNombre", query = "SELECT p FROM Pruebas p WHERE p.pruNombre = :pruNombre"),
+    @NamedQuery(name = "Pruebas.findByPruPorcentaje", query = "SELECT p FROM Pruebas p WHERE p.pruPorcentaje = :pruPorcentaje")})
 public class Pruebas implements Serializable {
 
     private static final long serialVersionUID = 1L;

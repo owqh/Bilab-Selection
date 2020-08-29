@@ -22,14 +22,14 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author carlosGodoy
+ * @author Oscar
  */
 @Entity
 @Table(name = "BIT_NAC_NIVEL_ACADEMICO", catalog = "BITLAB", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "NivelAcademico.findAll", query = "SELECT n FROM NivelAcademico n")
-    , @NamedQuery(name = "NivelAcademico.findByNacId", query = "SELECT n FROM NivelAcademico n WHERE n.nacId = :nacId")
-    , @NamedQuery(name = "NivelAcademico.findByNacNombre", query = "SELECT n FROM NivelAcademico n WHERE n.nacNombre = :nacNombre")})
+    @NamedQuery(name = "NivelAcademico.findAll", query = "SELECT n FROM NivelAcademico n"),
+    @NamedQuery(name = "NivelAcademico.findByNacId", query = "SELECT n FROM NivelAcademico n WHERE n.nacId = :nacId"),
+    @NamedQuery(name = "NivelAcademico.findByNacNombre", query = "SELECT n FROM NivelAcademico n WHERE n.nacNombre = :nacNombre")})
 public class NivelAcademico implements Serializable {
 
     private static final long serialVersionUID = 1L;

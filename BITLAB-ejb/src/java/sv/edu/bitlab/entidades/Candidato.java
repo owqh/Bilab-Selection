@@ -29,30 +29,30 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author carlosGodoy
+ * @author Oscar
  */
 @Entity
 @Table(name = "BIT_CAN_CANDIDATO", catalog = "BITLAB", schema = "", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"CAN_CODIGO"})
-    , @UniqueConstraint(columnNames = {"CAN_DUI"})
-    , @UniqueConstraint(columnNames = {"CAN_CORREO"})})
+    @UniqueConstraint(columnNames = {"CAN_CODIGO"}),
+    @UniqueConstraint(columnNames = {"CAN_DUI"}),
+    @UniqueConstraint(columnNames = {"CAN_CORREO"})})
 @NamedQueries({
-    @NamedQuery(name = "Candidato.findAll", query = "SELECT c FROM Candidato c")
-    , @NamedQuery(name = "Candidato.findByCanId", query = "SELECT c FROM Candidato c WHERE c.canId = :canId")
-    , @NamedQuery(name = "Candidato.findByCanCodigo", query = "SELECT c FROM Candidato c WHERE c.canCodigo = :canCodigo")
-    , @NamedQuery(name = "Candidato.findByCanPrimerNombre", query = "SELECT c FROM Candidato c WHERE c.canPrimerNombre = :canPrimerNombre")
-    , @NamedQuery(name = "Candidato.findByCanSegundoNombre", query = "SELECT c FROM Candidato c WHERE c.canSegundoNombre = :canSegundoNombre")
-    , @NamedQuery(name = "Candidato.findByCanPrimerApellido", query = "SELECT c FROM Candidato c WHERE c.canPrimerApellido = :canPrimerApellido")
-    , @NamedQuery(name = "Candidato.findByCanSegundoApellido", query = "SELECT c FROM Candidato c WHERE c.canSegundoApellido = :canSegundoApellido")
-    , @NamedQuery(name = "Candidato.findByCanDui", query = "SELECT c FROM Candidato c WHERE c.canDui = :canDui")
-    , @NamedQuery(name = "Candidato.findByCanCorreo", query = "SELECT c FROM Candidato c WHERE c.canCorreo = :canCorreo")
-    , @NamedQuery(name = "Candidato.findByCanDireccion", query = "SELECT c FROM Candidato c WHERE c.canDireccion = :canDireccion")
-    , @NamedQuery(name = "Candidato.findByCanTelefono", query = "SELECT c FROM Candidato c WHERE c.canTelefono = :canTelefono")
-    , @NamedQuery(name = "Candidato.findByCanFechaNac", query = "SELECT c FROM Candidato c WHERE c.canFechaNac = :canFechaNac")
-    , @NamedQuery(name = "Candidato.findByCanCv", query = "SELECT c FROM Candidato c WHERE c.canCv = :canCv")
-    , @NamedQuery(name = "Candidato.findByCanFoto", query = "SELECT c FROM Candidato c WHERE c.canFoto = :canFoto")
-    , @NamedQuery(name = "Candidato.findByCanPromedioCurso", query = "SELECT c FROM Candidato c WHERE c.canPromedioCurso = :canPromedioCurso")
-    , @NamedQuery(name = "Candidato.findByCanPromedioSeleccion", query = "SELECT c FROM Candidato c WHERE c.canPromedioSeleccion = :canPromedioSeleccion")})
+    @NamedQuery(name = "Candidato.findAll", query = "SELECT c FROM Candidato c"),
+    @NamedQuery(name = "Candidato.findByCanId", query = "SELECT c FROM Candidato c WHERE c.canId = :canId"),
+    @NamedQuery(name = "Candidato.findByCanCodigo", query = "SELECT c FROM Candidato c WHERE c.canCodigo = :canCodigo"),
+    @NamedQuery(name = "Candidato.findByCanPrimerNombre", query = "SELECT c FROM Candidato c WHERE c.canPrimerNombre = :canPrimerNombre"),
+    @NamedQuery(name = "Candidato.findByCanSegundoNombre", query = "SELECT c FROM Candidato c WHERE c.canSegundoNombre = :canSegundoNombre"),
+    @NamedQuery(name = "Candidato.findByCanPrimerApellido", query = "SELECT c FROM Candidato c WHERE c.canPrimerApellido = :canPrimerApellido"),
+    @NamedQuery(name = "Candidato.findByCanSegundoApellido", query = "SELECT c FROM Candidato c WHERE c.canSegundoApellido = :canSegundoApellido"),
+    @NamedQuery(name = "Candidato.findByCanDui", query = "SELECT c FROM Candidato c WHERE c.canDui = :canDui"),
+    @NamedQuery(name = "Candidato.findByCanCorreo", query = "SELECT c FROM Candidato c WHERE c.canCorreo = :canCorreo"),
+    @NamedQuery(name = "Candidato.findByCanDireccion", query = "SELECT c FROM Candidato c WHERE c.canDireccion = :canDireccion"),
+    @NamedQuery(name = "Candidato.findByCanTelefono", query = "SELECT c FROM Candidato c WHERE c.canTelefono = :canTelefono"),
+    @NamedQuery(name = "Candidato.findByCanFechaNac", query = "SELECT c FROM Candidato c WHERE c.canFechaNac = :canFechaNac"),
+    @NamedQuery(name = "Candidato.findByCanCv", query = "SELECT c FROM Candidato c WHERE c.canCv = :canCv"),
+    @NamedQuery(name = "Candidato.findByCanFoto", query = "SELECT c FROM Candidato c WHERE c.canFoto = :canFoto"),
+    @NamedQuery(name = "Candidato.findByCanPromedioCurso", query = "SELECT c FROM Candidato c WHERE c.canPromedioCurso = :canPromedioCurso"),
+    @NamedQuery(name = "Candidato.findByCanPromedioSeleccion", query = "SELECT c FROM Candidato c WHERE c.canPromedioSeleccion = :canPromedioSeleccion")})
 public class Candidato implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -110,9 +110,9 @@ public class Candidato implements Serializable {
     @Column(name = "CAN_FOTO", length = 300)
     private String canFoto;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "CAN_PROMEDIO_CURSO", precision = 22)
+    @Column(name = "CAN_PROMEDIO_CURSO", precision = 22, scale = 0)
     private Double canPromedioCurso;
-    @Column(name = "CAN_PROMEDIO_SELECCION", precision = 22)
+    @Column(name = "CAN_PROMEDIO_SELECCION", precision = 22, scale = 0)
     private Double canPromedioSeleccion;
     @JoinColumn(name = "EAP_ID", referencedColumnName = "EAP_ID")
     @ManyToOne(fetch = FetchType.LAZY)
@@ -156,6 +156,27 @@ public class Candidato implements Serializable {
         this.canDui = canDui;
         this.canCorreo = canCorreo;
         this.canTelefono = canTelefono;
+    }
+
+    public Candidato(Integer canId, String canCodigo, String canPrimerNombre, String canSegundoNombre, String canPrimerApellido, String canSegundoApellido, String canDui, String canCorreo, String canDireccion, String canTelefono, Date canFechaNac, EstadoAplicacion eapId, Generalidades genId, HistorialAplicacion hapId, Idioma idiId, NivelAcademico nacId, Ocupacion ocuId, Sexo sexId) {
+        this.canId = canId;
+        this.canCodigo = canCodigo;
+        this.canPrimerNombre = canPrimerNombre;
+        this.canSegundoNombre = canSegundoNombre;
+        this.canPrimerApellido = canPrimerApellido;
+        this.canSegundoApellido = canSegundoApellido;
+        this.canDui = canDui;
+        this.canCorreo = canCorreo;
+        this.canDireccion = canDireccion;
+        this.canTelefono = canTelefono;
+        this.canFechaNac = canFechaNac;
+        this.eapId = eapId;
+        this.genId = genId;
+        this.hapId = hapId;
+        this.idiId = idiId;
+        this.nacId = nacId;
+        this.ocuId = ocuId;
+        this.sexId = sexId;
     }
 
     public Integer getCanId() {

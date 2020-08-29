@@ -41,7 +41,7 @@
                 <div class="row mb-2">
                     <div class="col-sm-10" style="margin: 0 10% 30px 10%;">
                         <img src="resources/dist/img/Logo.png" width="350px" height="100px" class="float-right" alt="Logo bitlab"> </img>
-                        <h1 class="m-0 text-dark">Registro de becarios BitLab</h1>
+                        <h1 class="m-0 text-dark">Registro de becarios BitLab</h1><br/>
                         <p>Bienvenido al cuestionario de aplicación de becas BitLab.</p>
                         <p>Asegurate de contestar lo mas claro posible, pues de esto depende tu proceso de seleccion.</p>
                         <p>Antes de completar este formulario, es necesario que conozcas cómo funciona el programa de becas. Encuentra toda la información dando click <b><u><a href="https://blog.elaniin.com/enterate-aplicar-beca-bitlab/" target="_blank">aquí.</a></u></b> Asegúrate de leerlo.</p>
@@ -115,7 +115,7 @@
                                             <div class="form-group">
                                                 <p:outputLabel for="genero" value="Género" />
                                                 <div class="form-group">
-                                                    <p:selectOneMenu value="#{registroManaged.sexo}" id="genero" required="true" style="width: 100%">
+                                                    <p:selectOneMenu value="#{registroManaged.sexo}" id="genero" required="true" style="width: 100%" requiredMessage="Por favor, seleccione una opcion">
                                                         <f:selectItem itemLabel="Escoje una opción" itemValue="#{null}" noSelectionOption="true"/>
                                                         <f:selectItems value="#{registroManaged.listaGenero}" var="genero" itemLabel="#{genero.sexNombre}" />
                                                     </p:selectOneMenu>
@@ -128,7 +128,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <p:outputLabel for="dui" value="DUI" />
-                                                <p:inputMask id="dui" mask="99999999-9" styleClass="form-control" required="true" requiredMessage="Por favor, ingrese un dui valido">
+                                                <p:inputMask id="dui" mask="99999999-9"  value="#{registroManaged.dui}" styleClass="form-control" required="true" requiredMessage="Por favor, ingrese un dui valido">
                                                 </p:inputMask>
                                                 <p:message for="dui"/>
                                             </div>
@@ -136,7 +136,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <p:outputLabel for="telefono" value="¿Cuál es tu número de contacto?" />
-                                                <p:inputMask id="telefono" mask="9999-9999" styleClass="form-control" placeholder="Telefono" required="true" requiredMessage="Por favor, ingrese un numero de telefono">
+                                                <p:inputMask id="telefono" mask="9999-9999" value="#{registroManaged.telefono}" styleClass="form-control" placeholder="Telefono" required="true" requiredMessage="Por favor, ingrese un numero de telefono">
                                                     <p:keyFilter mask="num"/>
                                                 </p:inputMask>
                                                 <p:message for="telefono" />
@@ -147,7 +147,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <p:outputLabel for="email" value="¿A cuál correo te podemos contactar?" />
-                                                <p:inputText type="email" id="email" styleClass="form-control" placeholder="Email" required="true" requiredMessage="Por favor, ingrese un correo valido">
+                                                <p:inputText type="email"  value="#{registroManaged.correo}" id="email" styleClass="form-control" placeholder="Email" required="true" requiredMessage="Por favor, ingrese un correo valido">
                                                     <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
                                                 </p:inputText>
                                                 <p:message for="email" />
@@ -156,14 +156,14 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <p:outputLabel for="password" value="Crea una contraseña para revisar el proceso de tu solicitud en la plataforma" />
-                                                <p:password class="form-control" placeholder="Contraseña" id="password" required="true" requiredMessage="Por favor, ingrese una contraseña valida"/> 
+                                                <p:password class="form-control"  value="#{registroManaged.contrasena}" placeholder="Contraseña" id="password" required="true" requiredMessage="Por favor, ingrese una contraseña valida"/> 
                                                 <p:message for="password" />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <p:outputLabel for="direccion" value="Direccion" />
-                                        <p:inputTextarea id="direccion" styleClass="form-control" placeholder="Direccion" required="true" requiredMessage="Por favor, ingrese una direccion">
+                                        <p:inputTextarea id="direccion"  value="#{registroManaged.direccion}" styleClass="form-control" placeholder="Direccion" required="true" requiredMessage="Por favor, ingrese una direccion">
                                         </p:inputTextarea>
                                         <p:message for="direccion" />
                                     </div>
@@ -187,7 +187,7 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <p:outputLabel for="linkedin" value="Si tienes LinkedIn, ¿nos puedes compartir el enlace para conocerte mejor?" />
-                                        <p:inputText id="linkedin" styleClass="form-control" placeholder="https://www.linkedin.com/" />
+                                        <p:inputText id="linkedin"  value="#{registroManaged.linkedin}" styleClass="form-control" placeholder="https://www.linkedin.com/" />
                                         <p:message for="linkedin" />
                                     </div>
                                     <div class="row">
@@ -195,14 +195,10 @@
                                             <div class="form-group">
                                                 <p:outputLabel for="grado" value="Grado académico actual" />
                                                 <div class="form-group">
-                                                    <p:selectOneMenu id="grado"  style="width: 100%" required="true">
+                                                    <p:selectOneMenu id="grado" value="#{registroManaged.nivelAcademico}"  style="width: 100%" required="true" requiredMessage="Por favor, seleccione una opcion">
                                                         <f:selectItem itemLabel="Escoje una opción" itemValue="#{null}" noSelectionOption="true"/>
-                                                        <f:selectItem itemLabel="Bachiller General" itemValue="Bachiller General" />
-                                                        <f:selectItem itemLabel="Bachiller Técnico" itemValue="Bachiller Técnico" />
-                                                        <f:selectItem itemLabel="Técnico" itemValue="Técnico" />
-                                                        <f:selectItem itemLabel="Universitario" itemValue="Universitario" />
-                                                        <f:selectItem itemLabel="Otro" itemValue="Otro" />
-                                                    </p:selectOneMenu>
+                                                        <f:selectItems value="#{registroManaged.listaNivelAcademico}" var="nivel" itemLabel="#{nivel.nacNombre}"  />
+                                                     </p:selectOneMenu>   
                                                     <p:message for="grado"/>
                                                 </div>
                                             </div>
@@ -211,12 +207,9 @@
                                             <div class="form-group">
                                                 <p:outputLabel for="ocupacion" value="Ocupacion Actual"  />
                                                 <div class="form-group">
-                                                    <p:selectOneMenu id="ocupacion" style="width: 100%" required="true"> 
+                                                    <p:selectOneMenu id="ocupacion" value="#{registroManaged.ocupacion}" style="width: 100%" required="true" requiredMessage="Por favor, seleccione una opcion"> 
                                                         <f:selectItem itemLabel="Escoje una opción" itemValue="#{null}" noSelectionOption="true"/>
-                                                        <f:selectItem itemLabel="Empleado" itemValue="Empleado" />
-                                                        <f:selectItem itemLabel="Desempleado" itemValue="Desempleado" />
-                                                        <f:selectItem itemLabel="Estudiante" itemValue="Estudiante" />
-                                                        <f:selectItem itemLabel="Emprendedor" itemValue="Emprendedor" />
+                                                        <f:selectItems value="#{registroManaged.listaOcupacion}" var="ocupacion" itemLabel="#{ocupacion.ocuNombre}" />
                                                     </p:selectOneMenu>
                                                     <p:message for="ocupacion"/>
                                                 </div>
@@ -226,13 +219,9 @@
                                             <div class="form-group">
                                                 <p:outputLabel for="ingles" value="¿Cuéntanos sobre tu nivel de ingles?"  />
                                                 <div class="form-group">
-                                                    <p:selectOneMenu id="ingles" style="width: 100%" required="true"> 
+                                                    <p:selectOneMenu value="#{registroManaged.idioma}" id="ingles" style="width: 100%" required="true" requiredMessage="Por favor, seleccione una opcion"> 
                                                         <f:selectItem itemLabel="Escoje una opción" itemValue="#{null}" noSelectionOption="true"/>
-                                                        <f:selectItem itemLabel="Basico" itemValue="Basico" />
-                                                        <f:selectItem itemLabel="Intermedio" itemValue="Intermedio" />
-                                                        <f:selectItem itemLabel="Avanzado" itemValue="Avanzado" />
-                                                        <f:selectItem itemLabel="Nativo" itemValue="Nativo" />
-                                                        <f:selectItem itemLabel="No hablo ingles" itemValue="Nativo" />
+                                                        <f:selectItems value="#{registroManaged.listaIdioma}" var="idioma" itemLabel="#{idioma.idiNivel}" />
                                                     </p:selectOneMenu>
                                                     <p:message for="ingles"/>
                                                 </div>
@@ -244,10 +233,10 @@
                                             <div class="form-group">
                                                 <p:outputLabel for="internet" value="¿Posees acceso a internet?" />
                                                 <div class="form-group">
-                                                    <p:selectOneMenu id="internet" style="width: 100%">
+                                                    <p:selectOneMenu value="#{registroManaged.internt}" id="internet" style="width: 100%" requiredMessage="Por favor, seleccione una opcion" required="true">
                                                         <f:selectItem itemLabel="Escoje una opción" itemValue="#{null}" noSelectionOption="true"/>
-                                                        <f:selectItem itemLabel="SI" itemValue="1" />
-                                                        <f:selectItem itemLabel="NO" itemValue="2" />
+                                                        <f:selectItem itemLabel="SI" itemValue="SI" />
+                                                        <f:selectItem itemLabel="NO" itemValue="NO" />
                                                     </p:selectOneMenu>
                                                     <p:message for="internet"/>
                                                 </div>
@@ -257,10 +246,10 @@
                                             <div class="form-group">
                                                 <p:outputLabel for="computadora" value="¿Posees acceso a computadora?" />
                                                 <div class="form-group">
-                                                    <p:selectOneMenu id="computadora" style="width: 100%" required="true">
+                                                    <p:selectOneMenu value="#{registroManaged.computadora}" id="computadora" style="width: 100%" required="true" requiredMessage="Por favor, seleccione una opcion">
                                                         <f:selectItem itemLabel="Escoje una opción" itemValue="#{null}" noSelectionOption="true"/>
-                                                        <f:selectItem itemLabel="SI" itemValue="1" />
-                                                        <f:selectItem itemLabel="NO" itemValue="2" />
+                                                        <f:selectItem itemLabel="SI" itemValue="SI" />
+                                                        <f:selectItem itemLabel="NO" itemValue="NO" />
                                                     </p:selectOneMenu>
                                                     <p:message for="computadora"/>
                                                 </div>
@@ -270,11 +259,11 @@
                                             <div class="form-group">
                                                 <p:outputLabel for="tiempo" value="¿Cuál es tu disponibilidad de tiempo actual?" />
                                                 <div class="form-group">
-                                                    <p:selectOneMenu id="tiempo" style="width: 100%" required="true">
+                                                    <p:selectOneMenu value="#{registroManaged.tiempo}" id="tiempo" style="width: 100%" required="true" requiredMessage="Por favor, seleccione una opcion">
                                                         <f:selectItem itemLabel="Escoje una opción" itemValue="#{null}" noSelectionOption="true"/>
-                                                        <f:selectItem itemLabel="Tiempo parcial de 7:00 a.m. a 12:00 m.d." itemValue="1" />
-                                                        <f:selectItem itemLabel="Tiempo parcial de 12:00 m.d. a 5:00 p.m." itemValue="2" />
-                                                        <f:selectItem itemLabel="Jornada completa de 8:00 a.m. a 5:00 p.m." itemValue="3" />
+                                                        <f:selectItem itemLabel="Tiempo parcial de 7:00 a.m. a 12:00 m.d." itemValue="Tiempo parcial de 7:00 a.m. a 12:00 m.d." />
+                                                        <f:selectItem itemLabel="Tiempo parcial de 12:00 m.d. a 5:00 p.m." itemValue="Tiempo parcial de 12:00 m.d. a 5:00 p.m." />
+                                                        <f:selectItem itemLabel="Jornada completa de 8:00 a.m. a 5:00 p.m." itemValue="Jornada completa de 8:00 a.m. a 5:00 p.m." />
                                                     </p:selectOneMenu>
                                                     <p:message for="tiempo"/>
                                                 </div>
@@ -283,25 +272,25 @@
                                     </div>
                                     <div class="form-group">
                                         <p:outputLabel for="otrosEstudios" value="¡Queremos conocerte mejor! Detállanos los conocimientos técnicos previos que posees." />
-                                        <p:inputTextarea id="otrosEstudios" maxlength="600" styleClass="form-control" placeholder="!Cuéntanos sobre tus otros conocimientos técnicos acá!" required="true" requiredMessage="Por favor, tus otros conocimientos">
+                                        <p:inputTextarea value="#{registroManaged.otrosConocimientos}" id="otrosEstudios" maxlength="600" styleClass="form-control" placeholder="!Cuéntanos sobre tus otros conocimientos técnicos acá!" required="true" requiredMessage="Por favor, indicanos tus otros conocimientos">
                                         </p:inputTextarea>
                                         <p:message for="otrosEstudios" />
                                     </div>
                                     <div class="form-group">
                                         <p:outputLabel for="enterate" value="¿Cómo te enteraste de Bitlab?" />
-                                        <p:inputTextarea id="enterate" maxlength="300" styleClass="form-control" placeholder="Cuéntanos, ¿Como te enteraste sobre nosotros?" required="true" requiredMessage="Por favor, indicanos como te enteraste de nosotros.">
+                                        <p:inputTextarea value="#{registroManaged.enterado}" id="enterate" maxlength="300" styleClass="form-control" placeholder="Cuéntanos, ¿Como te enteraste sobre nosotros?" required="true" requiredMessage="Por favor, indicanos como te enteraste de nosotros.">
                                         </p:inputTextarea>
                                         <p:message for="enterate" />
                                     </div>
                                     <div class="form-group">
                                         <p:outputLabel for="estudio" value="¿Por qué te gustaría estudiar en Bitlab?" />
-                                        <p:inputTextarea id="estudio" maxlength="800" styleClass="form-control" placeholder="¡Déjanos saber tus motivos acá!" required="true" requiredMessage="Por favor, indicanos por que quieres estudiar con nosotros.">
+                                        <p:inputTextarea value="#{registroManaged.aspiracionCurso}" id="estudio" maxlength="800" styleClass="form-control" placeholder="¡Déjanos saber tus motivos acá!" required="true" requiredMessage="Por favor, indicanos por que quieres estudiar con nosotros.">
                                         </p:inputTextarea>
                                         <p:message for="estudio" />
                                     </div>
                                     <div class="form-group">
                                         <p:outputLabel for="laboral" value="¡Relátanos brevemente tus aspiraciones laborales! Si no posees aspiraciones laborales con el curso indícanoslo acá." />
-                                        <p:inputTextarea id="laboral"  maxlength="600" styleClass="form-control" placeholder="¡Tus aspiraciones laborales acá!" required="true" requiredMessage="Por favor, ingresa tus aspiraciones laborales">
+                                        <p:inputTextarea value="#{registroManaged.aspiracionLaboral}" id="laboral"  maxlength="600" styleClass="form-control" placeholder="¡Tus aspiraciones laborales acá!" required="true" requiredMessage="Por favor, ingresa tus aspiraciones laborales">
                                         </p:inputTextarea>
                                         <p:message for="laboral" />
                                     </div>
@@ -318,7 +307,7 @@
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <p:commandButton value="Completar registro!" ajax="false" update=":account" style="margin-top: 20px; margin-right: 20px" validateClient="true"/>
+                                    <p:commandButton value="Completar registro!" actionListener="#{registroManaged.guardarRegistro()}" ajax="false" update=":account" style="margin-top: 20px; margin-right: 20px" validateClient="true"/>
                                 </div>
                             </div>
                         </h:form>

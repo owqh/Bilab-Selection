@@ -23,15 +23,15 @@ import javax.persistence.Table;
 
 /**
  *
- * @author carlosGodoy
+ * @author Oscar
  */
 @Entity
 @Table(name = "BIT_NSE_NOTA_SELECCION", catalog = "BITLAB", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "NotaSeleccion.findAll", query = "SELECT n FROM NotaSeleccion n")
-    , @NamedQuery(name = "NotaSeleccion.findByNseId", query = "SELECT n FROM NotaSeleccion n WHERE n.nseId = :nseId")
-    , @NamedQuery(name = "NotaSeleccion.findByNseNota", query = "SELECT n FROM NotaSeleccion n WHERE n.nseNota = :nseNota")
-    , @NamedQuery(name = "NotaSeleccion.findByNsePromedio", query = "SELECT n FROM NotaSeleccion n WHERE n.nsePromedio = :nsePromedio")})
+    @NamedQuery(name = "NotaSeleccion.findAll", query = "SELECT n FROM NotaSeleccion n"),
+    @NamedQuery(name = "NotaSeleccion.findByNseId", query = "SELECT n FROM NotaSeleccion n WHERE n.nseId = :nseId"),
+    @NamedQuery(name = "NotaSeleccion.findByNseNota", query = "SELECT n FROM NotaSeleccion n WHERE n.nseNota = :nseNota"),
+    @NamedQuery(name = "NotaSeleccion.findByNsePromedio", query = "SELECT n FROM NotaSeleccion n WHERE n.nsePromedio = :nsePromedio")})
 public class NotaSeleccion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,9 +41,9 @@ public class NotaSeleccion implements Serializable {
     @Column(name = "NSE_ID", nullable = false)
     private Integer nseId;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "NSE_NOTA", precision = 22)
+    @Column(name = "NSE_NOTA", precision = 22, scale = 0)
     private Double nseNota;
-    @Column(name = "NSE_PROMEDIO", precision = 22)
+    @Column(name = "NSE_PROMEDIO", precision = 22, scale = 0)
     private Double nsePromedio;
     @OneToMany(mappedBy = "nseId", fetch = FetchType.LAZY)
     private List<HistorialAplicacion> historialAplicacionList;

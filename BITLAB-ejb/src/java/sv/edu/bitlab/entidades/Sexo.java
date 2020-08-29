@@ -23,14 +23,14 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author carlosGodoy
+ * @author Oscar
  */
 @Entity
 @Table(name = "BIT_SEX_SEXO", catalog = "BITLAB", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "Sexo.findAll", query = "SELECT s FROM Sexo s")
-    , @NamedQuery(name = "Sexo.findBySexId", query = "SELECT s FROM Sexo s WHERE s.sexId = :sexId")
-    , @NamedQuery(name = "Sexo.findBySexNombre", query = "SELECT s FROM Sexo s WHERE s.sexNombre = :sexNombre")})
+    @NamedQuery(name = "Sexo.findAll", query = "SELECT s FROM Sexo s"),
+    @NamedQuery(name = "Sexo.findBySexId", query = "SELECT s FROM Sexo s WHERE s.sexId = :sexId"),
+    @NamedQuery(name = "Sexo.findBySexNombre", query = "SELECT s FROM Sexo s WHERE s.sexNombre = :sexNombre")})
 public class Sexo implements Serializable {
 
     private static final long serialVersionUID = 1L;
