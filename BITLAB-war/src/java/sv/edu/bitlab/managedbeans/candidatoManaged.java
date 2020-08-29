@@ -8,13 +8,11 @@ package sv.edu.bitlab.managedbeans;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-
 import sv.edu.bitlab.beans.CandidatoFacade;
 import sv.edu.bitlab.beans.EstadoAplicacionFacade;
 import sv.edu.bitlab.beans.HistorialAplicacionFacade;
@@ -25,6 +23,7 @@ import sv.edu.bitlab.entidades.EstadoAplicacion;
 import sv.edu.bitlab.entidades.HistorialAplicacion;
 import sv.edu.bitlab.entidades.NotaSeleccion;
 import sv.edu.bitlab.entidades.Pruebas;
+import sv.edu.bitlab.utilidades.Utilidades;
 
 /**
  *
@@ -35,9 +34,12 @@ import sv.edu.bitlab.entidades.Pruebas;
 public class candidatoManaged implements Serializable {
 
     @EJB
-    private EstadoAplicacionFacade estadoAplicacionFacade1;
+    private CandidatoFacade candidatoFacade1;
+
     @EJB
-    private CandidatoFacade candidatoFacade;
+    private EstadoAplicacionFacade estadoAplicacionFacade1;
+//    @EJB
+//    private CandidatoFacade candidatoFacade;
     @EJB
     private NotaSeleccionFacade notaSeleccionFacade;
     @EJB
@@ -49,40 +51,44 @@ public class candidatoManaged implements Serializable {
     private String tecnica;
     private Candidato candidato;
     private NotaSeleccion notaSeleccion = new NotaSeleccion();
-    //private NotaSeleccion notaSeleccionP;
     private String logica;
+
+    //Listas de candidatos
     private List<Candidato> candidatoLista;
-    private List<Candidato> candidatoListPo;
-    private List<Candidato> candidatoListPre;
-    private List<Candidato> candidatoListRegularAlto;
-    private List<Candidato> candidatoListRegularBajo;
+    private List<Candidato> candidatoListPo; //
+    private List<Candidato> candidatoListRegularAlto; //
+    private List<Candidato> candidatoListRegularBajo; //
     private List<Candidato> candidatoSinOportu;
-    private List<Candidato> candidatoPreseleccionado;
-    private List<Candidato> aplicanteGeneral;
-    private List<EstadoAplicacion> estadoAplicacionlist;
-    private List<NotaSeleccion> notaSelList;
+    private List<Candidato> candidatoSeleccionado;
+    private List<Candidato> aplicanteGeneral; //
+    private List<Candidato> candidatoListPreseleccionado; //
+
     private EstadoAplicacion estadoSeleccion;
     private String entrevista;
+    //Variables de tipo Prueba
     private Pruebas pruebasE;
     private Pruebas pruebasT;
     private Pruebas pruebasL;
     private Pruebas pruebasP;
+
     private HistorialAplicacion hApp;
     private HistorialAplicacion historialAplicacion;
+    private List<HistorialAplicacion> historialLista;
 
     @PostConstruct
     public void cargarInfo() {
-        candidatoLista = candidatoFacade.findAll();
-
-//        estadoAplicacionlist = estadoAplicacionFacade1.findAll();
-//        estadoSeleccion = estadoAplicacionFacade.find(2);
+            logica="";
+            entrevista="";
+            Psicometrica="";
+            tecnica="";
         try {
-            aplicanteGeneral = candidatoFacade.aplicanteGeneral();
-            candidatoListPre = candidatoFacade.candidatoPre();
-            candidatoListPo = candidatoFacade.candidatoPotencial();
-            candidatoListRegularAlto = candidatoFacade.candidatoRegularAlto();
-            candidatoListRegularBajo = candidatoFacade.candidatoRegularBajo();
-            candidatoSinOportu = candidatoFacade.candidatoSinOportunidad();
+            candidatoListPreseleccionado = candidatoFacade1.candidatosPreseleccionados();
+            aplicanteGeneral = candidatoFacade1.aplicanteGeneral(); //
+            candidatoSeleccionado = candidatoFacade1.aplicanteSeleccionado();
+            candidatoListPo = candidatoFacade1.candidatoPotencial(); //
+            candidatoListRegularAlto = candidatoFacade1.candidatoRegularAlto(); //
+            candidatoListRegularBajo = candidatoFacade1.candidatoRegularBajo(); //
+            candidatoSinOportu = candidatoFacade1.candidatoSinOportunidad();
         } catch (Exception ex) {
             Logger.getLogger(candidatoManaged.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -90,81 +96,88 @@ public class candidatoManaged implements Serializable {
     }
 
     public void insertarNotas() {
-
+        //Llenado de objetos por id de tipo prueba
         pruebasE = pruebasFacade.find(1);
         pruebasT = pruebasFacade.find(2);
         pruebasL = pruebasFacade.find(3);
         pruebasP = pruebasFacade.find(4);
+        //calculo del promedio para cada prueba 
         double promedioE = (Double.parseDouble(entrevista) * (pruebasE.getPruPorcentaje()) / 100);
         double promedioT = (Double.parseDouble(tecnica) * (pruebasT.getPruPorcentaje()) / 100);
         double promedioL = (Double.parseDouble(logica) * (pruebasL.getPruPorcentaje()) / 100);
         double promedioP = (Double.parseDouble(Psicometrica) * (pruebasP.getPruPorcentaje()) / 100);
-        hApp = (HistorialAplicacion) historialFacade.buscarPorIdCandidato(candidato.getCanId());
         Double promedio = (promedioE + promedioL + promedioP + promedioT);
-//        notaSeleccion.setNseNota(Double.parseDouble(entrevista));
-//        notaSeleccion.setNsePromedio(promedioE);
-//        notaSeleccion.setPruId(pruebasE);
-//        notaSeleccion.setHapId(hApp);
-//        notaSeleccionFacade.create(notaSeleccion);
-
-//        notaSeleccion = new NotaSeleccion((Double.parseDouble(entrevista)), promedioE, hApp, pruebasE);
-//        notaSeleccionFacade.edit(notaSeleccion);
-//
-//        notaSeleccion = new NotaSeleccion((Double.parseDouble(tecnica)), promedioT, hApp, pruebasT);
-//        notaSeleccionFacade.edit(notaSeleccion);
-//
-//        notaSeleccion = new NotaSeleccion((Double.parseDouble(logica)), promedioL, hApp, pruebasL);
-//        notaSeleccionFacade.edit(notaSeleccion);
-//
-//        notaSeleccion = new NotaSeleccion((Double.parseDouble(Psicometrica)), promedioP, hApp, pruebasP);
-//        notaSeleccionFacade.edit(notaSeleccion);
-        
-//        
-        //System.out.println(" probando para ingresar el promedio." + notaSeleccionP.getNsePromedio().toString());
-//        notaSeleccionFacade.edit(notaSeleccion);
-//        
-        System.out.println(candidato.getCanCodigo());
-        System.out.println(candidato.getCanPrimerNombre());
-        System.out.println(candidato.getCanPrimerApellido());
-        System.out.println(candidato.getCanDui());
-        System.out.println(this.entrevista);
-        System.out.println(this.logica);
-        System.out.println(this.tecnica);
-        System.out.println(this.Psicometrica);
-        System.out.println(pruebasE.getPruNombre());
-        System.out.println(candidato.getCanId());
-        System.out.println("la nota de: " + candidato.getCanPrimerNombre() + " El promedio de la" + pruebasE.getPruNombre() + " es:" + promedioE);
-        System.out.println("la nota de: " + candidato.getCanPrimerNombre() + " El promedio de la Prueba" + pruebasT.getPruNombre() + " es es:" + promedioT);
-        System.out.println("la nota de: " + candidato.getCanPrimerNombre() + " El promedio de la Prueba " + pruebasL.getPruNombre() + " es es: " + promedioL);
-        System.out.println("la nota de: " + candidato.getCanPrimerNombre() + " El promedio de la Prueba " + pruebasP.getPruNombre() + " es es:" + promedioP);
-        System.out.println("El promedio general es de: " + (promedioE + promedioL + promedioP + promedioT));
-        //no reconocer el id, este debe ser un integer
-        //System.out.println("el ID de Hap_id es: " + historialFacade.buscarPorIdCandidato(candidato.getCanId()));
-
-        System.out.println(hApp);
+        //Ingreso de notas 
+        try {
+            notaSeleccion = new NotaSeleccion((Double.parseDouble(entrevista)), promedioE, pruebasE);
+            notaSeleccionFacade.edit(notaSeleccion);
+            notaSeleccion = new NotaSeleccion((Double.parseDouble(logica)), promedioL, pruebasL);
+            notaSeleccionFacade.edit(notaSeleccion);
+            notaSeleccion = new NotaSeleccion((Double.parseDouble(tecnica)), promedioT, pruebasT);
+            notaSeleccionFacade.edit(notaSeleccion);
+            notaSeleccion = new NotaSeleccion((Double.parseDouble(Psicometrica)), promedioP, pruebasP);
+            notaSeleccionFacade.edit(notaSeleccion);
+            //Ingreso del promedio 
+            double promedioSeleccion = Math.round(promedio * 100D) / 100D;
+            candidato.setCanPromedioSeleccion(promedioSeleccion);
+            candidatoFacade1.edit(candidato);
+            cargarInfo();
+            Utilidades.lanzarInfo("Exitoso", "Notas Ingresadas a " + candidato.getCanPrimerNombre());
+        } catch (Exception ex) {
+            Utilidades.lanzarError("Error", ex.getMessage());
+        }
 
     }
 
     public void aceptarPreSeleccionado() {
-        estadoSeleccion = estadoAplicacionFacade1.find(1);
-        candidato.setEapId(estadoSeleccion);
-        candidatoFacade.edit(candidato);
-        cargarInfo();
+        try {
+            estadoSeleccion = estadoAplicacionFacade1.find(1);
+            candidato.setEapId(estadoSeleccion);
+            candidatoFacade1.edit(candidato);
+            cargarInfo();
+            Utilidades.lanzarInfo("Exitoso", "Se ha aceptado a " + candidato.getCanPrimerNombre() + " Y su estado paso a: " + candidato.getEapId().getEapNombre());
+        } catch (Exception ex) {
+            Utilidades.lanzarError("Error", ex.getMessage());
+        }
+
     }
-    
-     public void aceptarASeleccionado() {
-        estadoSeleccion = estadoAplicacionFacade1.find(2);
-        candidato.setEapId(estadoSeleccion);
-        candidatoFacade.edit(candidato);
-        cargarInfo();
+
+    public void aceptarASeleccionado() {
+        try {
+            estadoSeleccion = estadoAplicacionFacade1.find(2);
+            candidato.setEapId(estadoSeleccion);
+            candidatoFacade1.edit(candidato);
+            cargarInfo();
+            Utilidades.lanzarInfo("Exitoso", "Se ha aceptado a " + candidato.getCanPrimerNombre() + " Y su estado paso a: " + candidato.getEapId().getEapNombre());
+        } catch (Exception ex) {
+            Utilidades.lanzarError("Error", ex.getMessage());
+        }
     }
-   
+
+    public void addAlumn() {
+        try {
+
+            estadoSeleccion = estadoAplicacionFacade1.find(3);
+            candidato.setEapId(estadoSeleccion);
+            candidatoFacade1.edit(candidato);
+            cargarInfo();
+            Utilidades.lanzarInfo("Exitoso", "Se ha aceptado a " + candidato.getCanPrimerNombre() + " Y su estado paso a: " + candidato.getEapId().getEapNombre());
+        } catch (Exception ex) {
+            Utilidades.lanzarError("Error", ex.getMessage());
+        }
+    }
 
     public void rechazarCandidato() {
-        estadoSeleccion = estadoAplicacionFacade1.find(7);
-        candidato.setEapId(estadoSeleccion);
-        candidatoFacade.edit(candidato);
-        cargarInfo();
+        try {
+            estadoSeleccion = estadoAplicacionFacade1.find(7);
+            candidato.setEapId(estadoSeleccion);
+            candidatoFacade1.edit(candidato);
+            cargarInfo();
+            Utilidades.lanzarInfo("Exitoso", candidato.getCanPrimerNombre() + " A sido rechazado");
+        } catch (Exception ex) {
+            Utilidades.lanzarError("Error", ex.getMessage());
+
+        }
     }
 
     public EstadoAplicacionFacade getEstadoAplicacionFacade1() {
@@ -207,20 +220,12 @@ public class candidatoManaged implements Serializable {
         this.candidatoSinOportu = candidatoSinOportu;
     }
 
-    public List<Candidato> getCandidatoListPre() {
-        return candidatoListPre;
-    }
-
-    public void setCandidatoListPre(List<Candidato> candidatoListPre) {
-        this.candidatoListPre = candidatoListPre;
-    }
-
     public CandidatoFacade getCandidatoFacade() {
-        return candidatoFacade;
+        return candidatoFacade1;
     }
 
     public void setCandidatoFacade(CandidatoFacade candidatoFacade) {
-        this.candidatoFacade = candidatoFacade;
+        this.candidatoFacade1 = candidatoFacade;
     }
 
     public List<Candidato> getCandidatoLista() {
@@ -253,14 +258,6 @@ public class candidatoManaged implements Serializable {
 
     public void setEstadoSeleccion(EstadoAplicacion estadoSeleccion) {
         this.estadoSeleccion = estadoSeleccion;
-    }
-
-    public List<EstadoAplicacion> getEstadoAplicacionlist() {
-        return estadoAplicacionlist;
-    }
-
-    public void setEstadoAplicacionlist(List<EstadoAplicacion> estadoAplicacionlist) {
-        this.estadoAplicacionlist = estadoAplicacionlist;
     }
 
     public NotaSeleccionFacade getNotaSeleccionFacade() {
@@ -326,5 +323,37 @@ public class candidatoManaged implements Serializable {
     public void setAplicanteGeneral(List<Candidato> aplicanteGeneral) {
         this.aplicanteGeneral = aplicanteGeneral;
     }
-    
+
+    public HistorialAplicacionFacade getHistorialFacade() {
+        return historialFacade;
+    }
+
+    public void setHistorialFacade(HistorialAplicacionFacade historialFacade) {
+        this.historialFacade = historialFacade;
+    }
+
+    public List<HistorialAplicacion> getHistorialLista() {
+        return historialLista;
+    }
+
+    public void setHistorialLista(List<HistorialAplicacion> historialLista) {
+        this.historialLista = historialLista;
+    }
+
+    public List<Candidato> getCandidatoSeleccionado() {
+        return candidatoSeleccionado;
+    }
+
+    public void setCandidatoSeleccionado(List<Candidato> candidatoSeleccionado) {
+        this.candidatoSeleccionado = candidatoSeleccionado;
+    }
+
+    public List<Candidato> getCandidatoListPreseleccionado() {
+        return candidatoListPreseleccionado;
+    }
+
+    public void setCandidatoListPreseleccionado(List<Candidato> candidatoListPreseleccionado) {
+        this.candidatoListPreseleccionado = candidatoListPreseleccionado;
+    }
+
 }
