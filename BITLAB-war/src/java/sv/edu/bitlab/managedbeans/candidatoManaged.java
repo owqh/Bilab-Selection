@@ -77,7 +77,10 @@ public class candidatoManaged implements Serializable {
 
     @PostConstruct
     public void cargarInfo() {
-
+            logica="";
+            entrevista="";
+            Psicometrica="";
+            tecnica="";
         try {
             candidatoListPreseleccionado = candidatoFacade1.candidatosPreseleccionados();
             aplicanteGeneral = candidatoFacade1.aplicanteGeneral(); //
