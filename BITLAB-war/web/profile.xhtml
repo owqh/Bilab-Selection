@@ -47,6 +47,7 @@
                         <div class="row">
                             <!-- Left col -->
                             <section class="col-lg-12">
+                                <p:growl id="messages" globalOnly="true" showDetail="true" showSummary="true" life="2000"/>
                                 <!-- Custom tabs (Charts with tabs)-->
                                 <h:form role="form" id="picture">
                                     <div class="card card-primary" style="margin: 0 10% 30px 10%">
@@ -55,14 +56,19 @@
                                                 <div class="col-xl-4" style="background-color: #333">
                                                     <div class="form-group" style="text-align: center; padding: 0">
                                                         <p:graphicImage name="dist/img/user2-160x160.jpg" alt="" width="250" style="padding: 5%"/>
+                                                        <!--<p:graphicImage value="/images/#/{fotoManaged.nombreFoto}" alt="" width="250" style="padding: 5%"/>-->
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-8" style="background-color: #fff">
                                                     <div class="form-group" style="padding-left: 20px; line-height: 300%">
                                                         <b><h:outputText value="#{usuarioManaged.nombre}" style="font-size: 30px"/></b> <br/>
                                                         <h:outputText value="#{usuarioManaged.rol}" style="font-size: 30px"/> <br/>
-                                                        <p:fileUpload label="Subir nueva foto" mode="simple" skinSimple="true" style="margin-top: 20px"/> <br/>
-                                                        <p:commandButton value="Actualizar" ajax="true" update=":picture"/> <br/>
+                                                        <p:fileUpload id="fotoPerfil" label="Nueva Foto" mode="advanced" skinSimple="true" style="margin-top: 20px"
+                                                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/" sizeLimit="5000000" 
+                                                                      validatorMessage="Fichero no valido" update="message"
+                                                                      dragDropSupport="true" uploadLabel="Actualizar Foto" cancelLabel="Cancelar" 
+                                                                      listener="#{fotoManaged.updatePicture}"/>
+                                                        <p:messages id="message"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -107,7 +113,7 @@
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
-                                            <p:commandButton value="Actualizar" ajax="true" update=":account" style="margin-top: 20px; margin-right: 20px" validateClient="true"/>
+                                            <p:commandButton value="Actualizar" update=":account :messages" style="margin-top: 20px; margin-right: 20px" validateClient="true"/>
                                             <p:commandButton value="Reset" type="reset" style="margin-top: 20px; margin-right: 20px"/>
                                         </div>
                                     </div>
@@ -205,7 +211,7 @@
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
-                                            <p:commandButton value="Actualizar" ajax="true" actionListener="#{perfilManaged.updateGeneral()}" update=":general" style="margin-top: 20px; margin-right: 20px" validateClient="true"/>
+                                            <p:commandButton value="Actualizar" ajax="true" actionListener="#{perfilManaged.updateGeneral()}" update=":general :messages" style="margin-top: 20px; margin-right: 20px" validateClient="true"/>
                                             <p:commandButton value="Reset" type="reset" style="margin-top: 20px; margin-right: 20px"/>
                                         </div>
                                     </div>
@@ -359,7 +365,7 @@
                                             <!-- /.card-body -->
 
                                             <div class="card-footer">
-                                                <p:commandButton value="Actualizar" actionListener="#{perfilManaged.updateComplement()}" ajax="true" update=":complement" style="margin-top: 20px; margin-right: 20px" validateClient="true"/>
+                                                <p:commandButton value="Actualizar" ajax="true" actionListener="#{perfilManaged.updateComplement()}" update=":complement :messages" style="margin-top: 20px; margin-right: 20px" validateClient="true"/>
                                                 <p:commandButton value="Reset" type="reset" style="margin-top: 20px; margin-right: 20px"/>
                                             </div>
                                         </div>

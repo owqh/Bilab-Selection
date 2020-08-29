@@ -11,8 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 import javax.inject.Inject;
 import sv.edu.bitlab.beans.CandidatoFacade;
 import sv.edu.bitlab.beans.GeneralidadesFacade;
@@ -22,6 +22,7 @@ import sv.edu.bitlab.entidades.Idioma;
 import sv.edu.bitlab.entidades.NivelAcademico;
 import sv.edu.bitlab.entidades.Ocupacion;
 import sv.edu.bitlab.entidades.Sexo;
+import sv.edu.bitlab.utilidades.Utilidades;
 
 /**
  *
@@ -30,8 +31,9 @@ import sv.edu.bitlab.entidades.Sexo;
 @Named(value = "perfilManaged")
 @ViewScoped
 public class PerfilManaged implements Serializable {
-    private static final Logger log = Logger.getLogger(PerfilManaged.class.getName());
-    
+
+    private static final Logger LOG = Logger.getLogger(PerfilManaged.class.getName());
+
     @EJB
     private GeneralidadesFacade generalidadesFacade;
 
@@ -110,18 +112,15 @@ public class PerfilManaged implements Serializable {
             enterado = perfilUsuario.getGenId().getGenEnterado();
             otros = perfilUsuario.getGenId().getGenOtrosConocimientos();
         } catch (Exception ex) {
-            log.log(Level.SEVERE, "No se encontro al candidato, error: {0}", ex);
+            LOG.log(Level.SEVERE, "No se encontro al candidato, error: {0}", ex);
         }
     }
-    
-    public void updatePicture(){
-        
+
+    public void updateAccount() {
+
     }
 
-    public void updateAccount(){
-        
-    }
-    public void updateGeneral(){
+    public void updateGeneral() {
         perfilUsuario.setCanPrimerNombre(pnombre);
         perfilUsuario.setCanSegundoNombre(snombre);
         perfilUsuario.setCanPrimerApellido(papellido);
@@ -131,18 +130,23 @@ public class PerfilManaged implements Serializable {
         perfilUsuario.setCanDui(dui);
         perfilUsuario.setCanTelefono(telefono);
         perfilUsuario.setCanDireccion(direccion);
-        
+
         candidatoFacade.edit(perfilUsuario);
+        Utilidades.lanzarInfo("Exitoso ", "Los campos de la tabla se han actualizado correctamente");
+
     }
-    public void updateComplement(){
+
+    public void updateComplement() {
         perfilUsuario.setNacId(new NivelAcademico(nivelAcademico));
         perfilUsuario.setOcuId(new Ocupacion(ocupacion));
         perfilUsuario.setIdiId(new Idioma(idioma));
         Generalidades genUsuario = new Generalidades(genId, internet, computadora, alaboral, expectativaSal, tiempo, acurso, enterado, otros, linkedIn);
         generalidadesFacade.edit(genUsuario);
+
         candidatoFacade.edit(perfilUsuario);
+        Utilidades.lanzarInfo("Exitoso ", "Los campos de la tabla se han actualizado correctamente");
     }
-    
+
     public String getPnombre() {
         return pnombre;
     }
