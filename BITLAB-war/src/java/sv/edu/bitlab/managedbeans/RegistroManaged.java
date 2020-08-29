@@ -7,11 +7,18 @@ package sv.edu.bitlab.managedbeans;
 
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
+import org.apache.commons.mail.DefaultAuthenticator;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.HtmlEmail;
+import org.slf4j.LoggerFactory;
 import sv.edu.bitlab.beans.CandidatoFacade;
+import sv.edu.bitlab.beans.ConfiguracionFacade;
 import sv.edu.bitlab.beans.EstadoAplicacionFacade;
 import sv.edu.bitlab.beans.GeneralidadesFacade;
 import sv.edu.bitlab.beans.HistorialAplicacionFacade;
@@ -22,6 +29,7 @@ import sv.edu.bitlab.beans.SexoFacade;
 import sv.edu.bitlab.beans.TipoUsuarioFacade;
 import sv.edu.bitlab.beans.UsuarioFacade;
 import sv.edu.bitlab.entidades.Candidato;
+import sv.edu.bitlab.entidades.Configuracion;
 import sv.edu.bitlab.entidades.EstadoAplicacion;
 import sv.edu.bitlab.entidades.Generalidades;
 import sv.edu.bitlab.entidades.HistorialAplicacion;
@@ -31,6 +39,7 @@ import sv.edu.bitlab.entidades.Ocupacion;
 import sv.edu.bitlab.entidades.Sexo;
 import sv.edu.bitlab.entidades.TipoUsuario;
 import sv.edu.bitlab.entidades.Usuario;
+import sv.edu.bitlab.utilidades.EncriptacionTexto;
 import sv.edu.bitlab.utilidades.Utilidades;
 
 /**
@@ -40,6 +49,9 @@ import sv.edu.bitlab.utilidades.Utilidades;
 @Named(value = "registroManaged")
 @Dependent
 public class RegistroManaged {
+
+    @EJB
+    private ConfiguracionFacade configuracionFacade;
 
     //Importando EJB para registrar al candidato
     @EJB
@@ -83,6 +95,7 @@ public class RegistroManaged {
     private Ocupacion ocupacion;
     private Usuario usuario;
     private TipoUsuario tipoUsuario;
+    private EncriptacionTexto encriptacionTexto;
 
     //Poner variables para insertar en 
     private String pnombre;
@@ -105,31 +118,44 @@ public class RegistroManaged {
     private String aspiracionCurso;
     private String enterado;
     private String otrosConocimientos;
-    
+    private String mensajeCorreo;
+    private String asuntoCorreo;
+
     //Listas para rrecorrer las entidades externas
     private List<Sexo> listaGenero;
     private List<NivelAcademico> listaNivelAcademico;
     private List<Idioma> listaIdioma;
     private List<Ocupacion> listaOcupacion;
-    
+    List<Configuracion> datos;
+
+    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(UsuarioFacade.class);
+
     @PostConstruct
-    public void cargarDatos(){
+    public void cargarDatos() {
         //Cargando listas desde la base de datos
         listaGenero = sexoFacade.findAll();
         listaNivelAcademico = nivelAcademicoFacade.findAll();
         listaIdioma = idiomaFacade.findAll();
         listaOcupacion = ocupacionFacade.findAll();
     }
-    
+
     public RegistroManaged() {
-      
+
     }
+
     //Metodo para generar el codigo de cada candidato
-    public void codigoPersonas(){
-        codigo = papellido.charAt(0) + sapellido.charAt(0) + "123"; 
+    public void codigoPersonas() {
+        codigo = papellido.charAt(0) + sapellido.charAt(0) + dui.substring(5, 8) + dui.charAt(9);
     }
-    
+
     public void guardarRegistro() {
+        //Creando cuenta de usuario para acceder al sistema
+        cuentaUsuario();
+
+        //Creando Historial de Aplicacion 
+        historialAplicacion = new HistorialAplicacion(1, new Date());
+        historialAplicacionFacade.create(historialAplicacion);
+
         //Encotrar todos los id foraneos
         sexo = sexoFacade.find(sexo.getSexId());
         idioma = idiomaFacade.find(idioma.getIdiId());
@@ -137,26 +163,88 @@ public class RegistroManaged {
         ocupacion = ocupacionFacade.find(ocupacion.getOcuId());
         estadoAplicacion = estadoAplicacionFacade.find(1); //El estado de aplicacion 1 pertenece al estado "Candidato"
         tipoUsuario = tipoUsuarioFacade.find(1); //El codigo 1 pertenece al tipo de usuario "candidato"
-        
-        //Creando Historial de Aplicacion 
-        
-        //Creando cuenta de usuario para acceder al sistema
-        //Acceder a metodo creado en la clase Usuario Managed
-        
+        historialAplicacion = historialAplicacionFacade.find(historialAplicacion.getHapId());
+
         //Creando registro de informacion basica de candidato
-        //candidato = new Candidato(Integer.SIZE, nombre, nombre, nombre, nombre, nombre, nombre, nombre, nombre, nombre, canFechaNac, nombre, nombre, eapId, genId, idiId, nacId, ocuId, sexo)
         candidato = new Candidato(1, codigo, pnombre, snombre, papellido, sapellido, dui, correo, direccion, telefono, fnacimiento, estadoAplicacion, generalidades, historialAplicacion, idioma, nivelAcademico, ocupacion, sexo);
         candidatoFacade.create(candidato);
-        
+
         //Creando registro de datos complementarios
-        
-        
-        
+        generalidades = new Generalidades(1, internt, computadora, aspiracionLaboral, aspiracionSalarial, tiempo, aspiracionCurso, enterado, otrosConocimientos, linkedin);
+        generalidadesFacade.create(generalidades);
+        Utilidades.lanzarInfo("Aplicacion recibida exitosamente", "Su aplicacion ha sido recibida por favor revise su correo electronico para obtener mas informacion");
+
+        asuntoCorreo = "Aplicacion a curos BITLAB";
+        mensajeCorreo = "<h1>Felicidades!! " + pnombre + " " + papellido + " !Tu solicitud se ha recibido con éxito! \n </h1> "
+                + "<p>Se ha recibido tu solicitud para obtener una beca en BITLAB, te pedimos estar pendiente de tu correo electrónico y tu número de contacto, en los próximos días nos comunicaremos contigo.</p>"
+                + "<p>Recuerda que puedes seguir tu proceso de selección a través de nuestra plataforma, utilizando tu dirección de correo y contraseña proporcionada en el formulario de aplicación</p>"
+                + "<p>Ha recibido este e-mail por que se ha registrado una cuenta en el sistema de seleccion de becarios BITLAB</p>"
+                + "<p>Preguntas frecuentes: "
+                + "<ul><li><a href=\"https://blog.elaniin.com/enterate-aplicar-beca-bitlab/\">¿Cual es el proceso de aplicacion? </a></li>"
+                + "<li><a href=\"https://bitlab.edu.sv/about\">¿Que es bitlab?</a></li></ul>"
+                + "<br/><p><b>Si usted no solicito este acceso por favor ignore este correo.</b></p>"
+                + "<h4>Por su seguirdad nunca comparta este correo electronico con nadie.</h4>"
+                + "<p><strong>Copyright &copy; 2020 <a href=\"https://bitlab.edu.sv/\">BITLAB</a>.</strong>\n"
+                + " All rights reserved.</p>";
+
+        enviarCorreo(correo, mensajeCorreo, asuntoCorreo);
     }
-    
-    public void cuentaUsuario(){
+
+    public void cuentaUsuario() {
         //Validando que el usuario no exista en la base de datos
-        
+        try {
+            //Buscando el correo en la base de datos
+            usuario = usuarioFacade.ObtenerUsuario(correo);
+            //Buscando el Dui en la base de datos
+            candidato = candidatoFacade.candidatoPorDui(dui);
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioManaged.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //preparando para encriptar contraseña
+        encriptacionTexto = new EncriptacionTexto();
+        if (usuario == null && candidato == null) {
+            //Buscando el tipo de usuario candidato 
+            tipoUsuario = tipoUsuarioFacade.find(5);
+
+            //Encriptando contraseña para guardar en base de datos
+            String contrasenaSegura = encriptacionTexto.getTextoEncriptado(contrasena);
+
+            //perparando y creando el registro
+            Usuario registro = new Usuario(1, correo, pnombre, papellido, contrasenaSegura, tipoUsuario);
+            usuarioFacade.create(registro);
+        } else {
+            LOG.error("El correo: " + correo + " o el " + dui + " ya existe en la base de datos");
+            Utilidades.lanzarError("Error en registrar aplicación", "El usuario ya se encuentra registrado.");
+            Utilidades.lanzarAdvertencia("Inicia sesion", "Oops parece que ya tienes una cuenta incia sesion haciendo click <strong><a>aqui</a></strong>");
+        }
+    }
+
+    //funicon para enviar correo electronico con un mensajepreviamente establecido
+    private void enviarCorreo(String correo, String mensaje, String asunto) {
+        //Encriptando Textos de la base 
+        encriptacionTexto = new EncriptacionTexto();
+        //Obteniendo la configuracion de la base de datos
+        datos = configuracionFacade.findAll();
+        //Combirtiendo la lista a tipo configuracion
+        Configuracion con = datos.get(0);
+        LOG.debug("Preparando envio de correo electronico de seguridad");
+        try {
+            HtmlEmail email = new HtmlEmail();
+            email.setHostName(encriptacionTexto.getTextoDesencriptado(con.getConServer()));
+            email.setSmtpPort(Integer.parseInt(encriptacionTexto.getTextoDesencriptado(con.getConPort())));
+            email.setAuthenticator(new DefaultAuthenticator(
+                    encriptacionTexto.getTextoDesencriptado(con.getConCorreo()),
+                    encriptacionTexto.getTextoDesencriptado(con.getConPcorreo())));
+            email.setSSLOnConnect(true);
+            email.setFrom(encriptacionTexto.getTextoDesencriptado(con.getConCorreo()));
+            email.setSubject(asunto);
+            email.setHtmlMsg(mensaje);
+            email.addTo(correo);
+            LOG.debug("Enviando correo electronico");
+            email.send();
+        } catch (EmailException ex) {
+            LOG.error("ERROR AL ENVIAR EL CORREO ELECTRONICO.  " + ex.getMessage());
+        }
     }
 
     public IdiomaFacade getIdiomaFacade() {
@@ -470,7 +558,4 @@ public class RegistroManaged {
     public void setListaOcupacion(List<Ocupacion> listaOcupacion) {
         this.listaOcupacion = listaOcupacion;
     }
-
-   
-
 }

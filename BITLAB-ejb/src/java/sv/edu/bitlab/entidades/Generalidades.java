@@ -97,18 +97,7 @@ public class Generalidades implements Serializable {
         this.genId = genId;
     }
 
-    public Generalidades(Integer genId, String genInternet, String genComputadora, String genAspiracionLab, Integer genAspiracionSal, String genTiempo, String genAspiracionCurso, String genEnterado, String genOtrosConocimientos, String genLinkedin) {
-        this.genId = genId;
-        this.genInternet = genInternet;
-        this.genComputadora = genComputadora;
-        this.genAspiracionLab = genAspiracionLab;
-        this.genAspiracionSal = genAspiracionSal;
-        this.genTiempo = genTiempo;
-        this.genAspiracionCurso = genAspiracionCurso;
-        this.genEnterado = genEnterado;
-        this.genOtrosConocimientos = genOtrosConocimientos;
-        this.genLinkedin = genLinkedin;
-    }
+ 
 
     public Integer getGenId() {
         return genId;
