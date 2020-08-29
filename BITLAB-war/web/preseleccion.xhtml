@@ -132,7 +132,7 @@
                                             <p:outputLabel value="Nota Prueba Psicometrica"/>
                                             <p:inputNumber placeholder="10.00"  value="#{candidatomanaged.psicometrica}"/>  
 
-                                            <p:commandButton value="Ingresar notas" actionListener="#{candidatomanaged.insertarNotas()}" update=":messages :messagesAll" oncomplete="PF('notas').hide()"/>
+                                            <p:commandButton value="Ingresar notas" actionListener="#{candidatomanaged.insertarNotas()}" update=":ingresoNotas :messages :messagesAll" oncomplete="PF('notas').hide()"/>
                                             <p:commandButton value="Cancelar" oncomplete="PF('notas').hide()" style = "background: #D90202; border-color: #D90202;"/>
                                         </p:panelGrid>
                                     </center>
