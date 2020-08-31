@@ -258,8 +258,33 @@ public class UsuarioManaged implements Serializable {
     }
 
     //Clase para el cambio de contraseña 
-    public void cambioContraseña() {
-
+    public void cambioContraseña(String contraActual, String contraNueva) {
+        try {
+            //Obteniendo el usuario de la base de datos
+            usr = usuarioFacade.ObtenerUsuario(usuario);
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioManaged.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        encriptacionTexto = new EncriptacionTexto();
+        
+        //Obtener contraseña desencriptada de la base de datos
+        String contraBD = encriptacionTexto.getTextoDesencriptado(usr.getUsrContrasena());
+        
+        //Verificar que la contraseña actual ingresada coincida con la de la base de datos
+        if(contraBD.equals(contraActual)){
+            //Verificar que la contraseña nueva sea diferente de la contraseña actual
+            if(!contraActual.equals(contraNueva)){
+                contraNueva = encriptacionTexto.getTextoEncriptado(contraNueva);
+                usr.setUsrContrasena(contraNueva);
+                usuarioFacade.edit(usr);
+                Utilidades.lanzarInfo("Actualización completada", "Se ha actualizado la contraseña correctamente");
+            }else{
+                Utilidades.lanzarAdvertencia("Contraseña Invalida", "La contraseña nueva coincide con la contraseña actual del usuario, ingrese una nueva contraseña.");
+            }
+        }else{
+            Utilidades.lanzarAdvertencia("Contraseña Invalida", "La contraseña actual ingresada no coincide con la contraseña del usuario.");
+        }
+        
     }
 
     public ConfiguracionFacade getConfiguracionFacade() {
