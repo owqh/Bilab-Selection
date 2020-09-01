@@ -146,4 +146,8 @@ public class CandidatoFacade extends AbstractFacade<Candidato> {
         return q.getResultList();
     }
     
+     public List<Candidato> alumno(){
+       Query q = em.createQuery("select c from Candidato c where c.eapId.eapId=3");
+        return q.getResultList();
+    }
 }
