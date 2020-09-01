@@ -46,7 +46,7 @@ public class candidatoManaged implements Serializable {
 
     @EJB
     private EstadoAplicacionFacade estadoAplicacionFacade1;
-    
+
     @EJB
     private NotaSeleccionFacade notaSeleccionFacade;
     @EJB
@@ -60,7 +60,6 @@ public class candidatoManaged implements Serializable {
     private NotaSeleccion notaSeleccion = new NotaSeleccion();
     private String logica;
 
-    
     private List<Candidato> candidatoLista;
     private List<Candidato> candidatoListPo; //
     private List<Candidato> candidatoListRegularAlto; //
@@ -69,10 +68,11 @@ public class candidatoManaged implements Serializable {
     private List<Candidato> candidatoSeleccionado;
     private List<Candidato> aplicanteGeneral; //
     private List<Candidato> candidatoListPreseleccionado; //
+    private List<Candidato> alumnos;
 
     private EstadoAplicacion estadoSeleccion;
     private String entrevista;
-   
+
     private Pruebas pruebasE;
     private Pruebas pruebasT;
     private Pruebas pruebasL;
@@ -81,16 +81,17 @@ public class candidatoManaged implements Serializable {
     private HistorialAplicacion hApp;
     private HistorialAplicacion historialAplicacion;
     private List<HistorialAplicacion> historialLista;
-    
-     private StreamedContent CV;
+
+    private StreamedContent CV;
 
     @PostConstruct
     public void cargarInfo() {
-            logica="";
-            entrevista="";
-            Psicometrica="";
-            tecnica="";
+        logica = "";
+        entrevista = "";
+        Psicometrica = "";
+        tecnica = "";
         try {
+            alumnos = candidatoFacade1.alumno();
             candidatoListPreseleccionado = candidatoFacade1.candidatosPreseleccionados();
             aplicanteGeneral = candidatoFacade1.aplicanteGeneral(); //
             candidatoSeleccionado = candidatoFacade1.aplicanteSeleccionado();
@@ -188,8 +189,9 @@ public class candidatoManaged implements Serializable {
 
         }
     }
-    
-      public StreamedContent getCV() throws FileNotFoundException, IOException {
+
+    public StreamedContent getCV() throws FileNotFoundException, IOException {
+        System.out.println(candidato.getCanCv());
         String cvPath = candidato.getCanCv();
         FileInputStream is = new FileInputStream(new File(cvPath));
         String contentType = FacesContext.getCurrentInstance().getExternalContext().getMimeType(cvPath);
@@ -375,5 +377,13 @@ public class candidatoManaged implements Serializable {
     public void setCandidatoListPreseleccionado(List<Candidato> candidatoListPreseleccionado) {
         this.candidatoListPreseleccionado = candidatoListPreseleccionado;
     }
-    
+
+    public List<Candidato> getAlumnos() {
+        return alumnos;
+    }
+
+    public void setAlumnos(List<Candidato> alumnos) {
+        this.alumnos = alumnos;
+    }
+
 }
