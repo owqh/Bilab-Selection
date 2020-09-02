@@ -137,6 +137,10 @@ public class RegistroManaged {
         listaNivelAcademico = nivelAcademicoFacade.findAll();
         listaIdioma = idiomaFacade.findAll();
         listaOcupacion = ocupacionFacade.findAll();
+        sexo = new Sexo();
+        idioma = new Idioma();
+        nivelAcademico = new NivelAcademico();
+        ocupacion = new Ocupacion();
     }
 
     public RegistroManaged() {
@@ -156,13 +160,13 @@ public class RegistroManaged {
         historialAplicacion = new HistorialAplicacion(1, new Date());
         historialAplicacionFacade.create(historialAplicacion);
 
-        //Encotrar todos los id foraneos
-        sexo = sexoFacade.find(sexo.getSexId());
-        idioma = idiomaFacade.find(idioma.getIdiId());
-        nivelAcademico = nivelAcademicoFacade.find(nivelAcademico.getNacId());
-        ocupacion = ocupacionFacade.find(ocupacion.getOcuId());
+//        //Encotrar todos los id foraneos
+//        sexo = sexoFacade.find(sexo.getSexId());
+//        idioma = idiomaFacade.find(idioma.getIdiId());
+//        nivelAcademico = nivelAcademicoFacade.find(nivelAcademico.getNacId());
+//        ocupacion = ocupacionFacade.find(ocupacion.getOcuId());
         estadoAplicacion = estadoAplicacionFacade.find(1); //El estado de aplicacion 1 pertenece al estado "Candidato"
-        tipoUsuario = tipoUsuarioFacade.find(1); //El codigo 1 pertenece al tipo de usuario "candidato"
+        tipoUsuario = tipoUsuarioFacade.find(5); //El codigo 1 pertenece al tipo de usuario "candidato"
         historialAplicacion = historialAplicacionFacade.find(historialAplicacion.getHapId());
 
         //Creando registro de informacion basica de candidato
@@ -558,4 +562,6 @@ public class RegistroManaged {
     public void setListaOcupacion(List<Ocupacion> listaOcupacion) {
         this.listaOcupacion = listaOcupacion;
     }
+    
+    
 }

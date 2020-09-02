@@ -259,7 +259,10 @@ public class UsuarioManaged implements Serializable {
 
     //Clase para el cambio de contraseña 
     public void cambioContraseña() {
-
+        //Buscar el usuario en la base (por correo)
+        //Verificar si la contraseña en la base es igual a la contraseña actual enviada
+        //
+        
     }
 
     public ConfiguracionFacade getConfiguracionFacade() {

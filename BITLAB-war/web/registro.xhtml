@@ -107,7 +107,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <p:outputLabel for="fnacimiento" value="Fecha de Nacimiento" />
-                                                <p:datePicker id="fnacimiento" value="#{registroManaged.fnacimiento}" pattern="yyyy-MM-dd" inputStyle="width:100%" styleClass="form-group" style="width: 100%" readonlyInput="true" required="true" requiredMessage="Por favor, ingrese una fecha"/>
+                                                <p:datePicker id="fnacimiento" value="#{registroManaged.fnacimiento}" pattern="yyyy-MM-dd" monthNavigator="true" yearNavigator="true" yearRange="1950:2020" inputStyle="width:100%" styleClass="form-group" style="width: 100%" readonlyInput="true" required="true" requiredMessage="Por favor, ingrese una fecha"/>
                                                 <p:message for="fnacimiento" />
                                             </div>
                                         </div>
@@ -117,7 +117,7 @@
                                                 <div class="form-group">
                                                     <p:selectOneMenu value="#{registroManaged.sexo}" id="genero" required="true" style="width: 100%" requiredMessage="Por favor, seleccione una opcion">
                                                         <f:selectItem itemLabel="Escoje una opción" itemValue="#{null}" noSelectionOption="true"/>
-                                                        <f:selectItems value="#{registroManaged.listaGenero}" var="genero" itemLabel="#{genero.sexNombre}" />
+                                                        <f:selectItems value="#{registroManaged.listaGenero}" var="genero" itemLabel="#{genero.sexNombre}" itemValue="#{genero}" />
                                                     </p:selectOneMenu>
                                                     <p:message for="genero"/>
                                                 </div>
@@ -197,7 +197,7 @@
                                                 <div class="form-group">
                                                     <p:selectOneMenu id="grado" value="#{registroManaged.nivelAcademico}"  style="width: 100%" required="true" requiredMessage="Por favor, seleccione una opcion">
                                                         <f:selectItem itemLabel="Escoje una opción" itemValue="#{null}" noSelectionOption="true"/>
-                                                        <f:selectItems value="#{registroManaged.listaNivelAcademico}" var="nivel" itemLabel="#{nivel.nacNombre}"  />
+                                                        <f:selectItems value="#{registroManaged.listaNivelAcademico}" var="nivel" itemLabel="#{nivel.nacNombre}" itemValue="#{nivel}"  />
                                                      </p:selectOneMenu>   
                                                     <p:message for="grado"/>
                                                 </div>
@@ -209,7 +209,7 @@
                                                 <div class="form-group">
                                                     <p:selectOneMenu id="ocupacion" value="#{registroManaged.ocupacion}" style="width: 100%" required="true" requiredMessage="Por favor, seleccione una opcion"> 
                                                         <f:selectItem itemLabel="Escoje una opción" itemValue="#{null}" noSelectionOption="true"/>
-                                                        <f:selectItems value="#{registroManaged.listaOcupacion}" var="ocupacion" itemLabel="#{ocupacion.ocuNombre}" />
+                                                        <f:selectItems value="#{registroManaged.listaOcupacion}" var="ocupacion" itemLabel="#{ocupacion.ocuNombre}" itemValue="#{ocupacion}" />
                                                     </p:selectOneMenu>
                                                     <p:message for="ocupacion"/>
                                                 </div>
@@ -219,9 +219,9 @@
                                             <div class="form-group">
                                                 <p:outputLabel for="ingles" value="¿Cuéntanos sobre tu nivel de ingles?"  />
                                                 <div class="form-group">
-                                                    <p:selectOneMenu value="#{registroManaged.idioma}" id="ingles" style="width: 100%" required="true" requiredMessage="Por favor, seleccione una opcion"> 
+                                                    <p:selectOneMenu  value="#{registroManaged.idioma}" converter="#{idiomaConvertidor}" id="ingles" style="width: 100%" required="true" requiredMessage="Por favor, seleccione una opcion"> 
                                                         <f:selectItem itemLabel="Escoje una opción" itemValue="#{null}" noSelectionOption="true"/>
-                                                        <f:selectItems value="#{registroManaged.listaIdioma}" var="idioma" itemLabel="#{idioma.idiNivel}" />
+                                                        <f:selectItems value="#{registroManaged.listaIdioma}" var="idioma" itemLabel="#{idioma.idiNivel}" itemValue="#{idioma}" />
                                                     </p:selectOneMenu>
                                                     <p:message for="ingles"/>
                                                 </div>

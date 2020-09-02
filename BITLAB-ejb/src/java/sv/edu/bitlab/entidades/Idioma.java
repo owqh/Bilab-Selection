@@ -77,22 +77,16 @@ public class Idioma implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (idiId != null ? idiId.hashCode() : 0);
-        return hash;
+        return ( idiId != null)
+                ? (getClass().hashCode()+idiId.hashCode()) 
+                : super.hashCode();
     }
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Idioma)) {
-            return false;
-        }
-        Idioma other = (Idioma) object;
-        if ((this.idiId == null && other.idiId != null) || (this.idiId != null && !this.idiId.equals(other.idiId))) {
-            return false;
-        }
-        return true;
+        return (object != null && getClass() == object.getClass() && idiId != null)
+                ? idiId.equals(((Idioma) object).idiId)
+                : (object == this);
     }
 
     @Override
