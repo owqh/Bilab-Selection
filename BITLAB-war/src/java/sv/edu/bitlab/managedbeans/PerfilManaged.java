@@ -116,10 +116,6 @@ public class PerfilManaged implements Serializable {
         }
     }
 
-    public void updateAccount() {
-
-    }
-
     public void updateGeneral() {
         perfilUsuario.setCanPrimerNombre(pnombre);
         perfilUsuario.setCanSegundoNombre(snombre);

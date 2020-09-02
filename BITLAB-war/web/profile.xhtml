@@ -55,8 +55,8 @@
                                             <div class="row">
                                                 <div class="col-xl-4" style="background-color: #333">
                                                     <div class="form-group" style="text-align: center; padding: 0">
-                                                        <p:graphicImage name="dist/img/user2-160x160.jpg" alt="" width="250" style="padding: 5%"/>
-                                                        <!--<p:graphicImage value="/images/#/{fotoManaged.nombreFoto}" alt="" width="250" style="padding: 5%"/>-->
+                                                        <!--<p:graphicImage name="dist/img/user2-160x160.jpg" alt="" width="250" style="padding: 5%"/>-->
+                                                        <p:graphicImage value="/images/#/{fotoManaged.nombreFoto}" alt="" style="padding: 5%;width: 250px; height:250px; object-fit: cover"/>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-8" style="background-color: #fff">
@@ -95,12 +95,12 @@
                                             <h3>Cambiar contraseña</h3>
                                             <div class="form-group">
                                                 <p:outputLabel for="apassword" value="Actual" />
-                                                <p:password id="apassword" styleClass="form-control" placeholder="Enter password" required="true" requiredMessage="Por favor, ingrese su contrasena"/>
+                                                <p:password id="apassword" value="#{contraActual}" styleClass="form-control" placeholder="Enter password" required="true" requiredMessage="Por favor, ingrese su contrasena"/>
                                                 <p:message for="apassword" />
                                             </div>
                                             <div class="form-group">
                                                 <p:outputLabel for="npassword" value="Nueva contraseña" />
-                                                <p:password id="npassword" styleClass="form-control" placeholder="Enter password" match="cnpassword" validatorMessage="Las contraseñas no coinciden"
+                                                <p:password id="npassword" value="#{contraNueva}" styleClass="form-control" placeholder="Enter password" match="cnpassword" validatorMessage="Las contraseñas no coinciden"
                                                             required="true" requiredMessage="Por favor, ingrese su contrasena"/>
                                                 <p:message for="npassword" />
                                             </div>
@@ -113,7 +113,7 @@
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
-                                            <p:commandButton value="Actualizar" update=":account :messages" style="margin-top: 20px; margin-right: 20px" validateClient="true"/>
+                                            <p:commandButton value="Actualizar" actionListener="#{usuarioManaged.cambioContraseña(contraActual, contraNueva)}" update=":account :messages" style="margin-top: 20px; margin-right: 20px" validateClient="true"/>
                                             <p:commandButton value="Reset" type="reset" style="margin-top: 20px; margin-right: 20px"/>
                                         </div>
                                     </div>
@@ -165,7 +165,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <p:outputLabel for="fnacimiento" value="Fecha de Nacimiento" />
-                                                        <p:datePicker id="fnacimiento" value="#{perfilManaged.fnacimiento}" pattern="yyyy-MM-dd" inputStyle="width:100%" styleClass="form-group" style="width: 100%" readonlyInput="true" required="true" requiredMessage="Por favor, ingrese una fecha"/>
+                                                        <p:datePicker id="fnacimiento" value="#{perfilManaged.fnacimiento}" pattern="yyyy-MM-dd" monthNavigator="true" yearNavigator="true" yearRange="1950:2020" inputStyle="width:100%" styleClass="form-group" style="width: 100%" readonlyInput="true" required="true" requiredMessage="Por favor, ingrese una fecha"/>
                                                         <p:message for="fnacimiento" />
                                                     </div>
                                                 </div>
@@ -358,8 +358,16 @@
                                                     <p:message for="otros" />
                                                 </div>
                                                 <div class="form-group">
-                                                    <p:fileUpload id="cv" label="CV" mode="simple" skinSimple="true"/>
-                                                    <p:message for="cv" />
+                                                    <p:fileUpload id="cv" label="Nuevo CV" mode="advanced" skinSimple="true" style="margin-top: 20px"
+                                                                  allowTypes="/(\.|\/)(gif|jpe?g|png|pdf|docx|doc)$/" sizeLimit="10000000" 
+                                                                  validatorMessage="Fichero no valido" update="cvMessage"
+                                                                  dragDropSupport="true" uploadLabel="Actualizar CV" cancelLabel="Cancelar" 
+                                                                  listener="#{fotoManaged.updateCV}"/>
+                                                    <p:messages id="cvMessage" />
+
+                                                    <p:commandButton value="Descargar CV" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="pi pi-arrow-down">
+                                                        <p:fileDownload value="#{fotoManaged.CV}" />
+                                                    </p:commandButton>
                                                 </div>
                                             </div>
                                             <!-- /.card-body -->

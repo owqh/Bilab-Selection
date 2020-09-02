@@ -5,6 +5,10 @@
  */
 package sv.edu.bitlab.managedbeans;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -13,6 +17,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
+import org.apache.commons.io.FilenameUtils;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import sv.edu.bitlab.beans.CandidatoFacade;
 import sv.edu.bitlab.beans.EstadoAplicacionFacade;
 import sv.edu.bitlab.beans.HistorialAplicacionFacade;
@@ -38,8 +46,7 @@ public class candidatoManaged implements Serializable {
 
     @EJB
     private EstadoAplicacionFacade estadoAplicacionFacade1;
-//    @EJB
-//    private CandidatoFacade candidatoFacade;
+
     @EJB
     private NotaSeleccionFacade notaSeleccionFacade;
     @EJB
@@ -53,7 +60,6 @@ public class candidatoManaged implements Serializable {
     private NotaSeleccion notaSeleccion = new NotaSeleccion();
     private String logica;
 
-    //Listas de candidatos
     private List<Candidato> candidatoLista;
     private List<Candidato> candidatoListPo; //
     private List<Candidato> candidatoListRegularAlto; //
@@ -62,10 +68,11 @@ public class candidatoManaged implements Serializable {
     private List<Candidato> candidatoSeleccionado;
     private List<Candidato> aplicanteGeneral; //
     private List<Candidato> candidatoListPreseleccionado; //
+    private List<Candidato> alumnos;
 
     private EstadoAplicacion estadoSeleccion;
     private String entrevista;
-    //Variables de tipo Prueba
+
     private Pruebas pruebasE;
     private Pruebas pruebasT;
     private Pruebas pruebasL;
@@ -75,13 +82,16 @@ public class candidatoManaged implements Serializable {
     private HistorialAplicacion historialAplicacion;
     private List<HistorialAplicacion> historialLista;
 
+    private StreamedContent CV;
+
     @PostConstruct
     public void cargarInfo() {
-            logica="";
-            entrevista="";
-            Psicometrica="";
-            tecnica="";
+        logica = "";
+        entrevista = "";
+        Psicometrica = "";
+        tecnica = "";
         try {
+            alumnos = candidatoFacade1.alumno();
             candidatoListPreseleccionado = candidatoFacade1.candidatosPreseleccionados();
             aplicanteGeneral = candidatoFacade1.aplicanteGeneral(); //
             candidatoSeleccionado = candidatoFacade1.aplicanteSeleccionado();
@@ -178,6 +188,18 @@ public class candidatoManaged implements Serializable {
             Utilidades.lanzarError("Error", ex.getMessage());
 
         }
+    }
+
+    public StreamedContent getCV() throws FileNotFoundException, IOException {
+        System.out.println(candidato.getCanCv());
+        String cvPath = candidato.getCanCv();
+        FileInputStream is = new FileInputStream(new File(cvPath));
+        String contentType = FacesContext.getCurrentInstance().getExternalContext().getMimeType(cvPath);
+        String nameCv = FilenameUtils.getName(cvPath);
+        CV = DefaultStreamedContent.builder().contentType(contentType).name(nameCv).stream(() -> {
+            return is;
+        }).build();
+        return CV;
     }
 
     public EstadoAplicacionFacade getEstadoAplicacionFacade1() {
@@ -354,6 +376,14 @@ public class candidatoManaged implements Serializable {
 
     public void setCandidatoListPreseleccionado(List<Candidato> candidatoListPreseleccionado) {
         this.candidatoListPreseleccionado = candidatoListPreseleccionado;
+    }
+
+    public List<Candidato> getAlumnos() {
+        return alumnos;
+    }
+
+    public void setAlumnos(List<Candidato> alumnos) {
+        this.alumnos = alumnos;
     }
 
 }
