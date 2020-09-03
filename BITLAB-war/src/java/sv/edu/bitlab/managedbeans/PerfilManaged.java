@@ -7,6 +7,7 @@ package sv.edu.bitlab.managedbeans;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -16,7 +17,12 @@ import javax.inject.Named;
 import javax.inject.Inject;
 import sv.edu.bitlab.beans.CandidatoFacade;
 import sv.edu.bitlab.beans.GeneralidadesFacade;
+import sv.edu.bitlab.beans.IdiomaFacade;
+import sv.edu.bitlab.beans.NivelAcademicoFacade;
+import sv.edu.bitlab.beans.OcupacionFacade;
+import sv.edu.bitlab.beans.SexoFacade;
 import sv.edu.bitlab.entidades.Candidato;
+import sv.edu.bitlab.entidades.EstadoAplicacion;
 import sv.edu.bitlab.entidades.Generalidades;
 import sv.edu.bitlab.entidades.Idioma;
 import sv.edu.bitlab.entidades.NivelAcademico;
@@ -40,6 +46,18 @@ public class PerfilManaged implements Serializable {
     @EJB
     private CandidatoFacade candidatoFacade;
 
+    @EJB
+    private OcupacionFacade ocupacionFacade;
+
+    @EJB
+    private SexoFacade sexoFacade;
+
+    @EJB
+    private IdiomaFacade idiomaFacade;
+
+    @EJB
+    private NivelAcademicoFacade nivelAcademicoFacade;
+
     @Inject
     UsuarioManaged usuarioManaged;
 
@@ -58,10 +76,11 @@ public class PerfilManaged implements Serializable {
     private String direccion;
 
     //Campos compuestos
-    private int sexo;
-    private int nivelAcademico;
-    private int idioma;
-    private int ocupacion;
+    private Idioma idioma;
+    private NivelAcademico nivelAcademico;
+    private Sexo sexo;
+    private Ocupacion ocupacion;
+    private EstadoAplicacion estadoAplicacion;
 
     //Generalidades
     private int genId;
@@ -74,6 +93,12 @@ public class PerfilManaged implements Serializable {
     private String acurso;
     private String enterado;
     private String otros;
+
+    //Listas de campos compuestos
+    private List<Sexo> listaGenero;
+    private List<NivelAcademico> listaNivelAcademico;
+    private List<Idioma> listaIdioma;
+    private List<Ocupacion> listaOcupacion;
 
     public PerfilManaged() {
     }
@@ -95,10 +120,11 @@ public class PerfilManaged implements Serializable {
             direccion = perfilUsuario.getCanDireccion();
 
             //Campos compuestos
-            sexo = perfilUsuario.getSexId().getSexId();
-            nivelAcademico = perfilUsuario.getNacId().getNacId();
-            idioma = perfilUsuario.getIdiId().getIdiId();
-            ocupacion = perfilUsuario.getOcuId().getOcuId();
+            sexo = perfilUsuario.getSexId();
+            nivelAcademico = perfilUsuario.getNacId();
+            idioma = perfilUsuario.getIdiId();
+            ocupacion = perfilUsuario.getOcuId();
+            estadoAplicacion = perfilUsuario.getEapId();
 
             //Generalidades
             genId = perfilUsuario.getGenId().getGenId();
@@ -111,6 +137,12 @@ public class PerfilManaged implements Serializable {
             acurso = perfilUsuario.getGenId().getGenAspiracionCurso();
             enterado = perfilUsuario.getGenId().getGenEnterado();
             otros = perfilUsuario.getGenId().getGenOtrosConocimientos();
+
+            //Cargando listas desde la base de datos
+            listaGenero = sexoFacade.findAll();
+            listaNivelAcademico = nivelAcademicoFacade.findAll();
+            listaIdioma = idiomaFacade.findAll();
+            listaOcupacion = ocupacionFacade.findAll();
         } catch (Exception ex) {
             LOG.log(Level.SEVERE, "No se encontro al candidato, error: {0}", ex);
         }
@@ -122,7 +154,7 @@ public class PerfilManaged implements Serializable {
         perfilUsuario.setCanPrimerApellido(papellido);
         perfilUsuario.setCanSegundoApellido(sapellido);
         perfilUsuario.setCanFechaNac(fnacimiento);
-        perfilUsuario.setSexId(new Sexo(sexo));
+        perfilUsuario.setSexId(sexo);
         perfilUsuario.setCanDui(dui);
         perfilUsuario.setCanTelefono(telefono);
         perfilUsuario.setCanDireccion(direccion);
@@ -133,14 +165,40 @@ public class PerfilManaged implements Serializable {
     }
 
     public void updateComplement() {
-        perfilUsuario.setNacId(new NivelAcademico(nivelAcademico));
-        perfilUsuario.setOcuId(new Ocupacion(ocupacion));
-        perfilUsuario.setIdiId(new Idioma(idioma));
+        perfilUsuario.setNacId(nivelAcademico);
+        perfilUsuario.setOcuId(ocupacion);
+        perfilUsuario.setIdiId(idioma);
         Generalidades genUsuario = new Generalidades(genId, internet, computadora, alaboral, expectativaSal, tiempo, acurso, enterado, otros, linkedIn);
         generalidadesFacade.edit(genUsuario);
 
         candidatoFacade.edit(perfilUsuario);
         Utilidades.lanzarInfo("Exitoso ", "Los campos de la tabla se han actualizado correctamente");
+    }
+    
+    public int progressBarValue(){
+        int value;
+        switch(estadoAplicacion.getEapId()){
+            case 1:
+                value = 50;
+                break;
+            case 2:
+                value = 75;
+                break;
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+                value = 100;
+                break;
+            case 7:
+            case 8:
+            case 9:
+                value = 0;
+                break;
+            default:
+                value = 0;
+        }
+        return value;
     }
 
     public String getPnombre() {
@@ -223,38 +281,6 @@ public class PerfilManaged implements Serializable {
         this.direccion = direccion;
     }
 
-    public int getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(int sexo) {
-        this.sexo = sexo;
-    }
-
-    public int getNivelAcademico() {
-        return nivelAcademico;
-    }
-
-    public void setNivelAcademico(int nivelAcademico) {
-        this.nivelAcademico = nivelAcademico;
-    }
-
-    public int getIdioma() {
-        return idioma;
-    }
-
-    public void setIdioma(int idioma) {
-        this.idioma = idioma;
-    }
-
-    public int getOcupacion() {
-        return ocupacion;
-    }
-
-    public void setOcupacion(int ocupacion) {
-        this.ocupacion = ocupacion;
-    }
-
     public String getLinkedIn() {
         return linkedIn;
     }
@@ -325,5 +351,77 @@ public class PerfilManaged implements Serializable {
 
     public void setOtros(String otros) {
         this.otros = otros;
+    }
+
+    public List<Sexo> getListaGenero() {
+        return listaGenero;
+    }
+
+    public void setListaGenero(List<Sexo> listaGenero) {
+        this.listaGenero = listaGenero;
+    }
+
+    public List<NivelAcademico> getListaNivelAcademico() {
+        return listaNivelAcademico;
+    }
+
+    public void setListaNivelAcademico(List<NivelAcademico> listaNivelAcademico) {
+        this.listaNivelAcademico = listaNivelAcademico;
+    }
+
+    public List<Idioma> getListaIdioma() {
+        return listaIdioma;
+    }
+
+    public void setListaIdioma(List<Idioma> listaIdioma) {
+        this.listaIdioma = listaIdioma;
+    }
+
+    public List<Ocupacion> getListaOcupacion() {
+        return listaOcupacion;
+    }
+
+    public void setListaOcupacion(List<Ocupacion> listaOcupacion) {
+        this.listaOcupacion = listaOcupacion;
+    }
+
+    public Idioma getIdioma() {
+        return idioma;
+    }
+
+    public void setIdioma(Idioma idioma) {
+        this.idioma = idioma;
+    }
+
+    public NivelAcademico getNivelAcademico() {
+        return nivelAcademico;
+    }
+
+    public void setNivelAcademico(NivelAcademico nivelAcademico) {
+        this.nivelAcademico = nivelAcademico;
+    }
+
+    public Sexo getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
+    }
+
+    public Ocupacion getOcupacion() {
+        return ocupacion;
+    }
+
+    public void setOcupacion(Ocupacion ocupacion) {
+        this.ocupacion = ocupacion;
+    }
+
+    public EstadoAplicacion getEstadoAplicacion() {
+        return estadoAplicacion;
+    }
+
+    public void setEstadoAplicacion(EstadoAplicacion estadoAplicacion) {
+        this.estadoAplicacion = estadoAplicacion;
     }
 }
