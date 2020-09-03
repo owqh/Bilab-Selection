@@ -10,125 +10,182 @@
     </h:head>
     <h:body>
         
-        <div id="top" class="top">
-            <ui:insert name="top" >
-                <p:growl id="messages" globalOnly="true" showDetail="true" showSummary="true" life="2000"/>
-                <p:messages id="messagesAll"/>
-            </ui:insert>
-        </div>
         
-        <h:form id="tUsuarios">
-            <p:column style="width:32px;text-align: center">
-                <p:commandButton value="Agregar Usuario" actionListener="#{usuarioManged.nuevaEntidad()}" process="@this" 
-                                 update=":nuevoU :messages :messagesAll"  oncomplete="PF('nuevoUsu').show()" icon="pi pi-plus">
-                </p:commandButton>    
-            </p:column>
-            <br />
-            <br />
+        <ui:composition template="./template.xhtml">
             
-            <p:dataTable var="usu" value="#{usuarioManged.usuarioList}" paginator="true" rows="5"
-                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                         rowsPerPageTemplate="5,10,15" reflow="true">
+            <ui:define name="prueba-menu">
+                <li class="nav-item">
+                    <a href="prueba.bitlab" class="nav-link active">
+                        <i class="fas fa-table nav-icon"></i>
+                        <p>Usuario</p>
+                    </a>
+                </li>
+            </ui:define>
+            
+            <ui:define name="content">
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1 class="m-0 text-dark">Usuario</h1>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item"><a href="index.bitlab">Home</a></li>
+                                    <li class="breadcrumb-item active">Usuario</li>
+                                </ol>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </div>
+                <!-- /.content-header -->
                 
-                <p:column headerText="Id" filterBy="#{usu.usrId}" filterMatchMode="contains">
-                    <h:outputText value="#{usu.usrId}" />
-                </p:column>
-                <p:column headerText="Acceso" filterBy="#{usu.usrAcceso}" filterMatchMode="contains">
-                    <h:outputText value="#{usu.usrAcceso}" />
-                </p:column>
-                <p:column headerText="Nombre" filterBy="#{usu.usrNombre}" filterMatchMode="contains">
-                    <h:outputText value="#{usu.usrNombre}" />
-                </p:column>
-                <p:column headerText="Apellido" filterBy="#{usu.usrApellido}" filterMatchMode="contains">
-                    <h:outputText value="#{usu.usrApellido}" />
-                </p:column>
-                <p:column headerText="Rol" filterBy="#{usu.tipId.tipNombre}" filterMatchMode="contains">
-                    <h:outputText value="#{usu.tipId.tipNombre}" />
-                </p:column>
-                
-                <p:column style="width:32px;text-align: center" exportable="false">
-                    <p:commandButton update=":modi :messages :messagesAll" actionListener="#{usuarioManged.completarInformacion(usu)}" 
-                                     oncomplete="PF('usuModi').show()" icon="pi pi-user-edit" title="modificar"/>
-                </p:column>
-                
-                <p:column style="width:32px;text-align: center">
-                    <p:commandButton update=":eliminar :messages :messagesAll" oncomplete="PF('eliminarUsu').show()" icon="pi pi-minus-circle" title="Eliminar">
-                        <f:setPropertyActionListener value="#{usu}" target="#{usuarioManged.usuario}" />
-                    </p:commandButton>
-                </p:column>
-            </p:dataTable>        
-        </h:form>
-        
-        <h:form id="modi">
-            <p:dialog header="modificar usuario" widgetVar="usuModi" showEffect="fade" hideEffect="fade" position="center" resizable="false" modal="true">
-                <p:panelGrid  columns="2">
-                    <p:outputLabel value="ID"/>
-                    <p:outputLabel value="#{usuarioManged.usuario.usrId}"/>
-                    <p:outputLabel value="Acceso"/>
-                    <p:inputText value="#{usuarioManged.usuario.usrAcceso}">
-                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
-                    </p:inputText>
-                    <p:outputLabel value="Nombre"/>
-                    <p:inputText value="#{usuarioManged.usuario.usrNombre}" />
-                    <p:outputLabel value="Apellido"/>
-                    <p:inputText value="#{usuarioManged.usuario.usrApellido}" />
-                    <p:outputLabel value="Contraseña"/>
-                    <p:password value="#{usuarioManged.contrasena}" />
-                    <p:outputLabel value="Rol"/>
-                    <p:inputText value="#" />
-                    
-                </p:panelGrid>
-                <center>
-                    <p:commandButton value="modificar" actionListener="#{usuarioManged.guardarEntidad()}" update=":tUsuarios :messages :messagesAll" oncomplete="PF('usuModi').hide()"/>
-                </center>
-            </p:dialog>
-        </h:form>
-        
-        <h:form id="eliminar">
-            <p:dialog header="Eliminar usuario" widgetVar="eliminarUsu" modal="true" showEffect="fade" hideEffect="fade" resizable="false"
-                      position="center">
-                <p:panelGrid  columns="2">
-                    <p:outputLabel value="Desea eliminar el usuario (#{usuarioManged.usuario.usrNombre}) ?"/>
-                </p:panelGrid>
-                <center>
-                    <p:growl id="message" showDetail="true" />
-                    <p:commandButton value="SI" action="#{usuarioManged.eliminarEntidad()}" onsuccess="PF('eliminarUsu').hide()" 
-                                     update="message :tUsuarios :messages :messagesAll" style = "background: #D90202; border-color: #D90202;"
-                                     icon="pi pi-trash">
-                    </p:commandButton>
-                    <p:commandButton value="NO" oncomplete="PF('eliminarUsu').hide()"/>
-                </center>
-            </p:dialog>
-        </h:form>
-        
-        <h:form id="nuevoU">
-            <p:dialog header="Nuevo usuario" widgetVar="nuevoUsu" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-                <p:panelGrid  columns="2">
-                    <p:outputLabel value="Acceso"/>
-                    <p:inputText value="#{usuarioManged.usuario.usrAcceso}">
-                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
-                    </p:inputText>
-                    <p:outputLabel value="Nombre"/>
-                    <p:inputText value="#{usuarioManged.usuario.usrNombre}" />
-                    <p:outputLabel value="Apellido"/>
-                    <p:inputText value="#{usuarioManged.usuario.usrApellido}" />
-                    <p:outputLabel value="Contraseña"/>
-                    <p:password value="#{usuarioManged.contrasena}" />
-                    <p:outputLabel value="Rol"/>
-                    <p:inputText value="#" />
-                    
-                </p:panelGrid>
-                <center>                 
-                    <p:commandButton value="Guardar" icon="pi pi-save" actionListener="#{usuarioManged.guardarEntidad()}"
-                                     update=" :tUsuarios :messages :messagesAll" onsuccess="PF('nuevoUsu').hide()"/>
-                </center>
-            </p:dialog>
-        </h:form>
-        
-        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
-        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-            <h:outputLabel value="Cargando..."/>
-        </p:dialog>
+                <!-- Main content -->
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="col-12">
+                            
+                            <div id="top" class="top">
+                                <ui:insert name="top" >
+                                    <p:growl id="messages" globalOnly="true" showDetail="true" showSummary="true" life="2000"/>
+                                    <p:messages id="messagesAll"/>
+                                </ui:insert>
+                            </div>
+                            
+                            <h:form id="tUsuarios">
+                                <p:column style="width:32px;text-align: center">
+                                    <p:commandButton value="Agregar Usuario" actionListener="#{usuariosMG.nuevaEntidad()}" process="@this" 
+                                                     update=":nuevoU :messages :messagesAll"  oncomplete="PF('nuevoUsu').show()" icon="pi pi-plus">
+                                    </p:commandButton>    
+                                </p:column>
+                                <br />
+                                <br />
+                                
+                                <p:dataTable var="usu" value="#{usuariosMG.usuarioList}" paginator="true" rows="5"
+                                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                             rowsPerPageTemplate="5,10,15" reflow="true">
+                                    
+                                    <p:column headerText="Id" filterBy="#{usu.usrId}" width="50" filterMatchMode="contains">
+                                        <h:outputText value="#{usu.usrId}" />
+                                    </p:column>
+                                    <p:column headerText="Acceso" filterBy="#{usu.usrAcceso}" filterMatchMode="contains">
+                                        <h:outputText value="#{usu.usrAcceso}" />
+                                    </p:column>
+                                    <p:column headerText="Nombre" filterBy="#{usu.usrNombre}" filterMatchMode="contains">
+                                        <h:outputText value="#{usu.usrNombre}" />
+                                    </p:column>
+                                    <p:column headerText="Apellido" filterBy="#{usu.usrApellido}" filterMatchMode="contains">
+                                        <h:outputText value="#{usu.usrApellido}" />
+                                    </p:column>
+                                    <p:column headerText="Rol" filterBy="#{usu.tipId.tipNombre}" filterMatchMode="contains">
+                                        <h:outputText value="#{usu.tipId.tipNombre}" />
+                                    </p:column>
+                                    
+                                    <p:column style="width:32px;text-align: center" exportable="false">
+                                        <p:commandButton update=":modi :messages :messagesAll" actionListener="#{usuariosMG.completarInformacion(usu)}" 
+                                                         oncomplete="PF('usuModi').show()" icon="pi pi-user-edit" title="modificar"/>
+                                    </p:column>
+                                    
+                                    <p:column style="width:32px;text-align: center">
+                                        <p:commandButton update=":eliminar :messages :messagesAll" oncomplete="PF('eliminarUsu').show()" icon="pi pi-minus-circle" title="Eliminar">
+                                            <f:setPropertyActionListener value="#{usu}" target="#{usuariosMG.usuario}" />
+                                        </p:commandButton>
+                                    </p:column>
+                                </p:dataTable>        
+                            </h:form>
+                            
+                            <h:form id="modi">
+                                <p:dialog header="modificar usuario" widgetVar="usuModi" showEffect="fade" hideEffect="fade" position="center" resizable="false" modal="true">
+                                    <p:panelGrid  columns="2">
+                                        <p:outputLabel value="ID"/>
+                                        <p:outputLabel value="#{usuariosMG.usuario.usrId}"/>
+                                        <p:outputLabel value="Acceso"/>
+                                        <p:inputText value="#{usuariosMG.usuario.usrAcceso}">
+                                            <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+                                        </p:inputText>
+                                        <p:outputLabel value="Nombre"/>
+                                        <p:inputText value="#{usuariosMG.usuario.usrNombre}" />
+                                        <p:outputLabel value="Apellido"/>
+                                        <p:inputText value="#{usuariosMG.usuario.usrApellido}" />
+                                        <p:outputLabel value="Contraseña"/>
+                                        <p:password value="#{usuariosMG.contrasena}" />
+                                        <p:outputLabel value="Rol"/>
+                                        <p:selectOneMenu id="usuar" value="#{usuariosMG.usuario.tipId}" dynamic="true" style="width:125px" autoWidth="true">
+                                            <f:selectItem itemLabel="-Select-" itemValue=""/>
+                                            <f:selectItems itemLabel="#{usu.tipNombre}" var="usu" value="#{usuariosMG.tipoUsuarioslist}"/>
+                                        </p:selectOneMenu>
+                                        
+                                    </p:panelGrid>
+                                    <center>
+                                        <br></br>
+                                        <p:commandButton value="modificar" actionListener="#{usuariosMG.guardarEntidad()}" update=":tUsuarios :messages :messagesAll" oncomplete="PF('usuModi').hide()"/>
+                                    </center>
+                                </p:dialog>
+                            </h:form>
+                            
+                            <h:form id="eliminar">
+                                <p:dialog header="Eliminar usuario" widgetVar="eliminarUsu" modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+                                          position="center">
+                                    <p:panelGrid  columns="2">
+                                        <p:outputLabel value="Desea eliminar el usuario (#{usuariosMG.usuario.usrNombre}) ?"/>
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <center>
+                                        <p:growl id="message" showDetail="true" />
+                                        <p:commandButton value="SI" action="#{usuariosMG.eliminarEntidad()}" onsuccess="PF('eliminarUsu').hide()" 
+                                                         update="message :tUsuarios :messages :messagesAll" style = "background: #D90202; border-color: #D90202;"
+                                                         icon="pi pi-trash">
+                                        </p:commandButton>
+                                        <p:commandButton value="NO" oncomplete="PF('eliminarUsu').hide()"/>
+                                    </center>
+                                </p:dialog>
+                            </h:form>
+                            
+                            <h:form id="nuevoU">
+                                <p:dialog header="Nuevo usuario" widgetVar="nuevoUsu" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                                    <p:panelGrid  columns="2">
+                                        <p:outputLabel value="Acceso"/>
+                                        <p:inputText value="#{usuariosMG.usuario.usrAcceso}">
+                                            <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+                                        </p:inputText>
+                                        <p:outputLabel value="Nombre"/>
+                                        <p:inputText value="#{usuariosMG.usuario.usrNombre}" />
+                                        <p:outputLabel value="Apellido"/>
+                                        <p:inputText value="#{usuariosMG.usuario.usrApellido}" />
+                                        <p:outputLabel value="Contraseña"/>
+                                        <p:password value="#{usuariosMG.contrasena}" />
+                                        <p:outputLabel value="Rol"/>
+                                        <p:selectOneMenu id="usuar" value="#{usuariosMG.usuario.tipId}" dynamic="true" style="width:125px" autoWidth="true">
+                                            <f:selectItem itemLabel="-Select-" itemValue=""/>
+                                            <f:selectItems itemLabel="#{usu.tipNombre}" var="usu" value="#{usuariosMG.tipoUsuarioslist}"/>
+                                        </p:selectOneMenu>
+                                        
+                                    </p:panelGrid>
+                                    <br></br>
+                                    <center>                 
+                                        <p:commandButton value="Guardar" icon="pi pi-save" actionListener="#{usuariosMG.guardarEntidad()}"
+                                                         update=" :tUsuarios :messages :messagesAll" onsuccess="PF('nuevoUsu').hide()"/>
+                                    </center>
+                                </p:dialog>
+                            </h:form>
+                            
+                            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                            <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                                <h:outputLabel value="Cargando..."/>
+                            </p:dialog>
+                            
+                        </div>
+                    </div>
+                </section>
+                <!-- /.content -->
+            </ui:define>
+            
+        </ui:composition>
         
     </h:body>
 </html>
