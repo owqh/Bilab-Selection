@@ -8,6 +8,7 @@ package sv.edu.bitlab.managedbeans;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,16 +31,22 @@ public class DocenteManaged implements Serializable {
     
     private Docente entidadSeleccion;
     private List<Docente> docenteList;
+    private List<String> estadoDocList;
     
     @EJB
-    private DocenteFacade docenteFacade = new DocenteFacade();
+    private DocenteFacade docenteFacade;
     
     public DocenteManaged() {
     }
     
     @PostConstruct
     private void encontrarEntidades(){
+        entidadSeleccion = new Docente();
         docenteList = docenteFacade.findAll();
+        
+        estadoDocList = new ArrayList<>();
+        estadoDocList.add("A");
+        estadoDocList.add("I");
         log.info("Lista de entidades cargada");
     }
     
@@ -81,9 +88,7 @@ public class DocenteManaged implements Serializable {
         }
         log.info("Entidad editada y guardada");
     }
-    
-    
-    
+   
     public List<Docente> getDocenteList() {
         return docenteList;
     }
@@ -106,6 +111,14 @@ public class DocenteManaged implements Serializable {
     
     public void setDocenteFacade(DocenteFacade docenteFacade) {
         this.docenteFacade = docenteFacade;
+    }
+
+    public List<String> getEstadoDocList() {
+        return estadoDocList;
+    }
+
+    public void setEstadoDocList(List<String> estadoDocList) {
+        this.estadoDocList = estadoDocList;
     }
     
 }

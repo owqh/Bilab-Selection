@@ -27,7 +27,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Oscar
+ * @author Manuel
  */
 @Entity
 @Table(name = "BIT_DOC_DOCENTE", catalog = "BITLAB", schema = "", uniqueConstraints = {
@@ -44,14 +44,9 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Docente.findByDocDireccion", query = "SELECT d FROM Docente d WHERE d.docDireccion = :docDireccion"),
     @NamedQuery(name = "Docente.findByDocTelefono", query = "SELECT d FROM Docente d WHERE d.docTelefono = :docTelefono"),
     @NamedQuery(name = "Docente.findByDocCorreo", query = "SELECT d FROM Docente d WHERE d.docCorreo = :docCorreo"),
-    @NamedQuery(name = "Docente.findByDocFechaNac", query = "SELECT d FROM Docente d WHERE d.docFechaNac = :docFechaNac")})
+    @NamedQuery(name = "Docente.findByDocFechaNac", query = "SELECT d FROM Docente d WHERE d.docFechaNac = :docFechaNac"),
+    @NamedQuery(name = "Docente.findByDocEstado", query = "SELECT d FROM Docente d WHERE d.docEstado = :docEstado")})
 public class Docente implements Serializable {
-
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 1)
-    @Column(name = "DOC_ESTADO", nullable = false, length = 1)
-    private String docEstado;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -89,8 +84,11 @@ public class Docente implements Serializable {
     @Column(name = "DOC_FECHA_NAC")
     @Temporal(TemporalType.DATE)
     private Date docFechaNac;
-    @OneToMany(mappedBy = "docId", fetch = FetchType.LAZY)
-    private List<Candidato> candidatoList;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 1)
+    @Column(name = "DOC_ESTADO", nullable = false, length = 1)
+    private String docEstado;
     @OneToMany(mappedBy = "docId", fetch = FetchType.LAZY)
     private List<Curso> cursoList;
 
@@ -99,6 +97,11 @@ public class Docente implements Serializable {
 
     public Docente(Integer docId) {
         this.docId = docId;
+    }
+
+    public Docente(Integer docId, String docEstado) {
+        this.docId = docId;
+        this.docEstado = docEstado;
     }
 
     public Integer getDocId() {
@@ -189,12 +192,12 @@ public class Docente implements Serializable {
         this.docFechaNac = docFechaNac;
     }
 
-    public List<Candidato> getCandidatoList() {
-        return candidatoList;
+    public String getDocEstado() {
+        return docEstado;
     }
 
-    public void setCandidatoList(List<Candidato> candidatoList) {
-        this.candidatoList = candidatoList;
+    public void setDocEstado(String docEstado) {
+        this.docEstado = docEstado;
     }
 
     public List<Curso> getCursoList() {
@@ -228,14 +231,6 @@ public class Docente implements Serializable {
     @Override
     public String toString() {
         return "sv.edu.bitlab.entidades.Docente[ docId=" + docId + " ]";
-    }
-
-    public String getDocEstado() {
-        return docEstado;
-    }
-
-    public void setDocEstado(String docEstado) {
-        this.docEstado = docEstado;
     }
     
 }

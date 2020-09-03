@@ -7,7 +7,6 @@ package sv.edu.bitlab.entidades;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,7 +18,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -28,7 +26,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Oscar
+ * @author Manuel
  */
 @Entity
 @Table(name = "BIT_CUR_CURSO", catalog = "BITLAB", schema = "", uniqueConstraints = {
@@ -60,10 +58,6 @@ public class Curso implements Serializable {
     @Column(name = "CUR_FECHA_FIN")
     @Temporal(TemporalType.DATE)
     private Date curFechaFin;
-    @OneToMany(mappedBy = "curId", fetch = FetchType.LAZY)
-    private List<Tecnologia> tecnologiaList;
-    @OneToMany(mappedBy = "curId", fetch = FetchType.LAZY)
-    private List<NotaCurso> notaCursoList;
     @JoinColumn(name = "DOC_ID", referencedColumnName = "DOC_ID")
     @ManyToOne(fetch = FetchType.LAZY)
     private Docente docId;
@@ -113,22 +107,6 @@ public class Curso implements Serializable {
 
     public void setCurFechaFin(Date curFechaFin) {
         this.curFechaFin = curFechaFin;
-    }
-
-    public List<Tecnologia> getTecnologiaList() {
-        return tecnologiaList;
-    }
-
-    public void setTecnologiaList(List<Tecnologia> tecnologiaList) {
-        this.tecnologiaList = tecnologiaList;
-    }
-
-    public List<NotaCurso> getNotaCursoList() {
-        return notaCursoList;
-    }
-
-    public void setNotaCursoList(List<NotaCurso> notaCursoList) {
-        this.notaCursoList = notaCursoList;
     }
 
     public Docente getDocId() {

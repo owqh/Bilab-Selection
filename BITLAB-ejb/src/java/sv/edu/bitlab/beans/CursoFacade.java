@@ -12,7 +12,7 @@ import sv.edu.bitlab.entidades.Curso;
 
 /**
  *
- * @author Mario
+ * @author Manuel
  */
 @Stateless
 public class CursoFacade extends AbstractFacade<Curso> {
