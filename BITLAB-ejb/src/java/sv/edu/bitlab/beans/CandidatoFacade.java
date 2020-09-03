@@ -104,7 +104,7 @@ public class CandidatoFacade extends AbstractFacade<Candidato> {
 
     public List<Candidato> candidatoRegularAlto() throws Exception {
         try {
-            Query q = em.createQuery("select c from Candidato c where c.genId.genInternet='si' and c.genId.genComputadora='si' and c.genId.genTiempo='no' and c.eapId.eapId=9");
+            Query q = em.createQuery("select c from Candidato c where c.genId.genInternet='si' and c.genId.genComputadora='si' and c.eapId.eapId=9");
             return q.getResultList();
         } catch (Exception e) {
             throw new Exception(e);
@@ -113,7 +113,7 @@ public class CandidatoFacade extends AbstractFacade<Candidato> {
     // lista para candidatos regularesbajos
     public List<Candidato> candidatoRegularBajo() throws Exception {
         try {
-            Query q = em.createQuery("select c from Candidato c where c.genId.genInternet='si' and c.genId.genComputadora='no' and c.genId.genTiempo='no' and c.eapId.eapId=9");
+            Query q = em.createQuery("select c from Candidato c where c.genId.genInternet='si' and c.genId.genComputadora='no' and c.eapId.eapId=9");
             return q.getResultList();
         } catch (Exception e) {
             throw new Exception(e);
