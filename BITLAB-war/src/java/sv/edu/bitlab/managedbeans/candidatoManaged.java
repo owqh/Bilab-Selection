@@ -201,7 +201,11 @@ public class candidatoManaged implements Serializable {
         }).build();
         return CV;
     }
-
+    
+    public String fotoPerfil(Candidato candidato){
+        return FilenameUtils.getBaseName(candidato.getCanFoto());
+    }
+    
     public EstadoAplicacionFacade getEstadoAplicacionFacade1() {
         return estadoAplicacionFacade1;
     }

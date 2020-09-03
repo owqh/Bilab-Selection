@@ -56,7 +56,7 @@
                                                 <div class="col-xl-4" style="background-color: #333">
                                                     <div class="form-group" style="text-align: center; padding: 0">
                                                         <!--<p:graphicImage name="dist/img/user2-160x160.jpg" alt="" width="250" style="padding: 5%"/>-->
-                                                        <p:graphicImage value="/images/#/{fotoManaged.nombreFoto}" alt="" style="padding: 5%;width: 250px; height:250px; object-fit: cover"/>
+                                                        <p:graphicImage value="/images/#{fotoManaged.nombreFoto}" alt="" style="padding: 5%;width: 250px; height:250px; object-fit: cover"/>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-8" style="background-color: #fff">
@@ -75,6 +75,14 @@
                                         </div>
                                     </div>
                                 </h:form>
+                                <ui:fragment>
+                                    <h:form role="form" id="progressbar">
+                                        <div class="card card-primary" style="margin: 0 10% 30px 10%"> 
+                                            <h3 style="padding: 10px 0 10px 20px; font-size: 20px"><b><h:outputText value="#{perfilManaged.estadoAplicacion.eapNombre}" /></b></h3>
+                                            <p:progressBar value="#{perfilManaged.progressBarValue()}" labelTemplate="{value}%" displayOnly="true"/>
+                                        </div>
+                                    </h:form>
+                                </ui:fragment>
                                 <!-- general form elements -->
                                 <h:form role="form" id="account">
                                     <div class="card card-primary" style="margin: 0 10% 30px 10%;">
@@ -173,9 +181,9 @@
                                                     <div class="form-group">
                                                         <p:outputLabel for="genero" value="Sexo" />
                                                         <div class="form-group">
-                                                            <p:selectOneMenu id="genero" value="#{perfilManaged.sexo}" required="true" style="width: 100%">
-                                                                <f:selectItem itemLabel="Masculino" itemValue="1" />
-                                                                <f:selectItem itemLabel="Femenino" itemValue="2" />
+                                                            <p:selectOneMenu value="#{perfilManaged.sexo}" id="genero" required="true" style="width: 100%" requiredMessage="Por favor, seleccione una opcion">
+                                                                <f:selectItem itemLabel="Escoje una opción" itemValue="#{null}" noSelectionOption="true"/>
+                                                                <f:selectItems value="#{perfilManaged.listaGenero}" var="genero" itemLabel="#{genero.sexNombre}" itemValue="#{genero}" />
                                                             </p:selectOneMenu>
                                                             <p:message for="genero"/>
                                                         </div>
@@ -241,13 +249,10 @@
                                                         <div class="form-group">
                                                             <p:outputLabel for="grado" value="Nivel académico actual" />
                                                             <div class="form-group">
-                                                                <p:selectOneMenu id="grado" value="#{perfilManaged.nivelAcademico}" style="width: 100%">
-                                                                    <f:selectItem itemLabel="Bachiller General" itemValue="1" />
-                                                                    <f:selectItem itemLabel="Bachiller Técnico" itemValue="2" />
-                                                                    <f:selectItem itemLabel="Técnico" itemValue="3" />
-                                                                    <f:selectItem itemLabel="Universitario" itemValue="4" />
-                                                                    <f:selectItem itemLabel="Otro" itemValue="5" />
-                                                                </p:selectOneMenu>
+                                                                <p:selectOneMenu id="grado" value="#{perfilManaged.nivelAcademico}"  style="width: 100%" required="true" requiredMessage="Por favor, seleccione una opcion">
+                                                                    <f:selectItem itemLabel="Escoje una opción" itemValue="#{null}" noSelectionOption="true"/>
+                                                                    <f:selectItems value="#{perfilManaged.listaNivelAcademico}" var="nivel" itemLabel="#{nivel.nacNombre}" itemValue="#{nivel}"  />
+                                                                </p:selectOneMenu>   
                                                                 <p:message for="grado"/>
                                                             </div>
                                                         </div>
@@ -256,11 +261,9 @@
                                                         <div class="form-group">
                                                             <p:outputLabel for="ocupacion" value="Ocupacion" />
                                                             <div class="form-group">
-                                                                <p:selectOneMenu id="ocupacion" value="#{perfilManaged.ocupacion}" style="width: 100%">
-                                                                    <f:selectItem itemLabel="Empleado" itemValue="1" />
-                                                                    <f:selectItem itemLabel="Desempleado" itemValue="2" />
-                                                                    <f:selectItem itemLabel="Estudiante" itemValue="3" />
-                                                                    <f:selectItem itemLabel="Emprendedor" itemValue="4" />
+                                                                <p:selectOneMenu id="ocupacion" value="#{perfilManaged.ocupacion}" style="width: 100%" required="true" requiredMessage="Por favor, seleccione una opcion"> 
+                                                                    <f:selectItem itemLabel="Escoje una opción" itemValue="#{null}" noSelectionOption="true"/>
+                                                                    <f:selectItems value="#{perfilManaged.listaOcupacion}" var="ocupacion" itemLabel="#{ocupacion.ocuNombre}" itemValue="#{ocupacion}" />
                                                                 </p:selectOneMenu>
                                                                 <p:message for="ocupacion"/>
                                                             </div>
@@ -270,14 +273,9 @@
                                                         <div class="form-group">
                                                             <p:outputLabel for="idioma" value="Nivel de Inglés" />
                                                             <div class="form-group">
-                                                                <p:selectOneMenu id="idioma" value="#{perfilManaged.idioma}" style="width: 100%">
-                                                                    <f:selectItem itemLabel="No hablo ingles" itemValue="1" />
-                                                                    <f:selectItem itemLabel="Básico" itemValue="2" />
-                                                                    <f:selectItem itemLabel="Intermedio bajo" itemValue="3" />
-                                                                    <f:selectItem itemLabel="Intermedio" itemValue="4" />
-                                                                    <f:selectItem itemLabel="Intermedio Alto" itemValue="5" />
-                                                                    <f:selectItem itemLabel="Avanzado" itemValue="6" />
-                                                                    <f:selectItem itemLabel="Nativo" itemValue="7" />
+                                                                <p:selectOneMenu  value="#{perfilManaged.idioma}" converter="#{idiomaConvertidor}" id="idioma" style="width: 100%" required="true" requiredMessage="Por favor, seleccione una opcion"> 
+                                                                    <f:selectItem itemLabel="Escoje una opción" itemValue="#{null}" noSelectionOption="true"/>
+                                                                    <f:selectItems value="#{perfilManaged.listaIdioma}" var="idioma" itemLabel="#{idioma.idiNivel}" itemValue="#{idioma}" />
                                                                 </p:selectOneMenu>
                                                                 <p:message for="idioma"/>
                                                             </div>
