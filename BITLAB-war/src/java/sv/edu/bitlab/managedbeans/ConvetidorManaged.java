@@ -56,11 +56,11 @@ public class ConvetidorManaged implements Serializable {
 
     //Importacion de EJB para realizar convertidores
     @EJB
-    private ConfiguracionFacade configuracionFacade;
-
-    @EJB
     private ActividadesFacade actividadesFacade;
-
+    
+    @EJB
+    private ConfiguracionFacade configuracionFacade;
+    
     @EJB
     private CandidatoFacade candidatoFacade;
 
