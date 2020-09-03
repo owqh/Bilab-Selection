@@ -33,8 +33,8 @@ public class CursoManaged implements Serializable {
     private Curso cursoObj;
     private List<Curso> cursoList;
     private List<Docente> docentesList;
+    private Docente docente;
     
-    private Docente docId;
     
     @EJB
     private DocenteFacade docenteFacade;
@@ -44,6 +44,8 @@ public class CursoManaged implements Serializable {
     
     @PostConstruct
     public void encontrarEntidades(){
+        cursoObj = new Curso();
+        docente = new Docente();
         docentesList = docenteFacade.findAll();
         cursoList = cursoFacade.findAll();
         log.info("Lista de entidades cargada");
@@ -89,10 +91,6 @@ public class CursoManaged implements Serializable {
     }
     
     
-    
-    /**
-     * Creates a new instance of CursoManaged
-     */
     public CursoManaged() {
     }
 
@@ -120,13 +118,6 @@ public class CursoManaged implements Serializable {
         this.docentesList = docentesList;
     }
 
-    public Docente getDocId() {
-        return docId;
-    }
-
-    public void setDocId(Docente docId) {
-        this.docId = docId;
-    }
 
     public DocenteFacade getDocenteFacade() {
         return docenteFacade;
@@ -143,7 +134,14 @@ public class CursoManaged implements Serializable {
     public void setCursoFacade(CursoFacade cursoFacade) {
         this.cursoFacade = cursoFacade;
     }
-    
+
+    public Docente getDocente() {
+        return docente;
+    }
+
+    public void setDocente(Docente docente) {
+        this.docente = docente;
+    }
     
     
 }

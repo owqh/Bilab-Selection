@@ -57,201 +57,201 @@
                             </div>
                             
                             <h:form id="tablaDocente">
-                                <p:commandButton value="Agregar docente" actionListener="#{docenteManaged.nuevaEntidad()}"
-                                                 update=":nuevoDocente :messages :messagesAll"  oncomplete="PF('widNuevoDocente').show()" icon="pi pi-plus"/>
-                                <br />
-                                <br />
-                                
-                                <!--TABLA DOCENTES-->
-                                <p:dataTable var="entidad" value="#{docenteManaged.docenteList}" style="margin-bottom:20px" rendered="true" paginator="true" rows="5"
-                                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                                             rowsPerPageTemplate="5,10,15" reflow="true">
-                                    <p:column headerText="Ver" style="width:20px">
-                                        <p:rowToggler/>
-                                    </p:column>
-                                    <p:column headerText="Codigo docente" filterBy="#{entidad.docCodigo}" filterMatchMode="contains" >
-                                        <h:outputText value="#{entidad.docCodigo}"/>
-                                    </p:column>
-                                    
-                                    <p:column headerText="Primer nombre" filterBy="#{entidad.docPrimerNombre}" filterMatchMode="contains" >
-                                        <h:outputText value="#{entidad.docPrimerNombre}"/>
-                                    </p:column>
-                                    
-                                    <p:column headerText="Primer apellido">
-                                        <h:outputText value="#{entidad.docPrimerApellido}"/> 
-                                    </p:column>
-                                    
-                                    <p:column headerText="Dui">
-                                        <h:outputText value="#{entidad.docDui}"/>
-                                    </p:column>
-                                    
-                                    <p:column headerText="Telefono">
-                                        <h:outputText value="#{entidad.docTelefono}"/>
-                                    </p:column>
-                                    
-                                    <p:column headerText="Email">
-                                        <h:outputText value="#{entidad.docCorreo}"/>
-                                    </p:column>
-                                    
-                                    <p:column headerText="Estado docente">
-                                        <h:outputText value="#{entidad.docEstado}"/>
-                                    </p:column>
-                                    <p:rowExpansion>
-                                        <p:panelGrid columns="12" columnClasses="label,value" style="width:auto">
-                                            <h:outputLabel value="Primer Nombre:" style="color:blueviolet"/>
-                                            <h:outputText value="#{entidad.docPrimerNombre}"/>
-                                            <h:outputLabel value="Primero Apellido:" style="color:blueviolet"/>
-                                            <h:outputText value="#{entidad.docPrimerApellido}" />
-                                            <h:outputLabel value="DUI:" style="color:blueviolet"/>
-                                            <h:outputText value="#{entidad.docDui}"/>
-                                            <h:outputLabel value="Direccion:" style="color:blueviolet"/>
-                                            <h:outputText value="#{entidad.docDireccion}"/>
-                                            <h:outputLabel value="Codigo:" style="color:blueviolet"/>
-                                            <h:outputText value="#{entidad.docCodigo}"/>
-                                            <h:outputLabel value="Estado:" style="color:blueviolet"/>
-                                            <h:outputText value="#{entidad.docEstado}"/>
-                                            <h:outputLabel value="Segundo nombre:" style="color:blueviolet"/>
-                                            <h:outputText value="#{entidad.docSegundoNombre}" />
-                                            <h:outputLabel value="Segundo Apellido:" style="color:blueviolet"/>
-                                            <h:outputText value="#{entidad.docSegundoApellido}" />
-                                            <h:outputLabel value="Telefono:" style="color:blueviolet"/>
-                                            <h:outputText value="#{entidad.docTelefono}"/>
-                                            <h:outputLabel value="Fecha nacimiento:" style="color:blueviolet"/>
-                                            <h:outputText value="#{entidad.docFechaNac}">
-                                                <f:convertDateTime pattern="dd/MM/yyyy"/>
-                                            </h:outputText>
-                                            <h:outputLabel value="Correo:" style="color:blueviolet"/>
-                                            <h:outputText value="#{entidad.docCorreo}"/>
-                                        </p:panelGrid> 
-                                    </p:rowExpansion>
-                                    
-                                    <p:column style="width:32px;text-align: center" headerText="Edit">
-                                        <p:commandButton update=":editDocente :messages :messagesAll" oncomplete="PF('widEditDocente').show()" 
-                                                         icon="pi pi-user-edit" title="edit">
-                                            <f:setPropertyActionListener value="#{entidad}" target="#{docenteManaged.entidadSeleccion}"/>
-                                        </p:commandButton>
-                                    </p:column>
-                                    
-                                </p:dataTable>
-                            </h:form>    
-                            
-                            <!--EDITAR DOCENTE-->
-                            <h:form id="editDocente"> 
-                                <p:dialog header="Editar Datos Docente" widgetVar="widEditDocente" resizable="false" 
-                                          showEffect="explode" hideEffect="hide" position="center">
-                                    
-                                    <p:panelGrid columns="4" style="border: none !important;">  
-                                        <h:outputLabel value="Primer nombre:"/>
-                                        <p:inputText value="#{docenteManaged.entidadSeleccion.docPrimerNombre}"/>
-                                        
-                                        <h:outputLabel value="Segundo nombre:"/>
-                                        <p:inputText value="#{docenteManaged.entidadSeleccion.docSegundoNombre}"/>
-                                        
-                                        <h:outputLabel value="Primer apellido:"/>
-                                        <p:inputText value="#{docenteManaged.entidadSeleccion.docPrimerApellido}"/>
-                                        
-                                        <h:outputLabel value="Segundo apellido:"/>
-                                        <p:inputText value="#{docenteManaged.entidadSeleccion.docSegundoApellido}"/>
-                                        
-                                        <h:outputLabel value="DUI:"/>
-                                        <p:inputMask value="#{docenteManaged.entidadSeleccion.docDui}" mask="99999999-9" required="true"/>
-                                        
-                                        <h:outputLabel value="Direccion:"/>
-                                        <p:inputText value="#{docenteManaged.entidadSeleccion.docDireccion}"/>
-                                        
-                                        <h:outputLabel value="Telefono:"/>
-                                        <p:inputMask value="#{docenteManaged.entidadSeleccion.docTelefono}" mask="9999-9999" required="true"/>
-                                        
-                                        <h:outputLabel value="Email:"/>
-                                        <p:inputText value="#{docenteManaged.entidadSeleccion.docCorreo}">
-                                            <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
-                                        </p:inputText>
-                                        
-                                        <h:outputLabel value="Fecha nacimiento: "/>
-                                        <p:calendar value="#{docenteManaged.entidadSeleccion.docFechaNac}" pattern="dd/MM/yyyy"/>
-                                        
-                                        <h:outputLabel value="Estado:"/>
-                                        <p:selectOneMenu id="docEst" value="#{docenteManaged.entidadSeleccion.docEstado}" autoWidth="true">
-                                            <f:selectItem itemLabel="-Select-" itemValue=""/>
-                                            <f:selectItems  itemValue="#{est}" var="est" value="#{docenteManaged.estadoDocenteList}"/>
-                                        </p:selectOneMenu>  
-                                    </p:panelGrid>
-                                    <br/>
-                                    <center>              
-                                        
-                                        <p:growl id="message" showDetail="true" />
-                                        <p:commandButton value="Eliminar" action="#{docenteManaged.eliminarEntidad()}" onsuccess="PF('widEditDocente').hide()" 
-                                                         update="message :tablaDocente :messages :messagesAll" style = "background: #D90202; border-color: #D90202;"
-                                                         icon="pi pi-trash">
-                                            <p:confirm header="Confirmación" message="Seguro que desea eliminar ?" icon="pi pi-exclamation-triangle" />
-                                        </p:commandButton>
-                                        
-                                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
-                                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times"/>
-                                        </p:confirmDialog>
-                                        
-                                        <p:commandButton value="Actualizar" icon="pi pi-save" actionListener="#{docenteManaged.guardarEntidad()}"
-                                                         update=" :tablaDocente :messages :messagesAll" onsuccess="PF('widEditDocente').hide()"/>
-                                    </center>
-                                </p:dialog>
-                            </h:form>   
-                            
-                            
-                            <!--NUEVO DOCENTE-->
-                            <h:form id="nuevoDocente"> 
-                                <p:dialog header="Ingresa datos Docente" widgetVar="widNuevoDocente" resizable="false" 
-                                          showEffect="explode" hideEffect="hide" position="center">
-                                    
-                                    <p:panelGrid columns="4" style="border: none !important;">
-                                        
-                                        <h:outputLabel value="Primer nombre:"/>
-                                        <p:inputText value="#{docenteManaged.entidadSeleccion.docPrimerNombre}"/>
-                                        
-                                        <h:outputLabel value="Segundo nombre:"/>
-                                        <p:inputText value="#{docenteManaged.entidadSeleccion.docSegundoNombre}"/>
-                                        
-                                        <h:outputLabel value="Primer apellido:"/>
-                                        <p:inputText value="#{docenteManaged.entidadSeleccion.docPrimerApellido}"/>
-                                        
-                                        <h:outputLabel value="Segundo apellido:"/>
-                                        <p:inputText value="#{docenteManaged.entidadSeleccion.docSegundoApellido}"/>
-                                        
-                                        <h:outputLabel value="DUI:"/>
-                                        <p:inputMask value="#{docenteManaged.entidadSeleccion.docDui}" mask="99999999-9" required="true"/>
-                                        
-                                        <h:outputLabel value="Direccion:"/>
-                                        <p:inputText value="#{docenteManaged.entidadSeleccion.docDireccion}"/>
-                                        
-                                        <h:outputLabel value="Telefono:"/>
-                                        <p:inputMask value="#{docenteManaged.entidadSeleccion.docTelefono}" mask="9999-9999" required="true"/>
-                                        
-                                        <h:outputLabel value="Email:"/>
-                                        <p:inputText value="#{docenteManaged.entidadSeleccion.docCorreo}">
-                                            <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
-                                        </p:inputText>
-                                        
-                                        <h:outputLabel value="Fecha nacimiento: "/>
-                                        <p:calendar value="#{docenteManaged.entidadSeleccion.docFechaNac}" pattern="dd/MM/yyyy"/>
-                                        
-                                        <h:outputLabel value="Estado:"/>
-                                        <p:selectOneMenu id="docEst" value="#{docenteManaged.entidadSeleccion.docEstado}" autoWidth="true">
-                                            <f:selectItem itemLabel="-Select-" itemValue=""/>
-                                            <f:selectItems  itemValue="#{est}" var="est" value="#{docenteManaged.estadoDocenteList}"/>
-                                        </p:selectOneMenu>
-                                    </p:panelGrid>
-                                    <br/>
-                                    <center>                 
-                                        <p:commandButton value="Guardar" icon="pi pi-save" actionListener="#{docenteManaged.guardarEntidad()}"
-                                                         update=" :tablaDocente :messages :messagesAll " onsuccess="PF('widNuevoDocente').hide()"/>
-                                    </center>
-                                </p:dialog>
-                            </h:form>
-                            
-                            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>
-                            <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-                                <h:outputLabel value="Cargando..."/>
-                            </p:dialog>
+            <p:commandButton value="Agregar docente" actionListener="#{docenteManaged.nuevaEntidad()}"
+                             update=":nuevoDocente :messages :messagesAll"  oncomplete="PF('widNuevoDocente').show()" icon="pi pi-plus"/>
+            <br />
+            <br />
+            
+            <!--TABLA DOCENTES-->
+            <p:dataTable var="entidad" value="#{docenteManaged.docenteList}" style="margin-bottom:20px" rendered="true" paginator="true" rows="5"
+                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                         rowsPerPageTemplate="5,10,15" reflow="true">
+                <p:column headerText="Ver" style="width:20px">
+                    <p:rowToggler/>
+                </p:column>
+                <p:column headerText="Codigo docente" filterBy="#{entidad.docCodigo}" filterMatchMode="contains" >
+                    <h:outputText value="#{entidad.docCodigo}"/>
+                </p:column>
+                
+                <p:column headerText="Primer nombre" filterBy="#{entidad.docPrimerNombre}" filterMatchMode="contains" >
+                    <h:outputText value="#{entidad.docPrimerNombre}"/>
+                </p:column>
+                
+                <p:column headerText="Primer apellido">
+                    <h:outputText value="#{entidad.docPrimerApellido}"/> 
+                </p:column>
+                
+                <p:column headerText="Dui">
+                    <h:outputText value="#{entidad.docDui}"/>
+                </p:column>
+                
+                <p:column headerText="Telefono">
+                    <h:outputText value="#{entidad.docTelefono}"/>
+                </p:column>
+                
+                <p:column headerText="Email">
+                    <h:outputText value="#{entidad.docCorreo}"/>
+                </p:column>
+                
+                <p:column headerText="Estado docente">
+                    <h:outputText value="#{entidad.docEstado}"/>
+                </p:column>
+                <p:rowExpansion>
+                    <p:panelGrid columns="12" columnClasses="label,value" style="width:auto">
+                        <h:outputLabel value="Primer Nombre:" style="color:blueviolet"/>
+                        <h:outputText value="#{entidad.docPrimerNombre}"/>
+                        <h:outputLabel value="Primero Apellido:" style="color:blueviolet"/>
+                        <h:outputText value="#{entidad.docPrimerApellido}" />
+                        <h:outputLabel value="DUI:" style="color:blueviolet"/>
+                        <h:outputText value="#{entidad.docDui}"/>
+                        <h:outputLabel value="Direccion:" style="color:blueviolet"/>
+                        <h:outputText value="#{entidad.docDireccion}"/>
+                        <h:outputLabel value="Codigo:" style="color:blueviolet"/>
+                        <h:outputText value="#{entidad.docCodigo}"/>
+                        <h:outputLabel value="Estado:" style="color:blueviolet"/>
+                        <h:outputText value="#{entidad.docEstado}"/>
+                        <h:outputLabel value="Segundo nombre:" style="color:blueviolet"/>
+                        <h:outputText value="#{entidad.docSegundoNombre}" />
+                        <h:outputLabel value="Segundo Apellido:" style="color:blueviolet"/>
+                        <h:outputText value="#{entidad.docSegundoApellido}" />
+                        <h:outputLabel value="Telefono:" style="color:blueviolet"/>
+                        <h:outputText value="#{entidad.docTelefono}"/>
+                        <h:outputLabel value="Fecha nacimiento:" style="color:blueviolet"/>
+                        <h:outputText value="#{entidad.docFechaNac}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                        <h:outputLabel value="Correo:" style="color:blueviolet"/>
+                        <h:outputText value="#{entidad.docCorreo}"/>
+                    </p:panelGrid> 
+                </p:rowExpansion>
+                
+                <p:column style="width:32px;text-align: center" headerText="Edit">
+                    <p:commandButton update=":editDocente :messages :messagesAll" oncomplete="PF('widEditDocente').show()" 
+                                     icon="pi pi-user-edit" title="edit">
+                        <f:setPropertyActionListener value="#{entidad}" target="#{docenteManaged.entidadSeleccion}"/>
+                    </p:commandButton>
+                </p:column>
+                
+            </p:dataTable>
+        </h:form>    
+        
+        <!--EDITAR DOCENTE-->
+        <h:form id="editDocente"> 
+            <p:dialog header="Editar Datos Docente" widgetVar="widEditDocente" resizable="false" 
+                      showEffect="explode" hideEffect="hide" position="center">
+                
+                <p:panelGrid columns="4" style="border: none !important;">  
+                    <h:outputLabel value="Primer nombre:"/>
+                    <p:inputText value="#{docenteManaged.entidadSeleccion.docPrimerNombre}"/>
+                    
+                    <h:outputLabel value="Segundo nombre:"/>
+                    <p:inputText value="#{docenteManaged.entidadSeleccion.docSegundoNombre}"/>
+                    
+                    <h:outputLabel value="Primer apellido:"/>
+                    <p:inputText value="#{docenteManaged.entidadSeleccion.docPrimerApellido}"/>
+                    
+                    <h:outputLabel value="Segundo apellido:"/>
+                    <p:inputText value="#{docenteManaged.entidadSeleccion.docSegundoApellido}"/>
+                    
+                    <h:outputLabel value="DUI:"/>
+                    <p:inputMask value="#{docenteManaged.entidadSeleccion.docDui}" mask="99999999-9" required="true"/>
+                    
+                    <h:outputLabel value="Direccion:"/>
+                    <p:inputText value="#{docenteManaged.entidadSeleccion.docDireccion}"/>
+                    
+                    <h:outputLabel value="Telefono:"/>
+                    <p:inputMask value="#{docenteManaged.entidadSeleccion.docTelefono}" mask="9999-9999" required="true"/>
+                    
+                    <h:outputLabel value="Email:"/>
+                    <p:inputText value="#{docenteManaged.entidadSeleccion.docCorreo}">
+                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+                    </p:inputText>
+                    
+                    <h:outputLabel value="Fecha nacimiento: "/>
+                    <p:calendar value="#{docenteManaged.entidadSeleccion.docFechaNac}" pattern="dd/MM/yyyy"/>
+                    
+                    <h:outputLabel value="Estado:"/>
+                    <p:selectOneMenu id="docEst" value="#{docenteManaged.entidadSeleccion.docEstado}" autoWidth="true">
+                        <f:selectItem itemLabel="-Select-" itemValue=""/>
+                        <f:selectItems  itemValue="#{est}" var="est" value="#{docenteManaged.estadoDocList}"/>
+                    </p:selectOneMenu>  
+                </p:panelGrid>
+                <br/>
+                <center>              
+                    
+                    <p:growl id="message" showDetail="true" />
+                    <p:commandButton value="Eliminar" action="#{docenteManaged.eliminarEntidad()}" onsuccess="PF('widEditDocente').hide()" 
+                                     update="message :tablaDocente :messages :messagesAll" style = "background: #D90202; border-color: #D90202;"
+                                     icon="pi pi-trash">
+                        <p:confirm header="Confirmación" message="Seguro que desea eliminar ?" icon="pi pi-exclamation-triangle" />
+                    </p:commandButton>
+                    
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times"/>
+                    </p:confirmDialog>
+                    
+                    <p:commandButton value="Actualizar" icon="pi pi-save" actionListener="#{docenteManaged.guardarEntidad()}"
+                                     update=" :tablaDocente :messages :messagesAll" onsuccess="PF('widEditDocente').hide()"/>
+                </center>
+            </p:dialog>
+        </h:form>   
+        
+        
+        <!--NUEVO DOCENTE-->
+        <h:form id="nuevoDocente"> 
+            <p:dialog header="Ingresa datos Docente" widgetVar="widNuevoDocente" resizable="false" 
+                      showEffect="explode" hideEffect="hide" position="center">
+                
+                <p:panelGrid columns="4" style="border: none !important;">
+                    
+                    <h:outputLabel value="Primer nombre:"/>
+                    <p:inputText value="#{docenteManaged.entidadSeleccion.docPrimerNombre}"/>
+                    
+                    <h:outputLabel value="Segundo nombre:"/>
+                    <p:inputText value="#{docenteManaged.entidadSeleccion.docSegundoNombre}"/>
+                    
+                    <h:outputLabel value="Primer apellido:"/>
+                    <p:inputText value="#{docenteManaged.entidadSeleccion.docPrimerApellido}"/>
+                    
+                    <h:outputLabel value="Segundo apellido:"/>
+                    <p:inputText value="#{docenteManaged.entidadSeleccion.docSegundoApellido}"/>
+                    
+                    <h:outputLabel value="DUI:"/>
+                    <p:inputMask value="#{docenteManaged.entidadSeleccion.docDui}" mask="99999999-9" required="true"/>
+                    
+                    <h:outputLabel value="Direccion:"/>
+                    <p:inputText value="#{docenteManaged.entidadSeleccion.docDireccion}"/>
+                    
+                    <h:outputLabel value="Telefono:"/>
+                    <p:inputMask value="#{docenteManaged.entidadSeleccion.docTelefono}" mask="9999-9999" required="true"/>
+                    
+                    <h:outputLabel value="Email:"/>
+                    <p:inputText value="#{docenteManaged.entidadSeleccion.docCorreo}">
+                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+                    </p:inputText>
+                    
+                    <h:outputLabel value="Fecha nacimiento: "/>
+                    <p:calendar value="#{docenteManaged.entidadSeleccion.docFechaNac}" pattern="dd/MM/yyyy"/>
+                    
+                    <h:outputLabel value="Estado:"/>
+                    <p:selectOneMenu id="docEst" value="#{docenteManaged.entidadSeleccion.docEstado}" autoWidth="true">
+                        <f:selectItem itemLabel="-Select-" itemValue=""/>
+                        <f:selectItems  itemValue="#{est}" var="est" value="#{docenteManaged.estadoDocList}"/>
+                    </p:selectOneMenu>
+                </p:panelGrid>
+                <br/>
+                <center>                 
+                    <p:commandButton value="Guardar" icon="pi pi-save" actionListener="#{docenteManaged.guardarEntidad()}"
+                                     update=" :tablaDocente :messages :messagesAll " onsuccess="PF('widNuevoDocente').hide()"/>
+                </center>
+            </p:dialog>
+        </h:form>
+        
+        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>
+        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+            <h:outputLabel value="Cargando..."/>
+        </p:dialog>
                             
                         </div>
                     </div>
