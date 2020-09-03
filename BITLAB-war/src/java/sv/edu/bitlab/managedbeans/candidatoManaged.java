@@ -22,11 +22,13 @@ import org.apache.commons.io.FilenameUtils;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import sv.edu.bitlab.beans.CandidatoFacade;
+import sv.edu.bitlab.beans.DocenteFacade;
 import sv.edu.bitlab.beans.EstadoAplicacionFacade;
 import sv.edu.bitlab.beans.HistorialAplicacionFacade;
 import sv.edu.bitlab.beans.NotaSeleccionFacade;
 import sv.edu.bitlab.beans.PruebasFacade;
 import sv.edu.bitlab.entidades.Candidato;
+import sv.edu.bitlab.entidades.Docente;
 import sv.edu.bitlab.entidades.EstadoAplicacion;
 import sv.edu.bitlab.entidades.HistorialAplicacion;
 import sv.edu.bitlab.entidades.NotaSeleccion;
@@ -42,6 +44,9 @@ import sv.edu.bitlab.utilidades.Utilidades;
 public class candidatoManaged implements Serializable {
 
     @EJB
+    private DocenteFacade docenteFacade;
+
+    @EJB
     private CandidatoFacade candidatoFacade1;
 
     @EJB
@@ -53,12 +58,15 @@ public class candidatoManaged implements Serializable {
     private PruebasFacade pruebasFacade;
     @EJB
     private HistorialAplicacionFacade historialFacade;
+    
+    
 
     private String Psicometrica;
     private String tecnica;
     private Candidato candidato;
     private NotaSeleccion notaSeleccion = new NotaSeleccion();
     private String logica;
+    private Docente docenteObj;
 
     private List<Candidato> candidatoLista;
     private List<Candidato> candidatoListPo; //
@@ -69,6 +77,7 @@ public class candidatoManaged implements Serializable {
     private List<Candidato> aplicanteGeneral; //
     private List<Candidato> candidatoListPreseleccionado; //
     private List<Candidato> alumnos;
+    private List<Docente> docenteList;
 
     private EstadoAplicacion estadoSeleccion;
     private String entrevista;
@@ -86,6 +95,8 @@ public class candidatoManaged implements Serializable {
 
     @PostConstruct
     public void cargarInfo() {
+        candidato = new Candidato();
+        docenteObj = new Docente();
         logica = "";
         entrevista = "";
         Psicometrica = "";
@@ -99,6 +110,7 @@ public class candidatoManaged implements Serializable {
             candidatoListRegularAlto = candidatoFacade1.candidatoRegularAlto(); //
             candidatoListRegularBajo = candidatoFacade1.candidatoRegularBajo(); //
             candidatoSinOportu = candidatoFacade1.candidatoSinOportunidad();
+            docenteList = docenteFacade.findAll();
         } catch (Exception ex) {
             Logger.getLogger(candidatoManaged.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -390,4 +402,20 @@ public class candidatoManaged implements Serializable {
         this.alumnos = alumnos;
     }
 
+    public List<Docente> getDocenteList() {
+        return docenteList;
+    }
+
+    public void setDocenteList(List<Docente> docenteList) {
+        this.docenteList = docenteList;
+    }
+
+    public Docente getDocenteObj() {
+        return docenteObj;
+    }
+
+    public void setDocenteObj(Docente docenteObj) {
+        this.docenteObj = docenteObj;
+    }
+    
 }
