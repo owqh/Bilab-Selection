@@ -66,23 +66,31 @@
                                 <br />
                                 <br />
                                 
-                                <p:dataTable var="usu" value="#{usuariosMG.usuarioList}" paginator="true" rows="5"
+                                <p:dataTable id="usuarioTable" var="usu" value="#{usuariosMG.usuarioList}" paginator="true" rows="5"
                                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                                             rowsPerPageTemplate="5,10,15" reflow="true">
+                                             rowsPerPageTemplate="5,10,15" paginatorPosition="top"
+                                             scrollable="true" resizeMode="expand">
                                     
-                                    <p:column headerText="Id" filterBy="#{usu.usrId}" width="50" filterMatchMode="contains">
+                                    <f:facet name="header">
+                                        <p:outputPanel style="text-align: right !important">
+                                            <p:commandButton id="toggler" type="button" icon="fas fa-columns"/>
+                                            <p:columnToggler datasource="usuarioTable" trigger="toggler" />
+                                        </p:outputPanel>
+                                    </f:facet>
+                                    
+                                    <p:column headerText="Id" filterBy="#{usu.usrId}" width="50" filterMatchMode="contains" sortBy="#{usu.usrId}">
                                         <h:outputText value="#{usu.usrId}" />
                                     </p:column>
-                                    <p:column headerText="Acceso" filterBy="#{usu.usrAcceso}" filterMatchMode="contains">
+                                    <p:column headerText="Acceso" filterBy="#{usu.usrAcceso}" filterMatchMode="contains" sortBy="#{usu.usrAcceso}">
                                         <h:outputText value="#{usu.usrAcceso}" />
                                     </p:column>
-                                    <p:column headerText="Nombre" filterBy="#{usu.usrNombre}" filterMatchMode="contains">
+                                    <p:column headerText="Nombre" filterBy="#{usu.usrNombre}" filterMatchMode="contains" sortBy="#{usu.usrNombre}">
                                         <h:outputText value="#{usu.usrNombre}" />
                                     </p:column>
-                                    <p:column headerText="Apellido" filterBy="#{usu.usrApellido}" filterMatchMode="contains">
+                                    <p:column headerText="Apellido" filterBy="#{usu.usrApellido}" filterMatchMode="contains" sortBy="#{usu.usrApellido}">
                                         <h:outputText value="#{usu.usrApellido}" />
                                     </p:column>
-                                    <p:column headerText="Rol" filterBy="#{usu.tipId.tipNombre}" filterMatchMode="contains">
+                                    <p:column headerText="Rol" filterBy="#{usu.tipId.tipNombre}" filterMatchMode="contains" sortBy="#{usu.tipId.tipNombre}">
                                         <h:outputText value="#{usu.tipId.tipNombre}" />
                                     </p:column>
                                     

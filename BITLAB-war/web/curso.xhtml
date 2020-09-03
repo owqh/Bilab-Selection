@@ -63,39 +63,45 @@
                                 <br />
                                 
                                 <!--TABLA CURSOS-->
-                                <p:dataTable var="entidad" value="#{cursoManaged.cursoList}" paginator="true" rows="5"
+                                <p:dataTable id="cursoTable" var="entidad" value="#{cursoManaged.cursoList}" paginator="true" rows="5" paginatorPosition="top"
                                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                                             rowsPerPageTemplate="5,10,15" reflow="true"> 
-                                    
-                                    <p:column headerText="ID" width="25">
+                                             rowsPerPageTemplate="5,10,15"
+                                             scrollable="true" resizeMode="expand"> 
+                                    <f:facet name="header">
+                                        <p:outputPanel style="text-align: right !important">
+                                            <p:commandButton id="toggler" type="button" icon="fas fa-columns"/>
+                                            <p:columnToggler datasource="cursoTable" trigger="toggler" />
+                                        </p:outputPanel>
+                                    </f:facet>
+                                    <p:column headerText="ID" width="25" sortBy="#{entidad.curId}">
                                         <h:outputText value="#{entidad.curId}"/>
                                     </p:column>
                                     
-                                    <p:column headerText="Codigo curso" filterBy="#{entidad.curCodigo}" filterMatchMode="contains">
+                                    <p:column headerText="Codigo curso" filterBy="#{entidad.curCodigo}" filterMatchMode="contains" sortBy="#{entidad.curCodigo}">
                                         <h:outputText value="#{entidad.curCodigo}"/>
                                     </p:column>
                                     
-                                    <p:column headerText="Nombre curso">
+                                    <p:column headerText="Nombre curso" sortBy="#{entidad.curNombre}">
                                         <h:outputText value="#{entidad.curNombre}"/>                          
                                     </p:column>
                                     
-                                    <p:column headerText="Fecha inicio">
+                                    <p:column headerText="Fecha inicio" sortBy="#{entidad.curFechaInicio}">
                                         <h:outputText value="#{entidad.curFechaInicio}" >
                                             <f:convertDateTime  pattern="dd/MM/yyyy"/>
                                         </h:outputText>
                                     </p:column>
                                     
-                                    <p:column headerText="Fecha fin">
+                                    <p:column headerText="Fecha fin" sortBy="#{entidad.curFechaFin}">
                                         <h:outputText value="#{entidad.curFechaFin}">
                                             <f:convertDateTime  pattern="dd/MM/yyyy"/>
                                         </h:outputText>
                                     </p:column>
                                     
-                                    <p:column headerText="Codigo Docente" filterBy="#{entidad.docId.docCodigo}" filterMatchMode="contains" >
+                                    <p:column headerText="Codigo Docente" filterBy="#{entidad.docId.docCodigo}" filterMatchMode="contains" sortBy="#{entidad.docId.docCodigo}">
                                         <h:outputText value="#{entidad.docId.docCodigo}"/>
                                     </p:column>
                                     
-                                    <p:column headerText="Nombre docente" filterBy="#{entidad.docId.docPrimerNombre}" filterMatchMode="contains">
+                                    <p:column headerText="Nombre docente" filterBy="#{entidad.docId.docPrimerNombre}" filterMatchMode="contains" sortBy="#{entidad.docId.docPrimerNombre}">
                                         <h:outputText value="#{entidad.docId.docPrimerNombre} "/>
                                         <h:outputText value="#{entidad.docId.docPrimerApellido}"/>
                                     </p:column>
