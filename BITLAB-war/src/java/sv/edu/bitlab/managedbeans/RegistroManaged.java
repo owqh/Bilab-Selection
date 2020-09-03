@@ -149,11 +149,13 @@ public class RegistroManaged implements Serializable{
     }
 
     //Metodo para generar el codigo de cada candidato
-    public void codigoPersonas() {
-        codigo = papellido.charAt(0) + sapellido.charAt(0) + dui.substring(5, 8) + dui.charAt(9);
+    public String codigoPersonas() {
+        String codigoGenerado = papellido.charAt(0) + sapellido.charAt(0) + dui.substring(5, 8) + dui.charAt(9);
+        return codigoGenerado;
     }
 
     public void guardarRegistro() {
+        codigo = codigoPersonas();
         System.out.println("Primer nombre: "+ pnombre);
         System.out.println("Segundo nombre: "+ snombre);
         System.out.println("Primer apellido: "+ papellido);
@@ -183,15 +185,19 @@ public class RegistroManaged implements Serializable{
 
         //Creando Historial de Aplicacion 
         CrearHistorial();
-
+        
         //Encotrar todos los id foraneos
         estadoAplicacion = estadoAplicacionFacade.find(9); //El estado de aplicacion 1 pertenece al estado "aplicante"
         tipoUsuario = tipoUsuarioFacade.find(5); //El codigo  pertenece al tipo de usuario "candidato"
         historialAplicacion = historialAplicacionFacade.find(historialAplicacion.getHapId());
-
-        //Creando registro de informacion basica de candidato
+    
+        try {
+            //Creando registro de informacion basica de candidato
         candidato = new Candidato(1, codigo, pnombre, snombre, papellido, sapellido, dui, correo, direccion, telefono, fnacimiento, estadoAplicacion, generalidades, historialAplicacion, idioma, nivelAcademico, ocupacion, sexo);
         candidatoFacade.create(candidato);
+        } catch (Exception e) {
+            
+        }
 
         //Creando registro de datos complementarios
         generalidades = new Generalidades(1, internt, computadora, aspiracionLaboral, aspiracionSalarial, tiempo, aspiracionCurso, enterado, otrosConocimientos, linkedin);
