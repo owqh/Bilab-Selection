@@ -7,31 +7,27 @@ package sv.edu.bitlab.convertidores;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
-import javax.faces.convert.Converter;import javax.faces.convert.Converter;
+import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import sv.edu.bitlab.beans.CandidatoFacade;
-import sv.edu.bitlab.entidades.Candidato;
-
+import sv.edu.bitlab.entidades.NivelAcademico;
+import sv.edu.bitlab.managedbeans.ConvetidorManaged;
+import sv.edu.bitlab.utilidades.Utilidades;
 
 /**
  *
- * @author carlosGodoy
+ * @author Oscar
  */
-@FacesConverter (forClass = Candidato.class) 
-public class CandidatoConvertidor implements Converter {
-
+@FacesConverter(forClass = NivelAcademico.class)
+public class NivelAcademicoConvertidor implements Converter {
+    
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        CandidatoFacade candidatoFacede = new CandidatoFacade();
-        return candidatoFacede.find(Integer.parseInt(value));
-       
+       return ((ConvetidorManaged)Utilidades.getBean("#{convetidorManaged}")).getNivelAcademicoId(value);
     }
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-        return ((Candidato)value).getCanCodigo().toString();
+       return ((NivelAcademico)value).getNacId().toString();
     }
-
-   
     
 }

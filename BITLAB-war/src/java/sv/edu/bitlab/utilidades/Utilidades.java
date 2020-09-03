@@ -22,50 +22,52 @@ import sv.edu.bitlab.managedbeans.UsuarioManaged;
 @ApplicationScoped
 public class Utilidades {
 
-
     private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(UsuarioManaged.class);
-        
-        
+
     public Utilidades() {
     }
-    
-    
-     //Envia un mensaje personalizado
-    public static void lanzarMensaje(FacesMessage.Severity severidad, String encabezado, String detalle){
+
+    //Envia un mensaje personalizado
+    public static void lanzarMensaje(FacesMessage.Severity severidad, String encabezado, String detalle) {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(severidad, encabezado, detalle));
     }
-    
+
     //Envia un mensaje de informacion
-    public static void lanzarInfo(String encabezado, String detalle){
+    public static void lanzarInfo(String encabezado, String detalle) {
         lanzarMensaje(FacesMessage.SEVERITY_INFO, encabezado, detalle);
     }
-    
+
     //Envia un mensaje de error
-    public static void lanzarError(String encabezado, String detalle){
+    public static void lanzarError(String encabezado, String detalle) {
         lanzarMensaje(FacesMessage.SEVERITY_ERROR, encabezado, detalle);
     }
-    
+
     //Envia un mensaje de error
-    public static void lanzarAdvertencia(String encabezado, String detalle){
+    public static void lanzarAdvertencia(String encabezado, String detalle) {
         lanzarMensaje(FacesMessage.SEVERITY_WARN, encabezado, detalle);
     }
-    
-    public static void redireccion(String pagina){
+
+    public static void redireccion(String pagina) {
         ExternalContext contex = FacesContext.getCurrentInstance().getExternalContext();
         try {
-            contex.redirect(contex.getRequestContextPath()+"/"+pagina+".bitlab");
+            contex.redirect(contex.getRequestContextPath() + "/" + pagina + ".bitlab");
         } catch (IOException e) {
-            LOG.error("Error al hacer redireccion: "+ e.getMessage());
+            LOG.error("Error al hacer redireccion: " + e.getMessage());
         }
     }
-    
-    public static void redireccionLogin(){
+
+    public static void redireccionLogin() {
         ExternalContext contex = FacesContext.getCurrentInstance().getExternalContext();
-            try {
-                contex.redirect(contex.getRequestContextPath() + "/login.bitlab");
-            } catch (IOException e) {
-                 LOG.error("Error al hacer redireccion: "+ e.getMessage());
-            }
+        try {
+            contex.redirect(contex.getRequestContextPath() + "/login.bitlab");
+        } catch (IOException e) {
+            LOG.error("Error al hacer redireccion: " + e.getMessage());
+        }
     }
- 
+
+    public static Object getBean(String beanName) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        return context.getApplication().evaluateExpressionGet(context, beanName, Object.class);
+    }
+
 }

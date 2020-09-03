@@ -5,29 +5,32 @@
  */
 package sv.edu.bitlab.convertidores;
 
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import sv.edu.bitlab.beans.HistorialAplicacionFacade;
-import sv.edu.bitlab.entidades.HistorialAplicacion;
+import sv.edu.bitlab.entidades.Idioma;
+import sv.edu.bitlab.managedbeans.ConvetidorManaged;
+import sv.edu.bitlab.utilidades.Utilidades;
+
 
 /**
  *
- * @author carlosGodoy
+ * @author Oscar
  */
-@FacesConverter (forClass = HistorialAplicacion.class) 
-public class HistorialAplicacionConvertidor implements Converter {
+@FacesConverter(forClass = Idioma.class)
+public class IdiomaConvertidor  implements Converter{
+
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
-       HistorialAplicacionFacade historialAplicacionFacade = new HistorialAplicacionFacade();
-       return historialAplicacionFacade.find(Integer.parseInt(value));
+        return ((ConvetidorManaged)Utilidades.getBean("#{convetidorManaged}")).getIdiomaId(value);
     }
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-     return ((HistorialAplicacion)value).getHapId().toString();
+        return ((Idioma) value).getIdiId().toString();
     }
     
 }

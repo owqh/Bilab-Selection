@@ -7,6 +7,9 @@ package sv.edu.bitlab.beans;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.validation.ConstraintViolationException;
+import org.slf4j.LoggerFactory;
+
 
 /**
  *
@@ -15,7 +18,8 @@ import javax.persistence.EntityManager;
 public abstract class AbstractFacade<T> {
 
     private Class<T> entityClass;
-
+    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(UsuarioFacade.class);
+    
     public AbstractFacade(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
@@ -23,9 +27,15 @@ public abstract class AbstractFacade<T> {
     protected abstract EntityManager getEntityManager();
 
     public void create(T entity) {
-        getEntityManager().persist(entity);
+        try {
+            getEntityManager().persist(entity);
+        }catch (ConstraintViolationException e) {
+       LOG.error("Exception: ");
+       e.getConstraintViolations().forEach(err->LOG.error(err.toString()));
     }
-
+        
+    }
+    
     public void edit(T entity) {
         getEntityManager().merge(entity);
     }

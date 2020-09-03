@@ -9,26 +9,25 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import sv.edu.bitlab.beans.EstadoAplicacionFacade;
-import sv.edu.bitlab.entidades.EstadoAplicacion;
+import sv.edu.bitlab.entidades.Ocupacion;
+import sv.edu.bitlab.managedbeans.ConvetidorManaged;
+import sv.edu.bitlab.utilidades.Utilidades;
 
 /**
  *
- * @author carlosGodoy
+ * @author Oscar
  */
-@FacesConverter (forClass = EstadoAplicacion.class) 
-public class EstadoAplicacionConvertidor implements Converter {
+@FacesConverter(forClass = Ocupacion.class)
+public class OcupacionConvertidor implements Converter{
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
-       EstadoAplicacionFacade estadoAplicacionFacade = new EstadoAplicacionFacade();
-       return estadoAplicacionFacade.find(Integer.parseInt(value));
-       
+       return ((ConvetidorManaged)Utilidades.getBean("#{convetidorManaged}")).getOcupacionId(value);
     }
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-     return ((EstadoAplicacion)value).getEapId().toString();
+        return ((Ocupacion)value).getOcuId().toString();
     }
     
 }

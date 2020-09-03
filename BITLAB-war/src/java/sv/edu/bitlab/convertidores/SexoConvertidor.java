@@ -5,29 +5,34 @@
  */
 package sv.edu.bitlab.convertidores;
 
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import sv.edu.bitlab.beans.NotaSeleccionFacade;
-import sv.edu.bitlab.entidades.NotaSeleccion;
+import sv.edu.bitlab.entidades.Sexo;
+import sv.edu.bitlab.managedbeans.ConvetidorManaged;
+import sv.edu.bitlab.utilidades.Utilidades;
 
 /**
  *
- * @author carlosGodoy
+ * @author Oscar
  */
-@FacesConverter (forClass = NotaSeleccion.class) 
-public class NotasSeleccionConvertidor implements Converter {
+@FacesConverter(forClass = Sexo.class)
+public class SexoConvertidor implements Converter{
+
+    
+    public SexoConvertidor() {
+    }
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        NotaSeleccionFacade notaSeleccionFacade = new NotaSeleccionFacade();
-        return notaSeleccionFacade.find(Integer.parseInt(value));
+        return ((ConvetidorManaged)Utilidades.getBean("#{convetidorManaged}")).getSexoId(value);
     }
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-        return ((NotaSeleccion)value).getNseId().toString();
+        return ((Sexo) value).getSexId().toString();
     }
     
 }
