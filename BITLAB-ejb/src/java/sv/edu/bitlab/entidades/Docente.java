@@ -22,6 +22,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -45,6 +46,12 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Docente.findByDocCorreo", query = "SELECT d FROM Docente d WHERE d.docCorreo = :docCorreo"),
     @NamedQuery(name = "Docente.findByDocFechaNac", query = "SELECT d FROM Docente d WHERE d.docFechaNac = :docFechaNac")})
 public class Docente implements Serializable {
+
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 1)
+    @Column(name = "DOC_ESTADO", nullable = false, length = 1)
+    private String docEstado;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -221,6 +228,14 @@ public class Docente implements Serializable {
     @Override
     public String toString() {
         return "sv.edu.bitlab.entidades.Docente[ docId=" + docId + " ]";
+    }
+
+    public String getDocEstado() {
+        return docEstado;
+    }
+
+    public void setDocEstado(String docEstado) {
+        this.docEstado = docEstado;
     }
     
 }

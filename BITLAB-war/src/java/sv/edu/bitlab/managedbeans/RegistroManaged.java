@@ -150,7 +150,8 @@ public class RegistroManaged implements Serializable{
 
     //Metodo para generar el codigo de cada candidato
     public String codigoPersonas() {
-        String codigoGenerado = papellido.charAt(0) + sapellido.charAt(0) + dui.substring(5, 8) + dui.charAt(9);
+        String codigoGenerado = papellido.charAt(0) + sapellido.charAt(0) + dui.substring(6,7) + dui.charAt(9);
+        System.out.println(codigoGenerado);
         return codigoGenerado;
     }
 
@@ -196,7 +197,7 @@ public class RegistroManaged implements Serializable{
         candidato = new Candidato(1, codigo, pnombre, snombre, papellido, sapellido, dui, correo, direccion, telefono, fnacimiento, estadoAplicacion, generalidades, historialAplicacion, idioma, nivelAcademico, ocupacion, sexo);
         candidatoFacade.create(candidato);
         } catch (Exception e) {
-            
+            Utilidades.lanzarError("Solicitud no recibida", "Su aplicacion no ha sido recibida, motivo: "+e.toString());
         }
 
         //Creando registro de datos complementarios

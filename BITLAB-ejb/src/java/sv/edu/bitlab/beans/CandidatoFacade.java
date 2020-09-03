@@ -58,7 +58,7 @@ public class CandidatoFacade extends AbstractFacade<Candidato> {
     public Candidato candidatoPorDui(String dui) throws Exception{
         try {
             Query q = em.createQuery("select c from Candidato c where c.canDui = :dui");
-            q.setParameter("correo", dui);
+            q.setParameter("dui", dui);
             List<Candidato> candidatos =  q.getResultList();
             return candidatos.get(0);
         } catch (Exception e) {
