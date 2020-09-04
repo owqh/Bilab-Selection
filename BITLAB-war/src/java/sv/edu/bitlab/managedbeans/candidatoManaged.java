@@ -91,7 +91,7 @@ public class candidatoManaged implements Serializable {
     private HistorialAplicacion historialAplicacion;
     private List<HistorialAplicacion> historialLista;
 
-    private StreamedContent CV;
+    private StreamedContent cv;
 
     @PostConstruct
     public void cargarInfo() {
@@ -202,16 +202,17 @@ public class candidatoManaged implements Serializable {
         }
     }
 
-    public StreamedContent getCV() throws FileNotFoundException, IOException {
+    public StreamedContent getCv() throws FileNotFoundException, IOException {
         System.out.println(candidato.getCanCv());
         String cvPath = candidato.getCanCv();
-        FileInputStream is = new FileInputStream(new File(cvPath));
-        String contentType = FacesContext.getCurrentInstance().getExternalContext().getMimeType(cvPath);
-        String nameCv = FilenameUtils.getName(cvPath);
-        CV = DefaultStreamedContent.builder().contentType(contentType).name(nameCv).stream(() -> {
-            return is;
-        }).build();
-        return CV;
+        try (FileInputStream is = new FileInputStream(new File(cvPath))) {
+            String contentType = FacesContext.getCurrentInstance().getExternalContext().getMimeType(cvPath);
+            String nameCv = FilenameUtils.getName(cvPath);
+            cv = DefaultStreamedContent.builder().contentType(contentType).name(nameCv).stream(() -> {
+                return is;
+            }).build();
+        }
+        return cv;
     }
     
     public String fotoPerfil(Candidato candidato){

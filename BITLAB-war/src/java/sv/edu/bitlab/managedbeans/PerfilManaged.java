@@ -38,8 +38,6 @@ import sv.edu.bitlab.utilidades.Utilidades;
 @ViewScoped
 public class PerfilManaged implements Serializable {
 
-    private static final Logger LOG = Logger.getLogger(PerfilManaged.class.getName());
-
     @EJB
     private GeneralidadesFacade generalidadesFacade;
 
@@ -101,6 +99,7 @@ public class PerfilManaged implements Serializable {
     private List<Ocupacion> listaOcupacion;
 
     public PerfilManaged() {
+        //Constructor necesario para el POJO
     }
 
     @PostConstruct
@@ -144,7 +143,7 @@ public class PerfilManaged implements Serializable {
             listaIdioma = idiomaFacade.findAll();
             listaOcupacion = ocupacionFacade.findAll();
         } catch (Exception ex) {
-            LOG.log(Level.SEVERE, "No se encontro al candidato, error: {0}", ex);
+            Logger.getLogger(PerfilManaged.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
