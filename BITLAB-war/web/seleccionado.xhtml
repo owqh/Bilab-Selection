@@ -60,7 +60,7 @@
                                             <p:graphicImage name="avatar.jpg" width="40%" height="40%"/> 
                                         </f:facet>
 
-                                        <h:outputText value="Codigo"/>
+                                        <h:outputText value="Código"/>
                                         <h:outputText value="#{candidato.canCodigo}" />
 
                                         <h:outputText value="Nombre" />
@@ -91,13 +91,13 @@
                                 <p:dialog widgetVar="seleccionado" modal="true" header="Ingresar Notas"  resizable="false" showEffect="explode" hideEffect="explode" position="center">
                                     <center>
                                         <p:panelGrid columns="2" style="border:none">
-                                            <p:outputLabel value="Codigo"/>
+                                            <p:outputLabel value="Código"/>
                                             <p:outputLabel value="#{candidatomanaged.candidato.canCodigo}"/>
                                             <p:outputLabel value="Nombre"/>
                                             <p:outputLabel value="#{candidatomanaged.candidato.canPrimerNombre}"/>
-                                            <p:outputLabel value=" Apellido"/>
+                                            <p:outputLabel value="Apellido"/>
                                             <p:outputLabel value="#{candidatomanaged.candidato.canPrimerApellido}"/>
-                                            <p:outputLabel value=" Estado Candidato"/>
+                                            <p:outputLabel value="Estado Candidato"/>
                                             <p:outputLabel value="#{candidatomanaged.candidato.eapId.eapNombre}"/>
                                             <h:outputLabel value="Docente:"/>
                                             <p:selectOneMenu id="docName" value="#{candidatomanaged.candidato.docId}" dynamic="true" style="width:140px" autoWidth="true">

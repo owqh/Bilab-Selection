@@ -68,7 +68,7 @@
                                     <p:column style="width:16px">
                                         <p:rowToggler />
                                     </p:column>
-                                    <p:column headerText="Codigo Candidato" filterBy="#{candidato.canCodigo}" filterMatchMode="contains" sortBy="#{candidato.canCodigo}">
+                                    <p:column headerText="Código Candidato" filterBy="#{candidato.canCodigo}" filterMatchMode="contains" sortBy="#{candidato.canCodigo}">
                                         <h:outputText value="#{candidato.canCodigo}" />
                                     </p:column>
                                     <p:column headerText="Nombre" filterBy="#{candidato.canPrimerNombre}" filterMatchMode="contains" sortBy="#{candidato.canPrimerNombre}">
@@ -77,13 +77,13 @@
                                     <p:column headerText="Apellido" filterBy="#{candidato.canPrimerApellido}" filterMatchMode="contains" sortBy="#{candidato.canPrimerApellido}">
                                         <h:outputText value="#{candidato.canPrimerApellido}" />
                                     </p:column>
-                                    <p:column headerText="Nivel academico" filterBy="#{candidato.nacId.nacNombre}" filterMatchMode="contains" sortBy="#{candidato.nacId.nacNombre}">
+                                    <p:column headerText="Nivel académico" filterBy="#{candidato.nacId.nacNombre}" filterMatchMode="contains" sortBy="#{candidato.nacId.nacNombre}">
                                         <h:outputText value="#{candidato.nacId.nacNombre}" />
                                     </p:column>
                                     <p:column headerText="Dui" filterBy="#{candidato.canDui}" filterMatchMode="contains" sortBy="#{candidato.canDui}">
                                         <h:outputText value="#{candidato.canDui}" />
                                     </p:column>
-                                    <p:column headerText="Ocupacion" filterBy="#{candidato.ocuId.ocuNombre}" filterMatchMode="contains" sortBy="#{candidato.ocuId.ocuNombre}">
+                                    <p:column headerText="Ocupación" filterBy="#{candidato.ocuId.ocuNombre}" filterMatchMode="contains" sortBy="#{candidato.ocuId.ocuNombre}">
                                         <h:outputText value="#{candidato.ocuId.ocuNombre}" />
                                     </p:column>
 
@@ -93,7 +93,7 @@
                                                 <p:graphicImage name="avatar.jpg" height="40%" width="80%"/> 
                                             </f:facet>
 
-                                            <h:outputText value="Codigo" />
+                                            <h:outputText value="Código" />
                                             <h:outputText value="#{candidato.canCodigo}" />
 
                                             <h:outputText value="Nombre" />
@@ -102,7 +102,7 @@
                                             <h:outputText value="Apellido" />
                                             <h:outputText value="#{candidato.canPrimerApellido}" />
 
-                                            <h:outputText value="Estado Seleccion" />
+                                            <h:outputText value="Estado Selección" />
                                             <h:outputText value="#{candidato.eapId.eapNombre}" />
 
 
@@ -116,7 +116,7 @@
                                     </p:column>
 
                                     <p:column style="width:32px;text-align: center">     
-                                        <p:commandButton update="aceptarPre :messages :messagesAll" oncomplete="PF('aceptarP').show()" icon="pi pi-user-plus" title="Gestion candidato">
+                                        <p:commandButton update="aceptarPre :messages :messagesAll" oncomplete="PF('aceptarP').show()" icon="pi pi-user-plus" title="Gestión candidato">
                                             <f:setPropertyActionListener value="#{candidato}" target="#{candidatomanaged.candidato}" />
                                         </p:commandButton>
                                     </p:column>
@@ -126,21 +126,21 @@
                                 <p:dialog widgetVar="notas" modal="true" header="Ingresar Notas"  resizable="false" showEffect="explode" hideEffect="explode" position="center">
                                     <center>
                                         <p:panelGrid columns="2" style="border:none" >
-                                            <p:outputLabel value="Codigo"/>
+                                            <p:outputLabel value="Código"/>
                                             <p:outputLabel value="#{candidatomanaged.candidato.canCodigo}"/>
                                             <p:outputLabel value="Nombre"/>
                                             <p:outputLabel value="#{candidatomanaged.candidato.canPrimerNombre}"/>
-                                            <p:outputLabel value=" Apellido"/>
+                                            <p:outputLabel value="Apellido"/>
                                             <p:outputLabel value="#{candidatomanaged.candidato.canPrimerApellido}"/>
-                                            <p:outputLabel value=" Estado actual"/>
+                                            <p:outputLabel value="Estado actual"/>
                                             <p:outputLabel value="#{candidatomanaged.candidato.eapId.eapNombre}"/>
                                             <p:outputLabel value="Nota Entrevista"/>
                                             <p:inputNumber  placeholder="10.00" value="#{candidatomanaged.entrevista}"/>  
-                                            <p:outputLabel value="Nota Prueba Logica"/>
+                                            <p:outputLabel value="Nota Prueba Lógica"/>
                                             <p:inputNumber placeholder="10.00"  value="#{candidatomanaged.logica}"/>  
-                                            <p:outputLabel value="Nota Prueba Tecnica"/>
+                                            <p:outputLabel value="Nota Prueba Técnica"/>
                                             <p:inputNumber placeholder="10.00"  value="#{candidatomanaged.tecnica}"/>  
-                                            <p:outputLabel value="Nota Prueba Psicometrica"/>
+                                            <p:outputLabel value="Nota Prueba Psicométrica"/>
                                             <p:inputNumber placeholder="10.00"  value="#{candidatomanaged.psicometrica}"/>
                                         </p:panelGrid>
                                     </center>
@@ -157,11 +157,11 @@
                                 <p:dialog widgetVar="aceptarP" modal="true" header="Ingresar Notas" resizable="false" showEffect="explode" hideEffect="explode" position="center">
                                     <center>
                                         <p:panelGrid columns="2" style="border:none">
-                                            <p:outputLabel value="Codigo"/>
+                                            <p:outputLabel value="Código"/>
                                             <p:outputLabel value="#{candidatomanaged.candidato.canCodigo}"/>
                                             <p:outputLabel value="Nombre"/>
                                             <p:outputLabel value="#{candidatomanaged.candidato.canPrimerNombre}"/>
-                                            <p:outputLabel value=" Apellido"/>
+                                            <p:outputLabel value="Apellido"/>
                                             <p:outputLabel value="#{candidatomanaged.candidato.canPrimerApellido}"/>
                                             <p:outputLabel value="Promedio"/>
                                             <p:outputLabel value="#{candidatomanaged.candidato.canPromedioSeleccion}"/>

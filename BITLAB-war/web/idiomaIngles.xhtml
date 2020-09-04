@@ -16,7 +16,7 @@
                 <li class="nav-item">
                     <a href="idiomaIngles.bitlab" class="nav-link active">
                         <i class="fas fa-language nav-icon"></i>
-                        <p>Gestion de idioma</p>
+                        <p>Gestión de idioma</p>
                     </a>
                 </li>
             </ui:define>
@@ -27,13 +27,13 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1 class="m-0 text-dark">Idioma Ingles</h1>
+                                <h1 class="m-0 text-dark">Idioma Inglés</h1>
                             </div>
                             <!-- /.col -->
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="index.bitlab">Home</a></li>
-                                    <li class="breadcrumb-item active">Idioma Ingles</li>
+                                    <li class="breadcrumb-item active">Idioma Inglés</li>
                                 </ol>
                             </div>
                             <!-- /.col -->
@@ -58,7 +58,7 @@
 
                             <h:form id="tIdioma">
                                 <p:column style="width:32px;text-align: center">
-                                    <p:commandButton value="Agregar Nivel idioma" actionListener="#{idiomaManaged.nuevaEntidad()}" process="@this" 
+                                    <p:commandButton value="Agregar nivel idioma" actionListener="#{idiomaManaged.nuevaEntidad()}" process="@this" 
                                                      update=":nuevoNiv :messages :messagesAll"  oncomplete="PF('nuevoN').show()" icon="pi pi-plus">
                                     </p:commandButton>    
                                 </p:column>
@@ -79,7 +79,7 @@
                                     <p:column headerText="Id" filterBy="#{idi.idiId}" filterMatchMode="contains" sortBy="#{idi.idiId}">
                                         <h:outputText value="#{idi.idiId}" />
                                     </p:column>
-                                    <p:column headerText="Nivel Ingles" filterBy="#{idi.idiNivel}" filterMatchMode="contains" sortBy="#{idi.idiNivel}">
+                                    <p:column headerText="Nivel Inglés" filterBy="#{idi.idiNivel}" filterMatchMode="contains" sortBy="#{idi.idiNivel}">
                                         <h:outputText value="#{idi.idiNivel}" />
                                     </p:column>
 

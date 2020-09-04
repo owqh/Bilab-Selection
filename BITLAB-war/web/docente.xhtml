@@ -76,7 +76,7 @@
                                     <p:column headerText="Ver" style="width:20px">
                                         <p:rowToggler/>
                                     </p:column>
-                                    <p:column headerText="Codigo docente" filterBy="#{entidad.docCodigo}" filterMatchMode="contains" sortBy="#{entidad.docCodigo}">
+                                    <p:column headerText="Código docente" filterBy="#{entidad.docCodigo}" filterMatchMode="contains" sortBy="#{entidad.docCodigo}">
                                         <h:outputText value="#{entidad.docCodigo}"/>
                                     </p:column>
 
@@ -92,7 +92,7 @@
                                         <h:outputText value="#{entidad.docDui}"/>
                                     </p:column>
 
-                                    <p:column headerText="Telefono" sortBy="#{entidad.docTelefono}">
+                                    <p:column headerText="Teléfono" sortBy="#{entidad.docTelefono}">
                                         <h:outputText value="#{entidad.docTelefono}"/>
                                     </p:column>
 
@@ -113,17 +113,17 @@
                                             <h:outputText value="#{entidad.docFechaNac}">
                                                 <f:convertDateTime pattern="dd/MM/yyyy"/>
                                             </h:outputText>
-                                            <h:outputLabel value="Direccion:" style="color:blueviolet"/>
+                                            <h:outputLabel value="Dirección:" style="color:blueviolet"/>
                                             <h:outputText value="#{entidad.docDireccion}"/>
                                             <h:outputLabel value="Primero Apellido:" style="color:blueviolet"/>
                                             <h:outputText value="#{entidad.docPrimerApellido}" />
                                             <h:outputLabel value="Segundo Apellido:" style="color:blueviolet"/>
                                             <h:outputText value="#{entidad.docSegundoApellido}" />
-                                            <h:outputLabel value="Codigo:" style="color:blueviolet"/>
+                                            <h:outputLabel value="Código:" style="color:blueviolet"/>
                                             <h:outputText value="#{entidad.docCodigo}"/>
                                             <h:outputLabel value="Estado:" style="color:blueviolet"/>
                                             <h:outputText value="#{entidad.docEstado}"/>
-                                            <h:outputLabel value="Telefono:" style="color:blueviolet"/>
+                                            <h:outputLabel value="Teléfono:" style="color:blueviolet"/>
                                             <h:outputText value="#{entidad.docTelefono}"/>
                                             <h:outputLabel value="DUI:" style="color:blueviolet"/>
                                             <h:outputText value="#{entidad.docDui}"/><h:outputLabel value="Correo:" style="color:blueviolet"/>
@@ -162,10 +162,10 @@
                                         <h:outputLabel value="DUI:"/>
                                         <p:inputMask value="#{docenteManaged.entidadSeleccion.docDui}" mask="99999999-9" required="true"/>
 
-                                        <h:outputLabel value="Direccion:"/>
+                                        <h:outputLabel value="Dirección:"/>
                                         <p:inputText value="#{docenteManaged.entidadSeleccion.docDireccion}"/>
 
-                                        <h:outputLabel value="Telefono:"/>
+                                        <h:outputLabel value="Teléfono:"/>
                                         <p:inputMask value="#{docenteManaged.entidadSeleccion.docTelefono}" mask="9999-9999" required="true"/>
 
                                         <h:outputLabel value="Email:"/>
@@ -189,7 +189,7 @@
                                         <p:commandButton value="Eliminar" action="#{docenteManaged.eliminarEntidad()}" onsuccess="PF('widEditDocente').hide()" 
                                                          update="message :tablaDocente :messages :messagesAll" style = "background: #D90202; border-color: #D90202;"
                                                          icon="pi pi-trash">
-                                            <p:confirm header="Confirmación" message="Seguro que desea eliminar ?" icon="pi pi-exclamation-triangle" />
+                                            <p:confirm header="Confirmación" message="Seguro que desea eliminar?" icon="pi pi-exclamation-triangle" />
                                         </p:commandButton>
 
                                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
@@ -226,10 +226,10 @@
                                         <h:outputLabel value="DUI:"/>
                                         <p:inputMask value="#{docenteManaged.entidadSeleccion.docDui}" mask="99999999-9" required="true"/>
 
-                                        <h:outputLabel value="Direccion:"/>
+                                        <h:outputLabel value="Dirección:"/>
                                         <p:inputText value="#{docenteManaged.entidadSeleccion.docDireccion}"/>
 
-                                        <h:outputLabel value="Telefono:"/>
+                                        <h:outputLabel value="Teléfono:"/>
                                         <p:inputMask value="#{docenteManaged.entidadSeleccion.docTelefono}" mask="9999-9999" required="true"/>
 
                                         <h:outputLabel value="Email:"/>

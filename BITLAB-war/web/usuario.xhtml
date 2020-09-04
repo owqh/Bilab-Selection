@@ -17,7 +17,7 @@
                 <li class="nav-item">
                     <a href="usuario.bitlab" class="nav-link active">
                         <i class="fas fa-users nav-icon"></i>
-                        <p>Gestion de usuarios</p>
+                        <p>Gestión de usuarios</p>
                     </a>
                 </li>
             </ui:define>
@@ -108,7 +108,7 @@
                             </h:form>
 
                             <h:form id="modi">
-                                <p:dialog header="modificar usuario" widgetVar="usuModi" showEffect="fade" hideEffect="fade" position="center" resizable="false" modal="true">
+                                <p:dialog header="Modificar usuario" widgetVar="usuModi" showEffect="fade" hideEffect="fade" position="center" resizable="false" modal="true">
                                     <p:panelGrid  columns="2">
                                         <p:outputLabel value="ID"/>
                                         <p:outputLabel value="#{usuariosMG.usuario.usrId}"/>
@@ -129,7 +129,7 @@
                                     </p:panelGrid>
                                     <center>
                                         <br></br>
-                                        <p:commandButton value="modificar" actionListener="#{usuariosMG.guardarEntidad()}" update=":tUsuarios :messages :messagesAll" oncomplete="PF('usuModi').hide()"/>
+                                        <p:commandButton value="Modificar" actionListener="#{usuariosMG.guardarEntidad()}" update=":tUsuarios :messages :messagesAll" oncomplete="PF('usuModi').hide()"/>
                                     </center>
                                 </p:dialog>
                             </h:form>

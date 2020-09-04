@@ -14,7 +14,7 @@
                 <li class="nav-item">
                     <a href="alumnos.bitlab" class="nav-link active">
                         <i class="fas fa-user-graduate nav-icon"></i>
-                        <p>Gestion de alumnos</p>
+                        <p>Gestión de alumnos</p>
                     </a>
                 </li>
             </ui:define>
@@ -59,7 +59,7 @@
                                     <p:column style="width:16px">
                                         <p:rowToggler />
                                     </p:column>
-                                    <p:column headerText="Codigo Candidato" filterBy="#{candidato.canCodigo}" filterMatchMode="contains" sortBy="#{candidato.canCodigo}">
+                                    <p:column headerText="Código Candidato" filterBy="#{candidato.canCodigo}" filterMatchMode="contains" sortBy="#{candidato.canCodigo}">
                                         <h:outputText value="#{candidato.canCodigo}" />
                                     </p:column>
                                     <p:column headerText="Nombre" filterBy="#{candidato.canPrimerNombre}" filterMatchMode="contains" sortBy="#{candidato.canPrimerNombre}">
@@ -68,13 +68,13 @@
                                     <p:column headerText="Apellido" filterBy="#{candidato.canPrimerApellido}" filterMatchMode="contains" sortBy="#{candidato.canPrimerApellido}">
                                         <h:outputText value="#{candidato.canPrimerApellido}" />
                                     </p:column>
-                                    <p:column headerText="Nivel academico" filterBy="#{candidato.nacId.nacNombre}" filterMatchMode="contains" sortBy="#{candidato.nacId.nacNombre}">
+                                    <p:column headerText="Nivel académico" filterBy="#{candidato.nacId.nacNombre}" filterMatchMode="contains" sortBy="#{candidato.nacId.nacNombre}">
                                         <h:outputText value="#{candidato.nacId.nacNombre}" />
                                     </p:column>
                                     <p:column headerText="Dui" filterBy="#{candidato.canDui}" filterMatchMode="contains" sortBy="#{candidato.canDui}">
                                         <h:outputText value="#{candidato.canDui}" />
                                     </p:column>
-                                    <p:column headerText="Ocupacion" filterBy="#{candidato.ocuId.ocuNombre}" filterMatchMode="contains" sortBy="#{candidato.ocuId.ocuNombre}">
+                                    <p:column headerText="Ocupación" filterBy="#{candidato.ocuId.ocuNombre}" filterMatchMode="contains" sortBy="#{candidato.ocuId.ocuNombre}">
                                         <h:outputText value="#{candidato.ocuId.ocuNombre}" />
                                     </p:column>
 
@@ -85,7 +85,7 @@
                                                 <!--<p:graphicImage value="/images/#{candidatomanaged.fotoPerfil(candidato)}" style="padding: 5%;width: 150px; height:150px; object-fit: scale-down"/>--> 
                                             </f:facet>
 
-                                            <h:outputText value="Codigo" />
+                                            <h:outputText value="Código" />
                                             <h:outputText value="#{candidato.canCodigo}" />
 
                                             <h:outputText value="Nombre" />

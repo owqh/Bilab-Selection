@@ -16,7 +16,7 @@
                 <li class="nav-item">
                     <a href="nivelAcademico.bitlab" class="nav-link active">
                         <i class="fas fa-school nav-icon"></i>
-                        <p>Gestion de nivel academico</p>
+                        <p>Gestión de nivel academico</p>
                     </a>
                 </li>
             </ui:define>
@@ -27,13 +27,13 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1 class="m-0 text-dark">Nivel academico</h1>
+                                <h1 class="m-0 text-dark">Nivel académico</h1>
                             </div>
                             <!-- /.col -->
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="index.bitlab">Home</a></li>
-                                    <li class="breadcrumb-item active">Nivel academico</li>
+                                    <li class="breadcrumb-item active">Nivel académico</li>
                                 </ol>
                             </div>
                             <!-- /.col -->
@@ -58,7 +58,7 @@
 
                             <h:form id="nivelAT">
                                 <p:column style="width:32px;text-align: center">
-                                    <p:commandButton value="Agregar nivel academico" actionListener="#{nivelAcademicoManaged.nuevaEntidad()}" process="@this" 
+                                    <p:commandButton value="Agregar nivel académico" actionListener="#{nivelAcademicoManaged.nuevaEntidad()}" process="@this" 
                                                      update=":nuevoNiv :messages :messagesAll"  oncomplete="PF('nuevoN').show()" icon="pi pi-plus">
                                     </p:commandButton>    
                                 </p:column>
@@ -80,7 +80,7 @@
                                     <p:column headerText="Id" sortBy="#{niv.nacId}">
                                         <h:outputText value="#{niv.nacId}" />
                                     </p:column>
-                                    <p:column headerText="Nivel Academico" sortBy="#{niv.nacNombre}">
+                                    <p:column headerText="Nivel Académico" sortBy="#{niv.nacNombre}">
                                         <h:outputText value="#{niv.nacNombre}" />
                                     </p:column>
 
@@ -100,11 +100,11 @@
                             </h:form>
 
                             <h:form id="modi">
-                                <p:dialog header="Modificar nivel academico" widgetVar="nivModi" showEffect="fade" hideEffect="fade" position="center" resizable="false" modal="true">
+                                <p:dialog header="Modificar nivel académico" widgetVar="nivModi" showEffect="fade" hideEffect="fade" position="center" resizable="false" modal="true">
                                     <p:panelGrid  columns="2">
                                         <p:outputLabel value="ID"/>
                                         <p:outputLabel value="#{nivelAcademicoManaged.nivelAcademico.nacId}"/>    
-                                        <p:outputLabel value="Nivel academico"/>
+                                        <p:outputLabel value="Nivel académico"/>
                                         <p:inputText value="#{nivelAcademicoManaged.nivelAcademico.nacNombre}"/>
                                     </p:panelGrid>
                                     <br></br>
@@ -116,7 +116,7 @@
                             </h:form>
 
                             <h:form id="eliminar">
-                                <p:dialog header="Eliminar nivel academico" widgetVar="eliminarNiv" modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+                                <p:dialog header="Eliminar nivel académico" widgetVar="eliminarNiv" modal="true" showEffect="fade" hideEffect="fade" resizable="false"
                                           position="center">
                                     <p:panelGrid  columns="2">
                                         <p:outputLabel value="Desea eliminar (#{nivelAcademicoManaged.nivelAcademico.nacNombre}) ?"/>
@@ -134,9 +134,9 @@
                             </h:form>
 
                             <h:form id="nuevoNiv">
-                                <p:dialog header="Nuevo nivel academico" widgetVar="nuevoN" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                                <p:dialog header="Nuevo nivel académico" widgetVar="nuevoN" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
                                     <p:panelGrid  columns="2">
-                                        <p:outputLabel value="Nivel academico:"/>
+                                        <p:outputLabel value="Nivel académico:"/>
                                         <p:inputText value="#{nivelAcademicoManaged.nivelAcademico.nacNombre}"/>
                                     </p:panelGrid>
                                     <br></br>

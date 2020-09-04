@@ -16,7 +16,7 @@
                 <li class="nav-item">
                     <a href="ocupacion.bitlab" class="nav-link active">
                         <i class="fas fa-briefcase nav-icon"></i>
-                        <p>Gestion de ocupacion</p>
+                        <p>Gestión de ocupación</p>
                     </a>
                 </li>
             </ui:define>
@@ -116,7 +116,7 @@
                             </h:form>
 
                             <h:form id="eliminar">
-                                <p:dialog header="Eliminar Ocupacion" widgetVar="eliminarOcu" modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+                                <p:dialog header="Eliminar Ocupación" widgetVar="eliminarOcu" modal="true" showEffect="fade" hideEffect="fade" resizable="false"
                                           position="center">
                                     <p:panelGrid  columns="2">
                                         <p:outputLabel value="Desea eliminar la ocupación (#{ocupacionesManaged.ocupacion.ocuNombre}) ?"/>
@@ -134,9 +134,9 @@
                             </h:form>
 
                             <h:form id="nuevoOt">
-                                <p:dialog header="Nueva Ocupacion" widgetVar="nuevaOc" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                                <p:dialog header="Nueva Ocupación" widgetVar="nuevaOc" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
                                     <p:panelGrid  columns="2">
-                                        <p:outputLabel value="Ocupacion:"/>
+                                        <p:outputLabel value="Ocupación:"/>
                                         <p:inputText value="#{ocupacionesManaged.ocupacion.ocuNombre}"/>
                                     </p:panelGrid>
                                     <br></br>

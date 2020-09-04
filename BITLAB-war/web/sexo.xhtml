@@ -17,7 +17,7 @@
                 <li class="nav-item">
                     <a href="sexo.bitlab" class="nav-link active">
                         <i class="fas fa-transgender-alt nav-icon"></i>
-                        <p>Gestion de generos</p>
+                        <p>Gestión de géneros</p>
                     </a>
                 </li>
             </ui:define>
@@ -28,13 +28,13 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1 class="m-0 text-dark">Genero</h1>
+                                <h1 class="m-0 text-dark">Género</h1>
                             </div>
                             <!-- /.col -->
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="index.bitlab">Home</a></li>
-                                    <li class="breadcrumb-item active">Genero</li>
+                                    <li class="breadcrumb-item active">Género</li>
                                 </ol>
                             </div>
                             <!-- /.col -->
@@ -87,7 +87,7 @@
 
                                     <p:column style="width:32px;text-align: center">
                                         <p:commandButton update=":modi :messages :messagesAll" oncomplete="PF('sexModi').show()" 
-                                                         icon="pi pi-user-edit" title="modificar">
+                                                         icon="pi pi-user-edit" title="Modificar">
                                             <f:setPropertyActionListener value="#{sx}" target="#{sexoManaged.sexo}" />
                                         </p:commandButton>
                                     </p:column>
@@ -111,7 +111,7 @@
                                     </p:panelGrid>
                                     <br></br>
                                     <center>
-                                        <p:commandButton value="modificar" actionListener="#{sexoManaged.guardarEntidad()}" 
+                                        <p:commandButton value="Modificar" actionListener="#{sexoManaged.guardarEntidad()}" 
                                                          update=":sexT :messages :messagesAll" oncomplete="PF('sexModi').hide()"/>
                                     </center>
                                 </p:dialog>
