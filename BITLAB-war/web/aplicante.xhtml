@@ -5,11 +5,11 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
-
+    
     <body>
-
+        
         <ui:composition template="./template.xhtml">
-
+            
             <ui:define name="prueba-menu">
                 <li class="nav-item">
                     <a href="prueba.bitlab" class="nav-link active">
@@ -18,7 +18,7 @@
                     </a>
                 </li>
             </ui:define>
-
+            
             <ui:define name="content">
                 <!-- Content Header (Page header) -->
                 <div class="content-header">
@@ -41,7 +41,7 @@
                     <!-- /.container-fluid -->
                 </div>
                 <!-- /.content-header -->
-
+                
                 <!-- Main content -->
                 <section class="content">
                     <div class="container-fluid">
@@ -78,7 +78,7 @@
                                     </p:column>
                                     <p:rowExpansion>
                                         <p:panelGrid  columns="10" columnClasses="label,value" style="width:1000px">
-
+                                            
                                             <h:outputText value="Codigo"  />
                                             <h:outputText value="#{candidato.canCodigo}" />
                                             <h:outputText value="Primer Nombre" />
@@ -121,11 +121,11 @@
                                             <h:outputText value="#{candidato.genId.genOtrosConocimientos}" />
                                             <h:outputText value="Estado Candidato" />
                                             <h:outputText value="#{candidato.eapId.eapNombre}" />
-
+                                            
                                         </p:panelGrid>
-
+                                        
                                     </p:rowExpansion>
-
+                                    
                                     <p:column style="width:32px;text-align: center">
                                         <p:commandButton update=":CanPotencial :messages :messagesAll" oncomplete="PF('CandiPotencial').show()" icon="pi pi-user-edit" title="Gestion Aplicante">
                                             <f:setPropertyActionListener value="#{candidato}" target="#{candidatomanaged.candidato}" />
@@ -133,21 +133,31 @@
                                     </p:column>
                                 </p:dataTable>
                             </h:form>
-
+                            
                             <h:form id="CanPotencial">
                                 <p:dialog widgetVar="CandiPotencial" modal="true" header="Decision Candidato" resizable="false" showEffect="explode" hideEffect="explode" position="center">
                                     <center>
                                         <p:panelGrid columns="2" style="border:none">
-                                            <p:outputLabel value="Estado actual"/>
-                                            <p:outputLabel value="#{candidatomanaged.candidato.eapId.eapNombre}"/>
-
-                                            <p:commandButton value="Aceptar" actionListener="#{candidatomanaged.aceptarPreSeleccionado()}" update=":candidatosPotenciales :apliGeneral :messages :messagesAll" oncomplete="PF('CandiPotencial').hide()"/>
-                                            <p:commandButton value="Rechazar" actionListener="#{candidatomanaged.rechazarCandidato()}" update=":candidatosPotenciales :apliGeneral :messages :messagesAll" oncomplete="PF('CandiPotencial').hide()" style = "background: #D90202; border-color: #D90202;"/>
-                                        </p:panelGrid>
+                                            <p:outputLabel value="Estado actual:"/>
+                                            <h:outputText value="#{candidatomanaged.candidato.eapId.eapNombre}"/></p:panelGrid>
+                                    </center>
+                                    <br></br>
+                                    <center>
+                                        <p:commandButton value="Aceptar" actionListener="#{candidatomanaged.aceptarPreSeleccionado()}" update=":candidatosPotenciales :apliGeneral :messages :messagesAll" 
+                                                         oncomplete="PF('CandiPotencial').hide()" icon="pi pi-thumbs-up"/>
+                                        <p:growl id="message" showDetail="true" />
+                                        <p:commandButton value="Rechazar" action="#{candidatomanaged.rechazarCandidato()}" update="message :candidatosPotenciales :apliGeneral :messages :messagesAll"
+                                                         onsuccess="PF('CandiPotencial').hide()" style = "background: #D90202; border-color: #D90202;" icon="pi pi-thumbs-down">
+                                            <p:confirm header="Confirmación" message="Seguro al rechazar a (#{candidatomanaged.candidato.canPrimerNombre}) ?" icon="pi pi-exclamation-triangle" />
+                                        </p:commandButton>
+                                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times"/>
+                                        </p:confirmDialog>
                                     </center>
                                 </p:dialog>
                             </h:form>
-
+                            
                             <p:outputLabel value="Aplicantes Regulares Altos"/>
                             <h:form id="regularesAltos">
                                 <p:dataTable var="candidato" value="#{candidatomanaged.candidatoListRegularAlto}" style="margin-bottom:20px" rendered="true" paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" rowsPerPageTemplate="5,10,15" reflow="true" rows="5" paginator="true">
@@ -174,7 +184,7 @@
                                     </p:column>
                                     <p:rowExpansion>
                                         <p:panelGrid  columns="10" columnClasses="label,value" style="width:1000px">
-
+                                            
                                             <h:outputText value="Codigo"  />
                                             <h:outputText value="#{candidato.canCodigo}" />
                                             <h:outputText value="Primer Nombre" />
@@ -203,7 +213,7 @@
                                             <h:outputText value="#{candidato.nacId.nacNombre}" />
                                             <h:outputText value=" nivel Ingles" />
                                             <h:outputText value="#{candidato.idiId.idiNivel}" />
-
+                                            
                                             <h:outputText value="Ocupacion" />
                                             <h:outputText value="#{candidato.ocuId.ocuNombre}" />
                                             <h:outputText value="Aspiracion al curso" />
@@ -218,11 +228,11 @@
                                             <h:outputText value="#{candidato.genId.genOtrosConocimientos}" />
                                             <h:outputText value="Estado Candidato" />
                                             <h:outputText value="#{candidato.eapId.eapNombre}" />
-
+                                            
                                         </p:panelGrid>
-
+                                        
                                     </p:rowExpansion>
-
+                                    
                                     <p:column style="width:32px;text-align: center">
                                         <p:commandButton update=":canReguAlto :messages :messagesAll" oncomplete="PF('candiReguAlto').show()" icon="pi pi-user-edit" title="Gestionar">
                                             <f:setPropertyActionListener value="#{candidato}" target="#{candidatomanaged.candidato}" />
@@ -230,22 +240,33 @@
                                     </p:column>
                                 </p:dataTable>
                             </h:form>
-
-
+                            
+                            
                             <h:form id="canReguAlto">
                                 <p:dialog widgetVar="candiReguAlto" modal="true" header="Decision Candidato " resizable="false" showEffect="explode" hideEffect="explode" position="center">
                                     <center>
                                         <p:panelGrid columns="2" style="border:none">
-                                            <p:outputLabel value="Estado actual"/>
-                                            <p:outputLabel value="#{candidatomanaged.candidato.eapId.eapNombre}"/>
-
-                                            <p:commandButton value="Aceptar" actionListener="#{candidatomanaged.aceptarPreSeleccionado()}" update=":regularesAltos :apliGeneral :messages :messagesAll" oncomplete="PF('candiReguAlto').hide()"/>
-                                            <p:commandButton value="Rechazar" actionListener="#{candidatomanaged.rechazarCandidato()}" update=":regularesAltos :apliGeneral :messages :messagesAll" oncomplete="PF('candiReguAlto').hide()" style = "background: #D90202; border-color: #D90202;"/>
+                                            <p:outputLabel value="Estado actual:"/>
+                                            <h:outputText value="#{candidatomanaged.candidato.eapId.eapNombre}"/>
                                         </p:panelGrid>
+                                    </center>
+                                    <br></br>
+                                    <center>
+                                        <p:commandButton value="Aceptar" actionListener="#{candidatomanaged.aceptarPreSeleccionado()}" update=":regularesAltos :apliGeneral :messages :messagesAll" 
+                                                         oncomplete="PF('candiReguAlto').hide()" icon="pi pi-thumbs-up"/>
+                                        <p:growl id="message" showDetail="true" />
+                                        <p:commandButton value="Rechazar" action="#{candidatomanaged.rechazarCandidato()}" update="message :regularesAltos :apliGeneral :messages :messagesAll"
+                                                         onsuccess="PF('candiReguAlto').hide()" style = "background: #D90202; border-color: #D90202;" icon="pi pi-thumbs-down">
+                                            <p:confirm header="Confirmación" message="Seguro al rechazar a (#{candidatomanaged.candidato.canPrimerNombre}) ?" icon="pi pi-exclamation-triangle" />
+                                        </p:commandButton>
+                                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times"/>
+                                        </p:confirmDialog>
                                     </center>
                                 </p:dialog>
                             </h:form>
-
+                            
                             <p:outputLabel value="Aplicantes Regulares Bajos"/>
                             <h:form id="regularesBajos">
                                 <p:dataTable var="candidato" value="#{candidatomanaged.candidatoListRegularBajo}" style="margin-bottom:20px" rendered="true" paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" rowsPerPageTemplate="5,10,15" reflow="true" rows="5" paginator="true">
@@ -272,7 +293,7 @@
                                     </p:column>
                                     <p:rowExpansion>
                                         <p:panelGrid  columns="10" columnClasses="label,value" style="width:1000px">
-
+                                            
                                             <h:outputText value="Codigo"  />
                                             <h:outputText value="#{candidato.canCodigo}" />
                                             <h:outputText value="Primer Nombre" />
@@ -301,7 +322,7 @@
                                             <h:outputText value="#{candidato.nacId.nacNombre}" />
                                             <h:outputText value=" nivel Ingles" />
                                             <h:outputText value="#{candidato.idiId.idiNivel}" />
-
+                                            
                                             <h:outputText value="Ocupacion" />
                                             <h:outputText value="#{candidato.ocuId.ocuNombre}" />
                                             <h:outputText value="Aspiracion al curso" />
@@ -316,11 +337,11 @@
                                             <h:outputText value="#{candidato.genId.genOtrosConocimientos}" />
                                             <h:outputText value="Estado Candidato" />
                                             <h:outputText value="#{candidato.eapId.eapNombre}" />
-
+                                            
                                         </p:panelGrid>
-
+                                        
                                     </p:rowExpansion>
-
+                                    
                                     <p:column style="width:32px;text-align: center">
                                         <p:commandButton update=":canReguBajo :messages :messagesAll" oncomplete="PF('candiRegubajo').show()" icon="pi pi-user-edit" title="Gestionar">
                                             <f:setPropertyActionListener value="#{candidato}" target="#{candidatomanaged.candidato}" />
@@ -328,23 +349,34 @@
                                     </p:column>
                                 </p:dataTable>
                             </h:form>
-
-
+                            
+                            
                             <h:form id="canReguBajo">
                                 <p:dialog widgetVar="candiRegubajo" modal="true" header="Decision Candidato" resizable="false" showEffect="explode" hideEffect="explode" position="center">
                                     <center>
                                         <p:panelGrid columns="2" style="border:none">
-                                            <p:outputLabel value="Estado actual"/>
-                                            <p:outputLabel value="#{candidatomanaged.candidato.eapId.eapNombre}"/>
-
-                                            <p:commandButton value="Aceptar" actionListener="#{candidatomanaged.aceptarPreSeleccionado()}" update=":regularesBajos :apliGeneral :messages :messagesAll" oncomplete="PF('candiRegubajo').hide()"/>
-                                            <p:commandButton value="Rechazar" actionListener="#{candidatomanaged.rechazarCandidato()}" update=":regularesBajos :apliGeneral :messages :messagesAll" oncomplete="PF('candiRegubajo').hide()" style = "background: #D90202; border-color: #D90202;"/>
+                                            <p:outputLabel value="Estado actual:"/>
+                                            <h:outputText value="#{candidatomanaged.candidato.eapId.eapNombre}"/>
                                         </p:panelGrid>
+                                    </center>
+                                    <br></br>
+                                    <center>
+                                        <p:commandButton value="Aceptar" actionListener="#{candidatomanaged.aceptarPreSeleccionado()}" update="message :regularesBajos :apliGeneral :messages :messagesAll" 
+                                                         oncomplete="PF('candiRegubajo').hide()" icon="pi pi-thumbs-up"/>
+                                        <p:growl id="message" showDetail="true" />
+                                        <p:commandButton value="Rechazar" action="#{candidatomanaged.rechazarCandidato()}" update="message :regularesBajos :apliGeneral :messages :messagesAll"
+                                                         onsuccess="PF('candiRegubajo').hide()" style = "background: #D90202; border-color: #D90202;" icon="pi pi-thumbs-down">
+                                            <p:confirm header="Confirmación" message="Seguro al rechazar a (#{candidatomanaged.candidato.canPrimerNombre}) ?" icon="pi pi-exclamation-triangle" />
+                                        </p:commandButton>
+                                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times"/>
+                                        </p:confirmDialog>
                                     </center>
                                 </p:dialog>
                             </h:form>
-
-
+                            
+                            
                             <p:outputLabel value="Aplicantes en general"/>
                             <h:form id="apliGeneral">
                                 <p:dataTable var="candidato" value="#{candidatomanaged.aplicanteGeneral}" style="margin-bottom:20px" rendered="true" paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" rowsPerPageTemplate="5,10,15" reflow="true" rows="5" paginator="true">
@@ -371,7 +403,7 @@
                                     </p:column>
                                     <p:rowExpansion>
                                         <p:panelGrid  columns="10" columnClasses="label,value" style="width:1000px">
-
+                                            
                                             <h:outputText value="Codigo"  />
                                             <h:outputText value="#{candidato.canCodigo}" />
                                             <h:outputText value="Primer Nombre" />
@@ -400,7 +432,7 @@
                                             <h:outputText value="#{candidato.nacId.nacNombre}" />
                                             <h:outputText value=" nivel Ingles" />
                                             <h:outputText value="#{candidato.idiId.idiNivel}" />
-
+                                            
                                             <h:outputText value="Ocupacion" />
                                             <h:outputText value="#{candidato.ocuId.ocuNombre}" />
                                             <h:outputText value="Aspiracion al curso" />
@@ -415,11 +447,11 @@
                                             <h:outputText value="#{candidato.genId.genOtrosConocimientos}" />
                                             <h:outputText value="Estado Candidato" />
                                             <h:outputText value="#{candidato.eapId.eapNombre}" />
-
+                                            
                                         </p:panelGrid>
-
+                                        
                                     </p:rowExpansion>
-
+                                    
                                     <p:column style="width:32px;text-align: center">
                                         <p:commandButton update=":apliCante :messages :messagesAll" oncomplete="PF('aplicanteGeneral').show()" icon="pi pi-user-edit" title="Gestionar">
                                             <f:setPropertyActionListener value="#{candidato}" target="#{candidatomanaged.candidato}" />
@@ -427,18 +459,29 @@
                                     </p:column>
                                 </p:dataTable>
                             </h:form>
-
-
+                            
+                            
                             <h:form id="apliCante">
                                 <p:dialog widgetVar="aplicanteGeneral" modal="true" header="Decision Candidato " resizable="false" showEffect="explode" hideEffect="explode" position="center">
                                     <center>
                                         <p:panelGrid columns="2" style="border:none">
-                                            <p:outputLabel value="Estado actual"/>
-                                            <p:outputLabel value="#{candidatomanaged.candidato.eapId.eapNombre}"/>
-
-                                            <p:commandButton value="Aceptar" actionListener="#{candidatomanaged.aceptarPreSeleccionado()}" update=":apliGeneral :messages :messagesAll" oncomplete="PF('aplicanteGeneral').hide()"/>
-                                            <p:commandButton value="Rechazar" actionListener="#{candidatomanaged.rechazarCandidato()}" update=":apliGeneral :messages :messagesAll" oncomplete="PF('aplicanteGeneral').hide()" style = "background: #D90202; border-color: #D90202;"/>
+                                            <p:outputLabel value="Estado actual:"/>
+                                            <h:outputText value="#{candidatomanaged.candidato.eapId.eapNombre}"/>
                                         </p:panelGrid>
+                                    </center>
+                                    <br></br>
+                                    <center>
+                                        <p:commandButton value="Aceptar" actionListener="#{candidatomanaged.aceptarPreSeleccionado()}" update="message :apliGeneral :messages :messagesAll" 
+                                                         oncomplete="PF('aplicanteGeneral').hide()" icon="pi pi-thumbs-up"/>
+                                        <p:growl id="message" showDetail="true" />
+                                        <p:commandButton value="Rechazar" action="#{candidatomanaged.rechazarCandidato()}" update="message :apliGeneral :messages :messagesAll"
+                                                         onsuccess="PF('aplicanteGeneral').hide()" style = "background: #D90202; border-color: #D90202;" icon="pi pi-thumbs-down">
+                                            <p:confirm header="Confirmación" message="Seguro al rechazar a (#{candidatomanaged.candidato.canPrimerNombre}) ?" icon="pi pi-exclamation-triangle" />
+                                        </p:commandButton>
+                                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times"/>
+                                        </p:confirmDialog>
                                     </center>
                                 </p:dialog>
                             </h:form>
@@ -447,8 +490,8 @@
                 </section>
                 <!-- /.content -->
             </ui:define>
-
+            
         </ui:composition>
-
+        
     </body>
 </html>
