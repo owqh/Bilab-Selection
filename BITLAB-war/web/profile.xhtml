@@ -65,7 +65,7 @@
                                                         <h:outputText value="#{usuarioManaged.rol}" style="font-size: 30px"/> <br/>
                                                         <p:fileUpload id="fotoPerfil" label="Nueva Foto" mode="advanced" skinSimple="true" style="margin-top: 20px"
                                                                       allowTypes="/(\.|\/)(gif|jpe?g|png)$/" sizeLimit="5000000" 
-                                                                      validatorMessage="Fichero no valido" update="message"
+                                                                      validatorMessage="Fichero no válido" update="message"
                                                                       dragDropSupport="true" uploadLabel="Actualizar Foto" cancelLabel="Cancelar" 
                                                                       listener="#{fotoManaged.updatePicture}"/>
                                                         <p:messages id="message"/>
@@ -200,7 +200,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <p:outputLabel for="telefono" value="Telefono" />
+                                                        <p:outputLabel for="telefono" value="Teléfono" />
                                                         <p:inputMask id="telefono" mask="9999-9999" styleClass="form-control" value="#{perfilManaged.telefono}" required="true" requiredMessage="Por favor, ingrese un numero de telefono">
                                                             <p:keyFilter mask="num"/>
                                                         </p:inputMask>
@@ -209,7 +209,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <p:outputLabel for="direccion" value="Direccion" />
+                                                <p:outputLabel for="direccion" value="Dirección" />
                                                 <p:inputTextarea id="direccion" styleClass="form-control" value="#{perfilManaged.direccion}" required="true" requiredMessage="Por favor, ingrese una direccion">
                                                 </p:inputTextarea>
                                                 <p:message for="direccion" />
@@ -257,7 +257,7 @@
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <p:outputLabel for="ocupacion" value="Ocupacion" />
+                                                            <p:outputLabel for="ocupacion" value="Ocupación" />
                                                             <div class="form-group">
                                                                 <p:selectOneMenu id="ocupacion" value="#{perfilManaged.ocupacion}" style="width: 100%" required="true" requiredMessage="Por favor, seleccione una opcion"> 
                                                                     <f:selectItems value="#{perfilManaged.listaOcupacion}" var="ocupacion" itemLabel="#{ocupacion.ocuNombre}" itemValue="#{ocupacion}" />
@@ -328,13 +328,13 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <p:outputLabel for="alaboral" value="Aspiracion Laboral" />
+                                                    <p:outputLabel for="alaboral" value="Aspiración Laboral" />
                                                     <p:inputTextarea id="alaboral" styleClass="form-control" value="#{perfilManaged.alaboral}">
                                                     </p:inputTextarea>
                                                     <p:message for="alaboral" />
                                                 </div>
                                                 <div class="form-group">
-                                                    <p:outputLabel for="acurso" value="Aspiracion del Curso en Bitlab" />
+                                                    <p:outputLabel for="acurso" value="Aspiración del Curso en Bitlab" />
                                                     <p:inputTextarea id="acurso" styleClass="form-control" value="#{perfilManaged.acurso}">
                                                     </p:inputTextarea>
                                                     <p:message for="acurso" />

@@ -5,20 +5,20 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
-    
+
     <body>
-        
+
         <ui:composition template="./template.xhtml">
-            
-            <ui:define name="prueba-menu">
+
+            <ui:define name="aplicante-menu">
                 <li class="nav-item">
-                    <a href="prueba.bitlab" class="nav-link active">
-                        <i class="fas fa-table nav-icon"></i>
-                        <p>Aplicante</p>
+                    <a href="aplicante.bitlab" class="nav-link active">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Aplicantes</p>
                     </a>
                 </li>
             </ui:define>
-            
+
             <ui:define name="content">
                 <!-- Content Header (Page header) -->
                 <div class="content-header">
@@ -41,7 +41,7 @@
                     <!-- /.container-fluid -->
                 </div>
                 <!-- /.content-header -->
-                
+
                 <!-- Main content -->
                 <section class="content">
                     <div class="container-fluid">
@@ -54,32 +54,43 @@
                             </div>
                             <p:outputLabel value="Aplicantes Potenciales"/>
                             <h:form id="candidatosPotenciales">
-                                <p:dataTable var="candidato" value="#{candidatomanaged.candidatoListPo}" style="margin-bottom:20px" rendered="true" paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" rowsPerPageTemplate="5,10,15" reflow="true" rows="5" paginator="true">
+                                <p:dataTable id="potencialTable" var="candidato" value="#{candidatomanaged.candidatoListPo}" style="margin-bottom:20px" rendered="true" 
+                                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" 
+                                             rowsPerPageTemplate="5,10,15" rows="5" paginator="true" paginatorPosition="top"
+                                             scrollable="true" resizeMode="expand">
+
+                                    <f:facet name="header" >
+                                        <p:outputPanel style="text-align: right !important" >
+                                            <p:commandButton id="toggler" type="button" icon="fas fa-columns"/>
+                                            <p:columnToggler datasource="potencialTable" trigger="toggler" />
+                                        </p:outputPanel>
+                                    </f:facet>
+
                                     <p:column style="width:16px">
                                         <p:rowToggler />
                                     </p:column>
-                                    <p:column headerText="Codigo Candidato" filterBy="#{candidato.canCodigo}" filterMatchMode="contains">
+                                    <p:column headerText="Código Candidato" filterBy="#{candidato.canCodigo}" filterMatchMode="contains" sortBy="#{candidato.canCodigo}">
                                         <h:outputText value="#{candidato.canCodigo}" />
                                     </p:column>
-                                    <p:column headerText="Nombre" filterBy="#{candidato.canPrimerNombre}" filterMatchMode="contains">
+                                    <p:column headerText="Nombre" filterBy="#{candidato.canPrimerNombre}" filterMatchMode="contains" sortBy="#{candidato.canPrimerNombre}">
                                         <h:outputText value="#{candidato.canPrimerNombre}" />
                                     </p:column>
-                                    <p:column headerText="Apellido" filterBy="#{candidato.canPrimerApellido}" filterMatchMode="contains">
+                                    <p:column headerText="Apellido" filterBy="#{candidato.canPrimerApellido}" filterMatchMode="contains" sortBy="#{candidato.canPrimerApellido}">
                                         <h:outputText value="#{candidato.canPrimerApellido}" />
                                     </p:column>
-                                    <p:column headerText="Nivel academico" filterBy="#{candidato.nacId.nacNombre}" filterMatchMode="contains">
+                                    <p:column headerText="Nivel académico" filterBy="#{candidato.nacId.nacNombre}" filterMatchMode="contains" sortBy="#{candidato.nacId.nacNombre}">
                                         <h:outputText value="#{candidato.nacId.nacNombre}" />
                                     </p:column>
-                                    <p:column headerText="Dui" filterBy="#{candidato.canDui}" filterMatchMode="contains">
+                                    <p:column headerText="Dui" filterBy="#{candidato.canDui}" filterMatchMode="contains" sortBy="#{candidato.canDui}">
                                         <h:outputText value="#{candidato.canDui}" />
                                     </p:column>
-                                    <p:column headerText="Ocupacion" filterBy="#{candidato.ocuId.ocuNombre}" filterMatchMode="contains">
+                                    <p:column headerText="Ocupación" filterBy="#{candidato.ocuId.ocuNombre}" filterMatchMode="contains" sortBy="#{candidato.ocuId.ocuNombre}">
                                         <h:outputText value="#{candidato.ocuId.ocuNombre}" />
                                     </p:column>
                                     <p:rowExpansion>
                                         <p:panelGrid  columns="10" columnClasses="label,value" style="width:1000px">
-                                            
-                                            <h:outputText value="Codigo"  />
+
+                                            <h:outputText value="Código"  />
                                             <h:outputText value="#{candidato.canCodigo}" />
                                             <h:outputText value="Primer Nombre" />
                                             <h:outputText value="#{candidato.canPrimerNombre}" />
@@ -93,9 +104,9 @@
                                             <h:outputText value="#{candidato.canDui}" />
                                             <h:outputText value="Correo" />
                                             <h:outputText value="#{candidato.canCorreo}" />
-                                            <h:outputText value="Direccion" />
+                                            <h:outputText value="Dirección" />
                                             <h:outputText value="#{candidato.canDireccion}" />
-                                            <h:outputText value="Telefono" />
+                                            <h:outputText value="Teléfono" />
                                             <h:outputText value="#{candidato.canTelefono}" />
                                             <h:outputText value="Fecha nacimiento" />
                                             <h:outputText value="#{candidato.canFechaNac}">
@@ -103,29 +114,29 @@
                                             </h:outputText>
                                             <h:outputText value="Sexo" />
                                             <h:outputText value="#{candidato.sexId.sexNombre}" />
-                                            <h:outputText value="Nivel academico" />
+                                            <h:outputText value="Nivel académico" />
                                             <h:outputText value="#{candidato.nacId.nacNombre}" />
-                                            <h:outputText value=" nivel Ingles" />
+                                            <h:outputText value="Nivel Ingles" />
                                             <h:outputText value="#{candidato.idiId.idiNivel}" />
-                                            <h:outputText value="Ocupacion" />
+                                            <h:outputText value="Ocupación" />
                                             <h:outputText value="#{candidato.ocuId.ocuNombre}" />
-                                            <h:outputText value="Aspiracion al curso"/>
+                                            <h:outputText value="Aspiración al curso"/>
                                             <h:outputText value="#{candidato.genId.genAspiracionCurso}" />
                                             <h:outputText value="Posee PC" style="color:red"/>
                                             <h:outputText value="#{candidato.genId.genComputadora}" style="color:red"/>
                                             <h:outputText value="Acceso a internet" style="color:red" />
                                             <h:outputText value="#{candidato.genId.genInternet}" style="color:red"/>
-                                            <h:outputText value="dispone tiempo" style="color:red" />
+                                            <h:outputText value="Dispone tiempo" style="color:red" />
                                             <h:outputText value="#{candidato.genId.genTiempo}" style="color:red" />
-                                            <h:outputText value="Otro conocimientos" />
+                                            <h:outputText value="Otros conocimientos" />
                                             <h:outputText value="#{candidato.genId.genOtrosConocimientos}" />
                                             <h:outputText value="Estado Candidato" />
                                             <h:outputText value="#{candidato.eapId.eapNombre}" />
-                                            
+
                                         </p:panelGrid>
-                                        
+
                                     </p:rowExpansion>
-                                    
+
                                     <p:column style="width:32px;text-align: center">
                                         <p:commandButton update=":CanPotencial :messages :messagesAll" oncomplete="PF('CandiPotencial').show()" icon="pi pi-user-edit" title="Gestion Aplicante">
                                             <f:setPropertyActionListener value="#{candidato}" target="#{candidatomanaged.candidato}" />
@@ -133,7 +144,7 @@
                                     </p:column>
                                 </p:dataTable>
                             </h:form>
-                            
+
                             <h:form id="CanPotencial">
                                 <p:dialog widgetVar="CandiPotencial" modal="true" header="Decision Candidato" resizable="false" showEffect="explode" hideEffect="explode" position="center">
                                     <center>
@@ -157,35 +168,46 @@
                                     </center>
                                 </p:dialog>
                             </h:form>
-                            
+
                             <p:outputLabel value="Aplicantes Regulares Altos"/>
                             <h:form id="regularesAltos">
-                                <p:dataTable var="candidato" value="#{candidatomanaged.candidatoListRegularAlto}" style="margin-bottom:20px" rendered="true" paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" rowsPerPageTemplate="5,10,15" reflow="true" rows="5" paginator="true">
+                                <p:dataTable id="regularTable" var="candidato" value="#{candidatomanaged.candidatoListRegularAlto}" style="margin-bottom:20px" rendered="true" 
+                                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" 
+                                             rowsPerPageTemplate="5,10,15" rows="5" paginator="true" paginatorPosition="top"
+                                             scrollable="true" resizeMode="expand">
+
+                                    <f:facet name="header" >
+                                        <p:outputPanel style="text-align: right !important" >
+                                            <p:commandButton id="toggler" type="button" icon="fas fa-columns"/>
+                                            <p:columnToggler datasource="regularTable" trigger="toggler" />
+                                        </p:outputPanel>
+                                    </f:facet>
+
                                     <p:column style="width:16px">
                                         <p:rowToggler />
                                     </p:column>
-                                    <p:column headerText="Codigo Candidato" filterBy="#{candidato.canCodigo}" filterMatchMode="contains">
+                                    <p:column headerText="Código Candidato" filterBy="#{candidato.canCodigo}" filterMatchMode="contains" sortBy="#{candidato.canCodigo}">
                                         <h:outputText value="#{candidato.canCodigo}" />
                                     </p:column>
-                                    <p:column headerText="Nombre" filterBy="#{candidato.canPrimerNombre}" filterMatchMode="contains">
+                                    <p:column headerText="Nombre" filterBy="#{candidato.canPrimerNombre}" filterMatchMode="contains" sortBy="#{candidato.canPrimerNombre}">
                                         <h:outputText value="#{candidato.canPrimerNombre}" />
                                     </p:column>
-                                    <p:column headerText="Apellido" filterBy="#{candidato.canPrimerApellido}" filterMatchMode="contains">
+                                    <p:column headerText="Apellido" filterBy="#{candidato.canPrimerApellido}" filterMatchMode="contains" sortBy="#{candidato.canPrimerApellido}">
                                         <h:outputText value="#{candidato.canPrimerApellido}" />
                                     </p:column>
-                                    <p:column headerText="Nivel academico" filterBy="#{candidato.nacId.nacNombre}" filterMatchMode="contains">
+                                    <p:column headerText="Nivel académico" filterBy="#{candidato.nacId.nacNombre}" filterMatchMode="contains" sortBy="#{candidato.nacId.nacNombre}">
                                         <h:outputText value="#{candidato.nacId.nacNombre}" />
                                     </p:column>
-                                    <p:column headerText="Dui" filterBy="#{candidato.canDui}" filterMatchMode="contains">
+                                    <p:column headerText="Dui" filterBy="#{candidato.canDui}" filterMatchMode="contains" sortBy="#{candidato.canDui}">
                                         <h:outputText value="#{candidato.canDui}" />
                                     </p:column>
-                                    <p:column headerText="Ocupacion" filterBy="#{candidato.ocuId.ocuNombre}" filterMatchMode="contains">
+                                    <p:column headerText="Ocupación" filterBy="#{candidato.ocuId.ocuNombre}" filterMatchMode="contains" sortBy="#{candidato.ocuId.ocuNombre}">
                                         <h:outputText value="#{candidato.ocuId.ocuNombre}" />
                                     </p:column>
                                     <p:rowExpansion>
                                         <p:panelGrid  columns="10" columnClasses="label,value" style="width:1000px">
-                                            
-                                            <h:outputText value="Codigo"  />
+
+                                            <h:outputText value="Código"  />
                                             <h:outputText value="#{candidato.canCodigo}" />
                                             <h:outputText value="Primer Nombre" />
                                             <h:outputText value="#{candidato.canPrimerNombre}" />
@@ -199,9 +221,9 @@
                                             <h:outputText value="#{candidato.canDui}" />
                                             <h:outputText value="Correo" />
                                             <h:outputText value="#{candidato.canCorreo}" />
-                                            <h:outputText value="Direccion" />
+                                            <h:outputText value="Dirección" />
                                             <h:outputText value="#{candidato.canDireccion}" />
-                                            <h:outputText value="Telefono" />
+                                            <h:outputText value="Teléfono" />
                                             <h:outputText value="#{candidato.canTelefono}" />
                                             <h:outputText value="Fecha nacimiento" />
                                             <h:outputText value="#{candidato.canFechaNac}">
@@ -209,30 +231,30 @@
                                             </h:outputText>
                                             <h:outputText value="Sexo" />
                                             <h:outputText value="#{candidato.sexId.sexNombre}" />
-                                            <h:outputText value="Nivel academico" />
+                                            <h:outputText value="Nivel académico" />
                                             <h:outputText value="#{candidato.nacId.nacNombre}" />
-                                            <h:outputText value=" nivel Ingles" />
+                                            <h:outputText value="Nivel Inglés" />
                                             <h:outputText value="#{candidato.idiId.idiNivel}" />
-                                            
-                                            <h:outputText value="Ocupacion" />
+
+                                            <h:outputText value="Ocupación" />
                                             <h:outputText value="#{candidato.ocuId.ocuNombre}" />
-                                            <h:outputText value="Aspiracion al curso" />
+                                            <h:outputText value="Aspiración al curso" />
                                             <h:outputText value="#{candidato.genId.genAspiracionCurso}" />
                                             <h:outputText value="Posee PC" style="color:red"/>
                                             <h:outputText value="#{candidato.genId.genComputadora}" style="color:red"/>
                                             <h:outputText value="Acceso a internet" style="color:red" />
                                             <h:outputText value="#{candidato.genId.genInternet}" style="color:red"/>
-                                            <h:outputText value="dispone tiempo" style="color:red" />
+                                            <h:outputText value="Dispone tiempo" style="color:red" />
                                             <h:outputText value="#{candidato.genId.genTiempo}" style="color:red" />
-                                            <h:outputText value="Otro conocimientos" />
+                                            <h:outputText value="Otros conocimientos" />
                                             <h:outputText value="#{candidato.genId.genOtrosConocimientos}" />
                                             <h:outputText value="Estado Candidato" />
                                             <h:outputText value="#{candidato.eapId.eapNombre}" />
-                                            
+
                                         </p:panelGrid>
-                                        
+
                                     </p:rowExpansion>
-                                    
+
                                     <p:column style="width:32px;text-align: center">
                                         <p:commandButton update=":canReguAlto :messages :messagesAll" oncomplete="PF('candiReguAlto').show()" icon="pi pi-user-edit" title="Gestionar">
                                             <f:setPropertyActionListener value="#{candidato}" target="#{candidatomanaged.candidato}" />
@@ -240,10 +262,10 @@
                                     </p:column>
                                 </p:dataTable>
                             </h:form>
-                            
-                            
+
+
                             <h:form id="canReguAlto">
-                                <p:dialog widgetVar="candiReguAlto" modal="true" header="Decision Candidato " resizable="false" showEffect="explode" hideEffect="explode" position="center">
+                                <p:dialog widgetVar="candiReguAlto" modal="true" header="Decisión Candidato " resizable="false" showEffect="explode" hideEffect="explode" position="center">
                                     <center>
                                         <p:panelGrid columns="2" style="border:none">
                                             <p:outputLabel value="Estado actual:"/>
@@ -266,35 +288,46 @@
                                     </center>
                                 </p:dialog>
                             </h:form>
-                            
+
                             <p:outputLabel value="Aplicantes Regulares Bajos"/>
                             <h:form id="regularesBajos">
-                                <p:dataTable var="candidato" value="#{candidatomanaged.candidatoListRegularBajo}" style="margin-bottom:20px" rendered="true" paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" rowsPerPageTemplate="5,10,15" reflow="true" rows="5" paginator="true">
+                                <p:dataTable id="regBajoTable" var="candidato" value="#{candidatomanaged.candidatoListRegularBajo}" style="margin-bottom:20px" rendered="true" 
+                                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" 
+                                             rowsPerPageTemplate="5,10,15" rows="5" paginator="true" paginatorPosition="top"
+                                             scrollable="true" resizeMode="expand">
+
+                                    <f:facet name="header" >
+                                        <p:outputPanel style="text-align: right !important" >
+                                            <p:commandButton id="toggler" type="button" icon="fas fa-columns"/>
+                                            <p:columnToggler datasource="regBajoTable" trigger="toggler" />
+                                        </p:outputPanel>
+                                    </f:facet>
+
                                     <p:column style="width:16px">
                                         <p:rowToggler />
                                     </p:column>
-                                    <p:column headerText="Codigo Candidato" filterBy="#{candidato.canCodigo}" filterMatchMode="contains">
+                                    <p:column headerText="Código Candidato" filterBy="#{candidato.canCodigo}" filterMatchMode="contains" sortBy="#{candidato.canCodigo}">
                                         <h:outputText value="#{candidato.canCodigo}" />
                                     </p:column>
-                                    <p:column headerText="Nombre" filterBy="#{candidato.canPrimerNombre}" filterMatchMode="contains">
+                                    <p:column headerText="Nombre" filterBy="#{candidato.canPrimerNombre}" filterMatchMode="contains" sortBy="#{candidato.canPrimerNombre}">
                                         <h:outputText value="#{candidato.canPrimerNombre}" />
                                     </p:column>
-                                    <p:column headerText="Apellido" filterBy="#{candidato.canPrimerApellido}" filterMatchMode="contains">
+                                    <p:column headerText="Apellido" filterBy="#{candidato.canPrimerApellido}" filterMatchMode="contains" sortBy="#{candidato.canPrimerApellido}">
                                         <h:outputText value="#{candidato.canPrimerApellido}" />
                                     </p:column>
-                                    <p:column headerText="Nivel academico" filterBy="#{candidato.nacId.nacNombre}" filterMatchMode="contains">
+                                    <p:column headerText="Nivel académico" filterBy="#{candidato.nacId.nacNombre}" filterMatchMode="contains" sortBy="#{candidato.nacId.nacNombre}">
                                         <h:outputText value="#{candidato.nacId.nacNombre}" />
                                     </p:column>
-                                    <p:column headerText="Dui" filterBy="#{candidato.canDui}" filterMatchMode="contains">
+                                    <p:column headerText="Dui" filterBy="#{candidato.canDui}" filterMatchMode="contains" sortBy="#{candidato.canDui}">
                                         <h:outputText value="#{candidato.canDui}" />
                                     </p:column>
-                                    <p:column headerText="Ocupacion" filterBy="#{candidato.ocuId.ocuNombre}" filterMatchMode="contains">
+                                    <p:column headerText="Ocupación" filterBy="#{candidato.ocuId.ocuNombre}" filterMatchMode="contains" sortBy="#{candidato.ocuId.ocuNombre}">
                                         <h:outputText value="#{candidato.ocuId.ocuNombre}" />
                                     </p:column>
                                     <p:rowExpansion>
                                         <p:panelGrid  columns="10" columnClasses="label,value" style="width:1000px">
-                                            
-                                            <h:outputText value="Codigo"  />
+
+                                            <h:outputText value="Código"  />
                                             <h:outputText value="#{candidato.canCodigo}" />
                                             <h:outputText value="Primer Nombre" />
                                             <h:outputText value="#{candidato.canPrimerNombre}" />
@@ -308,9 +341,9 @@
                                             <h:outputText value="#{candidato.canDui}" />
                                             <h:outputText value="Correo" />
                                             <h:outputText value="#{candidato.canCorreo}" />
-                                            <h:outputText value="Direccion" />
+                                            <h:outputText value="Dirección" />
                                             <h:outputText value="#{candidato.canDireccion}" />
-                                            <h:outputText value="Telefono" />
+                                            <h:outputText value="Teléfono" />
                                             <h:outputText value="#{candidato.canTelefono}" />
                                             <h:outputText value="Fecha nacimiento" />
                                             <h:outputText value="#{candidato.canFechaNac}">
@@ -318,30 +351,30 @@
                                             </h:outputText>
                                             <h:outputText value="Sexo" />
                                             <h:outputText value="#{candidato.sexId.sexNombre}" />
-                                            <h:outputText value="Nivel academico" />
+                                            <h:outputText value="Nivel académico" />
                                             <h:outputText value="#{candidato.nacId.nacNombre}" />
-                                            <h:outputText value=" nivel Ingles" />
+                                            <h:outputText value="Nivel Inglés" />
                                             <h:outputText value="#{candidato.idiId.idiNivel}" />
-                                            
-                                            <h:outputText value="Ocupacion" />
+
+                                            <h:outputText value="Ocupación" />
                                             <h:outputText value="#{candidato.ocuId.ocuNombre}" />
-                                            <h:outputText value="Aspiracion al curso" />
+                                            <h:outputText value="Aspiración al curso" />
                                             <h:outputText value="#{candidato.genId.genAspiracionCurso}" />
                                             <h:outputText value="Posee PC" style="color:red"/>
                                             <h:outputText value="#{candidato.genId.genComputadora}" style="color:red"/>
                                             <h:outputText value="Acceso a internet" style="color:red" />
                                             <h:outputText value="#{candidato.genId.genInternet}" style="color:red"/>
-                                            <h:outputText value="dispone tiempo" style="color:red" />
+                                            <h:outputText value="Dispone tiempo" style="color:red" />
                                             <h:outputText value="#{candidato.genId.genTiempo}" style="color:red" />
-                                            <h:outputText value="Otro conocimientos" />
+                                            <h:outputText value="Otros conocimientos" />
                                             <h:outputText value="#{candidato.genId.genOtrosConocimientos}" />
                                             <h:outputText value="Estado Candidato" />
                                             <h:outputText value="#{candidato.eapId.eapNombre}" />
-                                            
+
                                         </p:panelGrid>
-                                        
+
                                     </p:rowExpansion>
-                                    
+
                                     <p:column style="width:32px;text-align: center">
                                         <p:commandButton update=":canReguBajo :messages :messagesAll" oncomplete="PF('candiRegubajo').show()" icon="pi pi-user-edit" title="Gestionar">
                                             <f:setPropertyActionListener value="#{candidato}" target="#{candidatomanaged.candidato}" />
@@ -349,10 +382,10 @@
                                     </p:column>
                                 </p:dataTable>
                             </h:form>
-                            
-                            
+
+
                             <h:form id="canReguBajo">
-                                <p:dialog widgetVar="candiRegubajo" modal="true" header="Decision Candidato" resizable="false" showEffect="explode" hideEffect="explode" position="center">
+                                <p:dialog widgetVar="candiRegubajo" modal="true" header="Decisión Candidato" resizable="false" showEffect="explode" hideEffect="explode" position="center">
                                     <center>
                                         <p:panelGrid columns="2" style="border:none">
                                             <p:outputLabel value="Estado actual:"/>
@@ -375,36 +408,47 @@
                                     </center>
                                 </p:dialog>
                             </h:form>
-                            
-                            
+
+
                             <p:outputLabel value="Aplicantes en general"/>
                             <h:form id="apliGeneral">
-                                <p:dataTable var="candidato" value="#{candidatomanaged.aplicanteGeneral}" style="margin-bottom:20px" rendered="true" paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" rowsPerPageTemplate="5,10,15" reflow="true" rows="5" paginator="true">
+                                <p:dataTable id="generalTable" var="candidato" value="#{candidatomanaged.aplicanteGeneral}" style="margin-bottom:20px" rendered="true" 
+                                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" 
+                                             rowsPerPageTemplate="5,10,15" rows="5" paginator="true" paginatorPosition="top"
+                                             scrollable="true" resizeMode="expand">
+
+                                    <f:facet name="header" >
+                                        <p:outputPanel style="text-align: right !important" >
+                                            <p:commandButton id="toggler" type="button" icon="fas fa-columns"/>
+                                            <p:columnToggler datasource="generalTable" trigger="toggler" />
+                                        </p:outputPanel>
+                                    </f:facet>
+
                                     <p:column style="width:16px">
                                         <p:rowToggler />
                                     </p:column>
-                                    <p:column headerText="Codigo Candidato" filterBy="#{candidato.canCodigo}" filterMatchMode="contains">
+                                    <p:column headerText="Código Candidato" filterBy="#{candidato.canCodigo}" filterMatchMode="contains" sortBy="#{candidato.canCodigo}">
                                         <h:outputText value="#{candidato.canCodigo}" />
                                     </p:column>
-                                    <p:column headerText="Nombre" filterBy="#{candidato.canPrimerNombre}" filterMatchMode="contains">
+                                    <p:column headerText="Nombre" filterBy="#{candidato.canPrimerNombre}" filterMatchMode="contains" sortBy="#{candidato.canPrimerNombre}">
                                         <h:outputText value="#{candidato.canPrimerNombre}" />
                                     </p:column>
-                                    <p:column headerText="Apellido" filterBy="#{candidato.canPrimerApellido}" filterMatchMode="contains">
+                                    <p:column headerText="Apellido" filterBy="#{candidato.canPrimerApellido}" filterMatchMode="contains" sortBy="#{candidato.canPrimerApellido}">
                                         <h:outputText value="#{candidato.canPrimerApellido}" />
                                     </p:column>
-                                    <p:column headerText="Nivel academico" filterBy="#{candidato.nacId.nacNombre}" filterMatchMode="contains">
+                                    <p:column headerText="Nivel académico" filterBy="#{candidato.nacId.nacNombre}" filterMatchMode="contains" sortBy="#{candidato.nacId.nacNombre}">
                                         <h:outputText value="#{candidato.nacId.nacNombre}" />
                                     </p:column>
-                                    <p:column headerText="Dui" filterBy="#{candidato.canDui}" filterMatchMode="contains">
+                                    <p:column headerText="Dui" filterBy="#{candidato.canDui}" filterMatchMode="contains" sortBy="#{candidato.canDui}">
                                         <h:outputText value="#{candidato.canDui}" />
                                     </p:column>
-                                    <p:column headerText="Ocupacion" filterBy="#{candidato.ocuId.ocuNombre}" filterMatchMode="contains">
+                                    <p:column headerText="Ocupación" filterBy="#{candidato.ocuId.ocuNombre}" filterMatchMode="contains" sortBy="#{candidato.ocuId.ocuNombre}">
                                         <h:outputText value="#{candidato.ocuId.ocuNombre}" />
                                     </p:column>
                                     <p:rowExpansion>
                                         <p:panelGrid  columns="10" columnClasses="label,value" style="width:1000px">
-                                            
-                                            <h:outputText value="Codigo"  />
+
+                                            <h:outputText value="Código"  />
                                             <h:outputText value="#{candidato.canCodigo}" />
                                             <h:outputText value="Primer Nombre" />
                                             <h:outputText value="#{candidato.canPrimerNombre}" />
@@ -420,7 +464,7 @@
                                             <h:outputText value="#{candidato.canCorreo}" />
                                             <h:outputText value="Direccion" />
                                             <h:outputText value="#{candidato.canDireccion}" />
-                                            <h:outputText value="Telefono" />
+                                            <h:outputText value="Teléfono" />
                                             <h:outputText value="#{candidato.canTelefono}" />
                                             <h:outputText value="Fecha nacimiento" />
                                             <h:outputText value="#{candidato.canFechaNac}">
@@ -428,30 +472,30 @@
                                             </h:outputText>
                                             <h:outputText value="Sexo" />
                                             <h:outputText value="#{candidato.sexId.sexNombre}" />
-                                            <h:outputText value="Nivel academico" />
+                                            <h:outputText value="Nivel académico" />
                                             <h:outputText value="#{candidato.nacId.nacNombre}" />
-                                            <h:outputText value=" nivel Ingles" />
+                                            <h:outputText value="Nivel Inglés" />
                                             <h:outputText value="#{candidato.idiId.idiNivel}" />
-                                            
-                                            <h:outputText value="Ocupacion" />
+
+                                            <h:outputText value="Ocupación" />
                                             <h:outputText value="#{candidato.ocuId.ocuNombre}" />
-                                            <h:outputText value="Aspiracion al curso" />
+                                            <h:outputText value="Aspiración al curso" />
                                             <h:outputText value="#{candidato.genId.genAspiracionCurso}" />
                                             <h:outputText value="Posee PC" style="color:red"/>
                                             <h:outputText value="#{candidato.genId.genComputadora}" style="color:red"/>
                                             <h:outputText value="Acceso a internet" style="color:red" />
                                             <h:outputText value="#{candidato.genId.genInternet}" style="color:red"/>
-                                            <h:outputText value="dispone tiempo" style="color:red" />
+                                            <h:outputText value="Dispone tiempo" style="color:red" />
                                             <h:outputText value="#{candidato.genId.genTiempo}" style="color:red" />
-                                            <h:outputText value="Otro conocimientos" />
+                                            <h:outputText value="Otros conocimientos" />
                                             <h:outputText value="#{candidato.genId.genOtrosConocimientos}" />
                                             <h:outputText value="Estado Candidato" />
                                             <h:outputText value="#{candidato.eapId.eapNombre}" />
-                                            
+
                                         </p:panelGrid>
-                                        
+
                                     </p:rowExpansion>
-                                    
+
                                     <p:column style="width:32px;text-align: center">
                                         <p:commandButton update=":apliCante :messages :messagesAll" oncomplete="PF('aplicanteGeneral').show()" icon="pi pi-user-edit" title="Gestionar">
                                             <f:setPropertyActionListener value="#{candidato}" target="#{candidatomanaged.candidato}" />
@@ -459,10 +503,10 @@
                                     </p:column>
                                 </p:dataTable>
                             </h:form>
-                            
-                            
+
+
                             <h:form id="apliCante">
-                                <p:dialog widgetVar="aplicanteGeneral" modal="true" header="Decision Candidato " resizable="false" showEffect="explode" hideEffect="explode" position="center">
+                                <p:dialog widgetVar="aplicanteGeneral" modal="true" header="Decisión Candidato " resizable="false" showEffect="explode" hideEffect="explode" position="center">
                                     <center>
                                         <p:panelGrid columns="2" style="border:none">
                                             <p:outputLabel value="Estado actual:"/>
@@ -490,8 +534,8 @@
                 </section>
                 <!-- /.content -->
             </ui:define>
-            
+
         </ui:composition>
-        
+
     </body>
 </html>
