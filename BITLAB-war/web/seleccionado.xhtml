@@ -112,7 +112,7 @@
                                                          oncomplete="PF('seleccionado').hide()" icon="pi pi-thumbs-up"/>
                                         
                                         <p:growl id="message" showDetail="true" />
-                                        <p:commandButton value="Rechazar" action="#{candidatomanaged.rechazarCandidato()}" onsuccess="PF('seleccionado').hide()" 
+                                        <p:commandButton value="Rechazar" actionListener="#{candidatomanaged.rechazarCandidato()}" onsuccess="PF('seleccionado').hide()" 
                                                          update="message :seleccionadoA :messages :messagesAll" style = "background: #D90202; border-color: #D90202;"
                                                          icon="pi pi-thumbs-down">
                                             <p:confirm header="Confirmación" message="Seguro al rechazar a (#{candidatomanaged.candidato.canPrimerNombre}) ?" icon="pi pi-exclamation-triangle" />
