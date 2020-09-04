@@ -65,14 +65,22 @@
                                 <br />
                                 <br />
                                 
-                                <p:dataTable var="ocu" value="#{ocupacionesManaged.ocupacionList}" paginator="true" rows="5"
-                                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                                             rowsPerPageTemplate="5,10,15" reflow="true">
+                                <p:dataTable id="ocupacionTable" var="ocu" value="#{ocupacionesManaged.ocupacionList}" paginator="true" rows="5"
+                                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" paginatorPosition="top"
+                                             rowsPerPageTemplate="5,10,15" 
+                                             scrollable="true" resizeMode="expand">
                                     
-                                    <p:column headerText="Id">
+                                    <f:facet name="header" >
+                                        <p:outputPanel style="text-align: right !important" >
+                                            <p:commandButton id="toggler" type="button" icon="fas fa-columns"/>
+                                            <p:columnToggler datasource="ocupacionTable" trigger="toggler" />
+                                        </p:outputPanel>
+                                    </f:facet>
+                                    
+                                    <p:column headerText="Id" sortBy="#{ocu.ocuId}">
                                         <h:outputText value="#{ocu.ocuId}" />
                                     </p:column>
-                                    <p:column headerText="Nombre">
+                                    <p:column headerText="Nombre" sortBy="#{ocu.ocuNombre}">
                                         <h:outputText value="#{ocu.ocuNombre}" />
                                     </p:column>
                                     

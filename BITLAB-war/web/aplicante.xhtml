@@ -54,26 +54,37 @@
                             </div>
                             <p:outputLabel value="Aplicantes Potenciales"/>
                             <h:form id="candidatosPotenciales">
-                                <p:dataTable var="candidato" value="#{candidatomanaged.candidatoListPo}" style="margin-bottom:20px" rendered="true" paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" rowsPerPageTemplate="5,10,15" reflow="true" rows="5" paginator="true">
+                                <p:dataTable id="potencialTable" var="candidato" value="#{candidatomanaged.candidatoListPo}" style="margin-bottom:20px" rendered="true" 
+                                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" 
+                                             rowsPerPageTemplate="5,10,15" rows="5" paginator="true" paginatorPosition="top"
+                                             scrollable="true" resizeMode="expand">
+                                    
+                                    <f:facet name="header" >
+                                        <p:outputPanel style="text-align: right !important" >
+                                            <p:commandButton id="toggler" type="button" icon="fas fa-columns"/>
+                                            <p:columnToggler datasource="potencialTable" trigger="toggler" />
+                                        </p:outputPanel>
+                                    </f:facet>
+                                    
                                     <p:column style="width:16px">
                                         <p:rowToggler />
                                     </p:column>
-                                    <p:column headerText="Codigo Candidato" filterBy="#{candidato.canCodigo}" filterMatchMode="contains">
+                                    <p:column headerText="Codigo Candidato" filterBy="#{candidato.canCodigo}" filterMatchMode="contains" sortBy="#{candidato.canCodigo}">
                                         <h:outputText value="#{candidato.canCodigo}" />
                                     </p:column>
-                                    <p:column headerText="Nombre" filterBy="#{candidato.canPrimerNombre}" filterMatchMode="contains">
+                                    <p:column headerText="Nombre" filterBy="#{candidato.canPrimerNombre}" filterMatchMode="contains" sortBy="#{candidato.canPrimerNombre}">
                                         <h:outputText value="#{candidato.canPrimerNombre}" />
                                     </p:column>
-                                    <p:column headerText="Apellido" filterBy="#{candidato.canPrimerApellido}" filterMatchMode="contains">
+                                    <p:column headerText="Apellido" filterBy="#{candidato.canPrimerApellido}" filterMatchMode="contains" sortBy="#{candidato.canPrimerApellido}">
                                         <h:outputText value="#{candidato.canPrimerApellido}" />
                                     </p:column>
-                                    <p:column headerText="Nivel academico" filterBy="#{candidato.nacId.nacNombre}" filterMatchMode="contains">
+                                    <p:column headerText="Nivel academico" filterBy="#{candidato.nacId.nacNombre}" filterMatchMode="contains" sortBy="#{candidato.nacId.nacNombre}">
                                         <h:outputText value="#{candidato.nacId.nacNombre}" />
                                     </p:column>
-                                    <p:column headerText="Dui" filterBy="#{candidato.canDui}" filterMatchMode="contains">
+                                    <p:column headerText="Dui" filterBy="#{candidato.canDui}" filterMatchMode="contains" sortBy="#{candidato.canDui}">
                                         <h:outputText value="#{candidato.canDui}" />
                                     </p:column>
-                                    <p:column headerText="Ocupacion" filterBy="#{candidato.ocuId.ocuNombre}" filterMatchMode="contains">
+                                    <p:column headerText="Ocupacion" filterBy="#{candidato.ocuId.ocuNombre}" filterMatchMode="contains" sortBy="#{candidato.ocuId.ocuNombre}">
                                         <h:outputText value="#{candidato.ocuId.ocuNombre}" />
                                     </p:column>
                                     <p:rowExpansion>
@@ -160,26 +171,37 @@
                             
                             <p:outputLabel value="Aplicantes Regulares Altos"/>
                             <h:form id="regularesAltos">
-                                <p:dataTable var="candidato" value="#{candidatomanaged.candidatoListRegularAlto}" style="margin-bottom:20px" rendered="true" paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" rowsPerPageTemplate="5,10,15" reflow="true" rows="5" paginator="true">
+                                <p:dataTable id="regularTable" var="candidato" value="#{candidatomanaged.candidatoListRegularAlto}" style="margin-bottom:20px" rendered="true" 
+                                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" 
+                                             rowsPerPageTemplate="5,10,15" rows="5" paginator="true" paginatorPosition="top"
+                                             scrollable="true" resizeMode="expand">
+                                    
+                                    <f:facet name="header" >
+                                        <p:outputPanel style="text-align: right !important" >
+                                            <p:commandButton id="toggler" type="button" icon="fas fa-columns"/>
+                                            <p:columnToggler datasource="regularTable" trigger="toggler" />
+                                        </p:outputPanel>
+                                    </f:facet>
+                                    
                                     <p:column style="width:16px">
                                         <p:rowToggler />
                                     </p:column>
-                                    <p:column headerText="Codigo Candidato" filterBy="#{candidato.canCodigo}" filterMatchMode="contains">
+                                    <p:column headerText="Codigo Candidato" filterBy="#{candidato.canCodigo}" filterMatchMode="contains" sortBy="#{candidato.canCodigo}">
                                         <h:outputText value="#{candidato.canCodigo}" />
                                     </p:column>
-                                    <p:column headerText="Nombre" filterBy="#{candidato.canPrimerNombre}" filterMatchMode="contains">
+                                    <p:column headerText="Nombre" filterBy="#{candidato.canPrimerNombre}" filterMatchMode="contains" sortBy="#{candidato.canPrimerNombre}">
                                         <h:outputText value="#{candidato.canPrimerNombre}" />
                                     </p:column>
-                                    <p:column headerText="Apellido" filterBy="#{candidato.canPrimerApellido}" filterMatchMode="contains">
+                                    <p:column headerText="Apellido" filterBy="#{candidato.canPrimerApellido}" filterMatchMode="contains" sortBy="#{candidato.canPrimerApellido}">
                                         <h:outputText value="#{candidato.canPrimerApellido}" />
                                     </p:column>
-                                    <p:column headerText="Nivel academico" filterBy="#{candidato.nacId.nacNombre}" filterMatchMode="contains">
+                                    <p:column headerText="Nivel academico" filterBy="#{candidato.nacId.nacNombre}" filterMatchMode="contains" sortBy="#{candidato.nacId.nacNombre}">
                                         <h:outputText value="#{candidato.nacId.nacNombre}" />
                                     </p:column>
-                                    <p:column headerText="Dui" filterBy="#{candidato.canDui}" filterMatchMode="contains">
+                                    <p:column headerText="Dui" filterBy="#{candidato.canDui}" filterMatchMode="contains" sortBy="#{candidato.canDui}">
                                         <h:outputText value="#{candidato.canDui}" />
                                     </p:column>
-                                    <p:column headerText="Ocupacion" filterBy="#{candidato.ocuId.ocuNombre}" filterMatchMode="contains">
+                                    <p:column headerText="Ocupacion" filterBy="#{candidato.ocuId.ocuNombre}" filterMatchMode="contains" sortBy="#{candidato.ocuId.ocuNombre}">
                                         <h:outputText value="#{candidato.ocuId.ocuNombre}" />
                                     </p:column>
                                     <p:rowExpansion>
@@ -269,26 +291,37 @@
                             
                             <p:outputLabel value="Aplicantes Regulares Bajos"/>
                             <h:form id="regularesBajos">
-                                <p:dataTable var="candidato" value="#{candidatomanaged.candidatoListRegularBajo}" style="margin-bottom:20px" rendered="true" paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" rowsPerPageTemplate="5,10,15" reflow="true" rows="5" paginator="true">
+                                <p:dataTable id="regBajoTable" var="candidato" value="#{candidatomanaged.candidatoListRegularBajo}" style="margin-bottom:20px" rendered="true" 
+                                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" 
+                                             rowsPerPageTemplate="5,10,15" rows="5" paginator="true" paginatorPosition="top"
+                                             scrollable="true" resizeMode="expand">
+                                    
+                                    <f:facet name="header" >
+                                        <p:outputPanel style="text-align: right !important" >
+                                            <p:commandButton id="toggler" type="button" icon="fas fa-columns"/>
+                                            <p:columnToggler datasource="regBajoTable" trigger="toggler" />
+                                        </p:outputPanel>
+                                    </f:facet>
+                                    
                                     <p:column style="width:16px">
                                         <p:rowToggler />
                                     </p:column>
-                                    <p:column headerText="Codigo Candidato" filterBy="#{candidato.canCodigo}" filterMatchMode="contains">
+                                    <p:column headerText="Codigo Candidato" filterBy="#{candidato.canCodigo}" filterMatchMode="contains" sortBy="#{candidato.canCodigo}">
                                         <h:outputText value="#{candidato.canCodigo}" />
                                     </p:column>
-                                    <p:column headerText="Nombre" filterBy="#{candidato.canPrimerNombre}" filterMatchMode="contains">
+                                    <p:column headerText="Nombre" filterBy="#{candidato.canPrimerNombre}" filterMatchMode="contains" sortBy="#{candidato.canPrimerNombre}">
                                         <h:outputText value="#{candidato.canPrimerNombre}" />
                                     </p:column>
-                                    <p:column headerText="Apellido" filterBy="#{candidato.canPrimerApellido}" filterMatchMode="contains">
+                                    <p:column headerText="Apellido" filterBy="#{candidato.canPrimerApellido}" filterMatchMode="contains" sortBy="#{candidato.canPrimerApellido}">
                                         <h:outputText value="#{candidato.canPrimerApellido}" />
                                     </p:column>
-                                    <p:column headerText="Nivel academico" filterBy="#{candidato.nacId.nacNombre}" filterMatchMode="contains">
+                                    <p:column headerText="Nivel academico" filterBy="#{candidato.nacId.nacNombre}" filterMatchMode="contains" sortBy="#{candidato.nacId.nacNombre}">
                                         <h:outputText value="#{candidato.nacId.nacNombre}" />
                                     </p:column>
-                                    <p:column headerText="Dui" filterBy="#{candidato.canDui}" filterMatchMode="contains">
+                                    <p:column headerText="Dui" filterBy="#{candidato.canDui}" filterMatchMode="contains" sortBy="#{candidato.canDui}">
                                         <h:outputText value="#{candidato.canDui}" />
                                     </p:column>
-                                    <p:column headerText="Ocupacion" filterBy="#{candidato.ocuId.ocuNombre}" filterMatchMode="contains">
+                                    <p:column headerText="Ocupacion" filterBy="#{candidato.ocuId.ocuNombre}" filterMatchMode="contains" sortBy="#{candidato.ocuId.ocuNombre}">
                                         <h:outputText value="#{candidato.ocuId.ocuNombre}" />
                                     </p:column>
                                     <p:rowExpansion>
@@ -379,26 +412,37 @@
                             
                             <p:outputLabel value="Aplicantes en general"/>
                             <h:form id="apliGeneral">
-                                <p:dataTable var="candidato" value="#{candidatomanaged.aplicanteGeneral}" style="margin-bottom:20px" rendered="true" paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" rowsPerPageTemplate="5,10,15" reflow="true" rows="5" paginator="true">
+                                <p:dataTable id="generalTable" var="candidato" value="#{candidatomanaged.aplicanteGeneral}" style="margin-bottom:20px" rendered="true" 
+                                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" 
+                                             rowsPerPageTemplate="5,10,15" rows="5" paginator="true" paginatorPosition="top"
+                                             scrollable="true" resizeMode="expand">
+                                    
+                                    <f:facet name="header" >
+                                        <p:outputPanel style="text-align: right !important" >
+                                            <p:commandButton id="toggler" type="button" icon="fas fa-columns"/>
+                                            <p:columnToggler datasource="generalTable" trigger="toggler" />
+                                        </p:outputPanel>
+                                    </f:facet>
+                                    
                                     <p:column style="width:16px">
                                         <p:rowToggler />
                                     </p:column>
-                                    <p:column headerText="Codigo Candidato" filterBy="#{candidato.canCodigo}" filterMatchMode="contains">
+                                    <p:column headerText="Codigo Candidato" filterBy="#{candidato.canCodigo}" filterMatchMode="contains" sortBy="#{candidato.canCodigo}">
                                         <h:outputText value="#{candidato.canCodigo}" />
                                     </p:column>
-                                    <p:column headerText="Nombre" filterBy="#{candidato.canPrimerNombre}" filterMatchMode="contains">
+                                    <p:column headerText="Nombre" filterBy="#{candidato.canPrimerNombre}" filterMatchMode="contains" sortBy="#{candidato.canPrimerNombre}">
                                         <h:outputText value="#{candidato.canPrimerNombre}" />
                                     </p:column>
-                                    <p:column headerText="Apellido" filterBy="#{candidato.canPrimerApellido}" filterMatchMode="contains">
+                                    <p:column headerText="Apellido" filterBy="#{candidato.canPrimerApellido}" filterMatchMode="contains" sortBy="#{candidato.canPrimerApellido}">
                                         <h:outputText value="#{candidato.canPrimerApellido}" />
                                     </p:column>
-                                    <p:column headerText="Nivel academico" filterBy="#{candidato.nacId.nacNombre}" filterMatchMode="contains">
+                                    <p:column headerText="Nivel academico" filterBy="#{candidato.nacId.nacNombre}" filterMatchMode="contains" sortBy="#{candidato.nacId.nacNombre}">
                                         <h:outputText value="#{candidato.nacId.nacNombre}" />
                                     </p:column>
-                                    <p:column headerText="Dui" filterBy="#{candidato.canDui}" filterMatchMode="contains">
+                                    <p:column headerText="Dui" filterBy="#{candidato.canDui}" filterMatchMode="contains" sortBy="#{candidato.canDui}">
                                         <h:outputText value="#{candidato.canDui}" />
                                     </p:column>
-                                    <p:column headerText="Ocupacion" filterBy="#{candidato.ocuId.ocuNombre}" filterMatchMode="contains">
+                                    <p:column headerText="Ocupacion" filterBy="#{candidato.ocuId.ocuNombre}" filterMatchMode="contains" sortBy="#{candidato.ocuId.ocuNombre}">
                                         <h:outputText value="#{candidato.ocuId.ocuNombre}" />
                                     </p:column>
                                     <p:rowExpansion>

@@ -65,14 +65,21 @@
                                 <br />
                                 <br />
                                 
-                                <p:dataTable var="idi" value="#{idiomaManaged.idiomaLista}" paginator="true" rows="5"
-                                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                                             rowsPerPageTemplate="5,10,15" reflow="true">
+                                <p:dataTable id="idiomaTable" var="idi" value="#{idiomaManaged.idiomaLista}" paginator="true" rows="5"
+                                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" paginatorPosition="top"
+                                             rowsPerPageTemplate="5,10,15" 
+                                             scrollable="true" resizeMode="expand">
+                                    <f:facet name="header" >
+                                        <p:outputPanel style="text-align: right !important" >
+                                            <p:commandButton id="toggler" type="button" icon="fas fa-columns"/>
+                                            <p:columnToggler datasource="idiomaTable" trigger="toggler" />
+                                        </p:outputPanel>
+                                    </f:facet>
                                     
-                                    <p:column headerText="Id" filterBy="#{idi.idiId}" filterMatchMode="contains">
+                                    <p:column headerText="Id" filterBy="#{idi.idiId}" filterMatchMode="contains" sortBy="#{idi.idiId}">
                                         <h:outputText value="#{idi.idiId}" />
                                     </p:column>
-                                    <p:column headerText="Nivel Ingles" filterBy="#{idi.idiNivel}" filterMatchMode="contains">
+                                    <p:column headerText="Nivel Ingles" filterBy="#{idi.idiNivel}" filterMatchMode="contains" sortBy="#{idi.idiNivel}">
                                         <h:outputText value="#{idi.idiNivel}" />
                                     </p:column>
                                     

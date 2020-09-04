@@ -66,14 +66,22 @@
                                 <br />
                                 <br />
                                 
-                                <p:dataTable var="sx" value="#{sexoManaged.sexoList}" paginator="true" rows="5"
-                                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                                             rowsPerPageTemplate="5,10,15" reflow="true">
+                                <p:dataTable id="sexoTable" var="sx" value="#{sexoManaged.sexoList}" paginator="true" rows="5"
+                                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" paginatorPosition="top"
+                                             rowsPerPageTemplate="5,10,15" 
+                                             scrollable="true" resizeMode="expand">
                                     
-                                    <p:column headerText="Id">
+                                    <f:facet name="header" >
+                                        <p:outputPanel style="text-align: right !important" >
+                                            <p:commandButton id="toggler" type="button" icon="fas fa-columns"/>
+                                            <p:columnToggler datasource="sexoTable" trigger="toggler" />
+                                        </p:outputPanel>
+                                    </f:facet>
+                                    
+                                    <p:column headerText="Id" sortBy="#{sx.sexId}">
                                         <h:outputText value="#{sx.sexId}" />
                                     </p:column>
-                                    <p:column headerText="Sexo">
+                                    <p:column headerText="Sexo" sortBy="#{sx.sexNombre}">
                                         <h:outputText value="#{sx.sexNombre}" />
                                     </p:column>
                                     
