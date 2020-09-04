@@ -40,10 +40,7 @@ public class UsuariosMG implements Serializable {
     private List<Usuario> usuarioList = null;
     private String contrasena;
     private List<TipoUsuario> tipoUsuarioslist;
-    
-    public UsuariosMG() {
-    }
-    
+     
     
     @PostConstruct
     public void cargarInfo() {

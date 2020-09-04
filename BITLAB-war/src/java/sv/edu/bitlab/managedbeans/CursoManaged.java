@@ -89,10 +89,6 @@ public class CursoManaged implements Serializable {
         }
         log.info("Entidad editada y guardada");
     }
-    
-    
-    public CursoManaged() {
-    }
 
     public Curso getCursoObj() {
         return cursoObj;

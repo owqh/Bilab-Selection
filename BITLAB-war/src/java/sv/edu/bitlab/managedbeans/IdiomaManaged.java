@@ -33,10 +33,7 @@ public class IdiomaManaged implements Serializable {
     
     private Idioma idioma;
     private List<Idioma> idiomaLista;
-    
-    
-    public IdiomaManaged() {
-    }
+
     
     @PostConstruct
     private void encontrarEntidades(){
