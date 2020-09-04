@@ -13,7 +13,8 @@ import org.jasypt.util.text.BasicTextEncryptor;
  */
 public class EncriptacionTexto {
     
-    private static final String LLAVE_VAL = System.getenv().get("KEY_BITLAB");
+    //private static final String LLAVE_VAL = System.getenv().get("KEY_BITLAB");
+    private static final String LLAVE_VAL = "*b1Tl4b$2020!";
     BasicTextEncryptor encriptador;
     
     public EncriptacionTexto(String principalValor) {

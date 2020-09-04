@@ -67,8 +67,8 @@
                                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" paginatorPosition="top"
                                              rowsPerPageTemplate="5,10,15"
                                              scrollable="true" resizeMode="expand">
-                                    <f:facet name="header">
-                                        <p:outputPanel style="text-align: right !important">
+                                    <f:facet name="header" >
+                                        <p:outputPanel style="text-align: right !important" >
                                             <p:commandButton id="toggler" type="button" icon="fas fa-columns"/>
                                             <p:columnToggler datasource="docenteTable" trigger="toggler" />
                                         </p:outputPanel>
@@ -178,8 +178,8 @@
 
                                         <h:outputLabel value="Estado:"/>
                                         <p:selectOneMenu id="docEst" value="#{docenteManaged.entidadSeleccion.docEstado}" autoWidth="true">
-                                            <f:selectItem itemLabel="-Select-" itemValue=""/>
-                                            <f:selectItems  itemValue="#{est}" var="est" value="#{docenteManaged.estadoDocList}"/>
+                                            <f:selectItem itemLabel="Escoje una opción" itemValue="#{null}" noSelectionOption="true"/>
+                                            <f:selectItems   itemValue="#{est}" var="est" value="#{docenteManaged.estadoDocList}"/>
                                         </p:selectOneMenu>  
                                     </p:panelGrid>
                                     <br/>

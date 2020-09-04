@@ -24,8 +24,7 @@ public class Utilidades {
 
     private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(UsuarioManaged.class);
 
-    public Utilidades() {
-    }
+
 
     //Envia un mensaje personalizado
     public static void lanzarMensaje(FacesMessage.Severity severidad, String encabezado, String detalle) {

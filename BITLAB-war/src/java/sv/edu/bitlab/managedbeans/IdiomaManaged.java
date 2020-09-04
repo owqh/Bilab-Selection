@@ -42,7 +42,6 @@ public class IdiomaManaged implements Serializable {
     private void encontrarEntidades(){
         idioma = new Idioma();
         idiomaLista = idiomaFacade.findAll();
-        log.info("Lista de entidades cargada");
     }
     
     

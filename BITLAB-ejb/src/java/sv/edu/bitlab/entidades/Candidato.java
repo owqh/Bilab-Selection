@@ -158,6 +158,11 @@ public class Candidato implements Serializable {
         this.canTelefono = canTelefono;
     }
 
+    public Candidato(Generalidades genId) {
+        this.genId = genId;
+    }
+    
+
     public Candidato(Integer canId, String canCodigo, String canPrimerNombre, String canSegundoNombre, String canPrimerApellido, String canSegundoApellido, String canDui, String canCorreo, String canDireccion, String canTelefono, Date canFechaNac, EstadoAplicacion eapId, Generalidades genId, HistorialAplicacion hapId, Idioma idiId, NivelAcademico nacId, Ocupacion ocuId, Sexo sexId) {
         this.canId = canId;
         this.canCodigo = canCodigo;

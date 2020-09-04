@@ -55,20 +55,14 @@ public class UsuarioManaged implements Serializable {
     private String rol;
     private String nombre;
     private String mensajeCorreo;
-    private String contrasenaGenerada;
     private String asunto;
     
-    private TipoUsuario tipoUsuario;
     private Usuario usr;
     private EncriptacionTexto encriptacionTexto;
     List<Configuracion> datos;
     
     private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(UsuarioFacade.class);
 
-    @PostConstruct
-    public void inicializar() {
-
-    }
 
     //Funcion para validar si el usuario existe en la base de datos
     public void validarUsuario() {
@@ -97,6 +91,7 @@ public class UsuarioManaged implements Serializable {
                         + "<p>Ha recibido este e-mail por que tiene una cuenta registrada en el sistema de seleccion de becarios BITLAB</p>"
                         + "<p><b>Si usted no solicito este acceso por favor ignore este correo.</b></p>"
                         + "<h4>Por su seguirdad nunca comparta este correo electronico con nadie.</h4>"
+                        +"<p>Preserve el Medio Ambiente NO imprimiendo este correo si no es realmente indispensable, recuerde que cada uno puede hacer la diferencia.</p>"
                         + "<p><strong>Copyright &copy; 2020 <a href=\"https://bitlab.edu.sv/\">BITLAB</a>.</strong>\n"
                         + " All rights reserved.</p>";
                 asunto = "Incio de sesion Bitlab, autenticacion de dos pasos";
@@ -137,11 +132,11 @@ public class UsuarioManaged implements Serializable {
         //Variables para Generar el ID de Forma Aleatoria
         Random aleatorio = SecureRandom.getInstanceStrong();
         final String CODIGO_TOKEN = "AB7CDE0FG9HIJK2LMN6OPQRST8UVW4XY5Z163@#%+*";
-        final byte NIVEL_SEGURIDAD = 7; //cantidad de caracteres para el codigo
+        final byte NIVEL_SEGURIDAD = 8; //cantidad de caracteres para el codigo
         String cadena = ""; //Cadena de seguridad
 
         //Preparando la cadena
-        for (int i = 1; i < NIVEL_SEGURIDAD; i++) {
+        for (int i = 0; i < NIVEL_SEGURIDAD; i++) {
             //Método para el Cálculo de las letras
             byte caracter = (byte) (aleatorio.nextDouble() * CODIGO_TOKEN.length() - 1 + 0);
             cadena = cadena + CODIGO_TOKEN.charAt(caracter);
@@ -193,7 +188,7 @@ public class UsuarioManaged implements Serializable {
     }
 
     //Este metodo no funciona correctamente aun!!!!
-    public void recuperarContraseña() {
+    public void recuperarContrasena() {
         try {
             //Obteniendo el usuario de la base de datos
             usr = usuarioFacade.ObtenerUsuario(usuario);
@@ -201,29 +196,37 @@ public class UsuarioManaged implements Serializable {
             Logger.getLogger(UsuarioManaged.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (usr != null) {
-
+            String contrasenaGenerada = "";
             try {
                 //Preparando contraseña autogenerada
                 contrasenaGenerada = codigoAcceso();
+                System.out.println("Normal: " +contrasenaGenerada);
+                System.out.println("Pequeña: "+contrasenaGenerada.toLowerCase());
+                //Encriptando contraseña para insertar en la base de datos
+               String contrasenaSegura = encriptacionTexto.getTextoEncriptado(contrasenaGenerada.toLowerCase());
+                System.out.println("segura: "+contrasenaSegura);
+               //Cambiando la contraseña en la base de datos
+               usr.setUsrContrasena(contrasenaSegura);
+               usuarioFacade.edit(usr);
+               Utilidades.lanzarInfo("Solicitud enviada", "Por favor revise su correo electronico");
             } catch (NoSuchAlgorithmException ex) {
                 Logger.getLogger(UsuarioManaged.class.getName()).log(Level.SEVERE, null, ex);
             }
             //Preparando mensaje para enviar correo electronico
             mensajeCorreo = "<h1>Hola, " + usr.getUsrNombre() + " " + usr.getUsrApellido() + "¿Olvidaste tu contraseña? " + "\n </h1> "
-                    + "<p></p>"
-                    + "<h3>Su codigo de acceso a la plataforma es: <strong>" + codigoGenerado + "</strong></h3> \n "
-                    + "<p>Ha recibido este e-mail por que tiene una cuenta registrada en el sistema de seleccion de becarios BITLAB</p>"
-                    + "<p><b>Si usted no solicito este acceso por favor ignore este correo.</p>"
-                    + "<h4>Por su seguirdad nunca comparta este correo electronico con nadie.</b></h4>"
+                    + "<p>Estas a un paso de poder acceder al sistema de seleccion de becarios</p><br/>"
+                    + "<h3>Tu nueva contraseña de acceso a la plataforma es: <strong>" + contrasenaGenerada.toLowerCase() + "</strong></h3> \n "
+                    + "<p>Ha recibido este e-mail por que tiene una cuenta registrada en el sistema de seleccion de becarios BITLAB y solicito un cambio de contraseña</p>"
+                    + "<br/><h4>Por su seguirdad nunca comparta este correo electronico con nadie.</b></h4>"
+                    +"<p>Preserve el Medio Ambiente NO imprimiendo este correo si no es realmente indispensable, recuerde que cada uno puede hacer la diferencia.</p>"
                     + "<p><strong>Copyright &copy; 2020 <a href=\"https://bitlab.edu.sv/\">BITLAB</a>.</strong>\n"
                     + " All rights reserved.</p>";
 
             asunto = "Recuperacion de contraseña Bitlab";
-            Utilidades.lanzarInfo("Solicitud enviada", "Esta funcion esta en mantenimiento");
-            Utilidades.redireccionLogin();
-
+            
             //Funcion para enviar el correo electronico 
-            //enviarCorreo(usr.getUsrAcceso(), mensajeCorreo, asunto);
+            enviarCorreo(usr.getUsrAcceso(), mensajeCorreo, asunto);
+             Utilidades.redireccionLogin();
         } else {
             Utilidades.lanzarAdvertencia("Usaurio invalido", "El usuario no es valido, si no tienes una cuenta puedes crearla en la opcion registro!");
         }
@@ -242,7 +245,7 @@ public class UsuarioManaged implements Serializable {
         //Validando si el usuario ya existe en la base de datos
         if(usr == null) {
             //Buscando el tipo de usuario
-            tipoUsuario = tipoUsuarioFacade.find(tipo);
+            TipoUsuario tipoUsuario = tipoUsuarioFacade.find(tipo);
             
             //Encriptando contraseña para guardar en base de datos
             String contrasenaSegura = encriptacionTexto.getTextoEncriptado(pass);

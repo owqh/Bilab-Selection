@@ -49,7 +49,7 @@ import sv.edu.bitlab.utilidades.Utilidades;
  */
 @Named(value = "registroManaged")
 @SessionScoped
-public class RegistroManaged implements Serializable{
+public class RegistroManaged implements Serializable {
 
     //Importando EJB para registrar al candidato
     @EJB
@@ -103,7 +103,6 @@ public class RegistroManaged implements Serializable{
     private String snombre;
     private String papellido;
     private String sapellido;
-    private String codigo;
     private Date fnacimiento;
     private String dui;
     private String telefono;
@@ -119,8 +118,6 @@ public class RegistroManaged implements Serializable{
     private String aspiracionCurso;
     private String enterado;
     private String otrosConocimientos;
-    private String mensajeCorreo;
-    private String asuntoCorreo;
 
     //Listas para rrecorrer las entidades externas
     private List<Sexo> listaGenero;
@@ -144,77 +141,86 @@ public class RegistroManaged implements Serializable{
         ocupacion = new Ocupacion();
     }
 
-    public RegistroManaged() {
-
-    }
-
     //Metodo para generar el codigo de cada candidato
     public String codigoPersonas() {
-        String codigoGenerado = papellido.charAt(0) + sapellido.charAt(0) + dui.substring(6,7) + dui.charAt(9);
+        String codigoGenerado = papellido.substring(0,1) + sapellido.substring(0,1) + dui.substring(5, 8) + dui.substring(9);
         System.out.println(codigoGenerado);
         return codigoGenerado;
     }
 
     public void guardarRegistro() {
-        codigo = codigoPersonas();
-        System.out.println("Primer nombre: "+ pnombre);
-        System.out.println("Segundo nombre: "+ snombre);
-        System.out.println("Primer apellido: "+ papellido);
-        System.out.println("Segundo apellido: "+ sapellido);
-        System.out.println("Fecha de nacimiento: "+fnacimiento);
-        System.out.println("Genero seleccionado: "+sexo);
+        String codigo = codigoPersonas();
+        System.out.println("Primer nombre: " + pnombre);
+        System.out.println("Segundo nombre: " + snombre);
+        System.out.println("Primer apellido: " + papellido);
+        System.out.println("Segundo apellido: " + sapellido);
+        System.out.println("Fecha de nacimiento: " + fnacimiento);
+        System.out.println("Genero seleccionado: " + sexo);
         System.out.println("Dui: " + dui);
-        System.out.println("Telefono: "+telefono);
-        System.out.println("Correo: "+correo);
-        System.out.println("Contraseña: "+contrasena);
-        System.out.println("Direccion: "+direccion);
-        System.out.println("Linkedin: "+linkedin);
-        System.out.println("Grado academico: "+nivelAcademico);
-        System.out.println("Ocupacion: "+ocupacion);
-        System.out.println("Nivel de ingles: "+idioma);
-        System.out.println("internet: "+internt);
-        System.out.println("Computadora: "+computadora);
-        System.out.println("Tiempo: "+tiempo);
-        System.out.println("Otros conocimientos: "+otrosConocimientos);
-        System.out.println("Como te enteraste: "+enterado);
-        System.out.println("Por que quieres estudiar: "+aspiracionCurso);
-        System.out.println("Aspiraciones laborales: "+aspiracionLaboral);
-        System.out.println("Exprectativa salarial: "+aspiracionSalarial);
-        System.out.println("Codigo persona: "+codigo);
+        System.out.println("Telefono: " + telefono);
+        System.out.println("Correo: " + correo);
+        System.out.println("Contraseña: " + contrasena);
+        System.out.println("Direccion: " + direccion);
+        System.out.println("Linkedin: " + linkedin);
+        System.out.println("Grado academico: " + nivelAcademico);
+        System.out.println("Ocupacion: " + ocupacion);
+        System.out.println("Nivel de ingles: " + idioma);
+        System.out.println("internet: " + internt);
+        System.out.println("Computadora: " + computadora);
+        System.out.println("Tiempo: " + tiempo);
+        System.out.println("Otros conocimientos: " + otrosConocimientos);
+        System.out.println("Como te enteraste: " + enterado);
+        System.out.println("Por que quieres estudiar: " + aspiracionCurso);
+        System.out.println("Aspiraciones laborales: " + aspiracionLaboral);
+        System.out.println("Exprectativa salarial: " + aspiracionSalarial);
+        System.out.println("Codigo persona: " + codigo);
         //Creando cuenta de usuario para acceder al sistema
         cuentaUsuario();
 
-        //Creando Historial de Aplicacion 
-        CrearHistorial();
-        
-        //Encotrar todos los id foraneos
-        estadoAplicacion = estadoAplicacionFacade.find(9); //El estado de aplicacion 1 pertenece al estado "aplicante"
-        tipoUsuario = tipoUsuarioFacade.find(5); //El codigo  pertenece al tipo de usuario "candidato"
-        historialAplicacion = historialAplicacionFacade.find(historialAplicacion.getHapId());
-    
         try {
+            //Creando Historial de Aplicacion 
+            crearHistorial();
+            
+            //Creando generalidades
+            crearGeneralidades();
+            
+            //Encotrar todos los id foraneos
+            estadoAplicacion = estadoAplicacionFacade.find(9); //El estado de aplicacion 9 pertenece al estado "aplicante"
+            tipoUsuario = tipoUsuarioFacade.find(5); //El codigo  pertenece al tipo de usuario "candidato"
+            historialAplicacion = historialAplicacionFacade.find(historialAplicacion.getHapId());
+            generalidades = generalidadesFacade.find(generalidades.getGenId());
+            System.out.println(generalidades);
+            
             //Creando registro de informacion basica de candidato
-        candidato = new Candidato(1, codigo, pnombre, snombre, papellido, sapellido, dui, correo, direccion, telefono, fnacimiento, estadoAplicacion, generalidades, historialAplicacion, idioma, nivelAcademico, ocupacion, sexo);
-        candidatoFacade.create(candidato);
+            candidato = new Candidato(1, codigo, pnombre, snombre, papellido, sapellido, dui, correo, direccion, telefono, fnacimiento, estadoAplicacion, generalidades, historialAplicacion, idioma, nivelAcademico, ocupacion, sexo);
+            candidatoFacade.create(candidato);
+
+            //Enviando correo de registro exitoso    
+            correoRegistro();
+
+            Utilidades.lanzarInfo("Aplicacion recibida exitosamente", "Su aplicacion ha sido recibida por favor revise su correo electronico para obtener mas informacion");
         } catch (Exception e) {
-            Utilidades.lanzarError("Solicitud no recibida", "Su aplicacion no ha sido recibida, motivo: "+e.toString());
+            Utilidades.lanzarError("Solicitud no recibida", "Su aplicacion no ha sido recibida, motivo: " + e.toString());
+
         }
 
-        //Creando registro de datos complementarios
-        generalidades = new Generalidades(1, internt, computadora, aspiracionLaboral, aspiracionSalarial, tiempo, aspiracionCurso, enterado, otrosConocimientos, linkedin);
-        generalidadesFacade.create(generalidades);
-        Utilidades.lanzarInfo("Aplicacion recibida exitosamente", "Su aplicacion ha sido recibida por favor revise su correo electronico para obtener mas informacion");
+    }
+   
 
-        asuntoCorreo = "Aplicacion a curos BITLAB";
-        mensajeCorreo = "<h1>Felicidades!! " + pnombre + " " + papellido + " !Tu solicitud se ha recibido con éxito! \n </h1> "
-                + "<p>Se ha recibido tu solicitud para obtener una beca en BITLAB, te pedimos estar pendiente de tu correo electrónico y tu número de contacto, en los próximos días nos comunicaremos contigo.</p>"
-                + "<p>Recuerda que puedes seguir tu proceso de selección a través de nuestra plataforma, utilizando tu dirección de correo y contraseña proporcionada en el formulario de aplicación</p>"
-                + "<p>Ha recibido este e-mail por que se ha registrado una cuenta en el sistema de seleccion de becarios BITLAB</p>"
+  
+
+    public void correoRegistro() {
+        String asuntoCorreo = "Aplicacion a curos BITLAB";
+        String mensajeCorreo = "<h1>Estimad@  " + pnombre + " " + papellido + ", tu solicitud se ha procesado con éxito. \n </h1> "
+                + "<p>Hemos recibido tu solicitud para una de nuestras becas en Bitlab, te pedimos estés pendiente de tu número de contacto y correo electrónico, nos pondremos en contacto en los próximos días.</p>"
+                + "<p>¡Recuerda que puedes seguir tu proceso de selección a través de nuestra plataforma! Utiliza tu dirección de correo y contraseña proporcionada en el formulario de aplicación</p><br/>"
+                + "<p>Ha recibido este e-mail por que se ha registrado una cuenta en el sistema de seleccion de becarios BITLAB.</p><br/>"
                 + "<p>Preguntas frecuentes: "
                 + "<ul><li><a href=\"https://blog.elaniin.com/enterate-aplicar-beca-bitlab/\">¿Cual es el proceso de aplicacion? </a></li>"
                 + "<li><a href=\"https://bitlab.edu.sv/about\">¿Que es bitlab?</a></li></ul>"
                 + "<br/><p><b>Si usted no solicito este acceso por favor ignore este correo.</b></p>"
                 + "<h4>Por su seguirdad nunca comparta este correo electronico con nadie.</h4>"
+                +"<p>Preserve el Medio Ambiente NO imprimiendo este correo si no es realmente indispensable, recuerde que cada uno puede hacer la diferencia.</p>"
                 + "<p><strong>Copyright &copy; 2020 <a href=\"https://bitlab.edu.sv/\">BITLAB</a>.</strong>\n"
                 + " All rights reserved.</p>";
 
@@ -247,19 +253,28 @@ public class RegistroManaged implements Serializable{
         } else {
             System.out.println("No se pudo crear el usuario");
             LOG.error("El correo: " + correo + " o el " + dui + " ya existe en la base de datos");
-            Utilidades.lanzarError("Error en registrar aplicación", "El usuario ya se encuentra registrado.");
-            Utilidades.lanzarAdvertencia("Inicia sesion", "Oops parece que ya tienes una cuenta incia sesion haciendo click <strong><a>aqui</a></strong>");
+            Utilidades.lanzarError("Error en registrar aplicación", "El usuario ya se encuentra registrado. ¡Si ya tienes una cuenta incia sesion!");
         }
     }
-    
-    public void CrearHistorial(){
+
+    public void crearHistorial() {
         try {
             historialAplicacion = new HistorialAplicacion(1, new Date());
             historialAplicacionFacade.create(historialAplicacion);
         } catch (Exception e) {
-            LOG.error("No se pudo crear el historial de aplicacion. "+e);
+            LOG.error("No se pudo crear el historial de aplicacion. " + e);
         }
-        
+
+    }
+
+    public void crearGeneralidades() {
+        try {
+            //Creando registro de datos complementarios
+            generalidades = new Generalidades(1, internt, computadora, aspiracionLaboral, aspiracionSalarial, tiempo, aspiracionCurso, enterado, otrosConocimientos, linkedin);
+            generalidadesFacade.create(generalidades);
+        } catch (Exception e) {
+            LOG.error("No se pudo crear el historial de aplicacion. " + e);
+        }
     }
 
     //funicon para enviar correo electronico con un mensajepreviamente establecido
@@ -289,7 +304,7 @@ public class RegistroManaged implements Serializable{
             LOG.error("ERROR AL ENVIAR EL CORREO ELECTRONICO.  " + ex.getMessage());
         }
     }
-    
+
     public IdiomaFacade getIdiomaFacade() {
         return idiomaFacade;
     }
@@ -601,6 +616,5 @@ public class RegistroManaged implements Serializable{
     public void setListaOcupacion(List<Ocupacion> listaOcupacion) {
         this.listaOcupacion = listaOcupacion;
     }
-    
-    
+
 }

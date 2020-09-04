@@ -109,8 +109,6 @@ public class ConvetidorManaged implements Serializable {
     @EJB
     private UsuarioFacade usuarioFacade;
     
-    public ConvetidorManaged() {
-    }
     
     //Buscando los id para convertidores
     public Actividades getActividadesId(String id){

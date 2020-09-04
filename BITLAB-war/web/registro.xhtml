@@ -57,6 +57,8 @@
 
         <section class="content">
             <div class="container-fluid">
+                <!-- Mensaje recibido del menejador -->
+            <p:messages id="messagesAll" closable="true" showDetail="true" />
                 <!-- Main row -->
                 <div class="row">
                     <!-- Left col -->
@@ -307,7 +309,7 @@
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <p:commandButton value="Completar registro!" actionListener="#{registroManaged.guardarRegistro()}" ajax="false" update=":account" style="margin-top: 20px; margin-right: 20px" validateClient="true"/>
+                                    <p:commandButton value="Completar registro!" actionListener="#{registroManaged.guardarRegistro()}" ajax="false" update=":messagesAll :user" style="margin-top: 20px; margin-right: 20px" validateClient="true"/>
                                 </div>
                             </div>
                         </h:form>
