@@ -149,25 +149,25 @@
                                 >
                                 <!-- Add icons to the links using the .nav-icon class
                                  with font-awesome or any other icon font library -->
+                                <ui:insert name="index-menu">
+                                    <li class="nav-item">
+                                        <a href="index.bitlab" class="nav-link">
+                                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                                            <p>
+                                                Dashboard
+                                            </p>
+                                        </a>                               
+                                    </li>
+                                </ui:insert>
+                                <ui:insert name="profile-menu">
+                                    <li class="nav-item">
+                                        <a href="profile.bitlab" class="nav-link">
+                                            <i class="fas fa-user nav-icon"></i>
+                                            <p>Perfil</p>
+                                        </a>
+                                    </li>
+                                </ui:insert>
                                 <ui:fragment rendered="#{usuarioManaged.rol eq 'Candidato'}">
-                                    <ui:insert name="index-menu">
-                                        <li class="nav-item">
-                                            <a href="index.bitlab" class="nav-link">
-                                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                                <p>
-                                                    Dashboard
-                                                </p>
-                                            </a>                               
-                                        </li>
-                                    </ui:insert>
-                                    <ui:insert name="profile-menu">
-                                        <li class="nav-item">
-                                            <a href="profile.bitlab" class="nav-link">
-                                                <i class="fas fa-user nav-icon"></i>
-                                                <p>Perfil</p>
-                                            </a>
-                                        </li>
-                                    </ui:insert>
                                     <ui:insert name="crud-menu">
                                         <li class="nav-item">
                                             <a href="crud.bitlab" class="nav-link">
@@ -184,16 +184,6 @@
                                 </ui:insert>
                                 <!-- Menu SideBar Division -->
                                 <ui:fragment rendered="#{usuarioManaged.rol eq 'Administrador' || usuarioManaged.rol eq 'Supervisor' || usuarioManaged.rol eq 'Analista de seleccion'  }">
-                                    <ui:insert name="index-menu">
-                                        <li class="nav-item">
-                                            <a href="index.bitlab" class="nav-link">
-                                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                                <p>
-                                                    Dashboard
-                                                </p>
-                                            </a>                               
-                                        </li>
-                                    </ui:insert>
                                     <li class="nav-header">SELECCION APLICANTES</li>
                                     <li class="nav-item has-treeview">
                                         <a href="#" class="nav-link">
@@ -204,80 +194,101 @@
                                             </p>
                                         </a>
                                         <ul class="nav nav-treeview">
-                                            <li class="nav-item">
-                                                <a href="aplicante.bitlab" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Aplicantes</p>
-                                                </a>
-                                            </li>
-
-                                            <li class="nav-item">
-                                                <a href="preseleccion.bitlab" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Pre-Seleccionados</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="seleccionado.bitlab" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Seleccionados</p>
-                                                </a>
-                                            </li>
+                                            <ui:insert name="aplicante-menu">
+                                                <li class="nav-item">
+                                                    <a href="aplicante.bitlab" class="nav-link">
+                                                        <i class="far fa-circle nav-icon"></i>
+                                                        <p>Aplicantes</p>
+                                                    </a>
+                                                </li>
+                                            </ui:insert>
+                                            <ui:insert name="preseleccion-menu">
+                                                <li class="nav-item">
+                                                    <a href="preseleccion.bitlab" class="nav-link">
+                                                        <i class="far fa-circle nav-icon"></i>
+                                                        <p>Pre-Seleccionados</p>
+                                                    </a>
+                                                </li>
+                                            </ui:insert>
+                                            <ui:insert name="seleccionado-menu">
+                                                <li class="nav-item">
+                                                    <a href="seleccionado.bitlab" class="nav-link">
+                                                        <i class="far fa-circle nav-icon"></i>
+                                                        <p>Seleccionados</p>
+                                                    </a>
+                                                </li>
+                                            </ui:insert>
                                         </ul>
                                     </li>
                                 </ui:fragment>
                                 <ui:fragment rendered="#{usuarioManaged.rol eq 'Administrador' || usuarioManaged.rol eq 'Supervisor' }">
                                     <li class="nav-header">ADMINISTRACION</li>
-                                    <li class="nav-item">
-                                        <a href="docente.bitlab" class="nav-link">
-                                            <i class="fas fa-chalkboard-teacher nav-icon"></i>
-                                            <p>Gestion de docentes</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="alumnos.bitlab" class="nav-link">
-                                            <i class="fas fa-user-graduate nav-icon"></i>
-                                            <p>Gestion de alumnos</p>
-                                        </a>
-                                    </li>
+                                    <ui:insert name="docente-menu">
+                                        <li class="nav-item">
+                                            <a href="docente.bitlab" class="nav-link">
+                                                <i class="fas fa-chalkboard-teacher nav-icon"></i>
+                                                <p>Gestion de docentes</p>
+                                            </a>
+                                        </li>
+                                    </ui:insert>
+                                    <ui:insert name="alumno-menu">
+                                        <li class="nav-item">
+                                            <a href="alumnos.bitlab" class="nav-link">
+                                                <i class="fas fa-user-graduate nav-icon"></i>
+                                                <p>Gestion de alumnos</p>
+                                            </a>
+                                        </li>
+                                    </ui:insert>
                                 </ui:fragment>
                                 <ui:fragment rendered="#{usuarioManaged.rol eq 'Administrador'  }">
-                                    <li class="nav-item">
-                                        <a href="usuario.bitlab" class="nav-link">
-                                            <i class="fas fa-users nav-icon"></i>
-                                            <p>Gestion de usuarios</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="curso.bitlab" class="nav-link">
-                                            <i class="fas fa-laptop-code nav-icon"></i>
-                                            <p>Gestion de cursos</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="idiomaIngles.bitlab" class="nav-link">
-                                            <i class="fas fa-language nav-icon"></i>
-                                            <p>Gestion de idioma</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="sexo.bitlab" class="nav-link">
-                                            <i class="fas fa-transgender-alt nav-icon"></i>
-                                            <p>Gestion de generos</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="nivelAcademico.bitlab" class="nav-link">
-                                            <i class="fas fa-school nav-icon"></i>
-                                            <p>Gestion de nivel academico</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="ocupacion.bitlab" class="nav-link">
-                                            <i class="fas fa-briefcase nav-icon"></i>
-                                            <p>Gestion de ocupación</p>
-                                        </a>
-                                    </li>
+                                    <ui:insert name="usuario-menu">
+                                        <li class="nav-item">
+                                            <a href="usuario.bitlab" class="nav-link">
+                                                <i class="fas fa-users nav-icon"></i>
+                                                <p>Gestion de usuarios</p>
+                                            </a>
+                                        </li>
+                                    </ui:insert>
+                                    <ui:insert name="curso-menu">
+                                        <li class="nav-item">
+                                            <a href="curso.bitlab" class="nav-link">
+                                                <i class="fas fa-laptop-code nav-icon"></i>
+                                                <p>Gestion de cursos</p>
+                                            </a>
+                                        </li>
+                                    </ui:insert>
+                                    <ui:insert name="idioma-menu">
+                                        <li class="nav-item">
+                                            <a href="idiomaIngles.bitlab" class="nav-link">
+                                                <i class="fas fa-language nav-icon"></i>
+                                                <p>Gestion de idioma</p>
+                                            </a>
+                                        </li>
+                                    </ui:insert>
+                                    <ui:insert name="genero-menu">
+                                        <li class="nav-item">
+                                            <a href="sexo.bitlab" class="nav-link">
+                                                <i class="fas fa-transgender-alt nav-icon"></i>
+                                                <p>Gestion de generos</p>
+                                            </a>
+                                        </li>
+                                    </ui:insert>
+                                    <ui:insert name="academico-menu">
+                                        <li class="nav-item">
+                                            <a href="nivelAcademico.bitlab" class="nav-link">
+                                                <i class="fas fa-school nav-icon"></i>
+                                                <p>Gestion de nivel academico</p>
+                                            </a>
+                                        </li>
+                                    </ui:insert>
+                                    <ui:insert name="ocupacion-menu">
+                                        <li class="nav-item">
+                                            <a href="ocupacion.bitlab" class="nav-link">
+                                                <i class="fas fa-briefcase nav-icon"></i>
+                                                <p>Gestion de ocupacion</p>
+                                            </a>
+                                        </li>
+                                    </ui:insert>
                                 </ui:fragment>
                                 <!-- Menu SideBar Division -->
                                 <li class="nav-header"></li>
@@ -287,6 +298,7 @@
                                         <p>Cerrar Sesion</p>
                                     </h:commandLink>
                                 </h:form>
+                                <li class="nav-header"></li>
                             </ul>
                         </nav>
                         <!-- /.sidebar-menu -->

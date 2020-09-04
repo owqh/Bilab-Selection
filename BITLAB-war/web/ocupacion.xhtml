@@ -9,18 +9,18 @@
         <title>Ocupación</title>
     </h:head>
     <h:body>
-        
+
         <ui:composition template="./template.xhtml">
-            
-            <ui:define name="prueba-menu">
+
+            <ui:define name="ocupacion-menu">
                 <li class="nav-item">
-                    <a href="prueba.bitlab" class="nav-link active">
-                        <i class="fas fa-table nav-icon"></i>
-                        <p>Ocupación</p>
+                    <a href="ocupacion.bitlab" class="nav-link active">
+                        <i class="fas fa-briefcase nav-icon"></i>
+                        <p>Gestion de ocupacion</p>
                     </a>
                 </li>
             </ui:define>
-            
+
             <ui:define name="content">
                 <!-- Content Header (Page header) -->
                 <div class="content-header">
@@ -43,19 +43,19 @@
                     <!-- /.container-fluid -->
                 </div>
                 <!-- /.content-header -->
-                
+
                 <!-- Main content -->
                 <section class="content">
                     <div class="container-fluid">
                         <div class="col-12">
-                            
+
                             <div id="top" class="top">
                                 <ui:insert name="top" >
                                     <p:growl id="messages" globalOnly="true" showDetail="true" showSummary="true" life="2000"/>
                                     <p:messages id="messagesAll"/>
                                 </ui:insert>
                             </div>
-                            
+
                             <h:form id="ocupacionT">
                                 <p:column style="width:32px;text-align: center">
                                     <p:commandButton value="Agregar Ocupación" actionListener="#{ocupacionesManaged.nuevaEntidad()}" process="@this" 
@@ -64,26 +64,26 @@
                                 </p:column>
                                 <br />
                                 <br />
-                                
+
                                 <p:dataTable id="ocupacionTable" var="ocu" value="#{ocupacionesManaged.ocupacionList}" paginator="true" rows="5"
                                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" paginatorPosition="top"
                                              rowsPerPageTemplate="5,10,15" 
                                              scrollable="true" resizeMode="expand">
-                                    
+
                                     <f:facet name="header" >
                                         <p:outputPanel style="text-align: right !important" >
                                             <p:commandButton id="toggler" type="button" icon="fas fa-columns"/>
                                             <p:columnToggler datasource="ocupacionTable" trigger="toggler" />
                                         </p:outputPanel>
                                     </f:facet>
-                                    
+
                                     <p:column headerText="Id" sortBy="#{ocu.ocuId}">
                                         <h:outputText value="#{ocu.ocuId}" />
                                     </p:column>
                                     <p:column headerText="Nombre" sortBy="#{ocu.ocuNombre}">
                                         <h:outputText value="#{ocu.ocuNombre}" />
                                     </p:column>
-                                    
+
                                     <p:column style="width:32px;text-align: center">
                                         <p:commandButton update=":modi :messages :messagesAll" oncomplete="PF('ocuModi').show()" 
                                                          icon="pi pi-user-edit" title="modificar">
@@ -98,7 +98,7 @@
                                     </p:column>
                                 </p:dataTable>        
                             </h:form>
-                            
+
                             <h:form id="modi">
                                 <p:dialog header="Modificar idioma" widgetVar="ocuModi" showEffect="fade" hideEffect="fade" position="center" resizable="false" modal="true">
                                     <p:panelGrid  columns="2">
@@ -114,7 +114,7 @@
                                     </center>
                                 </p:dialog>
                             </h:form>
-                            
+
                             <h:form id="eliminar">
                                 <p:dialog header="Eliminar Ocupacion" widgetVar="eliminarOcu" modal="true" showEffect="fade" hideEffect="fade" resizable="false"
                                           position="center">
@@ -132,7 +132,7 @@
                                     </center>
                                 </p:dialog>
                             </h:form>
-                            
+
                             <h:form id="nuevoOt">
                                 <p:dialog header="Nueva Ocupacion" widgetVar="nuevaOc" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
                                     <p:panelGrid  columns="2">
@@ -146,20 +146,20 @@
                                     </center>
                                 </p:dialog>
                             </h:form>
-                            
+
                             <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>
                             <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
                                 <h:outputLabel value="Cargando..."/>
                             </p:dialog>
-                            
+
                         </div>
                     </div>
                 </section>
                 <!-- /.content -->
             </ui:define>
-            
+
         </ui:composition>
-        
+
     </h:body>
 </html>
 

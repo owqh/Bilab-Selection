@@ -9,18 +9,18 @@
         <title>Idioma Ingles</title>
     </h:head>
     <h:body>
-        
+
         <ui:composition template="./template.xhtml">
-            
-            <ui:define name="prueba-menu">
+
+            <ui:define name="idioma-menu">
                 <li class="nav-item">
-                    <a href="prueba.bitlab" class="nav-link active">
-                        <i class="fas fa-table nav-icon"></i>
-                        <p>Idioma Ingles</p>
+                    <a href="idiomaIngles.bitlab" class="nav-link active">
+                        <i class="fas fa-language nav-icon"></i>
+                        <p>Gestion de idioma</p>
                     </a>
                 </li>
             </ui:define>
-            
+
             <ui:define name="content">
                 <!-- Content Header (Page header) -->
                 <div class="content-header">
@@ -43,19 +43,19 @@
                     <!-- /.container-fluid -->
                 </div>
                 <!-- /.content-header -->
-                
+
                 <!-- Main content -->
                 <section class="content">
                     <div class="container-fluid">
                         <div class="col-12">
-                            
+
                             <div id="top" class="top">
                                 <ui:insert name="top" >
                                     <p:growl id="messages" globalOnly="true" showDetail="true" showSummary="true" life="2000"/>
                                     <p:messages id="messagesAll"/>
                                 </ui:insert>
                             </div>
-                            
+
                             <h:form id="tIdioma">
                                 <p:column style="width:32px;text-align: center">
                                     <p:commandButton value="Agregar Nivel idioma" actionListener="#{idiomaManaged.nuevaEntidad()}" process="@this" 
@@ -64,7 +64,7 @@
                                 </p:column>
                                 <br />
                                 <br />
-                                
+
                                 <p:dataTable id="idiomaTable" var="idi" value="#{idiomaManaged.idiomaLista}" paginator="true" rows="5"
                                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" paginatorPosition="top"
                                              rowsPerPageTemplate="5,10,15" 
@@ -75,21 +75,21 @@
                                             <p:columnToggler datasource="idiomaTable" trigger="toggler" />
                                         </p:outputPanel>
                                     </f:facet>
-                                    
+
                                     <p:column headerText="Id" filterBy="#{idi.idiId}" filterMatchMode="contains" sortBy="#{idi.idiId}">
                                         <h:outputText value="#{idi.idiId}" />
                                     </p:column>
                                     <p:column headerText="Nivel Ingles" filterBy="#{idi.idiNivel}" filterMatchMode="contains" sortBy="#{idi.idiNivel}">
                                         <h:outputText value="#{idi.idiNivel}" />
                                     </p:column>
-                                    
+
                                     <p:column style="width:32px;text-align: center">
                                         <p:commandButton update=":modi :messages :messagesAll" oncomplete="PF('idiModi').show()" 
                                                          icon="pi pi-user-edit" title="modificar">
                                             <f:setPropertyActionListener value="#{idi}" target="#{idiomaManaged.idioma}" />
                                         </p:commandButton>
                                     </p:column>
-                                    
+
                                     <p:column style="width:32px;text-align: center">
                                         <p:commandButton update=":eliminar :messages :messagesAll" oncomplete="PF('eliminarIdi').show()" 
                                                          icon="pi pi-minus-circle" title="Eliminar">
@@ -98,7 +98,7 @@
                                     </p:column>
                                 </p:dataTable>        
                             </h:form>
-                            
+
                             <h:form id="modi">
                                 <p:dialog header="Modificar idioma" widgetVar="idiModi" showEffect="fade" hideEffect="fade" position="center" resizable="false" modal="true">
                                     <p:panelGrid  columns="2">
@@ -106,14 +106,14 @@
                                         <p:outputLabel value="#{idiomaManaged.idioma.idiId}"/>    
                                         <p:outputLabel value="Nivel"/>
                                         <p:inputText value="#{idiomaManaged.idioma.idiNivel}"/>
-                                        
+
                                     </p:panelGrid>
                                     <center>
                                         <p:commandButton value="modificar" actionListener="#{idiomaManaged.guardarEntidad()}" update=":tIdioma :messages :messagesAll" oncomplete="PF('idiModi').hide()"/>
                                     </center>
                                 </p:dialog>
                             </h:form>
-                            
+
                             <h:form id="eliminar">
                                 <p:dialog header="Eliminar nivel" widgetVar="eliminarIdi" modal="true" showEffect="fade" hideEffect="fade" resizable="false"
                                           position="center">
@@ -131,14 +131,14 @@
                                     </center>
                                 </p:dialog>
                             </h:form>
-                            
+
                             <h:form id="nuevoNiv">
                                 <p:dialog header="Nuevo nivel" widgetVar="nuevoN" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
                                     <p:panelGrid  columns="2">
-                                        
+
                                         <p:outputLabel value="Describa el Nivel"/>
                                         <p:inputText value="#{idiomaManaged.idioma.idiNivel}"/>
-                                        
+
                                     </p:panelGrid>
                                     <br></br>
                                     <center>                 
@@ -147,20 +147,20 @@
                                     </center>
                                 </p:dialog>
                             </h:form>
-                            
+
                             <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>
                             <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
                                 <h:outputLabel value="Cargando..."/>
                             </p:dialog>
-                            
+
                         </div>
                     </div>
                 </section>
                 <!-- /.content -->
             </ui:define>
-            
+
         </ui:composition>
-        
+
     </h:body>
 </html>
 

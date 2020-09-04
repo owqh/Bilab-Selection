@@ -9,19 +9,19 @@
         <title>Genero</title>
     </h:head>
     <h:body>
-        
-        
+
+
         <ui:composition template="./template.xhtml">
-            
-            <ui:define name="prueba-menu">
+
+            <ui:define name="genero-menu">
                 <li class="nav-item">
-                    <a href="prueba.bitlab" class="nav-link active">
-                        <i class="fas fa-table nav-icon"></i>
-                        <p>Genero</p>
+                    <a href="sexo.bitlab" class="nav-link active">
+                        <i class="fas fa-transgender-alt nav-icon"></i>
+                        <p>Gestion de generos</p>
                     </a>
                 </li>
             </ui:define>
-            
+
             <ui:define name="content">
                 <!-- Content Header (Page header) -->
                 <div class="content-header">
@@ -44,19 +44,19 @@
                     <!-- /.container-fluid -->
                 </div>
                 <!-- /.content-header -->
-                
+
                 <!-- Main content -->
                 <section class="content">
                     <div class="container-fluid">
                         <div class="col-12">
-                            
+
                             <div id="top" class="top">
                                 <ui:insert name="top" >
                                     <p:growl id="messages" globalOnly="true" showDetail="true" showSummary="true" life="2000"/>
                                     <p:messages id="messagesAll"/>
                                 </ui:insert>
                             </div>
-                            
+
                             <h:form id="sexT">
                                 <p:column style="width:32px;text-align: center">
                                     <p:commandButton value="Agregar Sexo" actionListener="#{sexoManaged.nuevaEntidad()}" process="@this" 
@@ -65,33 +65,33 @@
                                 </p:column>
                                 <br />
                                 <br />
-                                
+
                                 <p:dataTable id="sexoTable" var="sx" value="#{sexoManaged.sexoList}" paginator="true" rows="5"
                                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" paginatorPosition="top"
                                              rowsPerPageTemplate="5,10,15" 
                                              scrollable="true" resizeMode="expand">
-                                    
+
                                     <f:facet name="header" >
                                         <p:outputPanel style="text-align: right !important" >
                                             <p:commandButton id="toggler" type="button" icon="fas fa-columns"/>
                                             <p:columnToggler datasource="sexoTable" trigger="toggler" />
                                         </p:outputPanel>
                                     </f:facet>
-                                    
+
                                     <p:column headerText="Id" sortBy="#{sx.sexId}">
                                         <h:outputText value="#{sx.sexId}" />
                                     </p:column>
                                     <p:column headerText="Sexo" sortBy="#{sx.sexNombre}">
                                         <h:outputText value="#{sx.sexNombre}" />
                                     </p:column>
-                                    
+
                                     <p:column style="width:32px;text-align: center">
                                         <p:commandButton update=":modi :messages :messagesAll" oncomplete="PF('sexModi').show()" 
                                                          icon="pi pi-user-edit" title="modificar">
                                             <f:setPropertyActionListener value="#{sx}" target="#{sexoManaged.sexo}" />
                                         </p:commandButton>
                                     </p:column>
-                                    
+
                                     <p:column style="width:32px;text-align: center">
                                         <p:commandButton update=":eliminar :messages :messagesAll" oncomplete="PF('eliminarSex').show()" 
                                                          icon="pi pi-minus-circle" title="Eliminar">
@@ -100,7 +100,7 @@
                                     </p:column>
                                 </p:dataTable>        
                             </h:form>
-                            
+
                             <h:form id="modi">
                                 <p:dialog header="Modificar idioma" widgetVar="sexModi" showEffect="fade" hideEffect="fade" position="center" resizable="false" modal="true">
                                     <p:panelGrid  columns="2">
@@ -116,7 +116,7 @@
                                     </center>
                                 </p:dialog>
                             </h:form>
-                            
+
                             <h:form id="eliminar">
                                 <p:dialog header="Eliminar nivel" widgetVar="eliminarSex" modal="true" showEffect="fade" hideEffect="fade" resizable="false"
                                           position="center">
@@ -134,14 +134,14 @@
                                     </center>
                                 </p:dialog>
                             </h:form>
-                            
+
                             <h:form id="nuevoSex">
                                 <p:dialog header="Nuevo Sexo" widgetVar="nuevoS" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
                                     <p:panelGrid  columns="2">
-                                        
+
                                         <p:outputLabel value="Describa el Sexo"/>
                                         <p:inputText value="#{sexoManaged.sexo.sexNombre}"/>
-                                        
+
                                     </p:panelGrid>
                                     <br></br>
                                     <center>                 
@@ -150,20 +150,20 @@
                                     </center>
                                 </p:dialog>
                             </h:form>
-                            
+
                             <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>
                             <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
                                 <h:outputLabel value="Cargando..."/>
                             </p:dialog>
-                            
+
                         </div>
                     </div>
                 </section>
                 <!-- /.content -->
             </ui:define>
-            
+
         </ui:composition>
-        
+
     </h:body>
 </html>
 
