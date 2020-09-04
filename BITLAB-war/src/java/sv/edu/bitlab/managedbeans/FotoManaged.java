@@ -39,8 +39,6 @@ import sv.edu.bitlab.utilidades.Utilidades;
 @RequestScoped
 public class FotoManaged {
 
-    private static final Logger LOG = Logger.getLogger(FotoManaged.class.getName());
-
     @EJB
     private CandidatoFacade candidatoFacade;
 
@@ -53,20 +51,21 @@ public class FotoManaged {
     private String nombreFoto;
 
     //Ficheros
-    private StreamedContent CV;
+    private StreamedContent cv;
 
     public FotoManaged() {
+        //Constructor necesario para el POJO
     }
 
     @PostConstruct
     public void inicializar() {
+
         try {
             perfilUsuario = candidatoFacade.candidatoPorCorreo(usuarioManaged.getUsr().getUsrAcceso());
-
             foto = perfilUsuario.getCanFoto();
             nombreFoto = FilenameUtils.getName(foto);
         } catch (Exception ex) {
-            LOG.log(Level.SEVERE, "No se encontro al candidato, error: {0}", ex);
+            Logger.getLogger(FotoManaged.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -89,11 +88,15 @@ public class FotoManaged {
 
             if (!fotoPreviaPath.contains("defaultImg")) {
                 File fotoPrevia = new File(fotoPreviaPath);
-                fotoPrevia.delete();
+                if (fotoPrevia.delete()) {
+                    System.out.println(fotoPrevia.getName() + " Was deleted!");
+                } else {
+                    System.out.println("Delete Operation Failed. Check: " + fotoPrevia);
+                }
             }
             Utilidades.lanzarInfo("Exitoso ", "La foto de perfil se ha actualizado correctamente");
         } catch (IOException ex) {
-            LOG.log(Level.SEVERE, "Hubo un error de IO: {0}", ex);
+            Logger.getLogger(FotoManaged.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -118,10 +121,15 @@ public class FotoManaged {
             if (!cvPrevioPath.contains("SI")) {
                 File cvPrevio = new File(cvPrevioPath);
                 cvPrevio.delete();
+                if (cvPrevio.delete()) {
+                    System.out.println(cvPrevio.getName() + " Was deleted!");
+                } else {
+                    System.out.println("Delete Operation Failed. Check: " + cvPrevio);
+                }
             }
             Utilidades.lanzarInfo("Exitoso ", "Su CV se ha actualizado correctamente");
         } catch (IOException ex) {
-            LOG.log(Level.SEVERE, "Hubo un error de IO: {0}", ex);
+            Logger.getLogger(FotoManaged.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -142,18 +150,24 @@ public class FotoManaged {
         this.foto = foto;
     }
 
-    public StreamedContent getCV() throws FileNotFoundException, IOException {
+    public StreamedContent getCv() throws FileNotFoundException, IOException {
         String cvPath = perfilUsuario.getCanCv();
-        FileInputStream is = new FileInputStream(new File(cvPath));
         String contentType = FacesContext.getCurrentInstance().getExternalContext().getMimeType(cvPath);
         String nameCv = FilenameUtils.getName(cvPath);
-        CV = DefaultStreamedContent.builder().contentType(contentType).name(nameCv).stream(() -> {
+        cv = DefaultStreamedContent.builder().contentType(contentType).name(nameCv).stream(() -> {
+            File file = new File(cvPath);
+            FileInputStream is = null;
+            try {
+                is = new FileInputStream(file);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(FotoManaged.class.getName()).log(Level.SEVERE, null, ex);
+            }
             return is;
         }).build();
-        return CV;
+        return cv;
     }
 
-    public void setCV(StreamedContent CV) {
-        this.CV = CV;
+    public void setCv(StreamedContent cv) {
+        this.cv = cv;
     }
 }

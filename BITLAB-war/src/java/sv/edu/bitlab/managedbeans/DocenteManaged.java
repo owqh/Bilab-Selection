@@ -35,9 +35,7 @@ public class DocenteManaged implements Serializable {
     
     @EJB
     private DocenteFacade docenteFacade;
-    
-    public DocenteManaged() {
-    }
+
     
     @PostConstruct
     private void encontrarEntidades(){
