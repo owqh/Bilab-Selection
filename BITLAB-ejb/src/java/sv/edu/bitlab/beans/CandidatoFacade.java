@@ -104,7 +104,7 @@ public class CandidatoFacade extends AbstractFacade<Candidato> {
 
     public List<Candidato> candidatoRegularAlto() throws Exception {
         try {
-            Query q = em.createQuery("select c from Candidato c where c.genId.genInternet='si' and c.genId.genComputadora='si' and c.eapId.eapId=9");
+            Query q = em.createQuery("select c from Candidato c where c.genId.genInternet='si' and c.genId.genComputadora='si' and c.genId.genTiempo='Tiempo parcial de 7:00 a.m. a 12:00 m.d.' and c.eapId.eapId=9");
             return q.getResultList();
         } catch (Exception e) {
             throw new Exception(e);
