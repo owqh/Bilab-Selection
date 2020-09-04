@@ -34,6 +34,7 @@ public class CursoManaged implements Serializable {
     private List<Curso> cursoList;
     private List<Docente> docentesList;
     private Docente docente;
+    private String codigoC = "";
     
     
     @EJB
@@ -76,10 +77,18 @@ public class CursoManaged implements Serializable {
         log.info("Entidad eliminada");
     }
     
+    //Generador de codigo Curso
+    public String codigoCurso(String curso) {
+        String codigo = "Bit-" + curso.substring(0, 2);
+        return codigo;
+    }
+    
     
     public void guardarEntidad(){
         log.info("Editando entidad...");
         try {
+            codigoC= codigoCurso(cursoObj.getCurNombre());
+            cursoObj.setCurCodigo(codigoC);
             cursoFacade.edit(cursoObj);
             encontrarEntidades();
             Utilidades.lanzarInfo("Exitoso ", Curso.class.getSimpleName() + " ha sido guardado");
@@ -137,6 +146,14 @@ public class CursoManaged implements Serializable {
 
     public void setDocente(Docente docente) {
         this.docente = docente;
+    }
+
+    public String getCodigoC() {
+        return codigoC;
+    }
+
+    public void setCodigoC(String codigoC) {
+        this.codigoC = codigoC;
     }
     
     
