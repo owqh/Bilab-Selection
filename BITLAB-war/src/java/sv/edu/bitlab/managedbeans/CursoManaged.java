@@ -79,7 +79,7 @@ public class CursoManaged implements Serializable {
     
     //Generador de codigo Curso
     public String codigoCurso(String curso) {
-        String codigo = "Bit-" + curso.substring(0, 2);
+        String codigo = "Bit-" + curso.substring(0, 2) + curso.length();
         return codigo;
     }
     
