@@ -32,10 +32,11 @@ public class DocenteManaged implements Serializable {
     private Docente entidadSeleccion;
     private List<Docente> docenteList;
     private List<String> estadoDocList;
+    private String codigo = "";
     
     @EJB
     private DocenteFacade docenteFacade;
-
+    
     
     @PostConstruct
     private void encontrarEntidades(){
@@ -74,9 +75,18 @@ public class DocenteManaged implements Serializable {
     }
     
     
+    //Generador de codigo para Docente
+    public String codigoDocente(String nombre, String apellido, String dui) {
+        String codigoDoc = nombre.substring(0, 1) + apellido.substring(0, 1) + dui.substring(6,8) + dui.charAt(9);
+        return codigoDoc;
+    }
+    
+    
     public void guardarEntidad(){
         log.info("Editando entidad...");
         try {
+            codigo = codigoDocente(entidadSeleccion.getDocPrimerNombre(), entidadSeleccion.getDocPrimerApellido(), entidadSeleccion.getDocDui());
+            entidadSeleccion.setDocCodigo(codigo);
             docenteFacade.edit(entidadSeleccion);
             encontrarEntidades();
             Utilidades.lanzarInfo("Exitoso ", Docente.class.getSimpleName() + " ha sido guardado");
@@ -86,7 +96,7 @@ public class DocenteManaged implements Serializable {
         }
         log.info("Entidad editada y guardada");
     }
-   
+    
     public List<Docente> getDocenteList() {
         return docenteList;
     }
@@ -110,13 +120,21 @@ public class DocenteManaged implements Serializable {
     public void setDocenteFacade(DocenteFacade docenteFacade) {
         this.docenteFacade = docenteFacade;
     }
-
+    
     public List<String> getEstadoDocList() {
         return estadoDocList;
     }
-
+    
     public void setEstadoDocList(List<String> estadoDocList) {
         this.estadoDocList = estadoDocList;
     }
-    
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+       
 }

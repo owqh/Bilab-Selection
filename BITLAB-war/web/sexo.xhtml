@@ -6,9 +6,10 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>Idioma Ingles</title>
+        <title>Genero</title>
     </h:head>
     <h:body>
+        
         
         <ui:composition template="./template.xhtml">
             
@@ -16,7 +17,7 @@
                 <li class="nav-item">
                     <a href="prueba.bitlab" class="nav-link active">
                         <i class="fas fa-table nav-icon"></i>
-                        <p>Idioma Ingles</p>
+                        <p>Genero</p>
                     </a>
                 </li>
             </ui:define>
@@ -27,13 +28,13 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1 class="m-0 text-dark">Idioma Ingles</h1>
+                                <h1 class="m-0 text-dark">Genero</h1>
                             </div>
                             <!-- /.col -->
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="index.bitlab">Home</a></li>
-                                    <li class="breadcrumb-item active">Idioma Ingles</li>
+                                    <li class="breadcrumb-item active">Genero</li>
                                 </ol>
                             </div>
                             <!-- /.col -->
@@ -56,87 +57,88 @@
                                 </ui:insert>
                             </div>
                             
-                            <h:form id="tIdioma">
+                            <h:form id="sexT">
                                 <p:column style="width:32px;text-align: center">
-                                    <p:commandButton value="Agregar Nivel idioma" actionListener="#{idiomaManaged.nuevaEntidad()}" process="@this" 
-                                                     update=":nuevoNiv :messages :messagesAll"  oncomplete="PF('nuevoN').show()" icon="pi pi-plus">
+                                    <p:commandButton value="Agregar Sexo" actionListener="#{sexoManaged.nuevaEntidad()}" process="@this" 
+                                                     update=":nuevoSex :messages :messagesAll"  oncomplete="PF('nuevoS').show()" icon="pi pi-plus">
                                     </p:commandButton>    
                                 </p:column>
                                 <br />
                                 <br />
                                 
-                                <p:dataTable var="idi" value="#{idiomaManaged.idiomaLista}" paginator="true" rows="5"
+                                <p:dataTable var="sx" value="#{sexoManaged.sexoList}" paginator="true" rows="5"
                                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                                              rowsPerPageTemplate="5,10,15" reflow="true">
                                     
-                                    <p:column headerText="Id" filterBy="#{idi.idiId}" filterMatchMode="contains">
-                                        <h:outputText value="#{idi.idiId}" />
+                                    <p:column headerText="Id">
+                                        <h:outputText value="#{sx.sexId}" />
                                     </p:column>
-                                    <p:column headerText="Nivel Ingles" filterBy="#{idi.idiNivel}" filterMatchMode="contains">
-                                        <h:outputText value="#{idi.idiNivel}" />
+                                    <p:column headerText="Sexo">
+                                        <h:outputText value="#{sx.sexNombre}" />
                                     </p:column>
                                     
                                     <p:column style="width:32px;text-align: center">
-                                        <p:commandButton update=":modi :messages :messagesAll" oncomplete="PF('idiModi').show()" 
+                                        <p:commandButton update=":modi :messages :messagesAll" oncomplete="PF('sexModi').show()" 
                                                          icon="pi pi-user-edit" title="modificar">
-                                            <f:setPropertyActionListener value="#{idi}" target="#{idiomaManaged.idioma}" />
+                                            <f:setPropertyActionListener value="#{sx}" target="#{sexoManaged.sexo}" />
                                         </p:commandButton>
                                     </p:column>
                                     
                                     <p:column style="width:32px;text-align: center">
-                                        <p:commandButton update=":eliminar :messages :messagesAll" oncomplete="PF('eliminarIdi').show()" 
+                                        <p:commandButton update=":eliminar :messages :messagesAll" oncomplete="PF('eliminarSex').show()" 
                                                          icon="pi pi-minus-circle" title="Eliminar">
-                                            <f:setPropertyActionListener value="#{idi}" target="#{idiomaManaged.idioma}" />
+                                            <f:setPropertyActionListener value="#{sx}" target="#{sexoManaged.sexo}" />
                                         </p:commandButton>
                                     </p:column>
                                 </p:dataTable>        
                             </h:form>
                             
                             <h:form id="modi">
-                                <p:dialog header="Modificar idioma" widgetVar="idiModi" showEffect="fade" hideEffect="fade" position="center" resizable="false" modal="true">
+                                <p:dialog header="Modificar idioma" widgetVar="sexModi" showEffect="fade" hideEffect="fade" position="center" resizable="false" modal="true">
                                     <p:panelGrid  columns="2">
                                         <p:outputLabel value="ID"/>
-                                        <p:outputLabel value="#{idiomaManaged.idioma.idiId}"/>    
-                                        <p:outputLabel value="Nivel"/>
-                                        <p:inputText value="#{idiomaManaged.idioma.idiNivel}"/>
-                                        
+                                        <p:outputLabel value="#{sexoManaged.sexo.sexId}"/>    
+                                        <p:outputLabel value="Sexo"/>
+                                        <p:inputText value="#{sexoManaged.sexo.sexNombre}"/>
                                     </p:panelGrid>
+                                    <br></br>
                                     <center>
-                                        <p:commandButton value="modificar" actionListener="#{idiomaManaged.guardarEntidad()}" update=":tIdioma :messages :messagesAll" oncomplete="PF('idiModi').hide()"/>
+                                        <p:commandButton value="modificar" actionListener="#{sexoManaged.guardarEntidad()}" 
+                                                         update=":sexT :messages :messagesAll" oncomplete="PF('sexModi').hide()"/>
                                     </center>
                                 </p:dialog>
                             </h:form>
                             
                             <h:form id="eliminar">
-                                <p:dialog header="Eliminar nivel" widgetVar="eliminarIdi" modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+                                <p:dialog header="Eliminar nivel" widgetVar="eliminarSex" modal="true" showEffect="fade" hideEffect="fade" resizable="false"
                                           position="center">
                                     <p:panelGrid  columns="2">
-                                        <p:outputLabel value="Desea eliminar el nivel (#{idiomaManaged.idioma.idiNivel}) ?"/>
+                                        <p:outputLabel value="Desea eliminar el sexo (#{sexoManaged.sexo.sexNombre}) ?"/>
                                     </p:panelGrid>
                                     <center>
                                         <br></br>
                                         <p:growl id="message" showDetail="true" />
-                                        <p:commandButton value="SI" action="#{idiomaManaged.eliminarEntidad()}" onsuccess="PF('eliminarIdi').hide()" 
-                                                         update="message :tIdioma :messages :messagesAll" style = "background: #D90202; border-color: #D90202;"
+                                        <p:commandButton value="SI" action="#{sexoManaged.eliminarEntidad()}" onsuccess="PF('eliminarSex').hide()" 
+                                                         update="message :sexT :messages :messagesAll" style = "background: #D90202; border-color: #D90202;"
                                                          icon="pi pi-trash">
                                         </p:commandButton>
-                                        <p:commandButton value="NO" oncomplete="PF('eliminarIdi').hide()"/>
+                                        <p:commandButton value="NO" oncomplete="PF('eliminarSex').hide()"/>
                                     </center>
                                 </p:dialog>
                             </h:form>
                             
-                            <h:form id="nuevoNiv">
-                                <p:dialog header="Nuevo nivel" widgetVar="nuevoN" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                            <h:form id="nuevoSex">
+                                <p:dialog header="Nuevo Sexo" widgetVar="nuevoS" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
                                     <p:panelGrid  columns="2">
                                         
-                                        <p:outputLabel value="Describa el Nivel"/>
-                                        <p:inputText value="#{idiomaManaged.idioma.idiNivel}"/>
+                                        <p:outputLabel value="Describa el Sexo"/>
+                                        <p:inputText value="#{sexoManaged.sexo.sexNombre}"/>
                                         
                                     </p:panelGrid>
                                     <br></br>
                                     <center>                 
-                                        <p:commandButton value="Guardar" icon="pi pi-save" actionListener="#{idiomaManaged.guardarEntidad()}"
-                                                         update=" :tIdioma :messages :messagesAll" onsuccess="PF('nuevoN').hide()"/>
+                                        <p:commandButton value="Guardar" icon="pi pi-save" actionListener="#{sexoManaged.guardarEntidad()}"
+                                                         update=" :sexT :messages :messagesAll" onsuccess="PF('nuevoS').hide()"/>
                                     </center>
                                 </p:dialog>
                             </h:form>
