@@ -242,7 +242,7 @@
 
                                         <h:outputLabel value="Estado:"/>
                                         <p:selectOneMenu id="docEst" value="#{docenteManaged.entidadSeleccion.docEstado}" autoWidth="true">
-                                            <f:selectItem itemLabel="-Select-" itemValue=""/>
+                                            <f:selectItem itemLabel="Seleccione un estado" itemValue="#{null}" noSelectionOption="true"/>
                                             <f:selectItems  itemValue="#{est}" var="est" value="#{docenteManaged.estadoDocList}"/>
                                         </p:selectOneMenu>
                                     </p:panelGrid>

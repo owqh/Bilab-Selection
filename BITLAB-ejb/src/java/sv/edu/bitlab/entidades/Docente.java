@@ -87,7 +87,7 @@ public class Docente implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 1)
-    @Column(name = "DOC_ESTADO", nullable = false, length = 1)
+    @Column(name = "DOC_ESTADO", nullable = false, length = 8)
     private String docEstado;
     @OneToMany(mappedBy = "docId", fetch = FetchType.LAZY)
     private List<Curso> cursoList;

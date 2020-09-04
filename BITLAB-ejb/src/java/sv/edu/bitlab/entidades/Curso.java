@@ -22,6 +22,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -39,6 +40,12 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Curso.findByCurFechaInicio", query = "SELECT c FROM Curso c WHERE c.curFechaInicio = :curFechaInicio"),
     @NamedQuery(name = "Curso.findByCurFechaFin", query = "SELECT c FROM Curso c WHERE c.curFechaFin = :curFechaFin")})
 public class Curso implements Serializable {
+
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 8)
+    @Column(name = "CUR_ESTADO", nullable = false, length = 8)
+    private String curEstado;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -140,6 +147,14 @@ public class Curso implements Serializable {
     @Override
     public String toString() {
         return "sv.edu.bitlab.entidades.Curso[ curId=" + curId + " ]";
+    }
+
+    public String getCurEstado() {
+        return curEstado;
+    }
+
+    public void setCurEstado(String curEstado) {
+        this.curEstado = curEstado;
     }
     
 }

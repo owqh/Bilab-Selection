@@ -97,8 +97,8 @@
                                         </h:outputText>
                                     </p:column>
                                     
-                                    <p:column headerText="Codigo Docente" filterBy="#{entidad.docId.docCodigo}" filterMatchMode="contains" sortBy="#{entidad.docId.docCodigo}">
-                                        <h:outputText value="#{entidad.docId.docCodigo}"/>
+                                    <p:column headerText="Estado de curso" filterBy="#{entidad.curEstado}" filterMatchMode="contains" sortBy="#{entidad.curEstado}">
+                                        <h:outputText value="#{entidad.curEstado}"/>
                                     </p:column>
                                     
                                     <p:column headerText="Nombre docente" filterBy="#{entidad.docId.docPrimerNombre}" filterMatchMode="contains" sortBy="#{entidad.docId.docPrimerNombre}">
@@ -137,9 +137,15 @@
                                         <h:outputLabel value="Fecha fin: "/>
                                         <p:calendar value="#{cursoManaged.cursoObj.curFechaFin}" pattern="dd/MM/yyyy"/>
                                         
+                                       <h:outputLabel value="Estado:"/>
+                                       <p:selectOneMenu id="Est" value="#{cursoManaged.cursoObj.curEstado}" autoWidth="true">
+                                            <f:selectItem itemLabel="Escoje una opción" itemValue="#{null}" noSelectionOption="true"/>
+                                            <f:selectItems   itemValue="#{est}" var="est" value="#{cursoManaged.estadoCurso}"/>
+                                        </p:selectOneMenu>  
+                                        
                                         <h:outputLabel value="Cambiar docente:"/>
                                         <p:selectOneMenu id="docName" value="#{cursoManaged.cursoObj.docId}" dynamic="true" style="width:125px" autoWidth="true">
-                                            <f:selectItem itemLabel="-Select-" itemValue=""/>
+                                            <f:selectItem itemLabel="Seleccione un docente" itemValue="#{null}" noSelectionOption="true"/>
                                             <f:selectItems itemLabel="#{doc.docPrimerNombre}" var="doc" value="#{cursoManaged.docentesList}"/>
                                         </p:selectOneMenu> 
                                         
@@ -184,8 +190,8 @@
                                         <p:calendar value="#{cursoManaged.cursoObj.curFechaFin}" pattern="dd/MM/yyyy"/>
                                         
                                         <h:outputLabel value="Docente:"/>
-                                        <p:selectOneMenu id="docName" value="#{cursoManaged.cursoObj.docId}" dynamic="true" style="width:125px" autoWidth="true">
-                                            <f:selectItem itemLabel="-Select-" itemValue=""/>
+                                        <p:selectOneMenu id="docName" value="#{cursoManaged.cursoObj.docId}" dynamic="true"  autoWidth="true">
+                                            <f:selectItem itemLabel="Seleccione un docente" itemValue="#{null}" noSelectionOption="true"/>
                                             <f:selectItems itemLabel="#{doc.docPrimerNombre}" var="doc" value="#{cursoManaged.docentesList}"/>
                                         </p:selectOneMenu>                    
                                         
