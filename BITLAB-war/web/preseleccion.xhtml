@@ -169,7 +169,7 @@
                                     </center>
                                     <br></br>
                                     <center>
-                                        <p:commandButton value="Aceptar" actionListener="#{candidatomanaged.aceptarPreSeleccionado()}" update="message :seleccion :messages :messagesAll" 
+                                        <p:commandButton value="Aceptar" actionListener="#{candidatomanaged.aceptarASeleccionado()}" update="message :seleccion :messages :messagesAll" 
                                                          oncomplete="PF('aceptarP').hide()" icon="pi pi-thumbs-up"/>
                                         <p:growl id="message" showDetail="true" />
                                         <p:commandButton value="Rechazar" action="#{candidatomanaged.rechazarCandidato()}" update="message :seleccion :messages :messagesAll"
