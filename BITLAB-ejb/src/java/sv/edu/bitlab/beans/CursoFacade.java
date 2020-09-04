@@ -5,9 +5,11 @@
  */
 package sv.edu.bitlab.beans;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import sv.edu.bitlab.entidades.Curso;
 
 /**
@@ -27,6 +29,11 @@ public class CursoFacade extends AbstractFacade<Curso> {
 
     public CursoFacade() {
         super(Curso.class);
+    }
+    
+      public List<Curso> cursoActivo(){
+       Query q = em.createQuery("select c from Curso c where c.curEstado = 'ACTIVO'");
+        return q.getResultList();
     }
     
 }

@@ -27,7 +27,7 @@ import sv.edu.bitlab.utilidades.Utilidades;
 @Named(value = "docenteManaged")
 @SessionScoped
 public class DocenteManaged implements Serializable {
-    private static final Logger log = Logger.getLogger(DocenteManaged.class.getName());
+    private static final Logger LOG = Logger.getLogger(DocenteManaged.class.getName());
     
     private Docente entidadSeleccion;
     private List<Docente> docenteList;
@@ -44,25 +44,25 @@ public class DocenteManaged implements Serializable {
         docenteList = docenteFacade.findAll();
         
         estadoDocList = new ArrayList<>();
-        estadoDocList.add("A");
-        estadoDocList.add("I");
-        log.info("Lista de entidades cargada");
+        estadoDocList.add("ACTIVO");
+        estadoDocList.add("INACTIVO");
+        LOG.info("Lista de entidades cargada");
     }
     
     
     public void nuevaEntidad() throws NoSuchMethodException{
-        log.info("Creando nueva entidad...");
+        LOG.info("Creando nueva entidad...");
         try {
             entidadSeleccion = Docente.class.getDeclaredConstructor().newInstance();
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             Logger.getLogger(DocenteManaged.class.getName()).log(Level.SEVERE, null, ex);
         }
-        log.info("Entidad creada exitosamente!!");
+        LOG.info("Entidad creada exitosamente!!");
     }
     
     
     public void eliminarEntidad(){
-        log.info("Eliminando docente...");
+        LOG.info("Eliminando docente...");
         try {
             docenteFacade.remove(entidadSeleccion);
             encontrarEntidades();
@@ -71,19 +71,19 @@ public class DocenteManaged implements Serializable {
             Logger.getLogger(DocenteManaged.class.getName()).log(Level.SEVERE, null, ex);
             Utilidades.lanzarError("Error al eliminar ", ex.getMessage());
         }
-        log.info("Entidad eliminada");
+        LOG.info("Entidad eliminada");
     }
     
     
     //Generador de codigo para Docente
     public String codigoDocente(String nombre, String apellido, String dui) {
-        String codigoDoc = nombre.substring(0, 1) + apellido.substring(0, 1) + dui.substring(6,8) + dui.charAt(9);
+        String codigoDoc = nombre.substring(0, 1) + apellido.substring(0, 1) + dui.substring(5,8) + dui.charAt(9);
         return codigoDoc;
     }
     
     
     public void guardarEntidad(){
-        log.info("Editando entidad...");
+        LOG.info("Editando entidad...");
         try {
             codigo = codigoDocente(entidadSeleccion.getDocPrimerNombre(), entidadSeleccion.getDocPrimerApellido(), entidadSeleccion.getDocDui());
             entidadSeleccion.setDocCodigo(codigo);
@@ -94,7 +94,7 @@ public class DocenteManaged implements Serializable {
             Logger.getLogger(DocenteManaged.class.getName()).log(Level.SEVERE, null, ex);
             Utilidades.lanzarError("Error al guardar ", ex.getMessage());
         }
-        log.info("Entidad editada y guardada");
+        LOG.info("Entidad editada y guardada");
     }
     
     public List<Docente> getDocenteList() {

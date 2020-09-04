@@ -9,6 +9,7 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,6 +34,7 @@ public class CursoManaged implements Serializable {
     private Curso cursoObj;
     private List<Curso> cursoList;
     private List<Docente> docentesList;
+    private List<String> estadoCurso;
     private Docente docente;
     private String codigoC = "";
     
@@ -47,8 +49,13 @@ public class CursoManaged implements Serializable {
     public void encontrarEntidades(){
         cursoObj = new Curso();
         docente = new Docente();
-        docentesList = docenteFacade.findAll();
+        docentesList = docenteFacade.docenteActivo();
         cursoList = cursoFacade.findAll();
+        
+        estadoCurso = new ArrayList<>();
+        estadoCurso.add("ACTIVO");
+        estadoCurso.add("INACTIVO");
+        
         log.info("Lista de entidades cargada");
     }
     
@@ -148,6 +155,16 @@ public class CursoManaged implements Serializable {
         this.docente = docente;
     }
 
+
+    public List<String> getEstadoCurso() {
+        return estadoCurso;
+    }
+
+    public void setEstadoCurso(List<String> estadoCurso) {
+        this.estadoCurso = estadoCurso;
+    }
+    
+
     public String getCodigoC() {
         return codigoC;
     }
@@ -155,6 +172,6 @@ public class CursoManaged implements Serializable {
     public void setCodigoC(String codigoC) {
         this.codigoC = codigoC;
     }
-    
+
     
 }
