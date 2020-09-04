@@ -58,8 +58,6 @@ public class candidatoManaged implements Serializable {
     private PruebasFacade pruebasFacade;
     @EJB
     private HistorialAplicacionFacade historialFacade;
-    
-    
 
     private String Psicometrica;
     private String tecnica;
@@ -205,20 +203,25 @@ public class candidatoManaged implements Serializable {
     public StreamedContent getCv() throws FileNotFoundException, IOException {
         System.out.println(candidato.getCanCv());
         String cvPath = candidato.getCanCv();
-        try (FileInputStream is = new FileInputStream(new File(cvPath))) {
-            String contentType = FacesContext.getCurrentInstance().getExternalContext().getMimeType(cvPath);
-            String nameCv = FilenameUtils.getName(cvPath);
-            cv = DefaultStreamedContent.builder().contentType(contentType).name(nameCv).stream(() -> {
-                return is;
-            }).build();
-        }
+        String contentType = FacesContext.getCurrentInstance().getExternalContext().getMimeType(cvPath);
+        String nameCv = FilenameUtils.getName(cvPath);
+        cv = DefaultStreamedContent.builder().contentType(contentType).name(nameCv).stream(() -> {
+            File file = new File(cvPath);
+            FileInputStream is = null;
+            try {
+                is = new FileInputStream(file);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(FotoManaged.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return is;
+        }).build();
         return cv;
     }
-    
-    public String fotoPerfil(Candidato candidato){
+
+    public String fotoPerfil(Candidato candidato) {
         return FilenameUtils.getBaseName(candidato.getCanFoto());
     }
-    
+
     public EstadoAplicacionFacade getEstadoAplicacionFacade1() {
         return estadoAplicacionFacade1;
     }
@@ -418,5 +421,5 @@ public class candidatoManaged implements Serializable {
     public void setDocenteObj(Docente docenteObj) {
         this.docenteObj = docenteObj;
     }
-    
+
 }

@@ -88,7 +88,7 @@ public class FotoManaged {
 
             if (!fotoPreviaPath.contains("defaultImg")) {
                 File fotoPrevia = new File(fotoPreviaPath);
-                if(fotoPrevia.delete()){
+                if (fotoPrevia.delete()) {
                     System.out.println(fotoPrevia.getName() + " Was deleted!");
                 } else {
                     System.out.println("Delete Operation Failed. Check: " + fotoPrevia);
@@ -121,7 +121,7 @@ public class FotoManaged {
             if (!cvPrevioPath.contains("SI")) {
                 File cvPrevio = new File(cvPrevioPath);
                 cvPrevio.delete();
-                if(cvPrevio.delete()){
+                if (cvPrevio.delete()) {
                     System.out.println(cvPrevio.getName() + " Was deleted!");
                 } else {
                     System.out.println("Delete Operation Failed. Check: " + cvPrevio);
@@ -152,13 +152,18 @@ public class FotoManaged {
 
     public StreamedContent getCv() throws FileNotFoundException, IOException {
         String cvPath = perfilUsuario.getCanCv();
-        try (FileInputStream is = new FileInputStream(new File(cvPath))) {
-            String contentType = FacesContext.getCurrentInstance().getExternalContext().getMimeType(cvPath);
-            String nameCv = FilenameUtils.getName(cvPath);
-            cv = DefaultStreamedContent.builder().contentType(contentType).name(nameCv).stream(() -> {
-                return is;
-            }).build();
-        }
+        String contentType = FacesContext.getCurrentInstance().getExternalContext().getMimeType(cvPath);
+        String nameCv = FilenameUtils.getName(cvPath);
+        cv = DefaultStreamedContent.builder().contentType(contentType).name(nameCv).stream(() -> {
+            File file = new File(cvPath);
+            FileInputStream is = null;
+            try {
+                is = new FileInputStream(file);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(FotoManaged.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return is;
+        }).build();
         return cv;
     }
 
