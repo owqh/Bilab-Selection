@@ -41,6 +41,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Curso.findByCurFechaFin", query = "SELECT c FROM Curso c WHERE c.curFechaFin = :curFechaFin")})
 public class Curso implements Serializable {
 
+    @Size(max = 300)
+    @Column(name = "CUR_DETALLE", length = 300)
+    private String curDetalle;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 8)
@@ -155,6 +159,14 @@ public class Curso implements Serializable {
 
     public void setCurEstado(String curEstado) {
         this.curEstado = curEstado;
+    }
+
+    public String getCurDetalle() {
+        return curDetalle;
+    }
+
+    public void setCurDetalle(String curDetalle) {
+        this.curDetalle = curDetalle;
     }
     
 }

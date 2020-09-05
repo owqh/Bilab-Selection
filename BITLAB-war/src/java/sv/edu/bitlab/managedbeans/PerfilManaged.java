@@ -15,15 +15,20 @@ import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.inject.Inject;
+import org.slf4j.LoggerFactory;
 import sv.edu.bitlab.beans.CandidatoFacade;
+import sv.edu.bitlab.beans.EstadoAplicacionFacade;
 import sv.edu.bitlab.beans.GeneralidadesFacade;
+import sv.edu.bitlab.beans.HistorialAplicacionFacade;
 import sv.edu.bitlab.beans.IdiomaFacade;
 import sv.edu.bitlab.beans.NivelAcademicoFacade;
 import sv.edu.bitlab.beans.OcupacionFacade;
 import sv.edu.bitlab.beans.SexoFacade;
+import sv.edu.bitlab.beans.UsuarioFacade;
 import sv.edu.bitlab.entidades.Candidato;
 import sv.edu.bitlab.entidades.EstadoAplicacion;
 import sv.edu.bitlab.entidades.Generalidades;
+import sv.edu.bitlab.entidades.HistorialAplicacion;
 import sv.edu.bitlab.entidades.Idioma;
 import sv.edu.bitlab.entidades.NivelAcademico;
 import sv.edu.bitlab.entidades.Ocupacion;
@@ -37,6 +42,12 @@ import sv.edu.bitlab.utilidades.Utilidades;
 @Named(value = "perfilManaged")
 @ViewScoped
 public class PerfilManaged implements Serializable {
+
+    @EJB
+    private EstadoAplicacionFacade estadoAplicacionFacade;
+
+    @EJB
+    private HistorialAplicacionFacade historialAplicacionFacade;
 
     @EJB
     private GeneralidadesFacade generalidadesFacade;
@@ -55,6 +66,8 @@ public class PerfilManaged implements Serializable {
 
     @EJB
     private NivelAcademicoFacade nivelAcademicoFacade;
+    
+    
 
     @Inject
     UsuarioManaged usuarioManaged;
@@ -79,6 +92,7 @@ public class PerfilManaged implements Serializable {
     private Sexo sexo;
     private Ocupacion ocupacion;
     private EstadoAplicacion estadoAplicacion;
+    private HistorialAplicacion historialAplicacion;
 
     //Generalidades
     private int genId;
@@ -98,6 +112,7 @@ public class PerfilManaged implements Serializable {
     private List<Idioma> listaIdioma;
     private List<Ocupacion> listaOcupacion;
 
+      private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(PerfilManaged.class);
     public PerfilManaged() {
         //Constructor necesario para el POJO
     }
@@ -173,10 +188,10 @@ public class PerfilManaged implements Serializable {
         candidatoFacade.edit(perfilUsuario);
         Utilidades.lanzarInfo("Exitoso ", "Los campos de la tabla se han actualizado correctamente");
     }
-    
-    public int progressBarValue(){
+
+    public int progressBarValue() {
         int value;
-        switch(estadoAplicacion.getEapId()){
+        switch (estadoAplicacion.getEapId()) {
             case 1:
                 value = 50;
                 break;
@@ -198,6 +213,36 @@ public class PerfilManaged implements Serializable {
                 value = 0;
         }
         return value;
+    }
+
+    public void nuevaAplicacion() {
+        try {
+            if ("Rechazado".equals(perfilUsuario.getEapId().getEapNombre()) || "Abandono".equals(perfilUsuario.getEapId().getEapNombre())) {
+               //Creando Historial de aplicacion
+                try {
+                    historialAplicacion = new HistorialAplicacion(1, new Date());
+                    historialAplicacionFacade.create(historialAplicacion);
+                } catch (Exception e) {
+                    LOG.error("No se pudo crear el historial de aplicacion. " + e);
+                }
+                
+                historialAplicacion = historialAplicacionFacade.find(historialAplicacion.getHapId());
+                perfilUsuario.setHapId(historialAplicacion);
+                
+                estadoAplicacion = estadoAplicacionFacade.find(9); //El estado de aplicacion 9 pertenece al estado "aplicante"
+                perfilUsuario.setEapId(estadoAplicacion);
+                
+               
+                candidatoFacade.edit(perfilUsuario);
+                Utilidades.lanzarInfo("Solicitud aceptada", "Hemos recibido tu solicitud, nos pondremos en contacto en los próximos días. ");
+            } else {
+                Utilidades.lanzarError("Error ", "No se ha podido registrar su aplicacion, solo se permite un proceso a la vez.");
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            Utilidades.lanzarError("Error ", "No se ha podido registrar su nueva aplicacion, intentelo de nuevo mas tarde.");
+        }
+
     }
 
     public String getPnombre() {

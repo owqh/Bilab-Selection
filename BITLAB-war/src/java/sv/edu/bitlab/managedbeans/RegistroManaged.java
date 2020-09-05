@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailException;
@@ -50,7 +51,9 @@ import sv.edu.bitlab.utilidades.Utilidades;
 @Named(value = "registroManaged")
 @SessionScoped
 public class RegistroManaged implements Serializable {
-
+    @Inject
+    private PerfilManaged perfilManaged;
+    
     //Importando EJB para registrar al candidato
     @EJB
     private ConfiguracionFacade configuracionFacade;
@@ -126,7 +129,7 @@ public class RegistroManaged implements Serializable {
     private List<Ocupacion> listaOcupacion;
     List<Configuracion> datos;
 
-    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(UsuarioFacade.class);
+    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(RegistroManaged.class);
 
     @PostConstruct
     public void cargarDatos() {
@@ -143,54 +146,28 @@ public class RegistroManaged implements Serializable {
 
     //Metodo para generar el codigo de cada candidato
     public String codigoPersonas() {
-        String codigoGenerado = papellido.substring(0,1) + sapellido.substring(0,1) + dui.substring(5, 8) + dui.substring(9);
-        System.out.println(codigoGenerado);
+        String codigoGenerado = papellido.substring(0, 1) + sapellido.substring(0, 1) + dui.substring(5, 8) + dui.substring(9);
         return codigoGenerado;
     }
 
     public void guardarRegistro() {
         String codigo = codigoPersonas();
-        System.out.println("Primer nombre: " + pnombre);
-        System.out.println("Segundo nombre: " + snombre);
-        System.out.println("Primer apellido: " + papellido);
-        System.out.println("Segundo apellido: " + sapellido);
-        System.out.println("Fecha de nacimiento: " + fnacimiento);
-        System.out.println("Genero seleccionado: " + sexo);
-        System.out.println("Dui: " + dui);
-        System.out.println("Telefono: " + telefono);
-        System.out.println("Correo: " + correo);
-        System.out.println("Contraseña: " + contrasena);
-        System.out.println("Direccion: " + direccion);
-        System.out.println("Linkedin: " + linkedin);
-        System.out.println("Grado academico: " + nivelAcademico);
-        System.out.println("Ocupacion: " + ocupacion);
-        System.out.println("Nivel de ingles: " + idioma);
-        System.out.println("internet: " + internt);
-        System.out.println("Computadora: " + computadora);
-        System.out.println("Tiempo: " + tiempo);
-        System.out.println("Otros conocimientos: " + otrosConocimientos);
-        System.out.println("Como te enteraste: " + enterado);
-        System.out.println("Por que quieres estudiar: " + aspiracionCurso);
-        System.out.println("Aspiraciones laborales: " + aspiracionLaboral);
-        System.out.println("Exprectativa salarial: " + aspiracionSalarial);
-        System.out.println("Codigo persona: " + codigo);
         //Creando cuenta de usuario para acceder al sistema
         cuentaUsuario();
 
         try {
             //Creando Historial de Aplicacion 
             crearHistorial();
-            
+
             //Creando generalidades
             crearGeneralidades();
-            
+
             //Encotrar todos los id foraneos
             estadoAplicacion = estadoAplicacionFacade.find(9); //El estado de aplicacion 9 pertenece al estado "aplicante"
             tipoUsuario = tipoUsuarioFacade.find(5); //El codigo  pertenece al tipo de usuario "candidato"
             historialAplicacion = historialAplicacionFacade.find(historialAplicacion.getHapId());
             generalidades = generalidadesFacade.find(generalidades.getGenId());
-            System.out.println(generalidades);
-            
+
             //Creando registro de informacion basica de candidato
             candidato = new Candidato(1, codigo, pnombre, snombre, papellido, sapellido, dui, correo, direccion, telefono, fnacimiento, estadoAplicacion, generalidades, historialAplicacion, idioma, nivelAcademico, ocupacion, sexo);
             candidatoFacade.create(candidato);
@@ -198,16 +175,13 @@ public class RegistroManaged implements Serializable {
             //Enviando correo de registro exitoso    
             correoRegistro();
 
-            Utilidades.lanzarInfo("Aplicacion recibida exitosamente", "Su aplicacion ha sido recibida por favor revise su correo electronico para obtener mas informacion");
+            Utilidades.lanzarInfo("Aplicacion recibida exitosamente", "Su aplicacion ha sido recibida por favor revise su correo electronico para obtener mas información. ¡Ya puedes iniciar sesion en el sistema!");
         } catch (Exception e) {
             Utilidades.lanzarError("Solicitud no recibida", "Su aplicacion no ha sido recibida, motivo: " + e.toString());
 
         }
 
     }
-   
-
-  
 
     public void correoRegistro() {
         String asuntoCorreo = "Aplicacion a curos BITLAB";
@@ -220,7 +194,7 @@ public class RegistroManaged implements Serializable {
                 + "<li><a href=\"https://bitlab.edu.sv/about\">¿Que es bitlab?</a></li></ul>"
                 + "<br/><p><b>Si usted no solicito este acceso por favor ignore este correo.</b></p>"
                 + "<h4>Por su seguirdad nunca comparta este correo electronico con nadie.</h4>"
-                +"<p>Preserve el Medio Ambiente NO imprimiendo este correo si no es realmente indispensable, recuerde que cada uno puede hacer la diferencia.</p>"
+                + "<p>Preserve el Medio Ambiente NO imprimiendo este correo si no es realmente indispensable, recuerde que cada uno puede hacer la diferencia.</p>"
                 + "<p><strong>Copyright &copy; 2020 <a href=\"https://bitlab.edu.sv/\">BITLAB</a>.</strong>\n"
                 + " All rights reserved.</p>";
 
@@ -249,9 +223,8 @@ public class RegistroManaged implements Serializable {
             //perparando y creando el registro
             Usuario registro = new Usuario(1, correo, pnombre, papellido, contrasenaSegura, tipoUsuario);
             usuarioFacade.create(registro);
-            System.out.println("Usuario creado con exito");
+            LOG.info("Se ha creado correctamente el usuario: " + correo);
         } else {
-            System.out.println("No se pudo crear el usuario");
             LOG.error("El correo: " + correo + " o el " + dui + " ya existe en la base de datos");
             Utilidades.lanzarError("Error en registrar aplicación", "El usuario ya se encuentra registrado. ¡Si ya tienes una cuenta incia sesion!");
         }

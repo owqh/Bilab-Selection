@@ -37,6 +37,7 @@ public class CursoManaged implements Serializable {
     private List<String> estadoCurso;
     private Docente docente;
     private String codigoC = "";
+    private List<Curso> cursoActivo;
     
     
     @EJB
@@ -51,7 +52,7 @@ public class CursoManaged implements Serializable {
         docente = new Docente();
         docentesList = docenteFacade.docenteActivo();
         cursoList = cursoFacade.findAll();
-        
+        cursoActivo = cursoFacade.cursoActivo();
         estadoCurso = new ArrayList<>();
         estadoCurso.add("ACTIVO");
         estadoCurso.add("INACTIVO");
@@ -173,5 +174,14 @@ public class CursoManaged implements Serializable {
         this.codigoC = codigoC;
     }
 
+    public List<Curso> getCursoActivo() {
+        return cursoActivo;
+    }
+
+    public void setCursoActivo(List<Curso> cursoActivo) {
+        this.cursoActivo = cursoActivo;
+    }
+
+    
     
 }

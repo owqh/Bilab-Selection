@@ -84,7 +84,11 @@
                                     <p:column headerText="Nombre curso" sortBy="#{entidad.curNombre}">
                                         <h:outputText value="#{entidad.curNombre}"/>
                                     </p:column>
-
+                                    
+                                    <p:column headerText="Detalle curso" sortBy="#{entidad.curDetalle}">
+                                        <h:outputText value="#{entidad.curDetalle}"/>
+                                    </p:column>
+                                    
                                     <p:column headerText="Fecha inicio" sortBy="#{entidad.curFechaInicio}">
                                         <h:outputText value="#{entidad.curFechaInicio}" >
                                             <f:convertDateTime  pattern="dd/MM/yyyy"/>
@@ -131,7 +135,10 @@
 
                                         <h:outputLabel value="Nombre curso: "/>
                                         <p:inputText value="#{cursoManaged.cursoObj.curNombre}"/>
-
+                                        
+                                        <h:outputLabel value="Detalle curso: "/>
+                                        <p:inputText value="#{cursoManaged.cursoObj.curDetalle}"/>
+                                        
                                         <h:outputLabel value="Fecha Inicio: "/>
                                         <p:calendar value="#{cursoManaged.cursoObj.curFechaInicio}" pattern="dd/MM/yyyy"/>
 
@@ -165,7 +172,7 @@
                                         </p:commandButton>
 
                                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                                            <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
                                             <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times"/>
                                         </p:confirmDialog>
 
@@ -184,7 +191,10 @@
                                     <p:panelGrid columns="2" style="border: none !important;">
 
                                         <h:outputLabel value="Nombre curso: "/>
-                                        <p:inputText value="#{cursoManaged.cursoObj.curNombre}"/>
+                                        <p:inputText value="#{cursoManaged.cursoObj.curNombre}" maxlength="300"/>
+                                        
+                                        <h:outputLabel value="Datalle del curso: "/>
+                                        <p:inputText value="#{cursoManaged.cursoObj.curDetalle}"/>
 
                                         <h:outputLabel value="Fecha Inicio: "/>
                                         <p:calendar value="#{cursoManaged.cursoObj.curFechaInicio}" pattern="dd/MM/yyyy"/>

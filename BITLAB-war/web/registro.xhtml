@@ -64,7 +64,7 @@
                     <!-- Left col -->
                     <section class="col-lg-12">
                         <!--Form General-->
-                        <h:form role="form" id="user">
+                        <h:form role="form" id="registroForm">
                             <div class="card card-primary" style="margin: 0 10% 30px 10%;">
                                 <div class="card-header" style="background-color: #6f42c1">
                                     <h3 class="card-title">Datos de generales</h3>
@@ -309,7 +309,7 @@
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <p:commandButton value="Completar registro!" actionListener="#{registroManaged.guardarRegistro()}" ajax="false" update=":messagesAll :user" style="margin-top: 20px; margin-right: 20px" validateClient="true"/>
+                                    <p:commandButton value="Completar registro!" actionListener="#{registroManaged.guardarRegistro()}" ajax="false" update=":registroForm :messagesAll" style="margin-top: 20px; margin-right: 20px" validateClient="true"/>
                                 </div>
                             </div>
                         </h:form>
