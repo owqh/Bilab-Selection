@@ -142,7 +142,7 @@ public class candidatoManaged implements Serializable {
             candidato.setCanPromedioSeleccion(promedioSeleccion);
             candidatoFacade1.edit(candidato);
             cargarInfo();
-            Utilidades.lanzarInfo("Exitoso", "Notas Ingresadas a " + candidato.getCanPrimerNombre());
+            Utilidades.lanzarInfo("Exitoso", "Notas Ingresadas");
         } catch (Exception ex) {
             Utilidades.lanzarError("Error", ex.getMessage());
         }
@@ -155,7 +155,7 @@ public class candidatoManaged implements Serializable {
             candidato.setEapId(estadoSeleccion);
             candidatoFacade1.edit(candidato);
             cargarInfo();
-            Utilidades.lanzarInfo("Exitoso", "Se ha aceptado a " + candidato.getCanPrimerNombre() + " Y su estado paso a: " + candidato.getEapId().getEapNombre());
+            Utilidades.lanzarInfo("Exitoso", "Se ha aceptado");
         } catch (Exception ex) {
             Utilidades.lanzarError("Error", ex.getMessage());
         }
@@ -168,7 +168,8 @@ public class candidatoManaged implements Serializable {
             candidato.setEapId(estadoSeleccion);
             candidatoFacade1.edit(candidato);
             cargarInfo();
-            Utilidades.lanzarInfo("Exitoso", "Se ha aceptado a " + candidato.getCanPrimerNombre() + " Y su estado paso a: " + candidato.getEapId().getEapNombre());
+            Utilidades.lanzarInfo("Exitoso", "Se ha aceptado");
+            
         } catch (Exception ex) {
             Utilidades.lanzarError("Error", ex.getMessage());
         }
@@ -181,7 +182,7 @@ public class candidatoManaged implements Serializable {
             candidato.setEapId(estadoSeleccion);
             candidatoFacade1.edit(candidato);
             cargarInfo();
-            Utilidades.lanzarInfo("Exitoso", "Se ha aceptado a " + candidato.getCanPrimerNombre() + " Y su estado paso a: " + candidato.getEapId().getEapNombre());
+            Utilidades.lanzarInfo("Exitoso", "Se ha aceptado");
         } catch (Exception ex) {
             Utilidades.lanzarError("Error", ex.getMessage());
         }
@@ -193,7 +194,7 @@ public class candidatoManaged implements Serializable {
             candidato.setEapId(estadoSeleccion);
             candidatoFacade1.edit(candidato);
             cargarInfo();
-            Utilidades.lanzarInfo("Exitoso", candidato.getCanPrimerNombre() + " A sido rechazado");
+            Utilidades.lanzarInfo("Exitoso", " A sido rechazado");
         } catch (Exception ex) {
             Utilidades.lanzarError("Error", ex.getMessage());
 
