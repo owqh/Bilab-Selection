@@ -74,7 +74,7 @@ public class FotoManaged {
             UploadedFile fotoSubida = event.getFile();
 
             InputStream input = fotoSubida.getInputStream();
-            Path folder = Paths.get("C:\\Users\\Mario\\Documents\\FotosPerfil");
+            Path folder = Paths.get("/home/carlosgodoy576/fotosperfil");
             String filename = FilenameUtils.getBaseName(fotoSubida.getFileName());
             String extension = FilenameUtils.getExtension(fotoSubida.getFileName());
             Path file = Files.createTempFile(folder, filename + "-", "." + extension);
@@ -86,7 +86,7 @@ public class FotoManaged {
             perfilUsuario.setCanFoto(fullPath);
             candidatoFacade.edit(perfilUsuario);
 
-            if (!fotoPreviaPath.contains("defaultImg")) {
+            if (!fotoPreviaPath.endsWith("defaultImg.jpg")) {
                 File fotoPrevia = new File(fotoPreviaPath);
                 if (fotoPrevia.delete()) {
                     System.out.println(fotoPrevia.getName() + " Was deleted!");
@@ -106,7 +106,7 @@ public class FotoManaged {
             UploadedFile cvSubido = event.getFile();
 
             InputStream input = cvSubido.getInputStream();
-            Path folder = Paths.get("C:\\Users\\Mario\\Documents\\CVPerfil");
+            Path folder = Paths.get("/home/carlosgodoy576/cv");
             String filename = FilenameUtils.getBaseName(cvSubido.getFileName());
             String extension = FilenameUtils.getExtension(cvSubido.getFileName());
             Path file = Files.createTempFile(folder, filename + "-", "." + extension);
@@ -118,7 +118,7 @@ public class FotoManaged {
             perfilUsuario.setCanCv(fullPath);
             candidatoFacade.edit(perfilUsuario);
 
-            if (!cvPrevioPath.contains("SI")) {
+            if (!(cvPrevioPath.endsWith("SI")||cvPrevioPath.endsWith("defaultCV.jpg"))) {
                 File cvPrevio = new File(cvPrevioPath);
                 cvPrevio.delete();
                 if (cvPrevio.delete()) {
