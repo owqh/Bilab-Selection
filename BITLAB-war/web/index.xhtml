@@ -49,6 +49,19 @@
                     <div class="container-fluid">
                         <!-- Main row -->
                         <div class="row">
+                            <ui:fragment rendered="#{usuarioManaged.rol eq 'Candidato'}">
+                                <section class="col-lg-12">
+                                    <h2>Bienvenido al Sistema de Becas de BITLAB!</h2>
+                                    <p>Asegurate de haber completado todos los campos de tu perfil antes de aplicar por una beca en BITLAB, de esa forma nos ayudas a poder evaluarte mejor.</p>
+                                    <p>Actualmente tu estado de aplicación es:</p>
+                                    <h:form role="form" id="progressbar">
+                                        <div class="card card-primary" style="margin: 0 10% 30px 10%"> 
+                                            <h3 style="padding: 10px 0 10px 20px; font-size: 20px"><b><h:outputText value="#{perfilManaged.estadoAplicacion.eapNombre}" /></b></h3>
+                                            <p:progressBar value="#{perfilManaged.progressBarValue()}" labelTemplate="{value}%" displayOnly="true"/>
+                                        </div>
+                                    </h:form>
+                                </section>
+                            </ui:fragment>
                             <ui:fragment rendered="#{usuarioManaged.rol eq 'Administrador' || usuarioManaged.rol eq 'Supervisor' }">
                                 <section class="col-lg-12">
                                     <h:form>
