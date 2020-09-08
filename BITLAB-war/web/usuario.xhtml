@@ -77,10 +77,6 @@
                                             <p:columnToggler datasource="usuarioTable" trigger="toggler" />
                                         </p:outputPanel>
                                     </f:facet>
-
-                                    <p:column headerText="Id" filterBy="#{usu.usrId}" width="50" filterMatchMode="contains" sortBy="#{usu.usrId}">
-                                        <h:outputText value="#{usu.usrId}" />
-                                    </p:column>
                                     <p:column headerText="Acceso" filterBy="#{usu.usrAcceso}" filterMatchMode="contains" sortBy="#{usu.usrAcceso}">
                                         <h:outputText value="#{usu.usrAcceso}" />
                                     </p:column>
@@ -110,8 +106,6 @@
                             <h:form id="modi">
                                 <p:dialog header="Modificar usuario" widgetVar="usuModi" showEffect="fade" hideEffect="fade" position="center" resizable="false" modal="true">
                                     <p:panelGrid  columns="2">
-                                        <p:outputLabel value="ID"/>
-                                        <p:outputLabel value="#{usuariosMG.usuario.usrId}"/>
                                         <p:outputLabel value="Acceso"/>
                                         <p:inputText value="#{usuariosMG.usuario.usrAcceso}">
                                             <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>

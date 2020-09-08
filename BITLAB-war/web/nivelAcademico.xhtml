@@ -76,10 +76,6 @@
                                             <p:columnToggler datasource="nivTable" trigger="toggler" />
                                         </p:outputPanel>
                                     </f:facet>
-
-                                    <p:column headerText="Id" sortBy="#{niv.nacId}">
-                                        <h:outputText value="#{niv.nacId}" />
-                                    </p:column>
                                     <p:column headerText="Nivel Académico" sortBy="#{niv.nacNombre}">
                                         <h:outputText value="#{niv.nacNombre}" />
                                     </p:column>
@@ -101,9 +97,7 @@
 
                             <h:form id="modi">
                                 <p:dialog header="Modificar nivel académico" widgetVar="nivModi" showEffect="fade" hideEffect="fade" position="center" resizable="false" modal="true">
-                                    <p:panelGrid  columns="2">
-                                        <p:outputLabel value="ID"/>
-                                        <p:outputLabel value="#{nivelAcademicoManaged.nivelAcademico.nacId}"/>    
+                                    <p:panelGrid  columns="2">   
                                         <p:outputLabel value="Nivel académico"/>
                                         <p:inputText value="#{nivelAcademicoManaged.nivelAcademico.nacNombre}"/>
                                     </p:panelGrid>

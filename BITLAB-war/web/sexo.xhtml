@@ -77,10 +77,7 @@
                                             <p:columnToggler datasource="sexoTable" trigger="toggler" />
                                         </p:outputPanel>
                                     </f:facet>
-
-                                    <p:column headerText="Id" sortBy="#{sx.sexId}">
-                                        <h:outputText value="#{sx.sexId}" />
-                                    </p:column>
+                                    
                                     <p:column headerText="Sexo" sortBy="#{sx.sexNombre}">
                                         <h:outputText value="#{sx.sexNombre}" />
                                     </p:column>
@@ -104,10 +101,10 @@
                             <h:form id="modi">
                                 <p:dialog header="Modificar sexo" widgetVar="sexModi" showEffect="fade" hideEffect="fade" position="center" resizable="false" modal="true">
                                     <p:panelGrid  columns="2">
-                                        <p:outputLabel value="ID"/>
-                                        <p:outputLabel value="#{sexoManaged.sexo.sexId}"/>    
+                                      
                                         <p:outputLabel value="Sexo"/>
                                         <p:inputText value="#{sexoManaged.sexo.sexNombre}"/>
+                                        
                                     </p:panelGrid>
                                     <br></br>
                                     <center>

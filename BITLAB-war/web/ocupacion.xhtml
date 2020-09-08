@@ -76,10 +76,6 @@
                                             <p:columnToggler datasource="ocupacionTable" trigger="toggler" />
                                         </p:outputPanel>
                                     </f:facet>
-
-                                    <p:column headerText="Id" sortBy="#{ocu.ocuId}">
-                                        <h:outputText value="#{ocu.ocuId}" />
-                                    </p:column>
                                     <p:column headerText="Nombre" sortBy="#{ocu.ocuNombre}">
                                         <h:outputText value="#{ocu.ocuNombre}" />
                                     </p:column>
@@ -101,9 +97,7 @@
 
                             <h:form id="modi">
                                 <p:dialog header="Modificar ocupación" widgetVar="ocuModi" showEffect="fade" hideEffect="fade" position="center" resizable="false" modal="true">
-                                    <p:panelGrid  columns="2">
-                                        <p:outputLabel value="ID"/>
-                                        <p:outputLabel value="#{ocupacionesManaged.ocupacion.ocuId}"/>    
+                                    <p:panelGrid  columns="2">   
                                         <p:outputLabel value="Ocupación"/>
                                         <p:inputText value="#{ocupacionesManaged.ocupacion.ocuNombre}"/>
                                     </p:panelGrid>

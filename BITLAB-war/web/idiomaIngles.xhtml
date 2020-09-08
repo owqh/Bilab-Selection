@@ -75,11 +75,7 @@
                                             <p:columnToggler datasource="idiomaTable" trigger="toggler" />
                                         </p:outputPanel>
                                     </f:facet>
-
-                                    <p:column headerText="Id" filterBy="#{idi.idiId}" filterMatchMode="contains" sortBy="#{idi.idiId}">
-                                        <h:outputText value="#{idi.idiId}" />
-                                    </p:column>
-                                    <p:column headerText="Nivel Inglés" filterBy="#{idi.idiNivel}" filterMatchMode="contains" sortBy="#{idi.idiNivel}">
+                                    <p:column headerText="Nivel Inglés" filterMatchMode="contains" sortBy="#{idi.idiNivel}">
                                         <h:outputText value="#{idi.idiNivel}" />
                                     </p:column>
 
@@ -100,10 +96,8 @@
                             </h:form>
 
                             <h:form id="modi">
-                                <p:dialog header="Modificar idioma" widgetVar="idiModi" showEffect="fade" hideEffect="fade" position="center" resizable="false" modal="true">
-                                    <p:panelGrid  columns="2">
-                                        <p:outputLabel value="ID"/>
-                                        <p:outputLabel value="#{idiomaManaged.idioma.idiId}"/>    
+                                <p:dialog header="Modificar idioma" widgetVar="idiModi" showEffect="explode" hideEffect="fade" position="center" resizable="false" modal="true">
+                                    <p:panelGrid  columns="2">  
                                         <p:outputLabel value="Nivel"/>
                                         <p:inputText value="#{idiomaManaged.idioma.idiNivel}"/>
 
@@ -115,7 +109,7 @@
                             </h:form>
 
                             <h:form id="eliminar">
-                                <p:dialog header="Eliminar nivel" widgetVar="eliminarIdi" modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+                                <p:dialog header="Eliminar nivel" widgetVar="eliminarIdi" modal="true" showEffect="explode" hideEffect="fade" resizable="false"
                                           position="center">
                                     <p:panelGrid  columns="2">
                                         <p:outputLabel value="Desea eliminar el nivel (#{idiomaManaged.idioma.idiNivel}) ?"/>
@@ -133,7 +127,7 @@
                             </h:form>
 
                             <h:form id="nuevoNiv">
-                                <p:dialog header="Nuevo nivel" widgetVar="nuevoN" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                                <p:dialog header="Nuevo nivel" widgetVar="nuevoN" modal="true" showEffect="explode" hideEffect="fade" resizable="false">
                                     <p:panelGrid  columns="2">
 
                                         <p:outputLabel value="Describa el Nivel"/>

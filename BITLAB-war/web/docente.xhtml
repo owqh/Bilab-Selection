@@ -126,7 +126,8 @@
                                             <h:outputLabel value="Teléfono:" style="color:blueviolet"/>
                                             <h:outputText value="#{entidad.docTelefono}"/>
                                             <h:outputLabel value="DUI:" style="color:blueviolet"/>
-                                            <h:outputText value="#{entidad.docDui}"/><h:outputLabel value="Correo:" style="color:blueviolet"/>
+                                            <h:outputText value="#{entidad.docDui}"/>
+                                            <h:outputLabel value="Correo:" style="color:blueviolet"/>
                                             <h:outputText value="#{entidad.docCorreo}"/>
                                         </p:panelGrid> 
                                     </p:rowExpansion>
@@ -143,9 +144,9 @@
 
                             <!--EDITAR DOCENTE-->
                             <h:form id="editDocente"> 
-                                <p:dialog header="Editar Datos Docente" widgetVar="widEditDocente" resizable="false" 
-                                          showEffect="explode" hideEffect="hide" position="center">
-
+                                <p:dialog header="Editar Datos Docente" widgetVar="widEditDocente"  
+                                          showEffect="explode" hideEffect="fade" position="center" resizable="false" modal="true">
+                                  
                                     <p:panelGrid columns="4" style="border: none !important;">  
                                         <h:outputLabel value="Primer nombre:"/>
                                         <p:inputText value="#{docenteManaged.entidadSeleccion.docPrimerNombre}"/>
@@ -207,7 +208,7 @@
                             <!--NUEVO DOCENTE-->
                             <h:form id="nuevoDocente"> 
                                 <p:dialog header="Ingresa datos Docente" widgetVar="widNuevoDocente" resizable="false" 
-                                          showEffect="explode" hideEffect="hide" position="center">
+                                          showEffect="explode" hideEffect="fade" position="center" modal="true">
 
                                     <p:panelGrid columns="4" style="border: none !important;">
 
